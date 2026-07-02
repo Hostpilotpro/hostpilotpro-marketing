@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#F8F4ED"/>
+  <g transform="translate(80,80)">
+    <circle cx="26" cy="26" r="25" stroke="#0B0F14" stroke-width="2.4"/>
+    <path d="M26 4 L31 26 L26 48 L21 26 Z" fill="#0B0F14"/>
+    <path d="M4 26 H48" stroke="#B8894A" stroke-width="2.4"/>
+    <circle cx="26" cy="26" r="4" fill="#B8894A"/>
+    <text x="70" y="38" font-family="General Sans, Arial, sans-serif" font-size="34" font-weight="600" fill="#0B0F14">HostPilot <tspan fill="#B8894A">Pro</tspan></text>
+  </g>
+  <text x="80" y="300" font-family="General Sans, Arial, sans-serif" font-size="66" font-weight="600" fill="#0B0F14">Rental operations,</text>
+  <text x="80" y="378" font-family="General Sans, Arial, sans-serif" font-size="66" font-weight="600" fill="#0B0F14">built by operators.</text>
+  <text x="80" y="452" font-family="Arial, sans-serif" font-size="27" fill="#5C6470">One AI. Three apps. One database. Priced per portfolio.</text>
+  <rect x="80" y="512" width="360" height="4" fill="#1E3A5F"/>
+  <text x="80" y="562" font-family="Arial, sans-serif" font-size="22" fill="#1E3A5F">Mr Property Siam · Koh Samui · 90+ villas</text>
+</svg>
