@@ -1,191 +1,141 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Building2, Users2, MapPin, Rocket, Layers, Plug, Bot, HeartHandshake } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import useSeo from '../lib/seo.js';
+import { SectionHead, Eyebrow } from '../components/ui.jsx';
+import asset from '../lib/asset.js';
 
-const TIMELINE = [
-  { year: '2012', title: 'Mr Property Siam opens in Koh Samui', body: 'A boutique property manager starts caring for a handful of luxury villas on the island.' },
-  { year: '2018', title: 'The portfolio hits 30 villas',        body: 'Spreadsheets, WhatsApp threads and Hostaway stop scaling. Owners, staff and guests are all on different tools.' },
-  { year: '2023', title: 'The first internal build',            body: 'We start building our own internal app to replace the mess — owner statements, task boards, guest guides.' },
-  { year: '2025', title: 'HostPilotPro is born',                body: 'The internal tool is battle-tested across 85 villas. We split it into three Hostaway plugins and open it up for other managers.' },
-  { year: '2026', title: 'The Suite launches',                  body: 'Owner Portal, Ops Hub and Guest Portal go public — one connected system for the villa industry.' },
-];
-
-const PILLARS = [
-  { icon: Layers, title: 'One platform, three doorways', body: 'Owner, ops and guest experiences share the same data model. Villas are defined once — everyone sees a consistent view.' },
-  { icon: Plug,   title: 'Built for Hostaway',           body: 'Each product ships as a Hostaway plugin. Reservations, guests, listings and payouts sync automatically.' },
-  { icon: Bot,    title: 'AI where it earns its keep',   body: 'Inventory parsers, bill scanners, review summarisers. AI is used where it saves real hours, not for headlines.' },
-  { icon: HeartHandshake, title: 'Built with an operator', body: 'Every feature exists because MPS staff or owners needed it. We ship products, not roadmaps.' },
+const timeline = [
+  [
+    'The spreadsheet years',
+    'Mr Property Siam ran a growing villa portfolio on spreadsheets, WhatsApp groups and a channel manager. It worked until it did not: two people editing the same rota, an owner asking about a pool bill nobody could find, a clean that everyone assumed someone else had logged.',
+  ],
+  [
+    'The statement problem',
+    'The breaking point was owner reporting. Producing a monthly statement took days, and defending one took an afternoon. If the operational record is not the source of the statement, every month becomes an argument. So the operational record came first.',
+  ],
+  [
+    'The field app',
+    'The second thing built was the staff app, because none of the data upstream is real unless the person doing the work can close the job in thirty seconds, outdoors, in their own language. Everything office-facing is downstream of that.',
+  ],
+  [
+    'The owner portal',
+    'Once the records were trustworthy, owners could be given a door of their own — statements they can open line by line, a payout history, a forward pipeline, and rate changes they approve rather than discover.',
+  ],
+  [
+    'The guest app',
+    'Guests were the last surface, and the only one that pays for itself directly. A priced add-on list in the guest’s pocket turns concierge work from an inbox chore into revenue.',
+  ],
+  [
+    'Now',
+    'The four surfaces are one system on one database, and it runs the company every day. That is the whole pitch: this is not a product built to be sold, it is a product being used, which is now being sold.',
+  ],
 ];
 
 export default function About() {
+  useSeo({
+    title: 'About — built by an operator on Koh Samui, not a software company',
+    description:
+      'HostPilot Pro was built inside Mr Property Siam, a villa management company on Koh Samui, because the operation needed it. The company still runs on it daily.',
+    path: '/about',
+  });
   return (
-    <>
-      {/* HERO */}
-      <section className="pt-16 md:pt-24 pb-16 md:pb-20">
-        <div className="container-editorial max-w-4xl">
-          <div className="eyebrow mb-6 reveal">About HostPilotPro</div>
-          <h1 className="text-5xl md:text-7xl leading-[1.05] text-ink reveal">
-            Built by villa managers. <span className="gradient-text">Powered by AI.</span>
+    <div>
+      <section className="relative overflow-hidden border-b border-hp-lineSoft">
+        <img src={asset('/img/samui-coast.jpg')} alt="" className="hero-img-soft absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 hero-scrim-strong" />
+        <div className="grain absolute inset-0" />
+        <div className="shell relative pb-16 pt-28 sm:pt-36">
+          <Eyebrow>About</Eyebrow>
+          <h1 className="h-sec mt-4 max-w-[24ch] font-medium">
+            Built by an operator, <span className="serif-em text-hp-text2">not a software company.</span>
           </h1>
-          <p className="mt-8 text-lg md:text-xl text-slate-600 leading-relaxed reveal">
-            HostPilotPro wasn't drawn on a whiteboard by a startup. It was written line by line to solve real problems inside Mr Property Siam — 85 luxury villas, 33 staff, 4,700+ reviews. Every module ships to our own team first before it goes public.
+          <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
+            HostPilot Pro comes out of Mr Property Siam, a villa management company that looks after more than 80
+            villas on Koh Samui. Every screen exists because something in that operation was breaking. The company
+            runs on this software daily, which means the people who maintain it are the people who depend on it.
           </p>
         </div>
       </section>
 
-      {/* STORY */}
-      <section className="py-20 md:py-24 bg-white border-y border-slate-200">
-        <div className="container-editorial grid md:grid-cols-2 gap-12 md:gap-20 items-start">
-          <div className="reveal">
-            <div className="eyebrow mb-3">The story</div>
-            <h2 className="text-4xl md:text-5xl text-ink leading-tight mb-6">
-              We built the tool<br />
-              <span className="gradient-text">we couldn't buy.</span>
-            </h2>
-            <p className="text-slate-600 leading-relaxed mb-4">
-              For 13 years, Mr Property Siam has managed luxury villas on Koh Samui. Housekeeping, maintenance, guest experience, financial reporting to owners — the full stack of running someone else's home for someone else's holiday.
-            </p>
-            <p className="text-slate-600 leading-relaxed mb-4">
-              Every year the operation grew — more villas, more staff, more owners, more platforms. And every year the software gap widened. Hostaway handled channel management beautifully, but owners still received PDF statements, guests still Googled the wifi password, and the ops team still lived inside three separate WhatsApp groups.
-            </p>
-            <p className="text-slate-600 leading-relaxed">
-              So we built our own layer on top. First it was one internal dashboard. Then a portal for owners. Then a companion for guests. Three years later, that layer became HostPilotPro — a platform we're now offering to other villa managers who are drowning in the same mess we were.
-            </p>
-          </div>
-
-          <div className="reveal">
-            <div className="grid grid-cols-2 gap-4">
-              <StatCard icon={Building2} n="85"      label="Villas managed live" />
-              <StatCard icon={Users2}    n="33"      label="Team members using it daily" />
-              <StatCard icon={MapPin}    n="1"       label="Reference deployment (MPS)" />
-              <StatCard icon={Rocket}    n="4,700+"  label="Guest reviews synced" />
-            </div>
-            <div className="mt-6 card border border-slate-200">
-              <blockquote className="text-lg text-ink font-medium leading-snug">
-                “We stopped stitching spreadsheets, WhatsApp threads and Hostaway together. Owners see their villas, the team runs the ops, guests get a real product. It's the one system we ship every process into.”
-              </blockquote>
-              <div className="mt-5 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-brand-gradient flex items-center justify-center text-white font-bold">J</div>
-                <div>
-                  <div className="font-semibold text-ink text-sm">Jordi</div>
-                  <div className="text-xs text-muted">CEO · Mr Property Siam · Founder, HostPilotPro</div>
+      <section className="py-16 sm:py-20">
+        <div className="shell">
+          <SectionHead
+            eyebrow="How it got built"
+            title="In the order the problems arrived."
+            lede="Nothing here was planned as a platform. It was built one broken process at a time, which is why the pieces fit."
+          />
+          <ol className="mt-10 grid gap-3 md:grid-cols-2">
+            {timeline.map(([t, b], i) => (
+              <li key={t} className="reveal hp-card p-6">
+                <div className="tnum font-display text-[26px] leading-none text-hp-goldDim">
+                  {String(i + 1).padStart(2, '0')}
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TIMELINE */}
-      <section className="py-20 md:py-24">
-        <div className="container-editorial">
-          <div className="max-w-2xl mb-12 reveal">
-            <div className="eyebrow mb-3">The journey</div>
-            <h2 className="text-4xl md:text-5xl text-ink leading-tight">
-              From one villa portfolio<br />to a platform.
-            </h2>
-          </div>
-          <div className="relative border-l-2 border-slate-200 pl-8 md:pl-12 space-y-10">
-            {TIMELINE.map((t, i) => (
-              <div key={t.year} className="reveal relative" style={{ transitionDelay: `${i * 60}ms` }}>
-                <span className="absolute -left-[45px] md:-left-[57px] top-1 w-6 h-6 rounded-full bg-brand-gradient border-4 border-slate-50" />
-                <div className="text-sm font-bold text-sky mb-1">{t.year}</div>
-                <h3 className="text-xl font-bold text-ink mb-2">{t.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{t.body}</p>
-              </div>
+                <div className="mt-3 font-display text-[19px] text-hp-text">{t}</div>
+                <p className="mt-2 text-[15px] leading-relaxed text-hp-text2">{b}</p>
+              </li>
             ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="band py-16 sm:py-20">
+        <div className="shell grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <SectionHead
+              eyebrow="Koh Samui"
+              title="Why the island shaped the product."
+              lede="Samui is a specific operating environment, and it made the software opinionated in ways a generic PMS is not."
+            />
+            <ul className="reveal mt-7 space-y-3.5 text-[15.5px] text-hp-text2">
+              {[
+                'Staff teams are commonly Thai and Burmese, so the field app is trilingual rather than English with a translation toggle.',
+                'Owners are usually overseas and asleep when things happen, so the portal has to answer questions without a human awake.',
+                'Villas are individual buildings with individual pumps, gardens and meters, so maintenance and recoveries are first-class, not an expense category.',
+                'Thai compliance is real work: TM30 filing and VAT on services are part of the flow, not an afterthought.',
+              ].map((t) => (
+                <li key={t} className="flex gap-3">
+                  <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-hp-gold" />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="reveal overflow-hidden rounded-2xl border border-hp-line shadow-frame">
+            <img src={asset('/img/villa-day.jpg')} alt="A villa terrace on Koh Samui in the morning" className="w-full" />
           </div>
         </div>
       </section>
 
-      {/* PILLARS: how the product works */}
-      <section className="py-20 md:py-24 bg-white border-y border-slate-200">
-        <div className="container-editorial">
-          <div className="max-w-2xl mb-14 reveal">
-            <div className="eyebrow mb-3">How the product works</div>
-            <h2 className="text-4xl md:text-5xl text-ink leading-tight">
-              Four principles.<br />
-              <span className="gradient-text">Every module.</span>
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8 md:gap-10">
-            {PILLARS.map((p) => {
-              const Icon = p.icon;
-              return (
-                <div key={p.title} className="reveal flex gap-5">
-                  <span className="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-gradient flex items-center justify-center text-white shadow-btn">
-                    <Icon size={20} strokeWidth={2} />
-                  </span>
-                  <div>
-                    <h4 className="text-lg font-bold text-ink mb-2">{p.title}</h4>
-                    <p className="text-slate-600 leading-relaxed">{p.body}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* WHERE WE ARE */}
-      <section className="py-20 md:py-24">
-        <div className="container-editorial grid md:grid-cols-[1fr_1.3fr] gap-12 items-center">
-          <div className="reveal">
-            <div className="eyebrow mb-3">Where we are</div>
-            <h2 className="text-4xl md:text-5xl text-ink leading-tight mb-6">
-              Koh Samui, Thailand.
-            </h2>
-            <p className="text-slate-600 leading-relaxed mb-4">
-              We work where our customers work. HostPilotPro is designed on the same island where our first 85 villas live — same climate, same tax rules, same monsoon-season maintenance backlog.
-            </p>
-            <p className="text-slate-600 leading-relaxed">
-              We're expanding to Phuket, Bali and beyond — but we'll always ship the product from an operator's chair.
-            </p>
-          </div>
-          <div className="reveal card border border-slate-200 h-72 md:h-96 relative overflow-hidden">
-            <div className="absolute inset-0 bg-brand-gradient opacity-90" />
-            <div className="absolute inset-0 flex items-center justify-center flex-col text-white text-center p-6">
-              <MapPin size={40} strokeWidth={1.8} className="mb-4" />
-              <div className="text-2xl font-bold">Koh Samui · Surat Thani</div>
-              <div className="text-sm text-white/85 mt-1">Thailand · GMT+7</div>
-              <div className="mt-6 text-xs uppercase tracking-widest font-semibold text-white/90">
-                Mr Property Siam · HQ
-              </div>
-            </div>
+      <section className="py-16 sm:py-20">
+        <div className="shell max-w-3xl">
+          <SectionHead
+            eyebrow="What we are not claiming"
+            title="The honest version."
+            lede="This category is full of numbers that cannot be checked. Here is what we will not say."
+          />
+          <ul className="reveal mt-7 space-y-3 text-[15.5px] text-hp-text2">
+            {[
+              'We are not publishing a customer count. The product is used daily by the company that built it and is now being offered to other operators.',
+              'We are not publishing a revenue-uplift percentage. Any figure we quoted would come from one operation and would not transfer to yours.',
+              'We have no review-site score to show, because we have not been on review sites long enough to have an honest one.',
+              'We are not the biggest, the first, or the only. We are the one you can click through before anyone phones you.',
+            ].map((t) => (
+              <li key={t} className="flex gap-3">
+                <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-hp-neg" />
+                {t}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link to="/tour" className="btn btn-gold">
+              Open the live tour <ArrowRight size={15} />
+            </Link>
+            <Link to="/demo" className="btn btn-quiet">
+              Talk to the operator
+            </Link>
           </div>
         </div>
       </section>
-
-      {/* CTA */}
-      <section className="py-24 md:py-32">
-        <div className="container-editorial reveal">
-          <div className="bg-brand-gradient rounded-2xl p-12 md:p-16 text-center text-white">
-            <h2 className="text-3xl md:text-5xl font-bold text-white">
-              Run your villa portfolio like we run ours.
-            </h2>
-            <p className="mt-5 text-white/90 max-w-xl mx-auto leading-relaxed">
-              Book a demo. We'll show you the same tools 33 people at Mr Property Siam use every day.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4 justify-center">
-              <Link to="/demo" className="inline-flex items-center gap-2 px-7 py-3 bg-white text-sky font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-btn transition-all">
-                Request a demo <ArrowUpRight size={16} />
-              </Link>
-              <Link to="/full-suite" className="inline-flex items-center gap-2 px-7 py-3 bg-white/10 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/20 transition-all">
-                See the Full Suite
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
-}
-
-function StatCard({ icon: Icon, n, label }) {
-  return (
-    <div className="card border border-slate-200">
-      <Icon size={20} className="text-sky mb-3" />
-      <div className="text-3xl font-bold gradient-text mb-1">{n}</div>
-      <div className="text-xs text-muted leading-snug">{label}</div>
     </div>
   );
 }

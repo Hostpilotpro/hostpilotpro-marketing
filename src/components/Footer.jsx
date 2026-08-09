@@ -1,47 +1,67 @@
 import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
 
+const cols = [
+  {
+    title: 'Product',
+    links: [
+      ['/owner', 'HostPilot Owner'],
+      ['/ops', 'HostPilot Ops'],
+      ['/guest', 'HostPilot Guest'],
+      ['/field', 'HostPilot Field'],
+      ['/full-suite', 'Full suite'],
+    ],
+  },
+  {
+    title: 'See it',
+    links: [
+      ['/tour', 'Live interactive tour'],
+      ['/pricing', 'Pricing'],
+      ['/demo', 'Book a call'],
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      ['/about', 'About the operator'],
+      ['/proof', 'Proof'],
+      ['/blog', 'Field notes'],
+    ],
+  },
+];
+
 export default function Footer() {
   return (
-    <footer className="mt-32 bg-slate-900 text-slate-300">
-      <div className="container-editorial py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
-        <div className="col-span-2">
-          <div className="text-white"><Logo /></div>
-          <p className="mt-5 text-sm text-slate-400 max-w-xs leading-relaxed">
-            The complete villa management platform. Owner portal, operations hub, and guest experience — one system, three doorways.
+    <footer className="border-t border-hp-lineSoft bg-hp-surface">
+      <div className="shell-wide grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+        <div>
+          <Link to="/" className="text-hp-text">
+            <Logo />
+          </Link>
+          <p className="mt-4 max-w-xs text-[15px] text-hp-text3">
+            The operating system underneath a villa management company. Built and run daily on Koh Samui by
+            Mr Property Siam.
           </p>
-          <p className="mt-6 text-xs text-slate-500">Built as Hostaway plugins. Made in Koh Samui.</p>
         </div>
-
-        <div>
-          <div className="text-xs uppercase tracking-[0.14em] font-semibold text-sky mb-4">Solutions</div>
-          <ul className="space-y-2.5 text-sm">
-            <li><Link to="/full-suite"   className="text-white font-medium hover:text-sky">Full Suite</Link></li>
-            <li><Link to="/owner-portal" className="text-slate-300 hover:text-white">Owner Portal</Link></li>
-            <li><Link to="/ops-hub"      className="text-slate-300 hover:text-white">Ops Hub</Link></li>
-            <li><Link to="/guest-portal" className="text-slate-300 hover:text-white">Guest Portal</Link></li>
-            <li><Link to="/pricing"      className="text-slate-300 hover:text-white">Pricing</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <div className="text-xs uppercase tracking-[0.14em] font-semibold text-orange mb-4">Company</div>
-          <ul className="space-y-2.5 text-sm">
-            <li><Link to="/about"        className="text-slate-300 hover:text-white">About</Link></li>
-            <li><Link to="/features"     className="text-slate-300 hover:text-white">Features</Link></li>
-            <li><Link to="/testimonials" className="text-slate-300 hover:text-white">Testimonials</Link></li>
-            <li><Link to="/blog"         className="text-slate-300 hover:text-white">Blog</Link></li>
-            <li><Link to="/demo"         className="text-slate-300 hover:text-white">Request a demo</Link></li>
-            <li><a href="mailto:jordi@mrpropertysiam.com" className="text-slate-300 hover:text-white">Contact</a></li>
-            <li><a href="https://www.mrpropertysiam.com" target="_blank" rel="noreferrer" className="text-slate-300 hover:text-white">Mr Property Siam</a></li>
-          </ul>
-        </div>
+        {cols.map((c) => (
+          <div key={c.title}>
+            <div className="eyebrow">{c.title}</div>
+            <ul className="mt-4 space-y-2.5">
+              {c.links.map(([to, label]) => (
+                <li key={to}>
+                  <Link to={to} className="text-[15px] text-hp-text2 transition hover:text-hp-goldInk">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
-
-      <div className="border-t border-slate-800">
-        <div className="container-editorial py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-2 text-xs text-slate-500">
-          <span>© {new Date().getFullYear()} HostPilotPro Suite. All rights reserved.</span>
-          <span>Reference deployment: Mr Property Siam · Koh Samui</span>
+      <div className="shell-wide flex flex-col gap-2 border-t border-hp-lineSoft py-6 text-[13.5px] text-hp-text3 sm:flex-row sm:items-center sm:justify-between">
+        <div>© {new Date().getFullYear()} HostPilot Pro · a Mr Property Siam product · Koh Samui, Thailand</div>
+        <div>
+          Every figure shown in product screens on this site is fictional demo data for Azure Coast Villas.
         </div>
       </div>
     </footer>

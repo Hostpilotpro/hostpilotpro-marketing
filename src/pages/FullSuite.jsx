@@ -1,167 +1,148 @@
 import { Link } from 'react-router-dom';
-import {
-  ArrowUpRight, Check, User, Wrench, Sparkles,
-  FileText, ClipboardCheck, Megaphone, Receipt, Camera, MessagesSquare,
-} from 'lucide-react';
-import ScreenMock from '../components/ScreenMock.jsx';
+import { ArrowRight, Play } from 'lucide-react';
+import useSeo from '../lib/seo.js';
+import { SectionHead, Eyebrow } from '../components/ui.jsx';
 
-const PLUGINS = [
-  { icon: User,     tag: 'HostPilot Owner', name: 'Owner Portal', body: 'Owners see their earnings, statements, reviews, marketing, and inspections in one calm dashboard — updated live.', to: '/owner-portal' },
-  { icon: Wrench,   tag: 'HostPilot Ops',   name: 'Ops Hub',      body: 'Your team runs reservations, tasks, payroll, bills, and statements from a single console synced to Hostaway.',    to: '/ops-hub' },
-  { icon: Sparkles, tag: 'HostPilot Guest', name: 'Guest Portal', body: 'Guests get a branded companion for their stay — property guides, add-ons, tours, transport, in-stay chat.',       to: '/guest-portal' },
-];
-
-const REASONS = [
-  { icon: FileText,       title: 'One data model',      body: 'A villa is defined once — owner, ops, and guest views all read from the same source. Nothing is duplicated, nothing goes stale.' },
-  { icon: MessagesSquare, title: 'One inbox',           body: 'Guest messages, owner requests, and internal tasks share the same routing engine. Nothing gets lost between tools.' },
-  { icon: ClipboardCheck, title: 'One onboarding',      body: 'Set up a villa once. It appears in Ops, in the owner\'s portal, and in the guest experience — automatically.' },
-  { icon: Megaphone,      title: 'One brand',           body: 'Your logo, colors and voice apply across all three products — for owners, for staff, for guests.' },
-  { icon: Receipt,        title: 'One monthly close',   body: 'Statements, payouts, commissions and P&L generated from the same ledger. Month-end takes hours, not days.' },
-  { icon: Camera,         title: 'One integration',     body: 'Hostaway plugs in once. Reservations, guests, listings sync into every product at the same time.' },
+const flow = [
+  {
+    step: 'A booking lands',
+    body:
+      'Hostaway syncs the reservation. HostPilot creates the stay, the guest record, the turnover tasks and the revenue line in one write.',
+    surfaces: ['Ops', 'Guest'],
+  },
+  {
+    step: 'The guest gets a link',
+    body:
+      'Stay details, arrival countdown, door code timing and the add-on catalogue for that villa. Anything they book becomes a task and a charge.',
+    surfaces: ['Guest', 'Ops'],
+  },
+  {
+    step: 'The work is assigned',
+    body:
+      'Departure clean, pool chemistry, pre-arrival inspection. Each lands on a department board and on one person’s phone.',
+    surfaces: ['Ops', 'Field'],
+  },
+  {
+    step: 'The work is closed in the field',
+    body:
+      'Clock-in, photos, completion time, receipts. This is the evidence layer everything downstream depends on.',
+    surfaces: ['Field'],
+  },
+  {
+    step: 'The month closes',
+    body:
+      'Reservations, recoveries, service costs and maintenance assemble into a statement. Nothing is re-typed, so nothing can silently disagree.',
+    surfaces: ['Ops', 'Owner'],
+  },
+  {
+    step: 'The owner reads it',
+    body:
+      'Every line expandable to the invoice or the closed task behind it, plus an assistant that explains movement and volunteers what went wrong.',
+    surfaces: ['Owner'],
+  },
 ];
 
 export default function FullSuite() {
+  useSeo({
+    title: 'The full suite — four surfaces on one database',
+    description:
+      'How HostPilot Ops, Owner, Guest and Field share a single data model: a booking becomes tasks, tasks become evidence, evidence becomes an owner statement.',
+    path: '/full-suite',
+  });
   return (
-    <>
-      <section className="pt-16 md:pt-24 pb-16 md:pb-20">
-        <div className="container-editorial">
-          <div className="inline-flex items-center gap-2 mb-6 reveal">
-            <span className="eyebrow">Full Suite</span>
-            <span className="text-[10px] uppercase tracking-widest bg-brand-gradient text-white px-2 py-0.5 rounded font-semibold">Recommended</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl leading-[1.05] text-ink max-w-5xl reveal">
-            All three products. <span className="gradient-text">One villa platform.</span>
+    <div>
+      <section className="relative overflow-hidden border-b border-hp-lineSoft">
+        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_80%_-20%,var(--hp-gold-tint),transparent_60%)]" />
+        <div className="shell relative pb-14 pt-28 sm:pt-32">
+          <Eyebrow>The full suite</Eyebrow>
+          <h1 className="h-sec mt-4 max-w-[24ch] font-medium">
+            One database, <span className="serif-em text-hp-text2">four ways in.</span>
           </h1>
-          <p className="mt-8 text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed reveal">
-            Owner Portal, Ops Hub, and Guest Portal — bundled into a single system. Shared data, shared brand, shared login, one contract. Built as Hostaway plugins.
+          <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
+            The reason an owner statement can be trusted is that it is assembled from the same records the cleaner
+            closed on her phone that morning. Buying the four surfaces separately would not produce that. They are one
+            system with four front doors.
           </p>
-          <div className="mt-10 flex flex-wrap gap-4 reveal">
-            <Link to="/demo" className="btn-primary">Request a demo <ArrowUpRight size={16} /></Link>
-            <Link to="/pricing" className="btn-ghost">See pricing</Link>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link to="/tour" className="btn btn-gold">
+              <Play size={15} className="fill-current" /> Walk all four in the tour
+            </Link>
+            <Link to="/pricing" className="btn btn-quiet">
+              How pricing works <ArrowRight size={15} />
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="pb-24 md:pb-28">
-        <div className="container-editorial reveal"><ScreenMock variant="ops" /></div>
-      </section>
-
-      <section className="py-20 md:py-24 bg-white border-y border-slate-200">
-        <div className="container-editorial">
-          <div className="max-w-2xl mb-12 reveal">
-            <div className="eyebrow mb-3">What's inside</div>
-            <h2 className="text-4xl md:text-5xl text-ink leading-tight">
-              Three plugins.<br />One connected system.
-            </h2>
-            <p className="mt-5 text-slate-600 leading-relaxed">Each plugin is a real product — not a feature slice. Together they cover every stakeholder in a villa business.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {PLUGINS.map((p, i) => {
-              const Icon = p.icon;
-              return (
-                <Link key={p.name} to={p.to} className="reveal group card border border-slate-200 flex flex-col" style={{ transitionDelay: `${i * 90}ms` }}>
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="w-11 h-11 rounded-xl bg-brand-gradient flex items-center justify-center text-white shadow-btn">
-                      <Icon size={18} strokeWidth={2} />
+      <section className="py-16 sm:py-20">
+        <div className="shell">
+          <SectionHead
+            eyebrow="One booking, end to end"
+            title="Follow a single reservation through the system."
+            lede="Six steps. No export, no re-keying, no reconciliation between two tools that half-agree."
+          />
+          <ol className="mt-10 space-y-3">
+            {flow.map((f, i) => (
+              <li key={f.step} className="reveal hp-card flex flex-col gap-4 p-5 sm:flex-row sm:items-start">
+                <span className="tnum shrink-0 font-display text-[30px] leading-none text-hp-goldDim">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="flex-1">
+                  <div className="font-display text-[19px] text-hp-text">{f.step}</div>
+                  <p className="mt-1.5 max-w-2xl text-[15px] leading-relaxed text-hp-text2">{f.body}</p>
+                </div>
+                <div className="flex shrink-0 flex-wrap gap-1.5">
+                  {f.surfaces.map((s) => (
+                    <span key={s} className="chip !text-[11.5px]">
+                      {s}
                     </span>
-                    <span className="eyebrow">{p.tag}</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-ink mb-2">{p.name}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-6 flex-1">{p.body}</p>
-                  <span className="inline-flex items-center gap-1.5 text-sky text-sm font-semibold group-hover:gap-2.5 transition-all">
-                    Deep-dive <ArrowUpRight size={14} />
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
-      <section className="py-20 md:py-24">
-        <div className="container-editorial">
-          <div className="max-w-2xl mb-12 reveal">
-            <div className="eyebrow mb-3">Why the Full Suite</div>
-            <h2 className="text-4xl md:text-5xl text-ink leading-tight">
-              Individual plugins solve a problem.<br />
-              <span className="gradient-text">The suite removes the seams.</span>
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
-            {REASONS.map((r) => {
-              const Icon = r.icon;
-              return (
-                <div key={r.title} className="reveal">
-                  <div className="w-12 h-12 rounded-xl bg-brand-gradient flex items-center justify-center text-white mb-5 shadow-btn">
-                    <Icon size={20} strokeWidth={2} />
-                  </div>
-                  <h4 className="text-lg font-bold text-ink mb-2">{r.title}</h4>
-                  <p className="text-slate-600 text-sm leading-relaxed">{r.body}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 md:py-24 bg-slate-900 text-white">
-        <div className="container-editorial">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div className="reveal">
-              <div className="text-xs uppercase tracking-[0.14em] font-semibold gradient-text mb-4">Standalone vs. Suite</div>
-              <h2 className="text-4xl md:text-5xl text-white leading-tight font-bold">
-                Buy one plugin.<br />
-                <span className="gradient-text">Or buy the platform.</span>
-              </h2>
-              <p className="mt-6 text-slate-300 leading-relaxed max-w-md">
-                Every plugin is available standalone — start with what hurts most. When you're ready to unify owner, ops and guest data, upgrade to the Full Suite in one click.
-              </p>
-            </div>
-            <div className="reveal grid grid-cols-2 gap-4">
-              {[
-                { label: 'One contract',         standalone: false, suite: true },
-                { label: 'Volume pricing',       standalone: false, suite: true },
-                { label: 'Shared owner logins',  standalone: false, suite: true },
-                { label: 'One-click onboarding', standalone: false, suite: true },
-                { label: 'Shared brand system',  standalone: false, suite: true },
-                { label: 'Hostaway sync',        standalone: true,  suite: true },
-              ].map((row) => (
-                <div key={row.label} className="col-span-2 grid grid-cols-[1fr_auto_auto] gap-6 py-3 border-b border-slate-800 items-center">
-                  <span className="text-sm text-slate-200">{row.label}</span>
-                  <span className="w-6 text-center text-slate-500 text-sm">{row.standalone ? <Check size={14} className="inline" /> : '—'}</span>
-                  <span className="w-6 text-center text-sky text-sm">{row.suite ? <Check size={14} className="inline" strokeWidth={3} /> : '—'}</span>
-                </div>
-              ))}
-              <div className="col-span-2 grid grid-cols-[1fr_auto_auto] gap-6 pt-2 text-[10px] uppercase tracking-widest font-semibold">
-                <span />
-                <span className="text-slate-500 w-6 text-center">Solo</span>
-                <span className="gradient-text w-6 text-center">Suite</span>
+      <section className="band py-16 sm:py-20">
+        <div className="shell">
+          <SectionHead
+            eyebrow="Where we sit"
+            title="On top of your channel manager, not instead of it."
+            lede="Replacing distribution is a migration nobody wants and a risk nobody needs. HostPilot syncs with Hostaway and takes over everything that happens after the booking is confirmed."
+          />
+          <div className="mt-9 grid gap-3 md:grid-cols-3">
+            {[
+              ['Hostaway keeps', 'Channel connections, OTA rates and content, inventory sync, the booking itself.'],
+              ['HostPilot takes', 'Tasks, staff, field work, guest experience, add-on revenue, statements, owner relationships, cash.'],
+              ['You keep', 'Your existing website, payment provider, accountant and any pricing tool you already trust.'],
+            ].map(([t, b]) => (
+              <div key={t} className="reveal hp-card p-5">
+                <div className="eyebrow">{t}</div>
+                <p className="mt-3 text-[15px] leading-relaxed text-hp-text2">{b}</p>
               </div>
-            </div>
+            ))}
           </div>
+          <p className="reveal mt-7 max-w-2xl text-[14.5px] text-hp-text3">
+            If you are on a different channel manager, say so on the call. The integration is an adapter, not a
+            rewrite, but we will be honest about how long it takes.
+          </p>
         </div>
       </section>
 
-      <section className="py-24 md:py-32">
-        <div className="container-editorial reveal">
-          <div className="bg-brand-gradient rounded-2xl p-12 md:p-16 text-center text-white">
-            <h2 className="text-3xl md:text-5xl font-bold text-white">
-              The whole platform. One conversation away.
-            </h2>
-            <p className="mt-5 text-white/90 max-w-xl mx-auto leading-relaxed">
-              30 minutes to see all three plugins working on your portfolio. Then a straight quote.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4 justify-center">
-              <Link to="/demo" className="inline-flex items-center gap-2 px-7 py-3 bg-white text-sky font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-btn transition-all">
-                Request a demo <ArrowUpRight size={16} />
-              </Link>
-              <Link to="/pricing" className="inline-flex items-center gap-2 px-7 py-3 bg-white/10 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/20 transition-all">
-                See suite pricing
-              </Link>
-            </div>
+      <section className="py-16 text-center sm:py-20">
+        <div className="shell">
+          <h2 className="h-sub font-display">Four surfaces. One tour. No signup.</h2>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Link to="/tour" className="btn btn-gold">
+              Open the live tour
+            </Link>
+            <Link to="/demo" className="btn btn-quiet">
+              Book a call
+            </Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

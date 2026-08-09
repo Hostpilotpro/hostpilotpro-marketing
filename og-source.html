@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1200px; height:630px; background:#0D0C0A; color:#FBFAF6; font-family:Inter,sans-serif; overflow:hidden; position:relative; }
+  .bg { position:absolute; inset:0; background:url('/img/samui-coast.jpg') center/cover; opacity:.5; }
+  .veil { position:absolute; inset:0; background:linear-gradient(120deg,rgba(13,12,10,.94) 0%,rgba(13,12,10,.72) 55%,rgba(13,12,10,.5) 100%); }
+  .glow { position:absolute; inset:0; background:radial-gradient(70% 90% at 8% 0%, rgba(227,200,155,.18), transparent 60%); }
+  .wrap { position:relative; padding:72px 80px; height:100%; display:flex; flex-direction:column; justify-content:space-between; }
+  .brand { display:flex; align-items:center; gap:14px; }
+  .brand svg { width:34px; height:34px; }
+  .bn { font-family:Fraunces,serif; font-size:27px; letter-spacing:-.01em; }
+  .bn b { font-weight:500; }
+  .bn span { color:#E3C89B; font-size:13px; letter-spacing:.22em; text-transform:uppercase; margin-left:8px; font-family:Inter,sans-serif; }
+  h1 { font-family:Fraunces,serif; font-weight:500; font-size:74px; line-height:1.03; letter-spacing:-.025em; max-width:16ch; }
+  h1 em { font-style:italic; color:#C9C3B7; }
+  p { margin-top:24px; font-size:22px; line-height:1.5; color:#C9C3B7; max-width:44ch; }
+  .foot { display:flex; align-items:center; gap:14px; font-size:16.5px; color:#8B857A; }
+  .pill { border:1px solid rgba(227,200,155,.4); color:#E3C89B; border-radius:999px; padding:9px 18px; font-size:16px; }
+  .rule { flex:1; height:1px; background:#2E2A23; }
+</style>
+</head>
+<body>
+  <div class="bg"></div><div class="veil"></div><div class="glow"></div>
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" fill="none"><path d="M5 15 16 6l11 9" stroke="#E3C89B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="20.5" r="5" stroke="#E3C89B" stroke-width="2.2"/><circle cx="16" cy="20.5" r="1.7" fill="#E3C89B"/></svg>
+      <div class="bn"><b>HostPilot</b><span>Pro</span></div>
+    </div>
+    <div>
+      <h1>Your owners can <em>see everything.</em></h1>
+      <p>A staff console, an owner portal, a guest app and a field app on one database. Click through the whole thing without talking to anyone.</p>
+    </div>
+    <div class="foot">
+      <div class="pill">Live interactive tour · no signup</div>
+      <div class="rule"></div>
+      <div>Built on Koh Samui</div>
+    </div>
+  </div>
+</body>
+</html>

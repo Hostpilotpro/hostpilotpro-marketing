@@ -1,85 +1,143 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Check } from 'lucide-react';
-import ScreenMock from './ScreenMock.jsx';
+import { ArrowRight, Play, Info } from 'lucide-react';
+import { SectionHead, Eyebrow, BrowserFrame, PhoneFrame, Tilt } from './ui.jsx';
 
+/**
+ * Shared layout for the four surface pages. Each page supplies its own copy,
+ * its own live replica component and its own honest-limits list.
+ */
 export default function ProductPage({
   eyebrow,
   title,
-  italic,
-  subhead,
-  audienceLabel,
-  features,
-  gallery,
-  mockVariant,
+  lede,
+  bullets = [],
+  replica,
+  replicaKind = 'desktop',
+  replicaTheme = 'dark',
+  host,
+  replicaCaption,
+  sections = [],
+  notFor = [],
 }) {
   return (
-    <>
-      <section className="pt-16 md:pt-24 pb-16 md:pb-20">
-        <div className="container-editorial">
-          <div className="eyebrow mb-6 reveal">{eyebrow}</div>
-          <h1 className="text-4xl md:text-6xl leading-[1.05] text-ink max-w-4xl reveal">
-            {title}
-            {italic && <> <span className="gradient-text">{italic}</span></>}
-          </h1>
-          <p className="mt-8 text-lg text-slate-600 max-w-2xl leading-relaxed reveal">{subhead}</p>
+    <div>
+      <section className="relative overflow-hidden border-b border-hp-lineSoft">
+        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_15%_-20%,var(--hp-gold-tint),transparent_60%)]" />
+        <div className="shell relative pb-14 pt-28 sm:pb-16 sm:pt-32">
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h1 className="h-sec mt-4 max-w-[22ch] font-medium">{title}</h1>
+          <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">{lede}</p>
+          {bullets.length > 0 && (
+            <ul className="mt-7 grid max-w-3xl gap-2.5 sm:grid-cols-2">
+              {bullets.map((b) => (
+                <li key={b} className="flex gap-2.5 text-[15px] text-hp-text2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-hp-gold" />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link to="/tour" className="btn btn-gold">
+              <Play size={15} className="fill-current" /> Try it in the tour
+            </Link>
+            <Link to="/demo" className="btn btn-quiet">
+              Book a call <ArrowRight size={15} />
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="pb-16 md:pb-24">
-        <div className="container-editorial reveal"><ScreenMock variant={mockVariant} /></div>
-      </section>
-
-      <section className="py-20 md:py-24 bg-white border-y border-slate-200">
-        <div className="container-editorial">
-          <div className="max-w-2xl mb-12 reveal">
-            <div className="eyebrow mb-3">{audienceLabel}</div>
-            <h2 className="text-3xl md:text-4xl text-ink leading-tight">Every capability, already shipped.</h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-3">
-            {features.map((f) => (
-              <div key={f} className="reveal flex gap-3.5 items-start py-3 border-b border-slate-100">
-                <span className="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-brand-gradient flex items-center justify-center text-white">
-                  <Check size={13} strokeWidth={3} />
-                </span>
-                <span className="text-slate-700 leading-relaxed">{f}</span>
+      <section className="py-12 sm:py-16">
+        <div className="shell-wide">
+          {replicaKind === 'desktop' ? (
+            <>
+              <div className="reveal hidden md:block">
+                <Tilt max={2}>
+                  <BrowserFrame host={host} note="Live replica · demo data">
+                    <div
+                      className={`relative max-h-[760px] overflow-hidden ${
+                        replicaTheme === 'light' ? 'replica-light' : 'replica-dark'
+                      }`}
+                    >
+                      {replica}
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 fade-down" />
+                    </div>
+                  </BrowserFrame>
+                </Tilt>
               </div>
-            ))}
+              <div
+                className={`-mx-5 overflow-hidden border-y border-hp-line md:hidden ${
+                  replicaTheme === 'light' ? 'replica-light' : 'replica-dark'
+                }`}
+              >
+                {replica}
+              </div>
+            </>
+          ) : (
+            <div className="reveal">
+              <PhoneFrame label={host}>{replica}</PhoneFrame>
+            </div>
+          )}
+          <div className="reveal mt-4 flex items-start gap-2 text-[12.5px] text-hp-text3">
+            <Info size={13} className="mt-0.5 shrink-0 text-hp-goldDeep" />
+            <span>
+              {replicaCaption ||
+                'Sample portfolio. Azure Coast Villas is a fictional 24-villa operator — every figure shown is demo data.'}
+            </span>
           </div>
         </div>
       </section>
 
-      {gallery && (
-        <section className="py-20 md:py-24">
-          <div className="container-editorial">
-            <div className="max-w-2xl mb-10 reveal">
-              <div className="eyebrow mb-3">Screenshot gallery</div>
-              <h2 className="text-3xl md:text-4xl text-ink leading-tight">Real screens. From production.</h2>
-            </div>
-            <div className="grid md:grid-cols-2 gap-8">
-              {gallery.map((g, i) => (
-                <div key={i} className="reveal">
-                  <ScreenMock variant={g.variant} />
-                  <div className="mt-4 text-sm text-muted">{g.caption}</div>
+      {sections.map((s, i) => (
+        <section key={s.title} className={i % 2 === 0 ? 'band py-16 sm:py-20' : 'py-16 sm:py-20'}>
+          <div className="shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+            <SectionHead eyebrow={s.eyebrow} title={s.title} lede={s.lede} />
+            <div className="reveal grid gap-3">
+              {s.items.map(([t, b]) => (
+                <div key={t} className="hp-card p-5">
+                  <div className="text-[15.5px] font-semibold text-hp-text">{t}</div>
+                  <p className="mt-1.5 text-[14.5px] leading-relaxed text-hp-text2">{b}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
+      ))}
+
+      {notFor.length > 0 && (
+        <section className="py-16 sm:py-20">
+          <div className="shell">
+            <SectionHead
+              eyebrow="Straight answers"
+              title="What this does not do."
+              lede="Every platform in this category oversells. Here is where the line is, so you do not find out on week three."
+            />
+            <ul className="reveal mt-7 grid gap-2.5 sm:grid-cols-2">
+              {notFor.map((n) => (
+                <li key={n} className="flex gap-2.5 text-[15px] text-hp-text2">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-hp-neg" />
+                  {n}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
       )}
 
-      <section className="py-20 md:py-28">
-        <div className="container-editorial reveal">
-          <div className="bg-brand-gradient rounded-2xl p-10 md:p-14 text-center text-white">
-            <h2 className="text-3xl md:text-4xl leading-tight text-white max-w-3xl mx-auto font-bold">See it in your portfolio.</h2>
-            <p className="mt-5 text-white/90 max-w-xl mx-auto leading-relaxed">30 minutes, live product, real data. No slides.</p>
-            <div className="mt-8">
-              <Link to="/demo" className="inline-flex items-center gap-2 px-7 py-3 bg-white text-sky font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-btn transition-all">
-                Request a demo <ArrowUpRight size={16} />
-              </Link>
-            </div>
+      <section className="band py-16 text-center sm:py-20">
+        <div className="shell">
+          <h2 className="h-sub font-display">Judge it yourself before anyone calls you.</h2>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Link to="/tour" className="btn btn-gold">
+              Open the live tour
+            </Link>
+            <Link to="/pricing" className="btn btn-quiet">
+              How pricing works
+            </Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

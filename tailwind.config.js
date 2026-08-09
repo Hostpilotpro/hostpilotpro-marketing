@@ -1,28 +1,45 @@
 /** @type {import('tailwindcss').Config} */
+
+// Colours resolve from CSS custom properties so the same class works in the
+// dark theme, the light champagne theme and inside the fixed-theme product
+// replicas. Channel triplets keep Tailwind's `/opacity` modifiers working.
+const c = (v) => `rgb(var(${v}) / <alpha-value>)`;
+
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
-        // Original HostPilotPro palette
-        sky:     { DEFAULT: '#0ea5e9', 600: '#0284c7', 700: '#0369a1' },
-        orange:  { DEFAULT: '#f97316', 600: '#ea580c', 700: '#c2410c' },
-        slate:   { 900: '#0f172a', 800: '#1e293b', 700: '#334155', 500: '#64748b', 400: '#94a3b8', 300: '#cbd5e1', 200: '#e2e8f0', 100: '#f1f5f9', 50: '#f8fafc' },
-        ink:     '#1e293b',
-        muted:   '#64748b',
+        hp: {
+          bg: c('--hp-bg-rgb'),
+          surface: c('--hp-surface-rgb'),
+          card: c('--hp-card-rgb'),
+          hi: c('--hp-hi-rgb'),
+          line: c('--hp-line-rgb'),
+          lineSoft: c('--hp-line-soft-rgb'),
+          gold: c('--hp-gold-rgb'),
+          goldDeep: c('--hp-gold-deep-rgb'),
+          goldDim: c('--hp-gold-dim-rgb'),
+          goldInk: c('--hp-gold-ink-rgb'),
+          text: c('--hp-text-rgb'),
+          text2: c('--hp-text-2-rgb'),
+          text3: c('--hp-text-3-rgb'),
+          pos: c('--hp-pos-rgb'),
+          neg: c('--hp-neg-rgb'),
+          info: c('--hp-info-rgb'),
+        },
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      },
-      backgroundImage: {
-        'brand-gradient': 'linear-gradient(135deg, #0ea5e9, #f97316)',
+        display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
       },
       boxShadow: {
-        card:       '0 4px 6px -1px rgba(0,0,0,0.1)',
-        'card-lift':'0 20px 25px -5px rgba(0,0,0,0.15)',
-        btn:        '0 10px 20px rgba(14,165,233,0.3)',
+        card: 'var(--hp-card-shadow)',
+        frame: 'var(--hp-frame-shadow)',
+        goldGlow: '0 0 0 1px var(--hp-gold-rule), 0 18px 40px -18px var(--hp-gold-glow)',
       },
-      maxWidth: { container: '1200px' },
+      maxWidth: { container: '1200px', wide: '1400px' },
+      letterSpacing: { eyebrow: '0.16em' },
     },
   },
   plugins: [],
