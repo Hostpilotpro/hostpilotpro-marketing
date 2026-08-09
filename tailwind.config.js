@@ -27,6 +27,7 @@ export default {
           pos: c('--hp-pos-rgb'),
           neg: c('--hp-neg-rgb'),
           info: c('--hp-info-rgb'),
+          warn: c('--hp-warn-rgb'),
         },
       },
       fontFamily: {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Info, Command, MousePointerClick, ArrowRight, PhoneCall } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import { BrowserFrame, PhoneFrame, Eyebrow } from '../components/ui.jsx';
@@ -31,6 +31,7 @@ const surfaces = [
       ['Expand any statement line for the plain-English verdict', MousePointerClick],
       ['Ask the concierge the question at the bottom', MousePointerClick],
       ['Answer the RatePilot approval three different ways', MousePointerClick],
+      ['Open Smart systems — follow the meter to the statement line it produces', MousePointerClick],
     ],
   },
   {
@@ -98,7 +99,11 @@ export default function Tour() {
       'A working replica of all four HostPilot Pro surfaces: the ops console, the owner portal, the guest app and the staff field app. No signup, no email gate, no sales call.',
     path: '/tour',
   });
-  const [active, setActive] = useState('ops');
+  /* /tour?surface=owner lands straight on the owner portal — the marketing
+     smart-systems section links in that way. */
+  const { search } = useLocation();
+  const wanted = new URLSearchParams(search).get('surface');
+  const [active, setActive] = useState(surfaces.some((x) => x.key === wanted) ? wanted : 'ops');
   const s = surfaces.find((x) => x.key === active);
 
   useEffect(() => {
@@ -195,6 +200,7 @@ export default function Tour() {
               'The Hostaway sync, payouts and payroll are live in the product but stubbed here.',
               'Only three sections of the ops console are wired up: Home, Properties, Operations.',
               'Every villa, owner, guest, staff member and figure is invented for this demo.',
+              'Smart systems are shown as designed. Device connections are in pilot — cameras, locks and meters are installed at villas today, but live status in the portal is not switched on for every property yet.',
             ].map((t) => (
               <li key={t} className="flex gap-2.5">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-hp-goldDim" />

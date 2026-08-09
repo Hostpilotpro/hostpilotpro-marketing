@@ -3,6 +3,12 @@
  * read 9 August 2026). Photography is the catalogue's own staged villa imagery,
  * downloaded into `public/img/smart/` rather than hotlinked.
  *
+ * PRICES ARE DELIBERATELY NOT PUBLISHED HERE. Install pricing is a Mr Property
+ * Siam service priced in Thai baht for one island, and this is an international
+ * software site. Publishing it confused the buy, contradicted the software
+ * pricing page, and handed a local price list to local competitors.
+ * Breadth is the point of this list — not cost.
+ *
  * FRAMING IS BINDING (messaging-v2 §8, DO NOT CLAIM):
  * this is a catalogue and a quote-request surface inside the owner portal.
  * There are zero connected devices and no lock integration. Nothing in here
@@ -13,8 +19,6 @@
 
 export const SMART_CATALOG_COUNT = 22;
 export const SMART_CHECKED = '9 August 2026';
-
-const thb = (n) => `฿${n.toLocaleString('en-US')}`;
 
 export const smartCategories = [
   { id: 'security', label: 'Security and access' },
@@ -31,7 +35,7 @@ export const smartItems = [
     alt: 'A Yale keypad lock fitted to the front door of a Koh Samui pool villa',
     body:
       'A keypad and card lock on the main door, so an arrival does not depend on somebody driving a key across the island.',
-    install: thb(14865),
+    install: 'Quoted per villa',
     monthly: null,
     feature: true,
   },
@@ -43,8 +47,8 @@ export const smartItems = [
     alt: 'A Reolink weatherproof camera mounted on a modern villa exterior wall',
     body:
       'Weatherproof outdoor camera with night vision, mounted where you decide. Recording and viewing run on the vendor’s own system.',
-    install: `from ${thb(2500)}`,
-    monthly: thb(150),
+    install: 'Quoted per villa',
+    monthly: null,
     feature: true,
   },
   {
@@ -54,7 +58,7 @@ export const smartItems = [
     img: 'doorbell.jpg',
     alt: 'A video doorbell installed at a villa entrance',
     body: 'A doorbell with a camera and intercom at the entrance, on the vendor’s app.',
-    install: thb(4725),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -64,7 +68,7 @@ export const smartItems = [
     img: 'gate.jpg',
     alt: 'An automatic sliding gate at a Koh Samui villa entrance',
     body: 'Motorised sliding or swing gate, sized to the driveway. Always quoted per property.',
-    install: 'Quote only',
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -74,7 +78,7 @@ export const smartItems = [
     img: 'safe.jpg',
     alt: 'A digital safe installed in a villa bedroom wardrobe',
     body: 'A keypad safe in the wardrobe, so a lost safe key stops being a locksmith call.',
-    install: thb(5626),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -84,7 +88,7 @@ export const smartItems = [
     img: 'perimeter.jpg',
     alt: 'An outdoor motion sensor on a villa perimeter wall at sunset',
     body: 'Outdoor motion sensors along the property line, for the stretch a camera at the door cannot see.',
-    install: thb(3105),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -94,7 +98,7 @@ export const smartItems = [
     img: 'door-sensor.jpg',
     alt: 'A magnetic door and window sensor pair on a teak sliding door',
     body: 'Magnetic contacts on sliding doors and windows — the cheapest hardware on the list and the most useful.',
-    install: thb(4185),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -104,7 +108,7 @@ export const smartItems = [
     img: 'occupancy.jpg',
     alt: 'An indoor motion sensor in a villa hallway',
     body: 'Indoor presence sensors for hallways and rooms that sit empty most of a stay.',
-    install: thb(1440),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -115,7 +119,7 @@ export const smartItems = [
     alt: 'A Shelly energy meter installed in a Koh Samui villa electrical panel',
     body:
       'A metering module fitted in the villa panel, single or three phase. It is the hardware behind a consumption number that is measured rather than estimated from a photo of the PEA meter.',
-    install: thb(5088),
+    install: 'Quoted per villa',
     monthly: null,
     feature: true,
   },
@@ -127,7 +131,7 @@ export const smartItems = [
     alt: 'An ultrasonic level sensor installed on top of a villa water tank',
     body:
       'An ultrasonic level sensor on the tank. On this island a dry tank mid-stay is a real event, not a hypothetical.',
-    install: thb(3782),
+    install: 'Quoted per villa',
     monthly: null,
     feature: true,
   },
@@ -138,7 +142,7 @@ export const smartItems = [
     img: 'leak.jpg',
     alt: 'A water leak sensor on a villa bathroom floor',
     body: 'Floor-level leak sensors under bathrooms, plant rooms and pumps.',
-    install: thb(2565),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -148,7 +152,7 @@ export const smartItems = [
     img: 'smoke.jpg',
     alt: 'A smart smoke and CO alarm on a villa ceiling',
     body: 'Interlinked smoke and carbon-monoxide alarms, specified room by room.',
-    install: thb(1755),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -158,8 +162,8 @@ export const smartItems = [
     img: 'ev-charger.jpg',
     alt: 'An EV wall charger in use at a villa carport with a sea view',
     body: 'A 7kW Type-2 wall charger at the carport, including the supply work to reach it.',
-    install: `from ${thb(22000)}`,
-    monthly: thb(200),
+    install: 'Quoted per villa',
+    monthly: null,
     feature: true,
   },
   {
@@ -169,7 +173,7 @@ export const smartItems = [
     img: 'solar.jpg',
     alt: 'Rooftop solar panels on a villa with a sea view',
     body: 'Monitoring hardware fitted to an existing rooftop array, quoted against the inverter you already have.',
-    install: `from ${thb(4500)}`,
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -179,7 +183,7 @@ export const smartItems = [
     img: 'generator.jpg',
     alt: 'A villa backup generator with a current sensor fitted to the transfer panel',
     body: 'A current sensor on the transfer panel, so generator runtime is recorded rather than remembered.',
-    install: thb(3375),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -189,7 +193,7 @@ export const smartItems = [
     img: 'ac.jpg',
     alt: 'An infrared AC controller mounted in a villa bedroom',
     body: 'An infrared controller beside each unit, for the rooms where the aircon is left running after checkout.',
-    install: thb(1175),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -199,7 +203,7 @@ export const smartItems = [
     img: 'irrigation.jpg',
     alt: 'An irrigation controller installed at a villa garden with a pool and sea view',
     body: 'A zoned irrigation controller for the garden, with rain-skip logic on the controller itself.',
-    install: thb(11450),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -209,7 +213,7 @@ export const smartItems = [
     img: 'lighting.jpg',
     alt: 'A villa exterior at dusk with warm uplighting on the palms and the pool lit',
     body: 'Scene lighting inside and out. Always quoted per villa, because it depends entirely on the wiring you have.',
-    install: 'Quote only',
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -219,7 +223,7 @@ export const smartItems = [
     img: 'curtains.jpg',
     alt: 'Motorised bedroom curtains opening onto a sea view at sunrise',
     body: 'Motorised tracks on the bedroom and living-room runs.',
-    install: thb(6750),
+    install: 'Quoted per villa',
     monthly: null,
   },
   {
@@ -229,7 +233,7 @@ export const smartItems = [
     img: 'sound.jpg',
     alt: 'In-ceiling speakers and an amplifier in a villa living room',
     body: 'Amplifier and in-ceiling speakers by zone. Quoted per villa.',
-    install: 'Quote only',
+    install: 'Quoted per villa',
     monthly: null,
   },
 ];
