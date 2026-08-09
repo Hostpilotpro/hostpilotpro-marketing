@@ -1,106 +1,77 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Mail, Rss, Clock } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
+import useSeo from '../lib/seo.js';
+import { SectionHead, Eyebrow } from '../components/ui.jsx';
 
-const UPCOMING = [
-  { tag: 'Product',    title: 'Building an owner portal that owners actually open',     read: '8 min read' },
-  { tag: 'Operations', title: 'How we replaced three WhatsApp groups with one task board', read: '6 min read' },
-  { tag: 'Finance',    title: 'VAT-clean owner statements in Thailand: what to include',   read: '10 min read' },
-  { tag: 'AI',         title: 'Inventory AI: photographing a villa in 20 minutes',        read: '5 min read' },
-  { tag: 'Guest',      title: 'The guest experience playbook we run in 85 villas',        read: '12 min read' },
-  { tag: 'Ops',        title: 'Onboarding a new villa in under 4 hours',                  read: '7 min read' },
+const PLANNED = [
+  ['Owner relations', 'Building an owner portal that owners actually open', '8 min'],
+  ['Operations', 'Replacing three WhatsApp groups with one task board', '6 min'],
+  ['Finance', 'VAT-clean owner statements in Thailand: what belongs on the line', '10 min'],
+  ['Field', 'Why the staff app had to be trilingual before anything else worked', '5 min'],
+  ['Guest revenue', 'What a priced add-on list in a guest’s pocket actually converts', '7 min'],
+  ['Onboarding', 'Onboarding a villa: the checklist we run before the first booking', '7 min'],
 ];
 
 export default function Blog() {
+  useSeo({
+    title: 'Field notes — operations writing from a working villa company',
+    description:
+      'Notes on villa operations, owner reporting, Thai compliance and the software decisions behind HostPilot Pro. Not published yet — here is what is being written.',
+    path: '/blog',
+  });
   return (
-    <>
-      {/* HERO */}
-      <section className="pt-16 md:pt-24 pb-16 md:pb-20 text-center">
-        <div className="container-editorial max-w-3xl">
-          <div className="eyebrow mb-6 reveal">Blog</div>
-          <h1 className="text-5xl md:text-7xl leading-[1.05] text-ink reveal">
-            Field notes from <span className="gradient-text">85 villas.</span>
+    <div>
+      <section className="border-b border-hp-lineSoft">
+        <div className="shell pb-14 pt-28 sm:pt-32">
+          <Eyebrow>Field notes</Eyebrow>
+          <h1 className="h-sec mt-4 max-w-[24ch] font-medium">
+            Operations writing, <span className="serif-em text-hp-text2">from inside the work.</span>
           </h1>
-          <p className="mt-8 text-lg md:text-xl text-slate-600 leading-relaxed reveal">
-            We're writing about what we learn running Mr Property Siam on our own software — operations, owner relationships, finance, guest experience, and the AI we ship along the way.
+          <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
+            Nothing is published here yet, and we would rather say that than fill the page with generated filler. These
+            are the six pieces being written, in order. Each one is about a decision that cost us something to learn.
           </p>
         </div>
       </section>
 
-      {/* COMING SOON BANNER */}
-      <section className="pb-12">
-        <div className="container-editorial reveal">
-          <div className="bg-brand-gradient rounded-2xl p-8 md:p-10 text-white flex flex-col md:flex-row md:items-center gap-6 md:gap-10">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 text-white/85 text-xs uppercase tracking-[0.14em] font-semibold mb-2">
-                <Rss size={13} /> Coming soon
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                First posts land in Q3 2026.
-              </h2>
-              <p className="text-white/90 leading-relaxed max-w-2xl">
-                We're already drafting a small library of longer pieces on how we run the platform inside MPS. Drop your email and we'll send you the first three posts.
-              </p>
-            </div>
-            <a
-              href="mailto:jordi@mrpropertysiam.com?subject=Subscribe%20me%20to%20the%20HostPilotPro%20blog"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-sky font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-btn transition-all self-start whitespace-nowrap"
-            >
-              <Mail size={16} /> Notify me
-            </a>
+      <section className="py-14 sm:py-16">
+        <div className="shell">
+          <div className="reveal mb-8 flex items-center gap-2.5 rounded-xl border border-hp-gold/25 bg-[rgba(227,200,155,0.06)] px-4 py-3 text-[14.5px] text-hp-text2">
+            <Clock size={15} className="text-hp-gold" />
+            First piece scheduled for publication. Ask on a call if you want it emailed when it lands.
           </div>
-        </div>
-      </section>
-
-      {/* UPCOMING POSTS */}
-      <section className="py-16 md:py-20 bg-white border-y border-slate-200">
-        <div className="container-editorial">
-          <div className="max-w-2xl mb-10 reveal">
-            <div className="eyebrow mb-3">On the docket</div>
-            <h2 className="text-3xl md:text-4xl text-ink leading-tight">
-              What we're writing next.
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {UPCOMING.map((p) => (
-              <div
-                key={p.title}
-                className="reveal card border border-slate-200 flex flex-col cursor-not-allowed opacity-90"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-slate-100 text-xs font-semibold text-sky uppercase tracking-wider">
-                    {p.tag}
-                  </span>
-                  <span className="text-[10px] uppercase tracking-widest font-semibold text-muted">Draft</span>
+          <ul className="grid gap-3 md:grid-cols-2">
+            {PLANNED.map(([tag, title, read]) => (
+              <li key={title} className="reveal hp-card-flat p-6">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="chip">{tag}</span>
+                  <span className="text-[12.5px] text-hp-text3">{read}</span>
                 </div>
-                <h3 className="text-lg font-bold text-ink leading-snug mb-4 flex-1">{p.title}</h3>
-                <div className="flex items-center gap-2 text-xs text-muted">
-                  <Clock size={12} /> {p.read}
-                </div>
-              </div>
+                <div className="mt-4 font-display text-[19px] leading-snug text-hp-text2">{title}</div>
+                <div className="mt-3 text-[13px] uppercase tracking-[0.14em] text-hp-text3">In draft</div>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 md:py-32">
-        <div className="container-editorial reveal">
-          <div className="bg-slate-900 rounded-2xl p-12 md:p-16 text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              Prefer to see it live?
-            </h2>
-            <p className="mt-4 text-slate-300 max-w-xl mx-auto leading-relaxed">
-              You can skip the blog and get the whole playbook in one demo call.
-            </p>
-            <div className="mt-8">
-              <Link to="/demo" className="inline-flex items-center gap-2 px-7 py-3 bg-brand-gradient text-white font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-btn transition-all">
-                Request a demo <ArrowUpRight size={16} />
-              </Link>
-            </div>
+      <section className="band py-16 sm:py-20">
+        <div className="shell max-w-3xl">
+          <SectionHead
+            eyebrow="Meanwhile"
+            title="The product says more than the blog would."
+            lede="If you came here to work out whether the people behind this understand villa operations, the tour will answer it faster than an article."
+          />
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link to="/tour" className="btn btn-gold">
+              Open the live tour <ArrowRight size={15} />
+            </Link>
+            <Link to="/about" className="btn btn-quiet">
+              How the product got built
+            </Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

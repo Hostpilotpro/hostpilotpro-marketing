@@ -4,25 +4,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Original HostPilotPro palette
-        sky:     { DEFAULT: '#0ea5e9', 600: '#0284c7', 700: '#0369a1' },
-        orange:  { DEFAULT: '#f97316', 600: '#ea580c', 700: '#c2410c' },
-        slate:   { 900: '#0f172a', 800: '#1e293b', 700: '#334155', 500: '#64748b', 400: '#94a3b8', 300: '#cbd5e1', 200: '#e2e8f0', 100: '#f1f5f9', 50: '#f8fafc' },
-        ink:     '#1e293b',
-        muted:   '#64748b',
+        hp: {
+          bg: '#0D0C0A',
+          surface: '#141210',
+          card: '#1B1815',
+          hi: '#232019',
+          line: '#2E2A23',
+          lineSoft: '#221F1A',
+          gold: '#E3C89B',
+          goldDeep: '#C2A470',
+          goldDim: '#8A7A59',
+          text: '#FBFAF6',
+          text2: '#C9C3B7',
+          text3: '#8B857A',
+          pos: '#7FA66B',
+          neg: '#C4705C',
+          info: '#6E8CA8',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      },
-      backgroundImage: {
-        'brand-gradient': 'linear-gradient(135deg, #0ea5e9, #f97316)',
+        display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
       },
       boxShadow: {
-        card:       '0 4px 6px -1px rgba(0,0,0,0.1)',
-        'card-lift':'0 20px 25px -5px rgba(0,0,0,0.15)',
-        btn:        '0 10px 20px rgba(14,165,233,0.3)',
+        card: '0 1px 0 rgba(255,255,255,0.04) inset, 0 24px 48px -24px rgba(0,0,0,0.8)',
+        frame: '0 40px 120px -40px rgba(0,0,0,0.9)',
+        goldGlow: '0 0 0 1px rgba(227,200,155,0.35), 0 18px 40px -18px rgba(227,200,155,0.35)',
       },
-      maxWidth: { container: '1200px' },
+      maxWidth: { container: '1200px', wide: '1400px' },
+      letterSpacing: { eyebrow: '0.16em' },
     },
   },
   plugins: [],

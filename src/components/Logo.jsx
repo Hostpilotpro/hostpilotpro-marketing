@@ -1,26 +1,31 @@
-export default function Logo({ className = '' }) {
+export default function Logo({ className = '', showWordmark = true }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <svg width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <defs>
-          <linearGradient id="hp-logo-g" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#0ea5e9" />
-            <stop offset="100%" stopColor="#f97316" />
-          </linearGradient>
-        </defs>
-        <rect width="32" height="32" rx="6" fill="url(#hp-logo-g)" />
-        <path
-          d="M9 8v16M9 16h9a5 5 0 0 0 0-8h-9m14 8v8"
-          stroke="#ffffff"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        />
+      <svg
+        width="28"
+        height="28"
+        viewBox="0 0 32 32"
+        fill="none"
+        aria-label="HostPilot Pro"
+        role="img"
+        className="shrink-0"
+      >
+        {/* A roofline over an open aperture — the house you can see into. */}
+        <path d="M4 15.2 16 4l12 11.2" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+        <path d="M8 16.6v11h16v-11" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+        <circle cx="16" cy="21.4" r="3.4" stroke="currentColor" strokeWidth="1.7" />
+        <circle cx="16" cy="21.4" r="1" fill="currentColor" />
       </svg>
-      <span className="font-sans text-lg font-bold tracking-tight leading-none">
-        <span className="text-sky">Host</span>
-        <span className="text-slate-700">Pilot</span>
-        <span className="text-orange">Pro</span>
-      </span>
+      {showWordmark && (
+        <span className="leading-none">
+          <span className="font-display text-[19px] font-medium tracking-[-0.01em] text-hp-text">
+            HostPilot
+          </span>
+          <span className="ml-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-hp-goldDeep">
+            Pro
+          </span>
+        </span>
+      )}
     </span>
   );
 }

@@ -1,448 +1,191 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Check, ArrowUpRight, Rocket, DollarSign, Building2, User,
-  Sparkles, Shield, Zap, Award, Info,
-} from 'lucide-react';
+import { Check, X, ArrowRight, Clock } from 'lucide-react';
+import useSeo from '../lib/seo.js';
+import { SectionHead, Eyebrow } from '../components/ui.jsx';
 
-// ================= PROPERTY-MANAGEMENT TIERS (primary market) =================
-const PM_TIERS = [
+const included = [
+  'All four surfaces — Ops, Owner, Guest and Field',
+  'Unlimited staff seats',
+  'Unlimited owner logins',
+  'Unlimited guest access',
+  'Hostaway sync',
+  'AI concierge for owners and staff',
+  'Every product update, at no extra tier',
+  'Data export whenever you ask for it',
+];
+
+const never = [
+  'No per-booking percentage fee.',
+  'No guest-service fee added later.',
+  'No charge for extra staff seats or extra owner logins.',
+  'No annual lock-in — monthly terms.',
+  'No onboarding fee for portfolios under 50 villas.',
+];
+
+const shapes = [
   {
-    name: 'Starter',
-    subtitle: 'Up to 10 villas',
-    monthly: 399,
-    annual: 319,
-    tagline: 'For boutique operators finding product-market fit.',
-    highlights: [
-      'Full suite (Owner + Ops + Guest)',
-      'Unlimited team seats, owners, guests',
-      'Hostaway two-way sync',
-      'AI concierge (Claude Haiku 4.5)',
-      'Weekly product updates',
-    ],
+    name: 'SaaS subscription',
+    who: 'You run the villas, we run the software.',
+    body:
+      'Per villa per month, billed monthly. The price per villa falls as the portfolio grows. Your data, your branding on the owner and guest surfaces.',
   },
   {
-    name: 'Growth',
-    subtitle: 'Up to 30 villas',
-    monthly: 899,
-    annual: 719,
-    tagline: 'For operators serious about owner retention.',
-    featured: true,
-    badge: 'Most Popular',
-    inherits: 'Everything in Starter, plus:',
-    highlights: [
-      'Custom AI persona images (your team as advisors)',
-      'Custom knowledge module (your SOPs, VAT, house rules)',
-      'Priority support',
-    ],
+    name: 'Branch / licensing partner',
+    who: 'You want the operating model, not just the tool.',
+    body:
+      'The platform plus the operating playbook underneath it — statement structure, task templates, staff roles, owner reporting cadence. Priced as a licence, discussed case by case.',
   },
   {
-    name: 'Professional',
-    subtitle: 'Up to 75 villas',
-    monthly: 1899,
-    annual: 1519,
-    tagline: 'For serious portfolio operators.',
-    inherits: 'Everything in Growth, plus:',
-    highlights: [
-      'Dedicated Slack channel',
-      'White-label branding',
-      'API access',
-      'Optional Sonnet-5 upgrade',
-    ],
-  },
-  {
-    name: 'Enterprise',
-    subtitle: 'Up to 200 villas',
-    monthly: 3499,
-    annual: 2799,
-    tagline: 'For multi-market management groups.',
-    inherits: 'Everything in Professional, plus:',
-    highlights: [
-      'SSO / SAML',
-      'Custom SLA',
-      'Dedicated account manager',
-      'Quarterly business review',
-    ],
+    name: 'Channel partner',
+    who: 'You already sell to villa operators.',
+    body:
+      'Referral or reseller terms for agencies, accountants and consultants working with villa management companies in the region.',
   },
 ];
 
-const PM_CUSTOM = {
-  name: 'Custom · White-label · Franchise',
-  subtitle: '200+ villas or multi-brand',
-  price: 'From $4,999',
-  per: '/mo',
-  tagline: 'Custom infrastructure, franchise territories, private-cloud deployment. Talk to us.',
-  bullets: [
-    'Multi-tenant private deployment',
-    'Franchise / territory licensing',
-    'Custom feature builds',
-    'Full white-label + custom domain',
-  ],
-};
-
-// ================= INDIVIDUAL OWNER TIERS =================
-const OWNER_TIERS = [
-  {
-    name: 'Solo',
-    subtitle: '1–2 villas',
-    monthly: 149,
-    annual: 119,
-    tagline: 'For self-managing owners of one or two homes.',
-    highlights: [
-      'Owner Portal + Ops Hub + Guest Portal',
-      'AI concierge with your live data',
-      'Hostaway two-way sync',
-      'Passport OCR, birthday cards, competitor tracking',
-      'Statement generation & payout tracking',
-    ],
-  },
-  {
-    name: 'Small Portfolio',
-    subtitle: '3–5 villas',
-    monthly: 299,
-    annual: 239,
-    featured: true,
-    tagline: 'For hands-on owners running a small collection.',
-    highlights: [
-      'Everything in Solo',
-      'Co-owner management',
-      'Portfolio aggregates & privacy wall',
-      'Priority support',
-    ],
-  },
-];
-
-// ================= INCLUDED IN ALL PLANS =================
-const INCLUDED = [
-  { icon: Sparkles, title: 'The full suite',            body: 'Owner Portal + Ops Hub + Guest Portal — one Supabase, one login, one AI.' },
-  { icon: Zap,      title: 'AI concierge',              body: 'Claude Haiku 4.5 with Samui + MPS knowledge + your live data. Nine personas.' },
-  { icon: Building2,title: 'Unlimited everything',      body: 'Team seats, owners, guests, and channels. No per-seat billing games.' },
-  { icon: Shield,   title: 'Honest math',               body: '6-month forecast with disclosed method. Portfolio aggregates behind a privacy wall.' },
-  { icon: Award,    title: 'Every feature, shipped',    body: 'Passport OCR, birthday-card automation, competitor tracking, agentic actions.' },
-  { icon: Info,     title: 'Channels + Hostaway sync',  body: 'Two-way Hostaway sync, direct bookings, plus Airbnb, Booking.com, Vrbo support.' },
-];
-
-// ================= ADD-ONS =================
-const ADDONS = [
-  { name: 'Sonnet-5 AI upgrade',              price: '+$99/mo' },
-  { name: 'Voice / video AI birthday greetings', price: '+$4 / owner / greeting' },
-  { name: 'WhatsApp Business integration',    price: '+$49/mo' },
-  { name: 'Custom domain + full white-label', price: '+$199/mo' },
-  { name: 'Migration from another PMS',       price: 'One-time $2,500' },
-  { name: 'Live launch onboarding (2 hrs)',   price: 'One-time $499 · included Pro+' },
-];
-
-// ================= COMPONENT =================
 export default function Pricing() {
-  const [market, setMarket] = useState('pm');       // 'pm' | 'owner'
-  const [billing, setBilling] = useState('annual'); // 'monthly' | 'annual'
-
+  useSeo({
+    title: 'Pricing — how HostPilot Pro charges, and what we will never charge for',
+    description:
+      'Per villa per month, billed monthly, price falls as the portfolio grows. No per-booking percentage, no guest-service fee, no seat charges, no annual lock-in. Tell us your portfolio size for a number the same day.',
+    path: '/pricing',
+  });
   return (
-    <>
-      {/* HERO */}
-      <section className="pt-16 md:pt-24 pb-8 text-center">
-        <div className="container-editorial max-w-3xl">
-          <div className="eyebrow mb-6 reveal">Pricing</div>
-          <h1 className="text-5xl md:text-7xl leading-[1.05] reveal">
-            Pricing That <span className="text-sky">Scales</span>{' '}
-            <span className="text-slate-700">With</span>{' '}
-            <span className="text-orange">You</span>
+    <div>
+      <section className="relative overflow-hidden border-b border-hp-lineSoft">
+        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_20%_-20%,rgba(227,200,155,0.13),transparent_60%)]" />
+        <div className="shell relative pb-14 pt-28 sm:pt-32">
+          <Eyebrow>Pricing</Eyebrow>
+          <h1 className="h-sec mt-4 max-w-[26ch] font-medium">
+            The shape of the deal, <span className="serif-em text-hp-text2">without the number.</span>
           </h1>
-          <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto reveal">
-            The full HostPilotPro suite in every plan — Owner Portal, Ops Hub, Guest Portal, and the AI concierge. Priced per portfolio for managers, or per-owner for self-managing hosts.
+          <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
+            We do not publish a rate yet. We do publish exactly how you are charged, what is included, and the five
+            things we will never bill you for — because a page that says only “contact us” tells you nothing, and
+            pricing opacity is the most common complaint in this category.
           </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm reveal">
-            <span className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-1.5">
-              <Check size={13} className="text-sky" /> 14-day free trial
-            </span>
-            <span className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-1.5">
-              <Check size={13} className="text-sky" /> No credit card
-            </span>
-            <span className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-1.5">
-              <Check size={13} className="text-sky" /> 30-day money-back
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* MARKET + BILLING TOGGLES */}
-      <section className="pb-10">
-        <div className="container-editorial flex flex-col items-center gap-5 reveal">
-          {/* Market toggle */}
-          <div className="inline-flex items-center bg-white border-2 border-slate-200 rounded-full p-1 shadow-card">
-            <button
-              onClick={() => setMarket('pm')}
-              className={`flex items-center gap-2 px-5 md:px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                market === 'pm' ? 'bg-brand-gradient text-white shadow-btn' : 'text-slate-600 hover:text-sky'
-              }`}
-            >
-              <Building2 size={16} /> Property Managers
-            </button>
-            <button
-              onClick={() => setMarket('owner')}
-              className={`flex items-center gap-2 px-5 md:px-6 py-2.5 rounded-full text-sm font-semibold transition-all ${
-                market === 'owner' ? 'bg-brand-gradient text-white shadow-btn' : 'text-slate-600 hover:text-sky'
-              }`}
-            >
-              <User size={16} /> Individual Owners
-            </button>
-          </div>
-
-          {/* Billing toggle */}
-          <div className="flex items-center gap-3 text-sm">
-            <span className={`font-semibold ${billing === 'monthly' ? 'text-ink' : 'text-muted'}`}>Monthly</span>
-            <button
-              onClick={() => setBilling(billing === 'annual' ? 'monthly' : 'annual')}
-              className="relative w-14 h-7 rounded-full bg-slate-200 transition-colors"
-              aria-label="Toggle billing"
-            >
-              <span
-                className={`absolute top-0.5 w-6 h-6 rounded-full bg-brand-gradient shadow-btn transition-all duration-300 ${
-                  billing === 'annual' ? 'left-[30px]' : 'left-0.5'
-                }`}
-              />
-            </button>
-            <span className={`font-semibold ${billing === 'annual' ? 'text-ink' : 'text-muted'}`}>
-              Annual
-              <span className="ml-2 text-[10px] uppercase tracking-widest bg-brand-gradient text-white px-2 py-0.5 rounded-full font-semibold">Save 20%</span>
-            </span>
-          </div>
-
-          <p className="text-xs text-muted max-w-md text-center">
-            {market === 'pm'
-              ? 'Priced per portfolio. All PM plans include the full suite, unlimited team seats, and unlimited owners.'
-              : 'Priced per-owner for self-managing hosts running 1–5 villas.'}
-          </p>
-        </div>
-      </section>
-
-      {/* ===== PROPERTY MANAGER TIERS ===== */}
-      {market === 'pm' && (
-        <>
-          <section className="pb-8">
-            <div className="container-editorial">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-                {PM_TIERS.map((t) => (
-                  <TierCard key={t.name} tier={t} billing={billing} />
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Custom tier */}
-          <section className="pb-16 md:pb-20">
-            <div className="container-editorial reveal">
-              <div className="rounded-2xl border-2 border-slate-900 bg-slate-900 text-white p-8 md:p-10 grid md:grid-cols-[1fr_auto] gap-6 md:items-center">
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-xs uppercase tracking-[0.14em] font-semibold gradient-text">{PM_CUSTOM.subtitle}</span>
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-2">{PM_CUSTOM.name}</h3>
-                  <p className="text-slate-300 leading-relaxed mb-4 max-w-2xl">{PM_CUSTOM.tagline}</p>
-                  <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-300">
-                    {PM_CUSTOM.bullets.map((b) => (
-                      <span key={b} className="flex items-center gap-1.5">
-                        <Check size={13} className="text-sky" /> {b}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="flex flex-col items-start md:items-end gap-3">
-                  <div>
-                    <span className="text-3xl md:text-4xl font-bold gradient-text">{PM_CUSTOM.price}</span>
-                    <span className="text-sm text-slate-400 font-medium ml-1">{PM_CUSTOM.per}</span>
-                  </div>
-                  <Link to="/demo" className="inline-flex items-center gap-2 px-6 py-3 bg-brand-gradient text-white font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-btn transition-all whitespace-nowrap">
-                    Talk to sales <ArrowUpRight size={14} />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* ===== INDIVIDUAL OWNER TIERS ===== */}
-      {market === 'owner' && (
-        <section className="pb-16 md:pb-20">
-          <div className="container-editorial">
-            <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-6">
-              {OWNER_TIERS.map((t) => (
-                <TierCard key={t.name} tier={t} billing={billing} />
-              ))}
-            </div>
-            <div className="mt-10 text-center reveal">
-              <p className="text-sm text-muted mb-3">
-                Managing more than 5 villas? You're a property manager — switch to PM pricing for volume discounts.
-              </p>
-              <button
-                onClick={() => setMarket('pm')}
-                className="btn-ghost text-sm inline-flex"
-              >
-                See Property Manager pricing <ArrowUpRight size={14} />
-              </button>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* INCLUDED IN ALL PLANS */}
-      <section className="py-16 md:py-24 bg-white border-y border-slate-200">
-        <div className="container-editorial">
-          <div className="text-center max-w-2xl mx-auto mb-14 reveal">
-            <div className="eyebrow mb-3">Every plan</div>
-            <h2 className="text-3xl md:text-4xl text-ink">Included at every tier</h2>
-            <p className="mt-4 text-slate-600 leading-relaxed">
-              No feature is held back. The AI, the sync, the automations, the honest math — everyone gets the same product. Higher tiers unlock customization and support depth, not the core capability.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {INCLUDED.map((i) => {
-              const Icon = i.icon;
-              return (
-                <div key={i.title} className="reveal card border border-slate-200">
-                  <div className="w-11 h-11 rounded-xl bg-brand-gradient flex items-center justify-center text-white mb-4 shadow-btn">
-                    <Icon size={19} strokeWidth={2} />
-                  </div>
-                  <h4 className="font-bold text-ink text-lg mb-2">{i.title}</h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">{i.body}</p>
-                </div>
-              );
-            })}
-          </div>
-          <div className="mt-8 text-center reveal">
-            <Link to="/features" className="link-arrow">
-              See the full feature list <ArrowUpRight size={14} />
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link to="/demo" className="btn btn-gold">
+              Tell us your portfolio size <ArrowRight size={15} />
+            </Link>
+            <Link to="/tour" className="btn btn-quiet">
+              See the product first
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ADD-ONS */}
-      <section className="py-16 md:py-24">
-        <div className="container-editorial">
-          <div className="max-w-2xl mb-10 reveal">
-            <div className="eyebrow mb-3">Optional add-ons</div>
-            <h2 className="text-3xl md:text-4xl text-ink">Extend the platform.</h2>
-            <p className="mt-4 text-slate-600 leading-relaxed">
-              Only pay for the parts you use. Every add-on is optional and can be turned on or off any month.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-3 reveal">
-            {ADDONS.map((a) => (
-              <div
-                key={a.name}
-                className="flex items-center justify-between bg-white border border-slate-200 rounded-xl px-5 py-4 hover:border-sky/60 transition-colors"
-              >
-                <span className="text-sm text-slate-700 font-medium">{a.name}</span>
-                <span className="text-sm font-bold gradient-text whitespace-nowrap ml-4">{a.price}</span>
+      {/* how you are charged */}
+      <section className="py-16 sm:py-20">
+        <div className="shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+          <SectionHead
+            eyebrow="How you are charged"
+            title="Per villa, per month."
+            lede="One line on one invoice. The per-villa rate falls as your portfolio grows, and it is the same rate for every villa in a band — not a low headline number with the useful features priced above it."
+          />
+          <div className="reveal grid gap-3">
+            {[
+              ['Billed monthly', 'Monthly terms, cancel with a month’s notice. No annual commitment to get a sane rate.'],
+              ['Volume bands', 'The rate steps down as villa count rises. We will tell you every band on the call, not just the one you are in.'],
+              ['One currency, one invoice', 'THB or USD. No per-module add-ons and no usage meter to watch.'],
+              ['Nothing core is upsold', 'The owner portal is not a premium tier. It is the point of the product.'],
+            ].map(([t, b]) => (
+              <div key={t} className="hp-card p-5">
+                <div className="text-[15.5px] font-semibold text-hp-text">{t}</div>
+                <p className="mt-1.5 text-[14.5px] leading-relaxed text-hp-text2">{b}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* GUARANTEES */}
-      <section className="py-16 md:py-20 bg-white border-y border-slate-200">
-        <div className="container-editorial">
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <Guarantee icon={Rocket}    title="14-day free trial"    body="No credit card required. Test the full suite on a sample portfolio." />
-            <Guarantee icon={Shield}    title="30-day money-back"    body="Not convinced in the first month? We refund your subscription, no questions." />
-            <Guarantee icon={DollarSign} title="Annual saves 20%"     body="Pay upfront, ship faster with your team. Monthly billing is always available too." />
+      {/* included / never */}
+      <section className="band py-16 sm:py-20">
+        <div className="shell grid gap-6 lg:grid-cols-2">
+          <div className="reveal hp-card p-6 sm:p-8">
+            <Eyebrow>Included at every size</Eyebrow>
+            <h2 className="h-sub mt-3 font-display">Everything, at every tier.</h2>
+            <ul className="mt-6 space-y-2.5">
+              {included.map((i) => (
+                <li key={i} className="flex gap-3 text-[15px] text-hp-text2">
+                  <Check size={16} className="mt-1 shrink-0 text-hp-pos" />
+                  {i}
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      </section>
-
-      {/* BOTTOM CTA */}
-      <section className="pb-24 md:pb-32 pt-16">
-        <div className="container-editorial reveal">
-          <div className="bg-slate-900 rounded-2xl p-12 md:p-16 text-center text-white">
-            <h2 className="text-3xl md:text-5xl font-bold text-white">
-              Simple. Scalable. <span className="gradient-text">Stress-Free.</span>
-            </h2>
-            <p className="mt-4 text-slate-300 max-w-xl mx-auto leading-relaxed">
-              Book a demo, or start a free 14-day trial. If you have 50+ villas, ask us for a custom onboarding plan.
+          <div className="reveal hp-card p-6 sm:p-8">
+            <Eyebrow>Commitments</Eyebrow>
+            <h2 className="h-sub mt-3 font-display">What we will never do.</h2>
+            <ul className="mt-6 space-y-3.5">
+              {never.map((i) => (
+                <li key={i} className="flex gap-3 text-[15.5px] text-hp-text">
+                  <X size={16} className="mt-1 shrink-0 text-hp-neg" />
+                  {i}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-[14px] text-hp-text3">
+              Each of those five is a real, repeated complaint made about a named competitor in the reviews we read
+              while researching this market. They are on this page so you can hold us to them.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4 justify-center">
-              <Link to="/demo" className="inline-flex items-center gap-2 px-7 py-3 bg-brand-gradient text-white font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-btn transition-all">
-                <Rocket size={16} /> Book a Demo
-              </Link>
-              <Link to="/demo" className="inline-flex items-center gap-2 px-7 py-3 bg-white/10 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/20 transition-all">
-                <DollarSign size={16} /> Start Free Trial
-              </Link>
-            </div>
           </div>
         </div>
       </section>
-    </>
-  );
-}
 
-// -------- Tier card --------
-function TierCard({ tier, billing }) {
-  const price = billing === 'annual' ? tier.annual : tier.monthly;
-  const monthlyEq = billing === 'annual' ? tier.monthly : null;
-  return (
-    <div
-      className={`reveal relative bg-white rounded-2xl p-8 flex flex-col transition-all duration-300
-        ${tier.featured
-          ? 'border-2 border-sky lg:scale-[1.03] shadow-card-lift z-10'
-          : 'border border-slate-200 shadow-card hover:-translate-y-2 hover:shadow-card-lift'
-        }`}
-    >
-      {tier.featured && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-gradient text-white text-xs font-semibold px-5 py-1.5 rounded-full shadow-btn whitespace-nowrap">
-          {tier.badge || 'Most Popular'}
-        </span>
-      )}
+      {/* relationship shapes */}
+      <section className="py-16 sm:py-20">
+        <div className="shell">
+          <SectionHead
+            eyebrow="Three shapes of relationship"
+            title="Not everyone wants to buy software."
+            lede="Some operators want the tool. Some want the operating model that comes with it. Some want to sell it to their own clients. All three are available; none of them have a published price."
+          />
+          <div className="mt-10 grid gap-3 md:grid-cols-3">
+            {shapes.map((s) => (
+              <div key={s.name} className="reveal hp-card p-6">
+                <div className="font-display text-[20px] text-hp-text">{s.name}</div>
+                <div className="mt-1.5 text-[13.5px] text-hp-goldDeep">{s.who}</div>
+                <p className="mt-4 text-[14.5px] leading-relaxed text-hp-text2">{s.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <h3 className="text-xl font-bold text-ink mb-1">{tier.name}</h3>
-      <p className="text-sm text-muted mb-5">{tier.subtitle}</p>
-
-      <div className="mb-1 flex items-baseline gap-1">
-        <span className={`text-4xl font-bold ${tier.featured ? 'gradient-text' : 'text-ink'}`}>${price}</span>
-        <span className="text-sm text-muted font-medium">/mo</span>
-      </div>
-      <div className="text-xs text-muted mb-5 h-4">
-        {billing === 'annual' ? <>Billed annually · <span className="line-through">${monthlyEq}/mo</span></> : 'Billed monthly'}
-      </div>
-
-      <p className="text-sm text-slate-700 leading-relaxed mb-5">{tier.tagline}</p>
-
-      {tier.inherits && (
-        <div className="text-xs uppercase tracking-widest font-semibold text-sky mb-3">{tier.inherits}</div>
-      )}
-      <ul className="space-y-2.5 mb-8 flex-1">
-        {tier.highlights.map((h) => (
-          <li key={h} className="flex gap-2.5 items-start text-sm">
-            <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand-gradient flex items-center justify-center text-white">
-              <Check size={11} strokeWidth={3} />
-            </span>
-            <span className="text-slate-700 leading-relaxed">{h}</span>
-          </li>
-        ))}
-      </ul>
-
-      <Link
-        to="/demo"
-        className={
-          tier.featured ? 'btn-primary justify-center w-full' : 'btn-ghost justify-center w-full'
-        }
-      >
-        Start free trial
-      </Link>
-    </div>
-  );
-}
-
-function Guarantee({ icon: Icon, title, body }) {
-  return (
-    <div className="reveal text-center">
-      <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-brand-gradient flex items-center justify-center text-white shadow-btn">
-        <Icon size={20} strokeWidth={2} />
-      </div>
-      <h4 className="font-bold text-ink mb-2">{title}</h4>
-      <p className="text-sm text-slate-600 leading-relaxed">{body}</p>
+      {/* why no price */}
+      <section className="band py-16 sm:py-20">
+        <div className="shell max-w-3xl">
+          <SectionHead
+            eyebrow="Straight answer"
+            title="Why we don’t list a price yet."
+            lede="Because we would have to guess, and a guess published on a website becomes a promise we might have to break."
+          />
+          <div className="reveal mt-6 space-y-4 text-[16px] leading-[1.7] text-hp-text2">
+            <p>
+              HostPilot Pro grew inside a working villa company rather than out of a pricing study. We know what it
+              costs us to run and support a portfolio, and we know what it is worth to an operator with 24 villas,
+              because that is the size of operation it was built for. What we do not have yet is enough external
+              customers at enough different sizes to publish a ladder we would still be honest about in six months.
+            </p>
+            <p>
+              So the deal is this: you tell us how many villas you manage and which channel manager you use, and we
+              send a number the same working day — plus the bands above and below yours, so you can see where it goes
+              as you grow. If we ever publish a rate card, it will match the numbers we have been quoting privately.
+            </p>
+          </div>
+          <div className="reveal mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-hp-gold/25 bg-[rgba(227,200,155,0.07)] p-5">
+            <Clock size={18} className="text-hp-gold" />
+            <div className="flex-1 text-[15px] text-hp-text2">
+              Tell us your portfolio size and we will send a number the same working day. If we cannot, we will tell
+              you why within that day rather than going quiet.
+            </div>
+            <Link to="/demo" className="btn btn-gold">
+              Ask for a number
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

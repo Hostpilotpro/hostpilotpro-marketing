@@ -1,24 +1,26 @@
-import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
-import OwnerPortal from './pages/OwnerPortal.jsx';
-import OpsHub from './pages/OpsHub.jsx';
-import GuestPortal from './pages/GuestPortal.jsx';
+import Tour from './pages/Tour.jsx';
+import Owner from './pages/Owner.jsx';
+import Ops from './pages/Ops.jsx';
+import Guest from './pages/Guest.jsx';
+import Field from './pages/Field.jsx';
 import FullSuite from './pages/FullSuite.jsx';
 import Pricing from './pages/Pricing.jsx';
-import Features from './pages/Features.jsx';
 import About from './pages/About.jsx';
-import Testimonials from './pages/Testimonials.jsx';
+import Proof from './pages/Proof.jsx';
 import Blog from './pages/Blog.jsx';
 import Demo from './pages/Demo.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return null;
 }
 
@@ -35,9 +37,8 @@ export default function App() {
             io.unobserve(e.target);
           }
         }),
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
     );
-    // Wait a tick for React to paint the new route.
     const t = setTimeout(() => {
       document.querySelectorAll('.reveal:not(.in)').forEach((el) => io.observe(el));
     }, 30);
@@ -54,16 +55,25 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/owner-portal" element={<OwnerPortal />} />
-          <Route path="/ops-hub" element={<OpsHub />} />
-          <Route path="/guest-portal" element={<GuestPortal />} />
+          <Route path="/tour" element={<Tour />} />
+          <Route path="/owner" element={<Owner />} />
+          <Route path="/ops" element={<Ops />} />
+          <Route path="/guest" element={<Guest />} />
+          <Route path="/field" element={<Field />} />
           <Route path="/full-suite" element={<FullSuite />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/features" element={<Features />} />
           <Route path="/about" element={<About />} />
-          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/proof" element={<Proof />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/demo" element={<Demo />} />
+
+          {/* Legacy routes from the previous site — kept so existing links survive. */}
+          <Route path="/owner-portal" element={<Navigate to="/owner" replace />} />
+          <Route path="/ops-hub" element={<Navigate to="/ops" replace />} />
+          <Route path="/guest-portal" element={<Navigate to="/guest" replace />} />
+          <Route path="/testimonials" element={<Navigate to="/proof" replace />} />
+          <Route path="/features" element={<Navigate to="/full-suite" replace />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

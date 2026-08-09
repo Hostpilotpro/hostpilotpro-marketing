@@ -1,184 +1,274 @@
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, FileText, Sparkles, ClipboardCheck, Megaphone, Receipt, Camera } from 'lucide-react';
-import ProductCard from '../components/ProductCard.jsx';
-import FeatureItem from '../components/FeatureItem.jsx';
-import ScreenMock from '../components/ScreenMock.jsx';
+import { ArrowRight, Play, Building2, Users, Smartphone, Monitor, Check, Info } from 'lucide-react';
+import useSeo from '../lib/seo.js';
+import { SectionHead, Eyebrow, Tilt, BrowserFrame, PrimaryLink } from '../components/ui.jsx';
+import OpsConsole from '../tour/OpsConsole.jsx';
+import demo from '../data/demo.js';
 
-const PRODUCTS = [
-  { eyebrow: 'Owner Portal',   name: 'HostPilot Owner', tagline: 'Where villa owners see everything.',            description: 'Earnings, payouts, inspections, reviews, marketing, inventory, and guest messaging — one calm place, updated in real time.', to: '/owner-portal' },
-  { eyebrow: 'Operations Hub', name: 'HostPilot Ops',   tagline: 'The internal system your team lives in.',       description: 'Bookings, tasks, statements, payroll, bills, sub-management ledgers. Everything an ops team touches, in one console.',       to: '/ops-hub' },
-  { eyebrow: 'Guest Portal',   name: 'HostPilot Guest', tagline: 'The experience your guests actually remember.', description: 'Property guides, add-ons, tours, transport, and in-stay assistance — a branded companion that turns stays into revenue.',    to: '/guest-portal' },
-];
-
-const FEATURES = [
-  { icon: FileText,       title: 'Owner statements',      description: 'Monthly earnings, VAT-clean, exportable. Owners stop asking for spreadsheets.' },
-  { icon: Sparkles,       title: 'Guest reviews AI',      description: 'Every Airbnb, Booking, and VRBO review synced and summarised — strengths, weaknesses, one glance.' },
-  { icon: ClipboardCheck, title: 'Inspection scheduling', description: 'Owners schedule their own villa inspections. No group chat, no back-and-forth.' },
-  { icon: Megaphone,      title: 'Marketing Boost',       description: 'Spark, Glow, Beam, Always-On packages. Owners choose the visibility they want.' },
-  { icon: Receipt,        title: 'Bill scanner',          description: 'AI parses supplier bills into the ledger — the ops team stops typing invoices.' },
-  { icon: Camera,         title: 'Inventory AI parser',   description: 'Photograph a room; the inventory list writes itself. Onboarding new villas gets fast.' },
-];
-
-const NUMBERS = [
-  { n: '33',     label: 'Team members' },
-  { n: '85',     label: 'Villas managed' },
-  { n: '4,700+', label: 'Reviews synced' },
-  { n: '100%',   label: 'Financial transparency' },
+const surfaces = [
+  {
+    to: '/owner',
+    name: 'HostPilot Owner',
+    icon: Users,
+    line: 'The owner portal, and the reason the rest exists.',
+    body:
+      'Monthly statements owners can actually read, every line expandable down to the invoice. Payout history, forward pipeline, rate approvals, and an assistant that answers questions from their own numbers.',
+    proof: 'Statement lines expand to a plain-English verdict.',
+  },
+  {
+    to: '/ops',
+    name: 'HostPilot Ops',
+    icon: Monitor,
+    line: 'The staff console the whole operation runs on.',
+    body:
+      'Villas, owners, reservations, tasks, inspections, statements, petty cash and payroll inputs in one place, with a command palette that reaches any record in two keystrokes.',
+    proof: 'Press ⌘K in the tour and jump to any villa.',
+  },
+  {
+    to: '/guest',
+    name: 'HostPilot Guest',
+    icon: Smartphone,
+    line: 'The stay app that sells things while you sleep.',
+    body:
+      'Door code, Wi-Fi, house manual, arrival status and a paid add-on list in the guest’s pocket. Transfers, chefs, charters, massage, breakfast — booked without a WhatsApp thread.',
+    proof: '฿24,950 of add-ons on one seven-night demo stay.',
+  },
+  {
+    to: '/field',
+    name: 'HostPilot Field',
+    icon: Building2,
+    line: 'The app your cleaners and pool techs actually open.',
+    body:
+      'Clock in, claim jobs, log work already done, photograph a receipt, check pay. Built for a phone held in one hand outdoors, in English, Thai or Burmese.',
+    proof: 'Switch language in the tour and watch it re-label.',
+  },
 ];
 
 export default function Home() {
+  useSeo({
+    title: 'HostPilot Pro — your owners can see everything',
+    description:
+      'HostPilot Pro is the operating system underneath a villa management company: a staff console, an owner portal, a guest app and a field app on one database. Click through it without talking to anyone.',
+    path: '/',
+  });
+
   return (
-    <>
-      {/* HERO */}
-      <section className="pt-16 md:pt-24 pb-20 md:pb-24">
-        <div className="container-editorial">
-          <div className="max-w-4xl">
-            <div className="eyebrow mb-6 reveal">The complete villa management platform</div>
-            <h1 className="text-5xl md:text-7xl leading-[1.05] text-ink reveal">
-              Effortless villa <span className="gradient-text">management.</span>
-            </h1>
-            <p className="mt-8 text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed reveal">
-              Owner portal, operations hub, and guest experience — one system, three doorways. Built as Hostaway plugins. Subscribe to any of them individually, or run the full suite.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4 reveal">
-              <Link to="/demo" className="btn-primary">Request a demo <ArrowUpRight size={16} /></Link>
-              <button onClick={() => document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })} className="btn-ghost">See the products</button>
-            </div>
+    <div>
+      {/* ---------------------------------------------------------------- hero */}
+      <section className="relative overflow-hidden">
+        <img
+          src="/img/samui-coast.jpg"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.42]"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,12,10,0.72)_0%,rgba(13,12,10,0.86)_55%,#0D0C0A_100%)]" />
+        <div className="grain absolute inset-0" />
+        <div className="shell relative pb-14 pt-28 sm:pb-20 sm:pt-36">
+          <div className="chip">
+            <span className="h-1.5 w-1.5 rounded-full bg-hp-pos" /> Built and run daily on Koh Samui
           </div>
+          <h1 className="h-hero mt-6 max-w-[16ch] font-medium">
+            Your owners can <span className="serif-em">see everything.</span>
+          </h1>
+          <p className="mt-7 max-w-2xl text-[17px] leading-[1.7] text-hp-text2 sm:text-[19px]">
+            HostPilot Pro is the operating system underneath a villa management company — a staff console, an owner
+            portal, a guest app and a field app, on one database. It sits on top of your channel manager rather than
+            replacing it.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link to="/tour" className="btn btn-gold">
+              <Play size={15} className="fill-current" /> Open the live tour
+            </Link>
+            <Link to="/demo" className="btn btn-quiet">
+              Book a call <ArrowRight size={15} />
+            </Link>
+          </div>
+          <p className="mt-4 text-[14px] text-hp-text3">
+            No email gate. No signup. The tour is the product, filled with demo data.
+          </p>
         </div>
       </section>
 
-      {/* SOLUTIONS */}
-      <section id="products" className="py-20 md:py-28 bg-white border-y border-slate-200">
-        <div className="container-editorial">
-          <div className="max-w-2xl mb-12 reveal">
-            <div className="eyebrow mb-3">Our solutions</div>
-            <h2 className="text-4xl md:text-5xl text-ink leading-tight">
-              Four ways to buy.<br />One connected platform.
-            </h2>
-            <p className="mt-5 text-slate-600 leading-relaxed">
-              Start with a single Hostaway plugin, or bundle the Full Suite from day one. Every solution shares the same data model — nothing gets re-entered when you add another.
-            </p>
+      {/* ------------------------------------------------------- product on page */}
+      <section className="border-t border-hp-lineSoft bg-hp-bg py-14 sm:py-20">
+        <div className="shell-wide">
+          <div className="reveal flex flex-wrap items-end justify-between gap-5">
+            <div className="max-w-2xl">
+              <Eyebrow>The ops console, live below</Eyebrow>
+              <h2 className="h-sec mt-3">
+                This is not a screenshot. <span className="serif-em text-hp-text2">Use it.</span>
+              </h2>
+              <p className="mt-4 text-[17px] text-hp-text2">
+                Press ⌘K and search a villa. Click one to open its dossier. Open Operations for the task board. Same
+                code as the tour, same fictional portfolio.
+              </p>
+            </div>
+            <PrimaryLink to="/tour">Open the full tour</PrimaryLink>
           </div>
 
-          {/* Full Suite featured card */}
-          <Link
-            to="/full-suite"
-            className="reveal group block relative overflow-hidden bg-brand-gradient text-white rounded-2xl p-8 md:p-12 mb-6 md:mb-8 transition-all hover:-translate-y-0.5 hover:shadow-card-lift"
-          >
-            <div className="grid md:grid-cols-[1fr_auto] gap-8 items-end">
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-xs uppercase tracking-[0.14em] font-semibold text-white/85">Full Suite</span>
-                  <span className="text-[10px] uppercase tracking-widest bg-white/25 text-white px-2 py-0.5 rounded font-semibold">Recommended</span>
+          <div className="reveal mt-9">
+            <Tilt max={2}>
+              <BrowserFrame host="ops.hostpilotpro.com" note="Live replica · demo data">
+                <div className="max-h-[720px] overflow-hidden">
+                  <OpsConsole />
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold leading-tight mb-4 text-white">
-                  All three plugins. <span className="text-white/85">One villa platform.</span>
-                </h3>
-                <p className="text-white/90 leading-relaxed max-w-xl">
-                  Owner Portal + Ops Hub + Guest Portal, bundled. Shared data, shared brand, shared logins. One contract, volume pricing.
-                </p>
-              </div>
-              <span className="inline-flex items-center gap-1.5 text-white text-sm font-semibold border-b-2 border-white/50 pb-1 group-hover:gap-2.5 transition-all">
-                Explore the Full Suite <ArrowUpRight size={14} />
-              </span>
-            </div>
-          </Link>
-
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            {PRODUCTS.map((p, i) => (
-              <div key={p.name} className="reveal" style={{ transitionDelay: `${i * 90}ms` }}>
-                <ProductCard {...p} index={i + 1} />
-              </div>
-            ))}
+              </BrowserFrame>
+            </Tilt>
+          </div>
+          <div className="reveal mt-4 flex items-center gap-2 text-[12.5px] text-hp-text3">
+            <Info size={13} className="text-hp-goldDeep" />
+            Sample portfolio. Azure Coast Villas is a fictional 24-villa operator — every figure shown is demo data.
           </div>
         </div>
       </section>
 
-      {/* MPS PROOF */}
-      <section className="py-24 md:py-32">
-        <div className="container-editorial grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+      {/* ---------------------------------------------------------- operator proof */}
+      <section className="band py-16 sm:py-24">
+        <div className="shell grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <SectionHead
+              eyebrow="Why this exists"
+              title={
+                <>
+                  Built by an operator, <span className="serif-em text-hp-text2">not a software company.</span>
+                </>
+              }
+              lede="Mr Property Siam manages villas on Koh Samui. Every screen in HostPilot Pro was built because something in that operation was broken — a statement an owner did not trust, a clean nobody logged, a pool bill nobody could find. The company runs on this software daily. When something is wrong, the person who fixes it is the person who needs it fixed."
+            />
+            <div className="reveal mt-8 grid gap-4 sm:grid-cols-2">
+              {[
+                ['One database', 'Owners, guests, staff and the office read the same records. Nothing is re-keyed.'],
+                ['On top of Hostaway', 'Your channel manager keeps doing distribution. We do everything after the booking.'],
+                ['Three languages in the field', 'English, Thai and Burmese, because that is who does the work.'],
+                ['Support from the operator', 'The most common complaint about every competitor we reviewed was support. We are a small team that answers.'],
+              ].map(([t, b]) => (
+                <div key={t} className="hp-card p-5">
+                  <div className="flex items-center gap-2">
+                    <Check size={14} className="text-hp-gold" />
+                    <div className="text-[15px] font-semibold text-hp-text">{t}</div>
+                  </div>
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-hp-text2">{b}</p>
+                </div>
+              ))}
+            </div>
+          </div>
           <div className="reveal">
-            <div className="eyebrow mb-4">Who's on it</div>
-            <h2 className="text-4xl md:text-5xl text-ink leading-tight mb-6">
-              First customer.<br />Reference deployment.
-            </h2>
-            <p className="text-slate-600 leading-relaxed mb-6">
-              Mr Property Siam manages 85 luxury villas in Koh Samui — the entire portfolio runs on HostPilotPro Suite in production, every day.
+            <div className="overflow-hidden rounded-2xl border border-hp-line shadow-frame">
+              <img src="/img/villa-sapphire-hero.jpg" alt="A managed villa at dusk on Koh Samui" className="w-full" />
+            </div>
+            <p className="mt-4 text-[13.5px] text-hp-text3">
+              Koh Samui, Thailand. The software was written between check-outs.
             </p>
-            <a href="https://www.mrpropertysiam.com" target="_blank" rel="noreferrer" className="link-arrow">
-              Visit Mr Property Siam <ArrowUpRight size={14} />
-            </a>
-          </div>
-          <figure className="reveal card border border-slate-200">
-            <blockquote className="text-xl md:text-2xl leading-snug text-ink font-medium">
-              “We stopped stitching spreadsheets, WhatsApp threads and Hostaway together. Owners see their villas, the team runs the ops, guests get a real product. It's the one system we ship every process into.”
-            </blockquote>
-            <figcaption className="mt-6 flex items-center gap-4">
-              <div className="w-11 h-11 rounded-full bg-brand-gradient flex items-center justify-center text-white font-bold text-lg">J</div>
-              <div>
-                <div className="font-semibold text-ink">Jordi</div>
-                <div className="text-sm text-muted">CEO · Mr Property Siam</div>
-              </div>
-            </figcaption>
-          </figure>
-        </div>
-      </section>
-
-      {/* FEATURES */}
-      <section className="py-20 md:py-24 bg-white border-y border-slate-200">
-        <div className="container-editorial">
-          <div className="max-w-2xl mb-14 reveal">
-            <div className="eyebrow mb-3">Key features</div>
-            <h2 className="text-4xl md:text-5xl text-ink leading-tight">
-              Every part shipped. Nothing in a roadmap.
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">
-            {FEATURES.map((f) => <FeatureItem key={f.title} {...f} />)}
           </div>
         </div>
       </section>
 
-      {/* PREVIEW STRIP */}
-      <section className="py-20 md:py-24">
-        <div className="container-editorial reveal">
-          <ScreenMock variant="owner" />
-        </div>
-      </section>
-
-      {/* NUMBERS */}
-      <section className="py-20 md:py-24 bg-slate-900 text-white">
-        <div className="container-editorial">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
-            {NUMBERS.map((n) => (
-              <div key={n.label} className="reveal">
-                <div className="text-4xl md:text-5xl font-bold gradient-text leading-none mb-3">{n.n}</div>
-                <div className="text-xs uppercase tracking-[0.14em] font-semibold text-slate-400">{n.label}</div>
-              </div>
-            ))}
+      {/* ---------------------------------------------------------- four surfaces */}
+      <section className="py-16 sm:py-24">
+        <div className="shell">
+          <SectionHead
+            eyebrow="Four surfaces, one system"
+            title="Everyone gets their own door."
+            lede="Most platforms give the office a good tool and everybody else a PDF. HostPilot Pro gives each audience a real interface, and they all read from the same records."
+          />
+          <div className="mt-10 grid gap-4 md:grid-cols-2">
+            {surfaces.map((s) => {
+              const Icon = s.icon;
+              return (
+                <Link key={s.to} to={s.to} className="reveal hp-card group p-6 transition hover:border-hp-gold/40">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-hp-line bg-[rgba(227,200,155,0.08)] text-hp-gold">
+                        <Icon size={17} />
+                      </span>
+                      <div>
+                        <div className="font-display text-[20px] text-hp-text">{s.name}</div>
+                        <div className="text-[13px] text-hp-text3">{s.line}</div>
+                      </div>
+                    </div>
+                    <ArrowRight
+                      size={17}
+                      className="mt-2 shrink-0 text-hp-text3 transition group-hover:translate-x-1 group-hover:text-hp-gold"
+                    />
+                  </div>
+                  <p className="mt-4 text-[15px] leading-relaxed text-hp-text2">{s.body}</p>
+                  <div className="mt-4 border-t border-hp-lineSoft pt-3 text-[13px] text-hp-goldDeep">{s.proof}</div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* CLOSING CTA */}
-      <section className="py-24 md:py-32">
-        <div className="container-editorial reveal">
-          <div className="bg-brand-gradient rounded-2xl p-12 md:p-16 text-center text-white">
-            <h2 className="text-3xl md:text-5xl leading-tight text-white max-w-3xl mx-auto font-bold">
-              Ready to run your villa portfolio like a pro?
-            </h2>
-            <p className="mt-5 text-white/90 max-w-xl mx-auto leading-relaxed">
-              Book a 30-minute call. We'll walk through the three products with your portfolio in mind.
-            </p>
-            <div className="mt-8">
-              <Link to="/demo" className="inline-flex items-center gap-2 px-7 py-3 bg-white text-sky font-semibold rounded-lg hover:-translate-y-0.5 hover:shadow-btn transition-all">
-                Request a demo <ArrowUpRight size={16} />
-              </Link>
+      {/* ---------------------------------------------------- the owner statement */}
+      <section className="band py-16 sm:py-24">
+        <div className="shell grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
+            <SectionHead
+              eyebrow="The thing owners judge you on"
+              title="A statement that survives being read closely."
+              lede="One number an owner cannot explain costs more trust than a whole quarter of good performance. Every line of a HostPilot statement expands into what it is, where it came from and why it is that size — including the maintenance nobody asked about."
+            />
+            <div className="reveal mt-7">
+              <PrimaryLink to="/owner">See HostPilot Owner</PrimaryLink>
+            </div>
+          </div>
+          <div className="reveal hp-card overflow-hidden">
+            <div className="border-b border-hp-lineSoft px-5 py-3.5 text-[13px] text-hp-text3">
+              {demo.owner_statement.villa} · {demo.owner_statement.period} · demo data
+            </div>
+            <div className="divide-y divide-[color:var(--hp-line-soft)]">
+              {demo.owner_statement.lines.map((l) => (
+                <div key={l.label} className="flex items-center gap-3 px-5 py-2.5">
+                  <span
+                    className={`flex-1 text-[14px] ${
+                      l.kind === 'total' ? 'font-semibold text-hp-text' : 'text-hp-text2'
+                    }`}
+                  >
+                    {l.label}
+                  </span>
+                  <span
+                    className="tnum text-[14px]"
+                    style={{
+                      color:
+                        l.kind === 'total'
+                          ? 'var(--hp-gold)'
+                          : l.value_thb < 0
+                          ? 'var(--hp-neg)'
+                          : 'var(--hp-text)',
+                    }}
+                  >
+                    {l.value_thb < 0 ? '−' : ''}฿{Math.abs(l.value_thb).toLocaleString()}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
-    </>
+
+      {/* ---------------------------------------------------------------- closing */}
+      <section className="relative overflow-hidden py-20 sm:py-28">
+        <div className="grain absolute inset-0 bg-[radial-gradient(90%_80%_at_50%_120%,rgba(227,200,155,0.14),transparent_65%)]" />
+        <div className="shell relative text-center">
+          <Eyebrow className="!text-hp-goldDeep">Next step</Eyebrow>
+          <h2 className="h-sec mx-auto mt-4 max-w-[22ch]">
+            Look at it first. <span className="serif-em text-hp-text2">Talk to us second.</span>
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-[17px] text-hp-text2">
+            Open the tour and form your own opinion. If it fits your portfolio, tell us how many villas you run and we
+            will send a number the same day.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link to="/tour" className="btn btn-gold">
+              <Play size={15} className="fill-current" /> Open the live tour
+            </Link>
+            <Link to="/pricing" className="btn btn-quiet">
+              How pricing works <ArrowRight size={15} />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
