@@ -188,10 +188,10 @@ export default function SmartCatalog() {
             ))}
           </div>
           <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-hp-text3">
-            Catalogue read from the live product on {SMART_CHECKED}. Install figures are indicative prices in Thai baht
-            and every job is re-quoted per villa — wiring, distance and access decide the real number. Device
-            connections into the portal are in pilot: hardware is installed at villas today, live portal status is not
-            switched on for every property yet.
+            Catalogue read from the live product on {SMART_CHECKED}. Every job is quoted per villa — wiring, distance
+            and access decide the number, so there is no useful list price. Fitting is handled by the team that manages
+            the property. Device connections into the portal are in pilot: hardware is installed at villas today, live
+            portal status is not switched on for every property yet.
           </p>
         </div>
       </div>
