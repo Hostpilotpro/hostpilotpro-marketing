@@ -24,7 +24,7 @@ export const stack = [
   {
     job: 'Housekeeping and field operations',
     example: 'Breezeway',
-    cost: 'No public price — gated behind a sales call. One third-party review notes the math does not work below 15 units.',
+    cost: 'No public price — gated behind a sales call.',
     links: [{ label: 'Breezeway', href: 'https://www.breezeway.io/' }],
   },
   {
