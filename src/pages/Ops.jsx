@@ -1,6 +1,7 @@
 import useSeo from '../lib/seo.js';
 import ProductPage from '../components/ProductPage.jsx';
 import OpsConsole from '../tour/OpsConsole.jsx';
+import { opsDepth } from './ops-sections.js';
 
 export default function Ops() {
   useSeo({
@@ -24,6 +25,9 @@ export default function Ops() {
         'A villa dossier per property with a 30-day booking grid',
         'Task board across cleaning, pool, garden, maintenance and inspection',
         'Finance hub: statements, owner balances, payment queue, petty cash',
+        'RatePilot rate recommendations, reviewed by a person before anything moves',
+        'Siam Discoveries: tours, activities and transfers priced per villa',
+        'Staff records with document expiry dates, and team messaging built in',
         'Profit estimate for the open month, clearly labelled as an estimate',
       ]}
       replica={<OpsConsole />}
@@ -66,11 +70,17 @@ export default function Ops() {
             ['Profit estimate, honestly labelled', 'The open month is an estimate. The product says so on the tile.'],
           ],
         },
+        ...opsDepth,
       ]}
+      roadmapIds={['connectors', 'trust']}
       notFor={[
         'It is not a channel manager. Distribution, rates on the OTAs and inventory sync stay with Hostaway.',
         'It is not a full accounting ledger. It produces the operational truth your accountant works from.',
         'There is no built-in website or booking engine. Direct bookings arrive through your existing stack.',
+        'RatePilot does not run your pricing unattended. It proposes; a person accepts; strict mode never pushes.',
+        'Document expiry reminders are not proven. The dates are tracked and visible; we will not promise an email until one has demonstrably sent.',
+        'Team messaging is internal. It is not a unified inbox across WhatsApp, email and the OTA channels.',
+        'Tour and transfer requests are confirmed by your office, not auto-confirmed with the supplier.',
       ]}
     />
   );

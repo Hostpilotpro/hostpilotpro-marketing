@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from './Logo.jsx';
+import CompatNote from './CompatNote.jsx';
 
 const cols = [
   {
@@ -42,6 +43,7 @@ export default function Footer() {
             The operating system underneath a villa management company. Built and run daily on Koh Samui by
             Mr Property Siam.
           </p>
+          <CompatNote variant="line" className="mt-4 max-w-xs" />
         </div>
         {cols.map((c) => (
           <div key={c.title}>

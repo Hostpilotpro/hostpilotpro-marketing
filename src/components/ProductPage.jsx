@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Play, Info } from 'lucide-react';
 import { SectionHead, Eyebrow, BrowserFrame, PhoneFrame, Tilt } from './ui.jsx';
+import CompatNote from './CompatNote.jsx';
+import BeingBuilt from './BeingBuilt.jsx';
 
 /**
  * Shared layout for the four surface pages. Each page supplies its own copy,
@@ -18,6 +20,8 @@ export default function ProductPage({
   replicaCaption,
   sections = [],
   notFor = [],
+  extra = null,
+  roadmapIds = null,
 }) {
   return (
     <div>
@@ -37,6 +41,7 @@ export default function ProductPage({
               ))}
             </ul>
           )}
+          <CompatNote className="mt-7" />
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to="/tour" className="btn btn-gold">
               <Play size={15} className="fill-current" /> Try it in the tour
@@ -104,6 +109,10 @@ export default function ProductPage({
           </div>
         </section>
       ))}
+
+      {extra}
+
+      {roadmapIds && <BeingBuilt only={roadmapIds} className="band" />}
 
       {notFor.length > 0 && (
         <section className="py-16 sm:py-20">

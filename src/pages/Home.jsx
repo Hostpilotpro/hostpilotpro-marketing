@@ -5,6 +5,10 @@ import { SectionHead, Eyebrow, Tilt, BrowserFrame, PrimaryLink } from '../compon
 import OpsConsole from '../tour/OpsConsole.jsx';
 import demo from '../data/demo.js';
 import asset from '../lib/asset.js';
+import StackCollapse from '../components/StackCollapse.jsx';
+import SmartCatalog from '../components/SmartCatalog.jsx';
+import BeingBuilt from '../components/BeingBuilt.jsx';
+import CompatNote from '../components/CompatNote.jsx';
 
 const surfaces = [
   {
@@ -47,9 +51,9 @@ const surfaces = [
 
 export default function Home() {
   useSeo({
-    title: 'HostPilot Pro — your owners can see everything',
+    title: 'HostPilot Pro — two subscriptions, not seven',
     description:
-      'HostPilot Pro is the operating system underneath a villa management company: a staff console, an owner portal, a guest app and a field app on one database. Click through it without talking to anyone.',
+      'Keep your channel manager. HostPilot Pro replaces the rest of the stack: owner portal, ops console, guest app, field app, ledgers, reporting, tours and transfers. Sits on top of Hostaway today. Click through it without talking to anyone.',
     path: '/',
   });
 
@@ -65,17 +69,20 @@ export default function Home() {
         <div className="absolute inset-0 hero-scrim" />
         <div className="grain absolute inset-0" />
         <div className="shell relative pb-16 pt-28 sm:pb-24 sm:pt-44">
-          <div className="chip">
-            <span className="h-1.5 w-1.5 rounded-full bg-hp-pos" /> Built and run daily on Koh Samui
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="chip">
+              <span className="h-1.5 w-1.5 rounded-full bg-hp-pos" /> Built and run daily on Koh Samui
+            </span>
           </div>
-          <h1 className="h-hero mt-6 max-w-[16ch] font-medium">
-            Your owners can <span className="serif-em">see everything.</span>
+          <h1 className="h-hero mt-6 max-w-[17ch] font-medium">
+            Keep your channel manager. <span className="serif-em">Replace everything else.</span>
           </h1>
           <p className="mt-7 max-w-2xl text-[17px] leading-[1.7] text-hp-text2 sm:text-[19px]">
-            HostPilot Pro is the operating system underneath a villa management company — a staff console, an owner
-            portal, a guest app and a field app, on one database. It sits on top of your channel manager rather than
-            replacing it.
+            A boutique villa operator pays for seven things. HostPilot Pro collapses that to two lines on the card: the
+            channel manager you already have, and us — a staff console, an owner portal, a guest app and a field app on
+            one database, with the ledgers, reporting and tour sales that live between them.
           </p>
+          <CompatNote className="mt-6" />
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to="/tour" className="btn btn-gold">
               <Play size={15} className="fill-current" /> Open the live tour
@@ -89,6 +96,9 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* ----------------------------------------- the consolidation centrepiece */}
+      <StackCollapse />
 
       {/* ------------------------------------------------------- product on page */}
       <section className="border-t border-hp-lineSoft bg-hp-bg py-14 sm:py-20">
@@ -139,7 +149,7 @@ export default function Home() {
             <div className="reveal mt-8 grid gap-4 sm:grid-cols-2">
               {[
                 ['One database', 'Owners, guests, staff and the office read the same records. Nothing is re-keyed.'],
-                ['On top of Hostaway', 'Your channel manager keeps doing distribution. We do everything after the booking.'],
+                ['On top of your channel manager', 'Distribution stays where it is. We do everything after the booking. Hostaway syncs today; Guesty and Lodgify are being built.'],
                 ['Three languages in the field', 'English, Thai and Burmese, because that is who does the work.'],
                 ['Support from the operator', 'The most common complaint about every competitor we reviewed was support. We are a small team that answers.'],
               ].map(([t, b]) => (
@@ -200,6 +210,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ------------------------------------------------------- smart catalogue */}
+      <SmartCatalog />
+
+      {/* ----------------------------------------------------------- the roadmap */}
+      <BeingBuilt />
 
       {/* ---------------------------------------------------- the owner statement */}
       <section className="band py-16 sm:py-24">
