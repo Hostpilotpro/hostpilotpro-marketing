@@ -54,7 +54,10 @@ export default function ProductPage({
               <div className="reveal hidden md:block">
                 <Tilt max={2}>
                   <BrowserFrame host={host} note="Live replica · demo data">
-                    <div className="max-h-[760px] overflow-hidden">{replica}</div>
+                    <div className="relative max-h-[760px] overflow-hidden">
+                      {replica}
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(13,12,10,0.85))]" />
+                    </div>
                   </BrowserFrame>
                 </Tilt>
               </div>

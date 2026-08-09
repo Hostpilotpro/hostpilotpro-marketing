@@ -164,9 +164,9 @@ export default function Pricing() {
           <div className="reveal mt-6 space-y-4 text-[16px] leading-[1.7] text-hp-text2">
             <p>
               HostPilot Pro grew inside a working villa company rather than out of a pricing study. We know what it
-              costs us to run and support a portfolio, and we know what it is worth to an operator with 24 villas,
-              because that is the size of operation it was built for. What we do not have yet is enough external
-              customers at enough different sizes to publish a ladder we would still be honest about in six months.
+              costs us to run and support a portfolio, because we support one. What we do not have yet is enough
+              external customers at enough different portfolio sizes to publish a ladder we would still be honest
+              about in six months.
             </p>
             <p>
               So the deal is this: you tell us how many villas you manage and which channel manager you use, and we
