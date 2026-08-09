@@ -49,10 +49,18 @@ export default function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        solid ? 'border-b border-hp-lineSoft bg-[color:var(--hp-nav)] backdrop-blur-xl' : 'border-b border-transparent'
+        solid
+          ? 'border-b border-hp-lineSoft bg-[color:var(--hp-nav)] backdrop-blur-xl'
+          : 'border-b border-transparent'
       }`}
     >
-      <div className="shell-wide flex h-16 items-center justify-between gap-4">
+      {!solid && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-[image:var(--hp-nav-top)]"
+        />
+      )}
+      <div className="relative shell-wide flex h-16 items-center justify-between gap-4">
         <Link to="/" className="text-hp-text" aria-label="HostPilot Pro home">
           <Logo />
         </Link>

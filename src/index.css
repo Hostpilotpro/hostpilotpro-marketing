@@ -78,6 +78,7 @@
   --hp-gold-glow: rgba(227, 200, 155, 0.14);
 
   /* chrome */
+  --hp-nav-top: linear-gradient(180deg, rgba(13, 12, 10, 0.55) 0%, rgba(13, 12, 10, 0) 100%);
   --hp-nav: rgba(13, 12, 10, 0.86);
   --hp-nav-solid: rgba(13, 12, 10, 0.97);
   --hp-sticky: rgba(13, 12, 10, 0.92);
@@ -212,6 +213,7 @@
   --hp-gold-rule: rgba(201, 168, 76, 0.55);
   --hp-gold-glow: rgba(201, 168, 76, 0.22);
 
+  --hp-nav-top: linear-gradient(180deg, rgba(247, 242, 231, 0.92) 0%, rgba(247, 242, 231, 0.45) 60%, rgba(247, 242, 231, 0) 100%);
   --hp-nav: rgba(247, 242, 231, 0.88);
   --hp-nav-solid: rgba(250, 246, 237, 0.98);
   --hp-sticky: rgba(247, 242, 231, 0.92);
