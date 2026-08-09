@@ -16,11 +16,11 @@ export default function GuestApp() {
   const count = Object.values(sel).filter(Boolean).length;
 
   return (
-    <div className="bg-hp-bg text-hp-text2">
+    <div className="replica-light bg-hp-bg text-hp-text2">
       {/* stay header */}
       <div className="relative">
         <img src={asset('/img/villa-sapphire-hero.jpg')} alt="" className="h-[190px] w-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,8,7,0.55)_0%,rgba(9,8,7,0.35)_40%,rgba(13,12,10,0.98)_100%)]" />
+        <div className="absolute inset-0 scrim-v" />
         <div className="absolute inset-x-0 bottom-0 p-4">
           <div className="eyebrow">Your stay</div>
           <h3 className="mt-1.5 font-display text-[22px] font-medium leading-tight text-hp-text">{g.villa}</h3>
@@ -32,7 +32,7 @@ export default function GuestApp() {
 
       <div className="space-y-3 p-4">
         {/* countdown */}
-        <div className="rounded-2xl border border-hp-gold/30 bg-[rgba(227,200,155,0.07)] p-4">
+        <div className="rounded-2xl border border-hp-gold/30 bg-[color:var(--hp-gold-wash)] p-4">
           <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-hp-goldDeep">
             <Clock size={11} /> Check-in
           </div>
@@ -51,7 +51,7 @@ export default function GuestApp() {
             <div className="flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.12em] text-hp-text3">
               <KeyRound size={11} /> Door code
             </div>
-            <div className="tnum mt-2 font-display text-[22px] tracking-[0.12em] text-hp-gold">
+            <div className="tnum mt-2 font-display text-[22px] tracking-[0.12em] text-hp-goldInk">
               {g.checkin.door_code}
             </div>
           </div>
@@ -76,12 +76,12 @@ export default function GuestApp() {
                 <button
                   key={a.name}
                   onClick={() => setSel((s) => ({ ...s, [a.name]: !s[a.name] }))}
-                  className="flex w-full items-center gap-3 px-4 py-3 text-left transition hover:bg-[rgba(255,252,245,0.04)]"
+                  className="flex w-full items-center gap-3 px-4 py-3 text-left transition hover:bg-[color:var(--hp-veil-3)]"
                 >
                   <span
                     className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition ${
                       on
-                        ? 'border-hp-gold bg-[rgba(227,200,155,0.9)] text-[#191510]'
+                        ? 'border-hp-gold bg-hp-gold text-[color:var(--hp-on-gold)]'
                         : 'border-hp-line text-hp-text3'
                     }`}
                   >
@@ -96,18 +96,18 @@ export default function GuestApp() {
               );
             })}
           </div>
-          <div className="flex items-center justify-between border-t border-hp-line bg-[rgba(255,252,245,0.03)] px-4 py-3">
+          <div className="flex items-center justify-between border-t border-hp-line bg-[color:var(--hp-veil-2)] px-4 py-3">
             <div className="text-[12px] text-hp-text3">
               {count} item{count === 1 ? '' : 's'} on this stay
             </div>
-            <div className="tnum font-display text-[19px] text-hp-gold">{baht(total)}</div>
+            <div className="tnum font-display text-[19px] text-hp-goldInk">{baht(total)}</div>
           </div>
         </div>
 
         {/* punchline */}
-        <div className="rounded-2xl border border-hp-line bg-[linear-gradient(180deg,rgba(227,200,155,0.09),rgba(227,200,155,0.02))] p-4">
+        <div className="rounded-2xl border border-hp-line bg-[image:var(--hp-gold-wash-grad)] p-4">
           <div className="eyebrow">The point</div>
-          <div className="tnum mt-2 font-display text-[26px] leading-none text-hp-gold">
+          <div className="tnum mt-2 font-display text-[26px] leading-none text-hp-goldInk">
             {baht(demo.guest_stay.upsell_revenue_thb)}
           </div>
           <p className="mt-2 text-[12.5px] leading-relaxed text-hp-text2">

@@ -27,6 +27,7 @@ export default function Ops() {
         'Profit estimate for the open month, clearly labelled as an estimate',
       ]}
       replica={<OpsConsole />}
+      replicaTheme="dark"
       host="ops.hostpilotpro.com"
       sections={[
         {

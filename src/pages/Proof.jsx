@@ -78,7 +78,7 @@ export default function Proof() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
-        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_50%_-20%,rgba(227,200,155,0.12),transparent_60%)]" />
+        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_50%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pt-32">
           <Eyebrow>Proof</Eyebrow>
           <h1 className="h-sec mt-4 max-w-[26ch] font-medium">
@@ -130,7 +130,7 @@ export default function Proof() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="chip !text-[12px] transition hover:border-hp-gold/50 hover:text-hp-gold"
+                      className="chip !text-[12px] transition hover:border-hp-gold/50 hover:text-hp-goldInk"
                     >
                       {label} <ExternalLink size={11} />
                     </a>

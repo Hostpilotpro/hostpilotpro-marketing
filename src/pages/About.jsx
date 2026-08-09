@@ -41,8 +41,8 @@ export default function About() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
-        <img src={asset('/img/samui-coast.jpg')} alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,12,10,0.78)_0%,rgba(13,12,10,0.9)_60%,#0D0C0A_100%)]" />
+        <img src={asset('/img/samui-coast.jpg')} alt="" className="hero-img-soft absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 hero-scrim-strong" />
         <div className="grain absolute inset-0" />
         <div className="shell relative pb-16 pt-28 sm:pt-36">
           <Eyebrow>About</Eyebrow>

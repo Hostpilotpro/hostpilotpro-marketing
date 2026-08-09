@@ -28,6 +28,7 @@ export default function Guest() {
       ]}
       replica={<GuestApp />}
       replicaKind="phone"
+      replicaTheme="light"
       host="stay.hostpilotpro.com"
       sections={[
         {

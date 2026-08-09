@@ -49,7 +49,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5">
               {c.links.map(([to, label]) => (
                 <li key={to}>
-                  <Link to={to} className="text-[15px] text-hp-text2 transition hover:text-hp-gold">
+                  <Link to={to} className="text-[15px] text-hp-text2 transition hover:text-hp-goldInk">
                     {label}
                   </Link>
                 </li>

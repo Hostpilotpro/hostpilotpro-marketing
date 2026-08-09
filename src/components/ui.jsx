@@ -19,6 +19,7 @@ export function SectionHead({ eyebrow, title, lede, align = 'left', className = 
     >
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <h2 className="h-sec mt-3">{title}</h2>
+      <div className={`rule-gold mt-5 ${align === 'center' ? 'mx-auto w-24' : 'w-24'}`} />
       {lede && <p className="mt-5 text-[17px] leading-[1.65] text-hp-text2">{lede}</p>}
     </div>
   );
@@ -65,15 +66,15 @@ export function Tilt({ children, className = '', max = 4 }) {
 export function BrowserFrame({ host = 'ops.hostpilotpro.com', children, className = '', note }) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border border-hp-line bg-hp-bg shadow-frame ${className}`}
+      className={`overflow-hidden rounded-2xl border border-[color:var(--hp-frame-border)] bg-hp-bg shadow-frame ${className}`}
     >
-      <div className="flex items-center gap-3 border-b border-hp-lineSoft bg-[#17140F] px-4 py-2.5">
+      <div className="flex items-center gap-3 border-b border-hp-lineSoft bg-[color:var(--hp-frame-bar)] px-4 py-2.5">
         <div className="flex gap-1.5">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#3a352c]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#3a352c]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#3a352c]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[color:var(--hp-frame-dot)]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[color:var(--hp-frame-dot)]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[color:var(--hp-frame-dot)]" />
         </div>
-        <div className="mx-auto max-w-[70%] truncate rounded-md border border-hp-lineSoft bg-[rgba(255,252,245,0.03)] px-3 py-1 text-[11.5px] text-hp-text3">
+        <div className="mx-auto max-w-[70%] truncate rounded-md border border-hp-lineSoft bg-[color:var(--hp-veil-2)] px-3 py-1 text-[11.5px] text-hp-text3">
           {host}
         </div>
         {note ? <div className="hidden text-[11px] text-hp-text3 sm:block">{note}</div> : <div className="w-8" />}
@@ -87,9 +88,9 @@ export function BrowserFrame({ host = 'ops.hostpilotpro.com', children, classNam
 export function PhoneFrame({ children, className = '', label }) {
   return (
     <div className={`mx-auto w-full max-w-[380px] ${className}`}>
-      <div className="rounded-[38px] border border-hp-line bg-[#17140F] p-2.5 shadow-frame">
+      <div className="rounded-[38px] border border-[color:var(--hp-frame-border)] bg-[color:var(--hp-frame-bar)] p-2.5 shadow-frame">
         <div className="relative overflow-hidden rounded-[30px] bg-hp-bg">
-          <div className="pointer-events-none absolute left-1/2 top-2 z-20 h-1.5 w-16 -translate-x-1/2 rounded-full bg-[#332e26]" />
+          <div className="pointer-events-none absolute left-1/2 top-2 z-20 h-1.5 w-16 -translate-x-1/2 rounded-full bg-[color:var(--hp-frame-notch)]" />
           {children}
         </div>
       </div>
@@ -141,12 +142,12 @@ export function AreaChart({ series, height = 150, id = 'area' }) {
     <svg viewBox={`0 0 ${w} ${height}`} className="w-full" style={{ height }} preserveAspectRatio="none" aria-hidden>
       <defs>
         <linearGradient id={`${id}-fill`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#E3C89B" stopOpacity="0.28" />
-          <stop offset="100%" stopColor="#E3C89B" stopOpacity="0" />
+          <stop offset="0%" stopColor="var(--hp-gold)" stopOpacity="0.28" />
+          <stop offset="100%" stopColor="var(--hp-gold)" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path d={`${line} L${w},${height} L0,${height} Z`} fill={`url(#${id}-fill)`} />
-      <path d={line} fill="none" stroke="#C2A470" strokeWidth="2" strokeLinecap="round" />
+      <path d={line} fill="none" stroke="var(--hp-gold-deep)" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }

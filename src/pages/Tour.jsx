@@ -64,7 +64,7 @@ function FrameChrome({ children, host, kind, persona }) {
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] text-hp-text3">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-hp-gold/30 bg-[rgba(227,200,155,0.07)] px-2.5 py-1 text-hp-goldDeep">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-hp-gold/30 bg-[color:var(--hp-gold-wash)] px-2.5 py-1 text-hp-goldDeep">
           <Info size={11} /> {DISCLOSURE}
         </span>
         <span>{persona}</span>
@@ -109,7 +109,7 @@ export default function Tour() {
     <div className="pt-16">
       {/* header */}
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
-        <div className="grain absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_-10%,rgba(227,200,155,0.13),transparent_60%)]" />
+        <div className="grain absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_-10%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative py-12 sm:py-16">
           <Eyebrow>The live tour</Eyebrow>
           <h1 className="h-sec mt-4 max-w-3xl">
@@ -127,9 +127,9 @@ export default function Tour() {
       </section>
 
       {/* segmented control */}
-      <div className="sticky top-16 z-40 border-b border-hp-lineSoft bg-[rgba(13,12,10,0.92)] backdrop-blur-xl">
+      <div className="sticky top-16 z-40 border-b border-hp-lineSoft bg-[color:var(--hp-sticky)] backdrop-blur-xl">
         <div className="shell-wide flex items-center gap-3 py-3">
-          <div className="flex flex-1 gap-1 overflow-x-auto no-scrollbar rounded-full border border-hp-line bg-[rgba(255,252,245,0.03)] p-1">
+          <div className="flex flex-1 gap-1 overflow-x-auto no-scrollbar rounded-full border border-hp-line bg-[color:var(--hp-veil-2)] p-1">
             {surfaces.map((x) => (
               <button
                 key={x.key}
@@ -137,7 +137,7 @@ export default function Tour() {
                 aria-current={active === x.key}
                 className={`shrink-0 rounded-full px-4 py-2 text-[13.5px] font-medium transition ${
                   active === x.key
-                    ? 'bg-[linear-gradient(180deg,#eddcbc,#c2a470)] text-[#191510]'
+                    ? 'gold-fill'
                     : 'text-hp-text2 hover:text-hp-text'
                 }`}
               >
@@ -153,7 +153,7 @@ export default function Tour() {
         <div className="mb-5 flex flex-wrap gap-2">
           {s.hints.map(([h, Icon]) => (
             <span key={h} className="chip !text-[12px]">
-              <Icon size={12} className="text-hp-gold" /> {h}
+              <Icon size={12} className="text-hp-goldInk" /> {h}
             </span>
           ))}
         </div>
@@ -180,14 +180,14 @@ export default function Tour() {
               >
                 <div className="flex items-center justify-between">
                   <span className="font-display text-[17px] text-hp-text">{x.label}</span>
-                  <ArrowRight size={15} className="text-hp-gold" />
+                  <ArrowRight size={15} className="text-hp-goldInk" />
                 </div>
                 <div className="mt-1.5 text-[12.5px] text-hp-text3">{x.persona}</div>
               </button>
             ))}
         </div>
 
-        <div className="mt-12 rounded-2xl border border-hp-line bg-[rgba(255,252,245,0.025)] p-6 sm:p-8">
+        <div className="mt-12 rounded-2xl border border-hp-line bg-[color:var(--hp-veil-1)] p-6 sm:p-8">
           <h2 className="font-display text-[22px] text-hp-text">What this demo does not do</h2>
           <ul className="mt-4 grid gap-2.5 text-[15px] text-hp-text2 sm:grid-cols-2">
             {[
@@ -215,7 +215,7 @@ export default function Tour() {
       {/* floating CTA */}
       <Link
         to="/demo"
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full border border-hp-gold/60 bg-[linear-gradient(180deg,#eddcbc,#c2a470)] px-4 py-3 text-[14px] font-semibold text-[#191510] shadow-goldGlow"
+        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full border border-hp-gold/60 gold-fill px-4 py-3 text-[14px] font-semibold text-[color:var(--hp-on-gold)] shadow-goldGlow"
       >
         <PhoneCall size={15} /> Book a call
       </Link>

@@ -28,6 +28,7 @@ export default function Field() {
       ]}
       replica={<FieldApp />}
       replicaKind="phone"
+      replicaTheme="light"
       host="field.hostpilotpro.com"
       replicaCaption="Sample portfolio — Nalin P. is a fictional staff member at the fictional Azure Coast Villas. Field ships in the product’s light theme because it is used outdoors in direct sunlight."
       sections={[

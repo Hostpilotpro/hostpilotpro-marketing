@@ -72,7 +72,7 @@ function Concierge() {
   return (
     <div className="hp-card-flat p-5">
       <div className="flex items-center gap-2">
-        <Sparkles size={15} className="text-hp-gold" />
+        <Sparkles size={15} className="text-hp-goldInk" />
         <h4 className="font-display text-[18px] text-hp-text">Ask about your villa</h4>
       </div>
       <p className="mt-1.5 text-[12.5px] text-hp-text3">
@@ -84,16 +84,16 @@ function Concierge() {
         disabled={asked}
         className={`mt-4 flex w-full items-start gap-3 rounded-xl border px-3.5 py-3 text-left text-[13.5px] transition ${
           asked
-            ? 'border-hp-lineSoft bg-[rgba(255,252,245,0.02)] text-hp-text2'
-            : 'border-hp-gold/40 bg-[rgba(227,200,155,0.07)] text-hp-text hover:bg-[rgba(227,200,155,0.12)]'
+            ? 'border-hp-lineSoft bg-[color:var(--hp-veil-1)] text-hp-text2'
+            : 'border-hp-gold/40 bg-[color:var(--hp-gold-wash)] text-hp-text hover:bg-[color:var(--hp-gold-wash-3)]'
         }`}
       >
         <span className="flex-1">{demo.owner_concierge.question}</span>
-        {!asked && <Send size={14} className="mt-0.5 shrink-0 text-hp-gold" />}
+        {!asked && <Send size={14} className="mt-0.5 shrink-0 text-hp-goldInk" />}
       </button>
 
       {asked && (
-        <div className="mt-3 rounded-xl border border-hp-lineSoft bg-[rgba(255,252,245,0.025)] p-4">
+        <div className="mt-3 rounded-xl border border-hp-lineSoft bg-[color:var(--hp-veil-1)] p-4">
           <div className="mb-2 flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-hp-goldDeep">
             <Sparkles size={11} /> HostPilot concierge
           </div>
@@ -107,7 +107,7 @@ function Concierge() {
           {done && (
             <button
               onClick={() => setAsked(false)}
-              className="mt-3 text-[12px] text-hp-text3 underline decoration-hp-line underline-offset-4 hover:text-hp-gold"
+              className="mt-3 text-[12px] text-hp-text3 underline decoration-hp-line underline-offset-4 hover:text-hp-goldInk"
             >
               Ask again
             </button>
@@ -130,7 +130,7 @@ function RatePilotCard() {
     <div className="hp-card-flat overflow-hidden">
       <div className="flex items-center justify-between border-b border-hp-lineSoft px-5 py-3">
         <div className="flex items-center gap-2">
-          <Gauge size={15} className="text-hp-gold" />
+          <Gauge size={15} className="text-hp-goldInk" />
           <span className="text-[13.5px] font-medium text-hp-text">RatePilot needs your approval</span>
         </div>
         <span className="chip !text-[11px]">{r.strategy} strategy</span>
@@ -145,11 +145,11 @@ function RatePilotCard() {
           </div>
           <div>
             <div className="text-[11px] uppercase tracking-[0.1em] text-hp-text3">Suggested</div>
-            <div className="tnum mt-1 font-display text-[30px] leading-none text-hp-gold">
+            <div className="tnum mt-1 font-display text-[30px] leading-none text-hp-goldInk">
               {baht(r.suggested_thb)}
             </div>
           </div>
-          <div className="rounded-full border border-hp-pos/40 bg-[rgba(127,166,107,0.12)] px-3 py-1 text-[12.5px] font-semibold text-hp-pos">
+          <div className="rounded-full border border-hp-pos/40 bg-[color:var(--hp-pos-wash)] px-3 py-1 text-[12.5px] font-semibold text-hp-pos">
             +{r.delta_pct}%
           </div>
           <div className="ml-auto text-right text-[12px] text-hp-text3">
@@ -167,7 +167,7 @@ function RatePilotCard() {
                 onClick={() => setChoice(a)}
                 className={`rounded-full px-4 py-2 text-[13.5px] font-semibold transition ${
                   i === 0
-                    ? 'border border-hp-gold/70 bg-[linear-gradient(180deg,#eddcbc,#c2a470)] text-[#191510]'
+                    ? 'border border-hp-gold/70 gold-fill'
                     : 'border border-hp-line text-hp-text hover:border-hp-gold/40'
                 }`}
               >
@@ -176,14 +176,14 @@ function RatePilotCard() {
             ))}
           </div>
         ) : (
-          <div className="mt-5 flex items-start gap-3 rounded-xl border border-hp-pos/30 bg-[rgba(127,166,107,0.09)] p-3.5">
+          <div className="mt-5 flex items-start gap-3 rounded-xl border border-hp-pos/30 bg-[color:var(--hp-pos-wash)] p-3.5">
             {choice === 'Decline' ? (
               <X size={15} className="mt-0.5 shrink-0 text-hp-neg" />
             ) : (
               <Check size={15} className="mt-0.5 shrink-0 text-hp-pos" />
             )}
             <div className="flex-1 text-[13px] text-hp-text2">{confirmation[choice]}</div>
-            <button onClick={() => setChoice(null)} className="text-[12px] text-hp-text3 hover:text-hp-gold">
+            <button onClick={() => setChoice(null)} className="text-[12px] text-hp-text3 hover:text-hp-goldInk">
               Undo
             </button>
           </div>
@@ -218,12 +218,12 @@ function Statement() {
             <div key={l.label} className={strong ? 'border-t border-hp-line' : ''}>
               <button
                 onClick={() => setOpen(isOpen ? null : l.label)}
-                className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition hover:bg-[rgba(255,252,245,0.04)]"
+                className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition hover:bg-[color:var(--hp-veil-3)]"
                 aria-expanded={isOpen}
               >
                 <ChevronDown
                   size={13}
-                  className={`shrink-0 text-hp-text3 transition ${isOpen ? 'rotate-180 text-hp-gold' : ''}`}
+                  className={`shrink-0 text-hp-text3 transition ${isOpen ? 'rotate-180 text-hp-goldInk' : ''}`}
                 />
                 <span
                   className={`flex-1 text-[13.5px] ${
@@ -247,7 +247,7 @@ function Statement() {
                 </span>
               </button>
               {isOpen && (
-                <div className="mx-3 mb-3 rounded-xl border border-hp-gold/25 bg-[rgba(227,200,155,0.06)] p-3.5">
+                <div className="mx-3 mb-3 rounded-xl border border-hp-gold/25 bg-[color:var(--hp-gold-wash)] p-3.5">
                   <div className="text-[10.5px] uppercase tracking-[0.14em] text-hp-goldDeep">Verdict</div>
                   <p className="mt-1.5 text-[13px] leading-relaxed text-hp-text2">{verdicts[l.label]}</p>
                 </div>
@@ -256,7 +256,7 @@ function Statement() {
           );
         })}
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-hp-lineSoft bg-[rgba(255,252,245,0.02)] px-5 py-3.5 text-[12.5px] text-hp-text3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-hp-lineSoft bg-[color:var(--hp-veil-1)] px-5 py-3.5 text-[12.5px] text-hp-text3">
         <span>
           Paid {s.payout.sent} · {s.payout.method} · ref {s.payout.reference}
         </span>
@@ -282,15 +282,15 @@ export default function OwnerPortal() {
   const stRef = useRef(null);
 
   return (
-    <div className="bg-hp-bg">
-      <div className="flex items-center gap-3 border-b border-hp-lineSoft bg-[#15120E] px-4 py-2.5">
+    <div className="replica-light bg-hp-bg">
+      <div className="flex items-center gap-3 border-b border-hp-lineSoft bg-[color:var(--hp-panel-bar)] px-4 py-2.5">
         <div className="font-display text-[13.5px] text-hp-text">Azure Coast Villas</div>
         <span className="hidden text-[11px] uppercase tracking-[0.14em] text-hp-text3 sm:inline">
           Owner portal
         </span>
         <div className="ml-auto flex items-center gap-2">
           <span className="hidden text-[12px] text-hp-text2 sm:inline">{demo.owner.name}</span>
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-hp-goldDeep text-[10.5px] font-semibold text-[#191510]">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-hp-goldDeep text-[10.5px] font-semibold text-[color:var(--hp-on-gold)]">
             {demo.owner.initials}
           </span>
         </div>
@@ -309,7 +309,7 @@ export default function OwnerPortal() {
               }}
               className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[12.5px] transition ${
                 active
-                  ? 'border border-hp-gold/40 bg-[rgba(227,200,155,0.11)] text-hp-gold'
+                  ? 'border border-hp-gold/40 bg-[color:var(--hp-gold-wash-2)] text-hp-goldInk'
                   : 'text-hp-text3 hover:text-hp-text2'
               }`}
             >
@@ -322,7 +322,7 @@ export default function OwnerPortal() {
       <div className="space-y-3.5 p-3 sm:p-4">
         <div className="grain relative overflow-hidden rounded-2xl border border-hp-line">
           <img src={asset('/img/villa-day.jpg')} alt="" className="h-[150px] w-full object-cover sm:h-[180px]" loading="lazy" />
-          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(9,8,7,0.95)_0%,rgba(9,8,7,0.7)_55%,rgba(9,8,7,0.4)_100%)]" />
+          <div className="absolute inset-0 scrim-d" />
           <div className="absolute inset-0 flex flex-col justify-center p-5 sm:p-7">
             <div className="eyebrow">{demo.owner.greeting}</div>
             <h3 className="mt-2 max-w-[80%] font-display text-[clamp(1.2rem,1rem+1.6vw,2.05rem)] font-medium leading-tight text-hp-text">
@@ -354,7 +354,7 @@ export default function OwnerPortal() {
           <div className="hp-card-flat p-5">
             <h4 className="font-display text-[18px] text-hp-text">Next payout</h4>
             <div className="mt-3 flex items-end gap-3">
-              <div className="tnum font-display text-[28px] leading-none text-hp-gold">
+              <div className="tnum font-display text-[28px] leading-none text-hp-goldInk">
                 {baht(d.upcoming_payout.estimate_thb)}
               </div>
               <div className="text-[12px] text-hp-text3">expected {d.upcoming_payout.expected}</div>

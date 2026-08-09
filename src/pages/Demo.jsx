@@ -73,7 +73,7 @@ export default function Demo() {
   };
 
   const field =
-    'w-full rounded-xl border border-hp-line bg-[rgba(255,252,245,0.03)] px-3.5 py-2.5 text-[15px] text-hp-text placeholder:text-hp-text3 outline-none transition focus:border-hp-gold/60';
+    'w-full rounded-xl border border-hp-line bg-[color:var(--hp-veil-2)] px-3.5 py-2.5 text-[15px] text-hp-text placeholder:text-hp-text3 outline-none transition focus:border-hp-gold/60';
 
   const submitted = status === 'done' || status === 'mailto';
 
@@ -98,12 +98,12 @@ export default function Demo() {
               'If it is not a fit, we will say so on the call rather than follow up for six weeks.',
             ].map((i) => (
               <li key={i} className="flex gap-3">
-                <Check size={16} className="mt-1 shrink-0 text-hp-gold" />
+                <Check size={16} className="mt-1 shrink-0 text-hp-goldInk" />
                 {i}
               </li>
             ))}
           </ul>
-          <div className="mt-8 rounded-2xl border border-hp-line bg-[rgba(255,252,245,0.025)] p-5 text-[14.5px] text-hp-text3">
+          <div className="mt-8 rounded-2xl border border-hp-line bg-[color:var(--hp-veil-1)] p-5 text-[14.5px] text-hp-text3">
             Prefer to look before you talk?{' '}
             <Link to="/tour" className="link-gold">
               The tour needs no email address <ArrowRight size={14} />
@@ -114,7 +114,7 @@ export default function Demo() {
         <div>
           {submitted ? (
             <div className="hp-card p-7">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-hp-pos/40 bg-[rgba(127,166,107,0.14)] text-hp-pos">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-hp-pos/40 bg-[color:var(--hp-pos-wash)] text-hp-pos">
                 <Check size={18} />
               </div>
               <h2 className="mt-5 font-display text-[26px] text-hp-text">Received. We will come back today.</h2>
@@ -190,7 +190,7 @@ export default function Demo() {
                 onChange={set('message')}
               />
               {status === 'error' && (
-                <div className="flex gap-2.5 rounded-xl border border-hp-neg/40 bg-[rgba(196,112,92,0.1)] p-3.5 text-[14px] text-hp-text2">
+                <div className="flex gap-2.5 rounded-xl border border-hp-neg/40 bg-[color:var(--hp-neg-wash)] p-3.5 text-[14px] text-hp-text2">
                   <AlertTriangle size={16} className="mt-0.5 shrink-0 text-hp-neg" />
                   <span>
                     That did not send. Email{' '}

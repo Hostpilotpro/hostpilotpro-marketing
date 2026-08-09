@@ -1,25 +1,32 @@
 /** @type {import('tailwindcss').Config} */
+
+// Colours resolve from CSS custom properties so the same class works in the
+// dark theme, the light champagne theme and inside the fixed-theme product
+// replicas. Channel triplets keep Tailwind's `/opacity` modifiers working.
+const c = (v) => `rgb(var(${v}) / <alpha-value>)`;
+
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
         hp: {
-          bg: '#0D0C0A',
-          surface: '#141210',
-          card: '#1B1815',
-          hi: '#232019',
-          line: '#2E2A23',
-          lineSoft: '#221F1A',
-          gold: '#E3C89B',
-          goldDeep: '#C2A470',
-          goldDim: '#8A7A59',
-          text: '#FBFAF6',
-          text2: '#C9C3B7',
-          text3: '#8B857A',
-          pos: '#7FA66B',
-          neg: '#C4705C',
-          info: '#6E8CA8',
+          bg: c('--hp-bg-rgb'),
+          surface: c('--hp-surface-rgb'),
+          card: c('--hp-card-rgb'),
+          hi: c('--hp-hi-rgb'),
+          line: c('--hp-line-rgb'),
+          lineSoft: c('--hp-line-soft-rgb'),
+          gold: c('--hp-gold-rgb'),
+          goldDeep: c('--hp-gold-deep-rgb'),
+          goldDim: c('--hp-gold-dim-rgb'),
+          goldInk: c('--hp-gold-ink-rgb'),
+          text: c('--hp-text-rgb'),
+          text2: c('--hp-text-2-rgb'),
+          text3: c('--hp-text-3-rgb'),
+          pos: c('--hp-pos-rgb'),
+          neg: c('--hp-neg-rgb'),
+          info: c('--hp-info-rgb'),
         },
       },
       fontFamily: {
@@ -27,9 +34,9 @@ export default {
         display: ['Fraunces', 'ui-serif', 'Georgia', 'serif'],
       },
       boxShadow: {
-        card: '0 1px 0 rgba(255,255,255,0.04) inset, 0 24px 48px -24px rgba(0,0,0,0.8)',
-        frame: '0 40px 120px -40px rgba(0,0,0,0.9)',
-        goldGlow: '0 0 0 1px rgba(227,200,155,0.35), 0 18px 40px -18px rgba(227,200,155,0.35)',
+        card: 'var(--hp-card-shadow)',
+        frame: 'var(--hp-frame-shadow)',
+        goldGlow: '0 0 0 1px var(--hp-gold-rule), 0 18px 40px -18px var(--hp-gold-glow)',
       },
       maxWidth: { container: '1200px', wide: '1400px' },
       letterSpacing: { eyebrow: '0.16em' },

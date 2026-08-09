@@ -27,6 +27,7 @@ export default function Owner() {
         'An assistant that answers from the owner’s own data, with a pointer to the source',
       ]}
       replica={<OwnerPortal />}
+      replicaTheme="light"
       host="owner.hostpilotpro.com"
       sections={[
         {

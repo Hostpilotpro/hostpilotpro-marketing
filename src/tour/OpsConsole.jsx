@@ -131,8 +131,8 @@ function CommandPalette({ open, onClose, onPick }) {
 
   if (!open) return null;
   return (
-    <div className="absolute inset-0 z-30 flex items-start justify-center bg-[rgba(8,7,6,0.72)] px-4 pt-10 backdrop-blur-sm sm:pt-16">
-      <div className="w-full max-w-[520px] overflow-hidden rounded-xl border border-hp-line bg-[#15120E] shadow-frame">
+    <div className="absolute inset-0 z-30 flex items-start justify-center bg-[color:var(--hp-modal-veil)] px-4 pt-10 backdrop-blur-sm sm:pt-16">
+      <div className="w-full max-w-[520px] overflow-hidden rounded-xl border border-hp-line bg-[color:var(--hp-panel-bar)] shadow-frame">
         <div className="flex items-center gap-2 border-b border-hp-lineSoft p-3">
           <Search size={15} className="text-hp-text3" />
           <input
@@ -165,14 +165,14 @@ function CommandPalette({ open, onClose, onPick }) {
               onMouseEnter={() => setI(idx)}
               onClick={() => onPick(v)}
               className={`flex w-full items-center gap-3 px-3 py-2 text-left ${
-                idx === i ? 'bg-[rgba(227,200,155,0.10)]' : ''
+                idx === i ? 'bg-[color:var(--hp-gold-wash-2)]' : ''
               }`}
               style={idx === i ? { boxShadow: 'inset 2px 0 0 var(--hp-gold)' } : undefined}
             >
               <Building2 size={14} className="shrink-0 text-hp-goldDim" />
               <span className="flex-1 truncate text-[13.5px] text-hp-text">{v.name}</span>
               <span className="tnum text-[11.5px] text-hp-text3">{v.code}</span>
-              {idx === i && <ArrowRight size={13} className="text-hp-gold" />}
+              {idx === i && <ArrowRight size={13} className="text-hp-goldInk" />}
             </button>
           ))}
         </div>
@@ -192,11 +192,11 @@ function Dashboard({ onOpenVilla }) {
   const pe = d.profit_estimate;
   return (
     <div className="space-y-3.5">
-      <div className="grain relative overflow-hidden rounded-2xl border border-hp-line bg-[linear-gradient(115deg,#1F1B15_0%,#15120E_58%,#100E0B_100%)] p-6 sm:p-8">
+      <div className="grain relative overflow-hidden rounded-2xl border border-hp-line panel-grad p-6 sm:p-8">
         <div className="eyebrow">Home · overview</div>
         <h3 className="mt-3 font-display text-[clamp(1.6rem,1rem+2.2vw,2.6rem)] font-medium text-hp-text">
           {d.greeting}
-          <span className="text-hp-gold">.</span>
+          <span className="text-hp-goldInk">.</span>
         </h3>
         <p className="mt-2 max-w-xl font-display text-[16px] italic leading-snug text-hp-text2">
           Your portfolio is running at <span className="font-semibold not-italic text-hp-text">78% occupancy</span>{' '}
@@ -259,7 +259,7 @@ function Dashboard({ onOpenVilla }) {
             ['Total mgmt fee (gross)', pe.total_mgmt_fee_gross_thb, 'Before expenses'],
             ['Total expenses', pe.total_expenses_thb, 'Salaries, recurring, 3-month average'],
           ].map(([label, v, sub], i) => (
-            <div key={label} className="rounded-xl border border-hp-lineSoft bg-[rgba(255,252,245,0.02)] p-3.5">
+            <div key={label} className="rounded-xl border border-hp-lineSoft bg-[color:var(--hp-veil-1)] p-3.5">
               <div className="text-[11px] uppercase tracking-[0.09em] text-hp-text3">{label}</div>
               <div
                 className="tnum mt-2 font-display text-[21px] leading-none"
@@ -278,9 +278,9 @@ function Dashboard({ onOpenVilla }) {
             </span>
           ))}
         </div>
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-hp-gold/25 bg-[rgba(227,200,155,0.07)] px-4 py-3">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-hp-gold/25 bg-[color:var(--hp-gold-wash)] px-4 py-3">
           <div className="text-[11px] uppercase tracking-[0.14em] text-hp-goldDeep">Estimated profit</div>
-          <div className="tnum font-display text-[26px] text-hp-gold">{baht(pe.estimated_profit_thb)}</div>
+          <div className="tnum font-display text-[26px] text-hp-goldInk">{baht(pe.estimated_profit_thb)}</div>
         </div>
       </div>
 
@@ -302,7 +302,7 @@ function Dashboard({ onOpenVilla }) {
                 <tr key={a.villa} className="border-t border-hp-lineSoft">
                   <td className="py-2.5">
                     <button
-                      className="text-hp-text transition hover:text-hp-gold"
+                      className="text-hp-text transition hover:text-hp-goldInk"
                       onClick={() => onOpenVilla(villas.find((v) => v.name === a.villa) || villas[0])}
                     >
                       {a.villa}
@@ -329,7 +329,7 @@ function Dashboard({ onOpenVilla }) {
 function VillaList({ onOpen }) {
   return (
     <div className="space-y-3.5">
-      <div className="grain relative overflow-hidden rounded-2xl border border-hp-line bg-[linear-gradient(115deg,#1F1B15_0%,#15120E_58%,#100E0B_100%)] p-6 sm:p-8">
+      <div className="grain relative overflow-hidden rounded-2xl border border-hp-line panel-grad p-6 sm:p-8">
         <div className="eyebrow">Portfolio · 24 villas</div>
         <h3 className="mt-3 font-display text-[clamp(1.5rem,1rem+2vw,2.4rem)] font-medium text-hp-text">
           Properties <span className="italic text-hp-text2">· every villa, one file each</span>
@@ -352,7 +352,7 @@ function VillaList({ onOpen }) {
             <div className="tnum mt-3 flex gap-4 text-[12.5px] text-hp-text2">
               <span>{v.occupancy_pct}% occ</span>
               <span>{baht(v.adr_thb)} ADR</span>
-              <span className="text-hp-gold">★ {v.rating}</span>
+              <span className="text-hp-goldInk">★ {v.rating}</span>
             </div>
           </button>
         ))}
@@ -389,7 +389,7 @@ function Dossier({ villa, onBack }) {
           className="h-[220px] w-full object-cover sm:h-[290px]"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(9,8,7,0.94)_0%,rgba(9,8,7,0.62)_45%,rgba(9,8,7,0.35)_100%)]" />
+        <div className="absolute inset-0 scrim-h" />
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
           <button
             onClick={onBack}
@@ -420,13 +420,13 @@ function Dossier({ villa, onBack }) {
           ].map(([v, l]) => (
             <div
               key={l}
-              className="rounded-lg border border-hp-line bg-[rgba(13,12,10,0.82)] px-3 py-2.5 backdrop-blur-md"
+              className="rounded-lg border border-hp-line bg-[color:var(--hp-scrim-panel)] px-3 py-2.5 backdrop-blur-md"
             >
               <div className="tnum font-display text-[19px] leading-none text-hp-text">{v}</div>
               <div className="mt-1 text-[9.5px] uppercase tracking-[0.14em] text-hp-text3">{l}</div>
             </div>
           ))}
-          <div className="col-span-2 rounded-lg border border-hp-line bg-[rgba(13,12,10,0.82)] px-3 py-2.5 backdrop-blur-md">
+          <div className="col-span-2 rounded-lg border border-hp-line bg-[color:var(--hp-scrim-panel)] px-3 py-2.5 backdrop-blur-md">
             <div className="font-display text-[17px] italic leading-none text-hp-text">
               {isHero ? demo.hero_villa.manager : 'Ploy S.'}
             </div>
@@ -435,13 +435,13 @@ function Dossier({ villa, onBack }) {
         </div>
       </div>
 
-      <div className="flex gap-1 overflow-x-auto no-scrollbar rounded-xl border border-hp-lineSoft bg-[rgba(255,252,245,0.03)] p-1.5">
+      <div className="flex gap-1 overflow-x-auto no-scrollbar rounded-xl border border-hp-lineSoft bg-[color:var(--hp-veil-2)] p-1.5">
         {dossierTabs.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={`whitespace-nowrap rounded-lg px-3.5 py-1.5 text-[13px] transition ${
-              tab === t ? 'bg-[rgba(227,200,155,0.14)] text-hp-gold' : 'text-hp-text3 hover:text-hp-text2'
+              tab === t ? 'bg-[color:var(--hp-gold-wash-2)] text-hp-goldInk' : 'text-hp-text3 hover:text-hp-text2'
             }`}
           >
             {t}
@@ -512,9 +512,9 @@ function Dossier({ villa, onBack }) {
                     className="tnum flex aspect-square items-center justify-center rounded-md text-[10.5px]"
                     style={
                       i === 0
-                        ? { background: 'rgba(127,166,107,0.45)', color: '#F3F0E8' }
+                        ? { background: 'rgba(127,166,107,0.45)', color: 'var(--hp-on-status)' }
                         : g === 'booked'
-                        ? { background: 'rgba(196,112,92,0.42)', color: '#F3F0E8' }
+                        ? { background: 'rgba(196,112,92,0.42)', color: 'var(--hp-on-status)' }
                         : { border: '1px solid var(--hp-line)', color: 'var(--hp-text-3)' }
                     }
                   >
@@ -560,7 +560,7 @@ function Tasks() {
     );
   return (
     <div className="space-y-3.5">
-      <div className="grain relative overflow-hidden rounded-2xl border border-hp-line bg-[linear-gradient(115deg,#1F1B15_0%,#15120E_58%,#100E0B_100%)] p-6 sm:p-8">
+      <div className="grain relative overflow-hidden rounded-2xl border border-hp-line panel-grad p-6 sm:p-8">
         <div className="eyebrow">Operations · daily field ops</div>
         <h3 className="mt-3 font-display text-[clamp(1.5rem,1rem+2vw,2.4rem)] font-medium text-hp-text">
           Tasks <span className="text-hp-goldDeep">·</span>{' '}
@@ -602,7 +602,7 @@ function Tasks() {
           {columns.map((col) => {
             const list = cards.filter((c) => c.state === col);
             return (
-              <div key={col} className="rounded-xl border border-hp-lineSoft bg-[rgba(255,252,245,0.02)] p-3">
+              <div key={col} className="rounded-xl border border-hp-lineSoft bg-[color:var(--hp-veil-1)] p-3">
                 <div className="flex items-center justify-between">
                   <div className="text-[12.5px] font-medium text-hp-text2">{col}</div>
                   <span className="tnum text-[11px] text-hp-text3">{list.length}</span>
@@ -617,7 +617,7 @@ function Tasks() {
                     <button
                       key={c.title}
                       onClick={() => advance(c.title)}
-                      className="w-full rounded-lg border border-hp-line bg-[rgba(255,252,245,0.035)] p-3 text-left transition hover:border-hp-gold/40"
+                      className="w-full rounded-lg border border-hp-line bg-[color:var(--hp-veil-2)] p-3 text-left transition hover:border-hp-gold/40"
                     >
                       <div className="text-[13px] leading-snug text-hp-text">{c.title}</div>
                       <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-hp-text3">
@@ -671,9 +671,9 @@ export default function OpsConsole() {
       : 'Dashboard';
 
   return (
-    <div ref={wrapRef} className="relative bg-hp-bg">
+    <div ref={wrapRef} className="replica-dark relative bg-hp-bg">
       {/* top bar */}
-      <div className="flex items-center gap-3 border-b border-hp-lineSoft bg-[#15120E] px-3 py-2.5">
+      <div className="flex items-center gap-3 border-b border-hp-lineSoft bg-[color:var(--hp-panel-bar)] px-3 py-2.5">
         <div className="hidden items-center gap-2 sm:flex">
           <div className="flex h-6 w-6 items-center justify-center rounded-md border border-hp-line text-hp-text3">
             <Command size={12} />
@@ -689,14 +689,14 @@ export default function OpsConsole() {
         </div>
         <button
           onClick={() => setPalette(true)}
-          className="ml-auto flex w-full max-w-[300px] items-center gap-2 rounded-lg border border-hp-line bg-[rgba(255,252,245,0.03)] px-2.5 py-1.5 text-left text-[12.5px] text-hp-text3 transition hover:border-hp-gold/40"
+          className="ml-auto flex w-full max-w-[300px] items-center gap-2 rounded-lg border border-hp-line bg-[color:var(--hp-veil-2)] px-2.5 py-1.5 text-left text-[12.5px] text-hp-text3 transition hover:border-hp-gold/40"
         >
           <Search size={13} />
           <span className="flex-1 truncate">Search villas, tasks, owners…</span>
           <span className="rounded border border-hp-line px-1 py-0.5 text-[10px]">⌘K</span>
         </button>
         <div className="hidden items-center gap-2 lg:flex">
-          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-hp-goldDeep text-[10.5px] font-semibold text-[#191510]">
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-hp-goldDeep text-[10.5px] font-semibold text-[color:var(--hp-on-gold)]">
             AC
           </div>
           <div className="leading-tight">
@@ -708,7 +708,7 @@ export default function OpsConsole() {
 
       <div className="flex">
         {/* icon rail */}
-        <div className="flex w-11 shrink-0 flex-col items-center gap-1.5 border-r border-hp-lineSoft bg-[#120F0C] py-3">
+        <div className="flex w-11 shrink-0 flex-col items-center gap-1.5 border-r border-hp-lineSoft bg-[color:var(--hp-rail-bg)] py-3">
           {rail.map((r) => {
             const Icon = r.icon;
             const active = section === r.key;
@@ -731,8 +731,8 @@ export default function OpsConsole() {
                 aria-label={r.label}
                 className={`flex h-8 w-8 items-center justify-center rounded-lg transition ${
                   active
-                    ? 'border border-hp-gold/45 bg-[rgba(227,200,155,0.13)] text-hp-gold'
-                    : 'text-hp-text3 hover:bg-[rgba(255,252,245,0.05)] hover:text-hp-text2'
+                    ? 'border border-hp-gold/45 bg-[color:var(--hp-gold-wash-2)] text-hp-goldInk'
+                    : 'text-hp-text3 hover:bg-[color:var(--hp-veil-3)] hover:text-hp-text2'
                 }`}
               >
                 <Icon size={15} />
@@ -742,7 +742,7 @@ export default function OpsConsole() {
         </div>
 
         {/* contextual sidebar */}
-        <div className="hidden w-[186px] shrink-0 border-r border-hp-lineSoft bg-[#141110] px-3 py-3.5 md:block">
+        <div className="hidden w-[186px] shrink-0 border-r border-hp-lineSoft bg-[color:var(--hp-sidebar-bg)] px-3 py-3.5 md:block">
           <div className="text-[9.5px] uppercase tracking-[0.14em] text-hp-text3">{sb.sub}</div>
           <div className="mt-1 font-display text-[18px] text-hp-text">{sb.title}</div>
           <div className="mt-4 space-y-4">
@@ -763,9 +763,9 @@ export default function OpsConsole() {
                         }}
                         className={`flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-[12.5px] transition ${
                           active
-                            ? 'border border-hp-gold/35 bg-[rgba(227,200,155,0.10)] text-hp-text'
+                            ? 'border border-hp-gold/35 bg-[color:var(--hp-gold-wash-2)] text-hp-text'
                             : clickable
-                            ? 'text-hp-text2 hover:bg-[rgba(255,252,245,0.05)]'
+                            ? 'text-hp-text2 hover:bg-[color:var(--hp-veil-3)]'
                             : 'text-hp-text3'
                         }`}
                       >

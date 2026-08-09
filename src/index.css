@@ -2,23 +2,289 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --hp-bg: #0d0c0a;
-  --hp-surface: #141210;
-  --hp-card: #1b1815;
-  --hp-card-hi: #232019;
-  --hp-line: #2e2a23;
-  --hp-line-soft: #221f1a;
-  --hp-gold: #e3c89b;
-  --hp-gold-deep: #c2a470;
-  --hp-gold-dim: #8a7a59;
+/* ---------------------------------------------------------------------------
+   THEME TOKENS
+
+   Every colour in this site resolves from the variables below. They are
+   declared three times over:
+
+     :root, [data-theme="dark"]  → the original near-black canvas
+     [data-theme="light"]        → the warm champagne canvas
+     .replica-dark / .replica-light
+                                 → fixed token sets for the product replicas,
+                                   which must keep the appearance of the real
+                                   applications regardless of the site theme.
+
+   Because custom properties inherit, the nearest ancestor wins: a
+   `.replica-dark` wrapper inside a light page still renders dark, and a
+   `.replica-light` wrapper inside a dark page still renders cream.
+
+   Channel triplets (--hp-*-rgb) exist so Tailwind opacity modifiers
+   (border-hp-gold/40) keep working — see tailwind.config.js.
+--------------------------------------------------------------------------- */
+
+:root,
+[data-theme='dark'],
+.replica-dark {
+  color-scheme: dark;
+
+  --hp-bg-rgb: 13 12 10;
+  --hp-surface-rgb: 20 18 16;
+  --hp-card-rgb: 27 24 21;
+  --hp-hi-rgb: 35 32 25;
+  --hp-line-rgb: 46 42 35;
+  --hp-line-soft-rgb: 34 31 26;
+  --hp-gold-rgb: 227 200 155;
+  --hp-gold-deep-rgb: 194 164 112;
+  --hp-gold-dim-rgb: 138 122 89;
+  --hp-gold-ink-rgb: 227 200 155;
+  --hp-text-rgb: 251 250 246;
+  --hp-text-2-rgb: 201 195 183;
+  --hp-text-3-rgb: 139 133 122;
+  --hp-pos-rgb: 127 166 107;
+  --hp-neg-rgb: 196 112 92;
+  --hp-info-rgb: 110 140 168;
+
+  /* Convenience hex-equivalents for raw CSS */
+  --hp-bg: rgb(var(--hp-bg-rgb));
+  --hp-surface: rgb(var(--hp-surface-rgb));
+  --hp-card: rgb(var(--hp-card-rgb));
+  --hp-card-hi: rgb(var(--hp-hi-rgb));
+  --hp-line: rgb(var(--hp-line-rgb));
+  --hp-line-soft: rgb(var(--hp-line-soft-rgb));
+  --hp-gold: rgb(var(--hp-gold-rgb));
+  --hp-gold-deep: rgb(var(--hp-gold-deep-rgb));
+  --hp-gold-dim: rgb(var(--hp-gold-dim-rgb));
+  --hp-gold-ink: rgb(var(--hp-gold-ink-rgb));
+  --hp-text: rgb(var(--hp-text-rgb));
+  --hp-text-2: rgb(var(--hp-text-2-rgb));
+  --hp-text-3: rgb(var(--hp-text-3-rgb));
+  --hp-pos: rgb(var(--hp-pos-rgb));
+  --hp-neg: rgb(var(--hp-neg-rgb));
+  --hp-info: rgb(var(--hp-info-rgb));
+
+  /* raised overlays (were hardcoded rgba(255,252,245,0.0x)) */
+  --hp-veil-1: rgba(255, 252, 245, 0.025);
+  --hp-veil-2: rgba(255, 252, 245, 0.035);
+  --hp-veil-3: rgba(255, 252, 245, 0.05);
+  --hp-veil-strong: rgba(255, 252, 245, 0.08);
+
+  /* gold washes */
+  --hp-gold-wash: rgba(227, 200, 155, 0.07);
+  --hp-gold-wash-2: rgba(227, 200, 155, 0.12);
+  --hp-gold-wash-3: rgba(227, 200, 155, 0.2);
+  --hp-gold-tint: rgba(227, 200, 155, 0.14);
+  --hp-gold-rule: rgba(227, 200, 155, 0.35);
   --hp-gold-glow: rgba(227, 200, 155, 0.14);
-  --hp-text: #fbfaf6;
-  --hp-text-2: #c9c3b7;
-  --hp-text-3: #8b857a;
-  --hp-pos: #7fa66b;
-  --hp-neg: #c4705c;
-  --hp-info: #6e8ca8;
+
+  /* chrome */
+  --hp-nav: rgba(13, 12, 10, 0.86);
+  --hp-nav-solid: rgba(13, 12, 10, 0.97);
+  --hp-sticky: rgba(13, 12, 10, 0.92);
+  --hp-frame-bar: #17140f;
+  --hp-frame-border: rgb(var(--hp-line-rgb));
+  --hp-frame-dot: #3a352c;
+  --hp-frame-notch: #332e26;
+  --hp-scrim-panel: rgba(13, 12, 10, 0.82);
+  --hp-modal-veil: rgba(8, 7, 6, 0.72);
+
+  /* cards */
+  --hp-card-bg: linear-gradient(180deg, rgba(255, 252, 245, 0.045), rgba(255, 252, 245, 0.015));
+  --hp-card-bg-flat: linear-gradient(180deg, rgba(255, 252, 245, 0.05), rgba(255, 252, 245, 0.018));
+  --hp-card-border: var(--hp-line);
+  --hp-card-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 48px -24px rgba(0, 0, 0, 0.8);
+  --hp-frame-shadow: 0 40px 120px -40px rgba(0, 0, 0, 0.9);
+
+  /* bands */
+  --hp-band-bg: var(--hp-surface);
+  --hp-band-line: var(--hp-line-soft);
+
+  /* imagery */
+  --hp-hero-img-opacity: 0.62;
+  --hp-hero-img-opacity-soft: 0.4;
+  --hp-eyebrow: var(--hp-text-3);
+  --hp-hero-img-filter: none;
+  --hp-hero-scrim: linear-gradient(
+    180deg,
+    rgba(13, 12, 10, 0.58) 0%,
+    rgba(13, 12, 10, 0.8) 52%,
+    rgb(var(--hp-bg-rgb)) 100%
+  );
+  --hp-hero-scrim-strong: linear-gradient(
+    180deg,
+    rgba(13, 12, 10, 0.78) 0%,
+    rgba(13, 12, 10, 0.9) 60%,
+    rgb(var(--hp-bg-rgb)) 100%
+  );
+  --hp-img-scrim-v: linear-gradient(
+    180deg,
+    rgba(9, 8, 7, 0.55) 0%,
+    rgba(9, 8, 7, 0.35) 40%,
+    rgba(13, 12, 10, 0.98) 100%
+  );
+  --hp-img-scrim-h: linear-gradient(
+    90deg,
+    rgba(9, 8, 7, 0.94) 0%,
+    rgba(9, 8, 7, 0.62) 45%,
+    rgba(9, 8, 7, 0.35) 100%
+  );
+  --hp-img-scrim-d: linear-gradient(
+    100deg,
+    rgba(9, 8, 7, 0.95) 0%,
+    rgba(9, 8, 7, 0.7) 55%,
+    rgba(9, 8, 7, 0.4) 100%
+  );
+  --hp-grain-opacity: 0.045;
+
+  /* replica overflow fade — resolves against whatever canvas it sits over */
+  --hp-fade-down: linear-gradient(180deg, transparent, rgb(var(--hp-bg-rgb) / 0.92));
+
+  /* ops console panel gradient (always dark, kept for the replica) */
+  --hp-panel-grad: linear-gradient(115deg, #1f1b15 0%, #15120e 58%, #100e0b 100%);
+  --hp-panel-bar: #15120e;
+  --hp-rail-bg: #120f0c;
+  --hp-sidebar-bg: #141110;
+
+  --hp-on-gold: #191510;
+  --hp-btn-gold-bg: linear-gradient(180deg, #eddcbc, rgb(var(--hp-gold-deep-rgb)));
+  --hp-btn-gold-border: rgba(227, 200, 155, 0.7);
+  --hp-scrollbar-track: #141210;
+  --hp-scrollbar-thumb: #2e2a23;
+
+  --hp-pos-wash: rgba(127, 166, 107, 0.14);
+  --hp-neg-wash: rgba(196, 112, 92, 0.12);
+  --hp-gold-wash-grad: linear-gradient(180deg, rgba(227, 200, 155, 0.09), rgba(227, 200, 155, 0.02));
+  --hp-on-status: #f3f0e8;
+}
+
+[data-theme='light'],
+.replica-light {
+  color-scheme: light;
+
+  /* Taken from the shipped Owner / Guest portals:
+     canvas #F7F2E7 · surface #FFFFFF · sub-surface #F5F1E8
+     text #1C1917 / #57534E / #8B7E6D · hairline rgba(28,25,23,0.08)
+     brand gold #C9A84C — fills, borders and icons only.
+     Small gold-toned TEXT uses #8C6D3F (5.0:1 on cream). */
+  --hp-bg-rgb: 247 242 231;
+  --hp-surface-rgb: 255 255 255;
+  --hp-card-rgb: 255 255 255;
+  --hp-hi-rgb: 245 241 232;
+  --hp-line-rgb: 227 221 205; /* rgba(28,25,23,0.08) flattened over cream */
+  --hp-line-soft-rgb: 238 233 220;
+  --hp-gold-rgb: 201 168 76;
+  --hp-gold-deep-rgb: 130 99 54; /* #826336 — readable gold ink, 4.9:1 on cream */
+  --hp-gold-dim-rgb: 126 102 54; /* #7E6636 */
+  --hp-gold-ink-rgb: 130 99 54; /* #826336 — 4.9:1 on cream, 4.9:1 on card-hi */
+  --hp-text-rgb: 28 25 23;
+  --hp-text-2-rgb: 87 83 78;
+  --hp-text-3-rgb: 112 101 84; /* #706554 — 5.1:1; darker than the product's #8B7E6D (3.6:1) for small text */
+  --hp-pos-rgb: 61 105 45;
+  --hp-neg-rgb: 158 62 42;
+  --hp-info-rgb: 46 92 128;
+
+  --hp-bg: rgb(var(--hp-bg-rgb));
+  --hp-surface: rgb(var(--hp-surface-rgb));
+  --hp-card: rgb(var(--hp-card-rgb));
+  --hp-card-hi: rgb(var(--hp-hi-rgb));
+  --hp-line: rgb(var(--hp-line-rgb));
+  --hp-line-soft: rgb(var(--hp-line-soft-rgb));
+  --hp-gold: rgb(var(--hp-gold-rgb));
+  --hp-gold-deep: rgb(var(--hp-gold-deep-rgb));
+  --hp-gold-dim: rgb(var(--hp-gold-dim-rgb));
+  --hp-gold-ink: rgb(var(--hp-gold-ink-rgb));
+  --hp-text: rgb(var(--hp-text-rgb));
+  --hp-text-2: rgb(var(--hp-text-2-rgb));
+  --hp-text-3: rgb(var(--hp-text-3-rgb));
+  --hp-pos: rgb(var(--hp-pos-rgb));
+  --hp-neg: rgb(var(--hp-neg-rgb));
+  --hp-info: rgb(var(--hp-info-rgb));
+
+  --hp-veil-1: rgba(28, 25, 23, 0.02);
+  --hp-veil-2: rgba(28, 25, 23, 0.035);
+  --hp-veil-3: rgba(28, 25, 23, 0.05);
+  --hp-veil-strong: rgba(201, 168, 76, 0.16);
+
+  --hp-gold-wash: rgba(201, 168, 76, 0.1);
+  --hp-gold-wash-2: rgba(201, 168, 76, 0.18);
+  --hp-gold-wash-3: rgba(201, 168, 76, 0.28);
+  --hp-gold-tint: rgba(201, 168, 76, 0.16);
+  --hp-gold-rule: rgba(201, 168, 76, 0.55);
+  --hp-gold-glow: rgba(201, 168, 76, 0.22);
+
+  --hp-nav: rgba(247, 242, 231, 0.88);
+  --hp-nav-solid: rgba(250, 246, 237, 0.98);
+  --hp-sticky: rgba(247, 242, 231, 0.92);
+  --hp-frame-bar: #efe9da;
+  --hp-frame-border: rgba(28, 25, 23, 0.16);
+  --hp-frame-dot: #cfc5ac;
+  --hp-frame-notch: #d8cfb8;
+  --hp-scrim-panel: rgba(255, 255, 255, 0.9);
+  --hp-modal-veil: rgba(28, 25, 23, 0.35);
+
+  --hp-card-bg: linear-gradient(180deg, #ffffff, #fdfbf6);
+  --hp-card-bg-flat: linear-gradient(180deg, #ffffff, #fbf8f1);
+  --hp-card-border: rgba(201, 168, 76, 0.3);
+  --hp-card-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 18px 40px -28px rgba(28, 25, 23, 0.22);
+  --hp-frame-shadow: 0 40px 110px -46px rgba(28, 25, 23, 0.4);
+
+  --hp-band-bg: linear-gradient(180deg, #ffffff 0%, #fdf9f0 100%);
+  --hp-band-line: rgba(201, 168, 76, 0.4);
+
+  --hp-hero-img-opacity: 0.95;
+  --hp-hero-img-opacity-soft: 0.7;
+  --hp-eyebrow: var(--hp-gold-ink);
+  --hp-hero-img-filter: saturate(1.02) brightness(1.02);
+  --hp-hero-scrim: linear-gradient(
+    180deg,
+    rgba(247, 242, 231, 0.3) 0%,
+    rgba(247, 242, 231, 0.82) 42%,
+    rgba(247, 242, 231, 0.94) 70%,
+    rgb(var(--hp-bg-rgb)) 100%
+  );
+  --hp-hero-scrim-strong: linear-gradient(
+    180deg,
+    rgba(247, 242, 231, 0.55) 0%,
+    rgba(247, 242, 231, 0.9) 50%,
+    rgb(var(--hp-bg-rgb)) 100%
+  );
+  --hp-img-scrim-v: linear-gradient(
+    180deg,
+    rgba(247, 242, 231, 0.15) 0%,
+    rgba(247, 242, 231, 0.55) 38%,
+    rgba(247, 242, 231, 0.98) 100%
+  );
+  --hp-img-scrim-h: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.78) 45%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  --hp-img-scrim-d: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0.96) 0%,
+    rgba(255, 255, 255, 0.82) 55%,
+    rgba(255, 255, 255, 0.5) 100%
+  );
+  --hp-grain-opacity: 0.03;
+
+  --hp-fade-down: linear-gradient(180deg, transparent, rgb(var(--hp-bg-rgb) / 0.94));
+
+  --hp-panel-grad: linear-gradient(115deg, #ffffff 0%, #fdf8ed 55%, #f7f0e0 100%);
+  --hp-panel-bar: #f5f1e8;
+  --hp-rail-bg: #f2ece0;
+  --hp-sidebar-bg: #faf7f0;
+
+  --hp-on-gold: #1c1917;
+  --hp-btn-gold-bg: linear-gradient(180deg, #d8ba63, #c9a84c);
+  --hp-btn-gold-border: rgba(160, 130, 52, 0.65);
+  --hp-scrollbar-track: #efe9da;
+  --hp-scrollbar-thumb: #d3c9b0;
+
+  --hp-pos-wash: rgba(61, 105, 45, 0.1);
+  --hp-neg-wash: rgba(158, 62, 42, 0.09);
+  --hp-gold-wash-grad: linear-gradient(180deg, rgba(201, 168, 76, 0.16), rgba(201, 168, 76, 0.04));
+  --hp-on-status: #ffffff;
 }
 
 @layer base {
@@ -34,6 +300,7 @@
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.35s ease, color 0.35s ease;
   }
   h1,
   h2,
@@ -47,13 +314,13 @@
     font-variation-settings: 'SOFT' 0, 'WONK' 0;
   }
   ::selection {
-    background: rgba(227, 200, 155, 0.28);
+    background: var(--hp-gold-wash-3);
     color: var(--hp-text);
   }
   ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: #141210; }
-  ::-webkit-scrollbar-thumb { background: #2e2a23; border-radius: 8px; }
-  :focus-visible { outline: 2px solid var(--hp-gold); outline-offset: 2px; }
+  ::-webkit-scrollbar-track { background: var(--hp-scrollbar-track); }
+  ::-webkit-scrollbar-thumb { background: var(--hp-scrollbar-thumb); border-radius: 8px; }
+  :focus-visible { outline: 2px solid var(--hp-gold-deep); outline-offset: 2px; }
 }
 
 @layer components {
@@ -68,7 +335,7 @@
   .eyebrow {
     @apply text-[11px] sm:text-xs uppercase font-semibold;
     letter-spacing: 0.16em;
-    color: var(--hp-text-3);
+    color: var(--hp-eyebrow);
   }
   .h-hero {
     font-size: clamp(2.5rem, 1rem + 5.2vw, 5.25rem);
@@ -80,15 +347,15 @@
     font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem);
   }
   .hp-card {
-    background: linear-gradient(180deg, rgba(255, 252, 245, 0.045), rgba(255, 252, 245, 0.015));
-    border: 1px solid var(--hp-line);
+    background: var(--hp-card-bg);
+    border: 1px solid var(--hp-card-border);
     border-radius: 16px;
     backdrop-filter: blur(14px);
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 24px 48px -24px rgba(0, 0, 0, 0.8);
+    box-shadow: var(--hp-card-shadow);
   }
   .hp-card-flat {
-    background: linear-gradient(180deg, rgba(255, 252, 245, 0.05), rgba(255, 252, 245, 0.018));
-    border: 1px solid var(--hp-line);
+    background: var(--hp-card-bg-flat);
+    border: 1px solid var(--hp-card-border);
     border-radius: 14px;
   }
   .btn {
@@ -96,22 +363,22 @@
     padding: 0.8rem 1.5rem;
   }
   .btn-gold {
-    background: linear-gradient(180deg, #eddcbc, var(--hp-gold-deep));
-    color: #191510;
-    border: 1px solid rgba(227, 200, 155, 0.7);
+    background: var(--hp-btn-gold-bg);
+    color: var(--hp-on-gold);
+    border: 1px solid var(--hp-btn-gold-border);
   }
   .btn-gold:hover {
-    box-shadow: 0 0 0 1px rgba(227, 200, 155, 0.4), 0 18px 40px -18px rgba(227, 200, 155, 0.45);
+    box-shadow: 0 0 0 1px var(--hp-gold-rule), 0 18px 40px -18px var(--hp-gold-glow);
     transform: translateY(-1px);
   }
   .btn-quiet {
     color: var(--hp-text);
     border: 1px solid var(--hp-line);
-    background: rgba(255, 252, 245, 0.03);
+    background: var(--hp-veil-1);
   }
   .btn-quiet:hover {
-    border-color: rgba(227, 200, 155, 0.45);
-    background: rgba(255, 252, 245, 0.06);
+    border-color: var(--hp-gold-rule);
+    background: var(--hp-veil-3);
   }
   .serif-em {
     font-style: italic;
@@ -121,25 +388,41 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--hp-line), transparent);
   }
+  /* Gold hairline used under section headings in both themes. */
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(90deg, var(--hp-gold-rule), rgb(var(--hp-gold-rgb) / 0.05) 70%, transparent);
+  }
   .tnum {
     font-variant-numeric: tabular-nums;
   }
   .band {
-    background: var(--hp-surface);
-    border-top: 1px solid var(--hp-line-soft);
-    border-bottom: 1px solid var(--hp-line-soft);
+    background: var(--hp-band-bg);
+    border-top: 1px solid var(--hp-band-line);
+    border-bottom: 1px solid var(--hp-band-line);
   }
   .link-gold {
     @apply inline-flex items-center gap-1.5 font-medium transition-all duration-300;
-    color: var(--hp-gold);
+    color: var(--hp-gold-ink);
   }
   .link-gold:hover { gap: 0.6rem; }
   .chip {
     @apply inline-flex items-center gap-2 rounded-full text-[12.5px];
     padding: 0.3rem 0.7rem;
     border: 1px solid var(--hp-line);
-    background: rgba(255, 252, 245, 0.03);
+    background: var(--hp-veil-1);
     color: var(--hp-text-2);
+  }
+  /* Theme toggle in the header. */
+  .theme-toggle {
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-full transition;
+    border: 1px solid var(--hp-line);
+    color: var(--hp-gold-ink);
+    background: var(--hp-gold-wash);
+  }
+  .theme-toggle:hover {
+    border-color: var(--hp-gold-rule);
+    background: var(--hp-gold-wash-2);
   }
 }
 
@@ -169,8 +452,18 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.045;
+  opacity: var(--hp-grain-opacity);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Full-bleed hero photography: opacity and tone are theme-dependent. */
+.hero-img {
+  opacity: var(--hp-hero-img-opacity);
+  filter: var(--hp-hero-img-filter);
+}
+.hero-img-soft {
+  opacity: var(--hp-hero-img-opacity-soft);
+  filter: var(--hp-hero-img-filter);
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -183,9 +476,48 @@
   height: 1.05em;
   margin-left: 2px;
   vertical-align: -0.15em;
-  background: var(--hp-gold);
+  background: var(--hp-gold-ink);
   animation: caret 1s steps(1) infinite;
 }
 @keyframes caret {
   50% { opacity: 0; }
+}
+
+
+/* ---------------------------------------------------------------------------
+   Theme-aware paint utilities. These replace the hardcoded gradients and
+   overlays that previously assumed a near-black canvas.
+--------------------------------------------------------------------------- */
+.gold-fill {
+  background: var(--hp-btn-gold-bg);
+  color: var(--hp-on-gold);
+}
+.panel-grad {
+  background: var(--hp-panel-grad);
+}
+.hero-scrim {
+  background: var(--hp-hero-scrim);
+}
+.hero-scrim-strong {
+  background: var(--hp-hero-scrim-strong);
+}
+.fade-down {
+  background: var(--hp-fade-down);
+}
+.scrim-v {
+  background: var(--hp-img-scrim-v);
+}
+.scrim-h {
+  background: var(--hp-img-scrim-h);
+}
+.scrim-d {
+  background: var(--hp-img-scrim-d);
+}
+
+/* Product replicas paint their own canvas so a site-theme switch cannot
+   bleed into them. */
+.replica-dark,
+.replica-light {
+  background: var(--hp-bg);
+  color: var(--hp-text-2);
 }

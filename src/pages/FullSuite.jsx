@@ -52,7 +52,7 @@ export default function FullSuite() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
-        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_80%_-20%,rgba(227,200,155,0.13),transparent_60%)]" />
+        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_80%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pt-32">
           <Eyebrow>The full suite</Eyebrow>
           <h1 className="h-sec mt-4 max-w-[24ch] font-medium">

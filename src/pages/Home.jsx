@@ -60,9 +60,9 @@ export default function Home() {
         <img
           src={asset('/img/samui-coast.jpg')}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.62]"
+          className="hero-img absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,12,10,0.58)_0%,rgba(13,12,10,0.8)_52%,#0D0C0A_100%)]" />
+        <div className="absolute inset-0 hero-scrim" />
         <div className="grain absolute inset-0" />
         <div className="shell relative pb-16 pt-28 sm:pb-24 sm:pt-44">
           <div className="chip">
@@ -145,7 +145,7 @@ export default function Home() {
               ].map(([t, b]) => (
                 <div key={t} className="hp-card p-5">
                   <div className="flex items-center gap-2">
-                    <Check size={14} className="text-hp-gold" />
+                    <Check size={14} className="text-hp-goldInk" />
                     <div className="text-[15px] font-semibold text-hp-text">{t}</div>
                   </div>
                   <p className="mt-2 text-[14.5px] leading-relaxed text-hp-text2">{b}</p>
@@ -179,7 +179,7 @@ export default function Home() {
                 <Link key={s.to} to={s.to} className="reveal hp-card group p-6 transition hover:border-hp-gold/40">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-hp-line bg-[rgba(227,200,155,0.08)] text-hp-gold">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-hp-line bg-[color:var(--hp-gold-wash)] text-hp-goldInk">
                         <Icon size={17} />
                       </span>
                       <div>
@@ -189,7 +189,7 @@ export default function Home() {
                     </div>
                     <ArrowRight
                       size={17}
-                      className="mt-2 shrink-0 text-hp-text3 transition group-hover:translate-x-1 group-hover:text-hp-gold"
+                      className="mt-2 shrink-0 text-hp-text3 transition group-hover:translate-x-1 group-hover:text-hp-goldInk"
                     />
                   </div>
                   <p className="mt-4 text-[15px] leading-relaxed text-hp-text2">{s.body}</p>
@@ -250,7 +250,7 @@ export default function Home() {
 
       {/* ---------------------------------------------------------------- closing */}
       <section className="relative overflow-hidden py-20 sm:py-28">
-        <div className="grain absolute inset-0 bg-[radial-gradient(90%_80%_at_50%_120%,rgba(227,200,155,0.14),transparent_65%)]" />
+        <div className="grain absolute inset-0 bg-[radial-gradient(90%_80%_at_50%_120%,var(--hp-gold-tint),transparent_65%)]" />
         <div className="shell relative text-center">
           <Eyebrow className="!text-hp-goldDeep">Next step</Eyebrow>
           <h2 className="h-sec mx-auto mt-4 max-w-[22ch]">

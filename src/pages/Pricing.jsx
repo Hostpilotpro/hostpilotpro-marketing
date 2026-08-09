@@ -53,7 +53,7 @@ export default function Pricing() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
-        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_20%_-20%,rgba(227,200,155,0.13),transparent_60%)]" />
+        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_20%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pt-32">
           <Eyebrow>Pricing</Eyebrow>
           <h1 className="h-sec mt-4 max-w-[26ch] font-medium">
@@ -174,8 +174,8 @@ export default function Pricing() {
               as you grow. If we ever publish a rate card, it will match the numbers we have been quoting privately.
             </p>
           </div>
-          <div className="reveal mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-hp-gold/25 bg-[rgba(227,200,155,0.07)] p-5">
-            <Clock size={18} className="text-hp-gold" />
+          <div className="reveal mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-hp-gold/25 bg-[color:var(--hp-gold-wash)] p-5">
+            <Clock size={18} className="text-hp-goldInk" />
             <div className="flex-1 text-[15px] text-hp-text2">
               Tell us your portfolio size and we will send a number the same working day. If we cannot, we will tell
               you why within that day rather than going quiet.

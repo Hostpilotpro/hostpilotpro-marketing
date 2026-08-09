@@ -36,8 +36,8 @@ export default function Blog() {
 
       <section className="py-14 sm:py-16">
         <div className="shell">
-          <div className="reveal mb-8 flex items-center gap-2.5 rounded-xl border border-hp-gold/25 bg-[rgba(227,200,155,0.06)] px-4 py-3 text-[14.5px] text-hp-text2">
-            <Clock size={15} className="text-hp-gold" />
+          <div className="reveal mb-8 flex items-center gap-2.5 rounded-xl border border-hp-gold/25 bg-[color:var(--hp-gold-wash)] px-4 py-3 text-[14.5px] text-hp-text2">
+            <Clock size={15} className="text-hp-goldInk" />
             First piece scheduled for publication. Ask on a call if you want it emailed when it lands.
           </div>
           <ul className="grid gap-3 md:grid-cols-2">

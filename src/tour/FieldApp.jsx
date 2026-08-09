@@ -95,7 +95,7 @@ export default function FieldApp() {
   };
 
   return (
-    <div className="min-h-[560px] bg-[#F7F4EC] text-[#1E1B16]">
+    <div className="replica-light min-h-[560px] bg-[#F7F4EC] text-[#1E1B16]">
       {/* header */}
       <div className="flex items-start gap-3 px-4 pb-3 pt-6">
         <Menu size={20} className="mt-1 shrink-0 text-[#4A4436]" />

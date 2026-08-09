@@ -13,6 +13,7 @@ export default function ProductPage({
   bullets = [],
   replica,
   replicaKind = 'desktop',
+  replicaTheme = 'dark',
   host,
   replicaCaption,
   sections = [],
@@ -21,7 +22,7 @@ export default function ProductPage({
   return (
     <div>
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
-        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_15%_-20%,rgba(227,200,155,0.14),transparent_60%)]" />
+        <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_15%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pb-16 sm:pt-32">
           <Eyebrow>{eyebrow}</Eyebrow>
           <h1 className="h-sec mt-4 max-w-[22ch] font-medium">{title}</h1>
@@ -54,14 +55,24 @@ export default function ProductPage({
               <div className="reveal hidden md:block">
                 <Tilt max={2}>
                   <BrowserFrame host={host} note="Live replica · demo data">
-                    <div className="relative max-h-[760px] overflow-hidden">
+                    <div
+                      className={`relative max-h-[760px] overflow-hidden ${
+                        replicaTheme === 'light' ? 'replica-light' : 'replica-dark'
+                      }`}
+                    >
                       {replica}
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(13,12,10,0.85))]" />
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 fade-down" />
                     </div>
                   </BrowserFrame>
                 </Tilt>
               </div>
-              <div className="-mx-5 overflow-hidden border-y border-hp-line md:hidden">{replica}</div>
+              <div
+                className={`-mx-5 overflow-hidden border-y border-hp-line md:hidden ${
+                  replicaTheme === 'light' ? 'replica-light' : 'replica-dark'
+                }`}
+              >
+                {replica}
+              </div>
             </>
           ) : (
             <div className="reveal">
