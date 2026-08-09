@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ChevronDown, Menu, X, Play, Sun, Moon } from 'lucide-react';
+import { ChevronDown, Menu, X, Play, Sun, Moon, Layers } from 'lucide-react';
 import Logo from './Logo.jsx';
 import useTheme from '../lib/theme.jsx';
 
@@ -61,9 +61,18 @@ export default function Nav() {
         />
       )}
       <div className="relative shell-wide flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="text-hp-text" aria-label="HostPilot Pro home">
-          <Logo />
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link to="/" className="text-hp-text" aria-label="HostPilot Pro home">
+            <Logo />
+          </Link>
+          <span className="hidden items-center gap-2 border-l border-hp-lineSoft pl-4 xl:flex">
+            <Layers size={13} className="text-hp-goldInk" />
+            <span className="text-[12.5px] leading-tight text-hp-text3">
+              Sits on top of your channel manager
+              <span className="block text-hp-goldDim">Hostaway today</span>
+            </span>
+          </span>
+        </div>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
           <div
@@ -150,6 +159,10 @@ export default function Nav() {
 
       {open && (
         <div className="border-t border-hp-lineSoft bg-[color:var(--hp-nav-solid)] px-5 pb-6 pt-3 lg:hidden">
+          <p className="mb-3 flex items-center gap-2 text-[12.5px] text-hp-text3">
+            <Layers size={13} className="shrink-0 text-hp-goldInk" />
+            Sits on top of your channel manager — Hostaway today
+          </p>
           <Link to="/tour" className="btn btn-gold w-full">
             Open the live tour
           </Link>

@@ -1,6 +1,8 @@
 import useSeo from '../lib/seo.js';
 import ProductPage from '../components/ProductPage.jsx';
 import OwnerPortal from '../tour/OwnerPortal.jsx';
+import { ownerDepth } from './owner-sections.js';
+import SmartCatalog from '../components/SmartCatalog.jsx';
 
 export default function Owner() {
   useSeo({
@@ -25,6 +27,10 @@ export default function Owner() {
         'Rate approvals the owner grants or refuses, with the reasoning attached',
         'Proactive disclosure — maintenance is surfaced before it is asked about',
         'An assistant that answers from the owner’s own data, with a pointer to the source',
+        'Financial, performance and annual summary PDFs, downloadable any time',
+        'An ROI tracker fed by the owner’s own purchase price and costs',
+        'VAT-aware reporting and exports an accountant will accept',
+        'A smart-tech catalogue: browse hardware for the villa and request a quote',
       ]}
       replica={<OwnerPortal />}
       replicaTheme="light"
@@ -77,11 +83,17 @@ export default function Owner() {
             ['An audit trail', 'Six months later, both sides can see who agreed to what and when.'],
           ],
         },
+        ...ownerDepth,
       ]}
+      extra={<SmartCatalog />}
+      roadmapIds={['trust', 'devices']}
       notFor={[
         'It is not trust accounting certified to any particular jurisdiction — statements are operational, and your accountant still files.',
         'Owners cannot block a confirmed booking from the portal. Calendar control stays with the office.',
         'We do not pay owners from inside the product. Payouts are recorded here and sent by your bank or Wise.',
+        'The annual tax summary is a convenience document for your accountant. It is not a VAT invoice and not a tax filing.',
+        'The smart-tech section is a catalogue and a quote request. No device is connected to the portal — no live feeds, no remote unlocking, no meter readings.',
+        '“Talk to the real person” opens a separate message thread with the team. A human does not take over the AI conversation you were in.',
       ]}
     />
   );

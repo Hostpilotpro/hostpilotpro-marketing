@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Play } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import { SectionHead, Eyebrow } from '../components/ui.jsx';
+import StackCollapse from '../components/StackCollapse.jsx';
+import BeingBuilt from '../components/BeingBuilt.jsx';
+import CompatNote from '../components/CompatNote.jsx';
 
 const flow = [
   {
@@ -63,6 +66,7 @@ export default function FullSuite() {
             closed on her phone that morning. Buying the four surfaces separately would not produce that. They are one
             system with four front doors.
           </p>
+          <CompatNote className="mt-7" />
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to="/tour" className="btn btn-gold">
               <Play size={15} className="fill-current" /> Walk all four in the tour
@@ -73,6 +77,8 @@ export default function FullSuite() {
           </div>
         </div>
       </section>
+
+      <StackCollapse compact />
 
       <section className="py-16 sm:py-20">
         <div className="shell">
@@ -113,8 +119,8 @@ export default function FullSuite() {
           />
           <div className="mt-9 grid gap-3 md:grid-cols-3">
             {[
-              ['Hostaway keeps', 'Channel connections, OTA rates and content, inventory sync, the booking itself.'],
-              ['HostPilot takes', 'Tasks, staff, field work, guest experience, add-on revenue, statements, owner relationships, cash.'],
+              ['Your channel manager keeps', 'Channel connections, OTA rates and content, inventory sync, the booking itself. Hostaway is the one we sync with today.'],
+              ['HostPilot takes', 'Tasks, staff, field work, guest experience, tours and transfers, add-on revenue, ledgers and statements, owner reporting, cash.'],
               ['You keep', 'Your existing website, payment provider, accountant and any pricing tool you already trust.'],
             ].map(([t, b]) => (
               <div key={t} className="reveal hp-card p-5">
@@ -124,13 +130,17 @@ export default function FullSuite() {
             ))}
           </div>
           <p className="reveal mt-7 max-w-2xl text-[14.5px] text-hp-text3">
-            If you are on a different channel manager, say so on the call. The integration is an adapter, not a
-            rewrite, but we will be honest about how long it takes.
+            Being straight about this: Hostaway is the only channel manager HostPilot syncs with today. Guesty and
+            Lodgify connectors are being built — they are adapters rather than rewrites, but they are not finished, so
+            if you run on either one you cannot subscribe and connect this week. Tell us on the call and we will tell you
+            where the queue is.
           </p>
         </div>
       </section>
 
-      <section className="py-16 text-center sm:py-20">
+      <BeingBuilt />
+
+      <section className="band py-16 text-center sm:py-20">
         <div className="shell">
           <h2 className="h-sub font-display">Four surfaces. One tour. No signup.</h2>
           <div className="mt-6 flex flex-wrap justify-center gap-3">

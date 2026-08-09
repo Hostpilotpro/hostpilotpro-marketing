@@ -17,14 +17,16 @@ export default function Guest() {
           The stay app that sells things <span className="serif-em text-hp-text2">while you sleep.</span>
         </>
       }
-      lede="Guests ask the same eleven questions on every stay, and they ask them at midnight. Answer them once, in a link they already have, and the same screen can sell an airport transfer, a chef and a boat day without anyone typing a reply."
+      lede="Guests ask the same eleven questions on every stay, and they ask them at midnight. Answer them once, in a link they already have, and the same screen can offer an airport transfer, a chef and a boat day without a WhatsApp negotiation — your office confirms the ones they request."
       bullets={[
-        'Arrival countdown, door code and Wi-Fi released on the morning of check-in',
+        'Arrival countdown, plus the door code and Wi-Fi your team set, shown on the morning of check-in',
         'Verification status visible to the guest — passports, TM30 filed',
         'House manual, directions and villa rules in one place',
         'Paid add-on catalogue with a running total',
-        'Everything the guest books appears instantly in the ops task board',
+        'Every add-on a guest requests appears in the ops task board straight away',
         'No app store download — it opens from a link',
+        'Tours, activities and transfers, curated per villa by your own team',
+        'Transfer prices set per villa, per destination — not one island-wide rate',
       ]}
       replica={<GuestApp />}
       replicaKind="phone"
@@ -38,8 +40,8 @@ export default function Guest() {
             'That figure is from the demo portfolio, not a customer average — we will not publish an uplift percentage we cannot show you on screen. But the mechanism is plain: a priced list in a guest’s pocket converts better than the same list inside an email they read on the plane.',
           items: [
             ['Add-ons priced and visible', 'Transfer ฿1,400 · chef ฿4,800 an evening · charter ฿18,500 · massage ฿1,200 an hour.'],
-            ['One tap, no negotiation', 'The guest adds it; the office sees a task and a charge, not a message to answer.'],
-            ['Charged to the villa account', 'Settled at checkout rather than chased in cash.'],
+            ['One tap instead of a thread', 'The guest requests it; the office sees a task and a charge to confirm, not a message to interpret.'],
+            ['Charged to the villa account', 'Confirmed items are settled through your existing payment flow at checkout rather than chased in cash.'],
             ['Concierge margin is yours', 'The catalogue, the suppliers and the markup are set by you, per villa.'],
           ],
         },
@@ -49,17 +51,44 @@ export default function Guest() {
           lede:
             'Most bad reviews are written about the first evening — a code that did not work, a gate nobody explained, an aircon remote in Thai.',
           items: [
-            ['Timed access', 'Door codes appear when they should and expire when the stay ends.'],
+            ['Access details, timed', 'The code your team set is shown when the stay starts and hidden when it ends. The lock itself is not connected to this system — your team sets the code.'],
             ['Status, not silence', 'The guest can see that their passports are verified and TM30 has been filed.'],
             ['Directions that survive Samui', 'Pinned location, gate instructions and the manager’s name and number.'],
             ['One thread if they need a human', 'Messages route to whoever is on duty, inside the same system as the tasks.'],
           ],
         },
+        {
+          eyebrow: 'Siam Discoveries',
+          title: 'Tours, activities and transfers — curated per villa.',
+          lede:
+            'The experiences a guest sees are not a generic island list. Your team maintains the catalogue in the ops console and decides, villa by villa, what appears.',
+          items: [
+            [
+              'A visibility matrix your office controls',
+              '55 active experiences, and a per-villa matrix that decides which of them a given guest is shown. Across a portfolio that resolves to thousands of villa-and-experience combinations, with explicit overrides where a villa needs something different.',
+            ],
+            [
+              'Transfers priced per villa, per destination',
+              '610 taxi rates across 10 destinations in our own operation. The airport run from one villa is not the same job as from another, and the price reflects it.',
+            ],
+            [
+              'Run by named people',
+              'Named editors maintain the experiences, their photography and their pricing. There are orders, sales and insight views behind it, and a commission-rules engine.',
+            ],
+            [
+              'How a request actually completes',
+              'A guest requests; your office confirms with the supplier and settles the charge. There is no instant supplier confirmation and no automatic payment confirmation — the last step is a human, on purpose.',
+            ],
+          ],
+        },
       ]}
+      roadmapIds={['devices']}
       notFor={[
         'It is not a booking engine — guests arrive with a reservation already made.',
         'It does not take card payments by itself; add-ons are settled through your existing payment flow at checkout.',
         'It is a web app, not a native app. That is deliberate: nobody downloads software for one week.',
+        'Add-on and transfer requests are not instantly confirmed with the supplier. Your team closes the loop.',
+        'Door codes are issued and communicated by your team. No smart lock is connected to this system today.',
       ]}
     />
   );
