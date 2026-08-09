@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import demo from '../data/demo.js';
 import { AreaChart, baht } from '../components/ui.jsx';
+import asset from '../lib/asset.js';
 
 const rail = [
   { key: 'home', icon: Home, label: 'Home' },
@@ -383,7 +384,7 @@ function Dossier({ villa, onBack }) {
     <div className="space-y-3.5">
       <div className="relative overflow-hidden rounded-2xl border border-hp-line">
         <img
-          src="/img/villa-sapphire-hero.jpg"
+          src={asset('/img/villa-sapphire-hero.jpg')}
           alt=""
           className="h-[220px] w-full object-cover sm:h-[290px]"
           loading="lazy"

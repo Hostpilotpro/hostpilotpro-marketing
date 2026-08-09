@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import demo from '../data/demo.js';
 import { baht, signedBaht, AreaChart } from '../components/ui.jsx';
+import asset from '../lib/asset.js';
 
 /* Plain-language explanations for the verdict drawer. */
 const verdicts = {
@@ -320,7 +321,7 @@ export default function OwnerPortal() {
 
       <div className="space-y-3.5 p-3 sm:p-4">
         <div className="grain relative overflow-hidden rounded-2xl border border-hp-line">
-          <img src="/img/villa-day.jpg" alt="" className="h-[150px] w-full object-cover sm:h-[180px]" loading="lazy" />
+          <img src={asset('/img/villa-day.jpg')} alt="" className="h-[150px] w-full object-cover sm:h-[180px]" loading="lazy" />
           <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(9,8,7,0.95)_0%,rgba(9,8,7,0.7)_55%,rgba(9,8,7,0.4)_100%)]" />
           <div className="absolute inset-0 flex flex-col justify-center p-5 sm:p-7">
             <div className="eyebrow">{demo.owner.greeting}</div>

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { KeyRound, Wifi, ShieldCheck, Plus, Check, Clock } from 'lucide-react';
 import demo from '../data/demo.js';
 import { baht } from '../components/ui.jsx';
+import asset from '../lib/asset.js';
 
 export default function GuestApp() {
   const g = demo.guest_stay;
@@ -18,7 +19,7 @@ export default function GuestApp() {
     <div className="bg-hp-bg text-hp-text2">
       {/* stay header */}
       <div className="relative">
-        <img src="/img/villa-sapphire-hero.jpg" alt="" className="h-[190px] w-full object-cover" loading="lazy" />
+        <img src={asset('/img/villa-sapphire-hero.jpg')} alt="" className="h-[190px] w-full object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,8,7,0.55)_0%,rgba(9,8,7,0.35)_40%,rgba(13,12,10,0.98)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 p-4">
           <div className="eyebrow">Your stay</div>

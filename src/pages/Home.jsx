@@ -4,6 +4,7 @@ import useSeo from '../lib/seo.js';
 import { SectionHead, Eyebrow, Tilt, BrowserFrame, PrimaryLink } from '../components/ui.jsx';
 import OpsConsole from '../tour/OpsConsole.jsx';
 import demo from '../data/demo.js';
+import asset from '../lib/asset.js';
 
 const surfaces = [
   {
@@ -57,7 +58,7 @@ export default function Home() {
       {/* ---------------------------------------------------------------- hero */}
       <section className="relative overflow-hidden">
         <img
-          src="/img/samui-coast.jpg"
+          src={asset('/img/samui-coast.jpg')}
           alt=""
           className="absolute inset-0 h-full w-full object-cover opacity-[0.62]"
         />
@@ -154,7 +155,7 @@ export default function Home() {
           </div>
           <div className="reveal">
             <div className="overflow-hidden rounded-2xl border border-hp-line shadow-frame">
-              <img src="/img/villa-sapphire-hero.jpg" alt="A managed villa at dusk on Koh Samui" className="w-full" />
+              <img src={asset('/img/villa-sapphire-hero.jpg')} alt="A managed villa at dusk on Koh Samui" className="w-full" />
             </div>
             <p className="mt-4 text-[13.5px] text-hp-text3">
               Koh Samui, Thailand. The software was written between check-outs.

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import { SectionHead, Eyebrow } from '../components/ui.jsx';
+import asset from '../lib/asset.js';
 
 const timeline = [
   [
@@ -40,7 +41,7 @@ export default function About() {
   return (
     <div>
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
-        <img src="/img/samui-coast.jpg" alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <img src={asset('/img/samui-coast.jpg')} alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,12,10,0.78)_0%,rgba(13,12,10,0.9)_60%,#0D0C0A_100%)]" />
         <div className="grain absolute inset-0" />
         <div className="shell relative pb-16 pt-28 sm:pt-36">
@@ -100,7 +101,7 @@ export default function About() {
             </ul>
           </div>
           <div className="reveal overflow-hidden rounded-2xl border border-hp-line shadow-frame">
-            <img src="/img/villa-day.jpg" alt="A villa terrace on Koh Samui in the morning" className="w-full" />
+            <img src={asset('/img/villa-day.jpg')} alt="A villa terrace on Koh Samui in the morning" className="w-full" />
           </div>
         </div>
       </section>
