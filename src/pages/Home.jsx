@@ -59,11 +59,11 @@ export default function Home() {
         <img
           src="/img/samui-coast.jpg"
           alt=""
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.42]"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.62]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,12,10,0.72)_0%,rgba(13,12,10,0.86)_55%,#0D0C0A_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(13,12,10,0.58)_0%,rgba(13,12,10,0.8)_52%,#0D0C0A_100%)]" />
         <div className="grain absolute inset-0" />
-        <div className="shell relative pb-14 pt-28 sm:pb-20 sm:pt-36">
+        <div className="shell relative pb-16 pt-28 sm:pb-24 sm:pt-44">
           <div className="chip">
             <span className="h-1.5 w-1.5 rounded-full bg-hp-pos" /> Built and run daily on Koh Samui
           </div>

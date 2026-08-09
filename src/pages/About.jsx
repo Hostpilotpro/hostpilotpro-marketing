@@ -49,9 +49,9 @@ export default function About() {
             Built by an operator, <span className="serif-em text-hp-text2">not a software company.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
-            HostPilot Pro comes out of Mr Property Siam, a villa management company on Koh Samui. Every screen exists
-            because something in that operation was breaking. The company runs on this software daily, which means the
-            people who maintain it are the people who depend on it.
+            HostPilot Pro comes out of Mr Property Siam, a villa management company that looks after more than 80
+            villas on Koh Samui. Every screen exists because something in that operation was breaking. The company
+            runs on this software daily, which means the people who maintain it are the people who depend on it.
           </p>
         </div>
       </section>
