@@ -10,10 +10,12 @@ import {
   CalendarDays,
   Wallet,
   Home,
+  Radio,
 } from 'lucide-react';
 import demo from '../data/demo.js';
 import { baht, signedBaht, AreaChart } from '../components/ui.jsx';
 import asset from '../lib/asset.js';
+import SmartSystems from './SmartSystems.jsx';
 
 /* Plain-language explanations for the verdict drawer. */
 const verdicts = {
@@ -193,9 +195,15 @@ function RatePilotCard() {
   );
 }
 
-function Statement() {
+function Statement({ highlight = null, flashKey = 0, onBack = null }) {
   const s = demo.owner_statement;
   const [open, setOpen] = useState(null);
+
+  /* A jump from the Smart systems meter card opens and flashes its own line. */
+  useEffect(() => {
+    if (highlight) setOpen(highlight);
+  }, [highlight, flashKey]);
+
   return (
     <div className="hp-card-flat overflow-hidden">
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-hp-lineSoft px-5 py-4">
@@ -210,12 +218,30 @@ function Statement() {
           {s.status}
         </span>
       </div>
+      {highlight && onBack && (
+        <div
+          className="flex flex-wrap items-center gap-2 border-b border-hp-lineSoft px-5 py-2.5 text-[12px]"
+          style={{ background: 'var(--hp-gold-wash)' }}
+        >
+          <Radio size={12} className="text-hp-goldInk" />
+          <span className="text-hp-text2">
+            Jumped from Smart systems — this is the line the electricity meter produced.
+          </span>
+          <button onClick={onBack} className="ml-auto text-hp-goldInk underline decoration-hp-gold/50 underline-offset-4">
+            Back to Smart systems
+          </button>
+        </div>
+      )}
       <div className="px-2 py-2 sm:px-3">
         {s.lines.map((l) => {
           const isOpen = open === l.label;
           const strong = l.kind === 'total' || l.kind === 'subtotal';
+          const lit = highlight === l.label;
           return (
-            <div key={l.label} className={strong ? 'border-t border-hp-line' : ''}>
+            <div
+              key={`${l.label}-${lit ? flashKey : 'x'}`}
+              className={`${strong ? 'border-t border-hp-line' : ''} ${lit ? 'stmt-flash' : ''}`}
+            >
               <button
                 onClick={() => setOpen(isOpen ? null : l.label)}
                 className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition hover:bg-[color:var(--hp-veil-3)]"
@@ -274,12 +300,25 @@ const ownerNav = [
   { icon: CalendarDays, label: 'Calendar' },
   { icon: Wallet, label: 'Payouts' },
   { icon: Gauge, label: 'Approvals' },
+  { icon: Radio, label: 'Smart systems' },
 ];
 
 export default function OwnerPortal() {
   const d = demo.owner_dashboard;
   const [nav, setNav] = useState('Overview');
+  const [highlight, setHighlight] = useState(null);
+  const [flashKey, setFlashKey] = useState(0);
   const stRef = useRef(null);
+
+  /* Cross-tab jump: the electricity meter on Smart systems produces the
+     "Electricity recovered from guests" income line, so clicking it lands on
+     that line with the verdict already open. */
+  const openStatementLine = (label) => {
+    setNav('Statements');
+    setHighlight(label);
+    setFlashKey((n) => n + 1);
+    setTimeout(() => stRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+  };
 
   return (
     <div className="replica-light bg-hp-bg">
@@ -305,7 +344,12 @@ export default function OwnerPortal() {
               key={n.label}
               onClick={() => {
                 setNav(n.label);
-                if (n.label === 'Statements') stRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (n.label !== 'Statements') setHighlight(null);
+                if (n.label === 'Statements')
+                  setTimeout(
+                    () => stRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }),
+                    60
+                  );
               }}
               className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[12.5px] transition ${
                 active
@@ -319,6 +363,11 @@ export default function OwnerPortal() {
         })}
       </div>
 
+      {nav === 'Smart systems' ? (
+        <div className="p-3 sm:p-4">
+          <SmartSystems onOpenStatement={() => openStatementLine('Electricity recovered from guests')} />
+        </div>
+      ) : (
       <div className="space-y-3.5 p-3 sm:p-4">
         <div className="grain relative overflow-hidden rounded-2xl border border-hp-line">
           <img src={asset('/img/villa-day.jpg')} alt="" className="h-[150px] w-full object-cover sm:h-[180px]" loading="lazy" />
@@ -347,7 +396,11 @@ export default function OwnerPortal() {
         </div>
 
         <div ref={stRef}>
-          <Statement />
+          <Statement
+            highlight={highlight}
+            flashKey={flashKey}
+            onBack={() => setNav('Smart systems')}
+          />
         </div>
 
         <div className="grid gap-3.5 lg:grid-cols-2">
@@ -377,6 +430,7 @@ export default function OwnerPortal() {
 
         <Concierge />
       </div>
+      )}
     </div>
   );
 }

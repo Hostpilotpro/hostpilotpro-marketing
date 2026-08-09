@@ -92,7 +92,7 @@ export default function Owner() {
         'Owners cannot block a confirmed booking from the portal. Calendar control stays with the office.',
         'We do not pay owners from inside the product. Payouts are recorded here and sent by your bank or Wise.',
         'The annual tax summary is a convenience document for your accountant. It is not a VAT invoice and not a tax filing.',
-        'The smart-tech section is a catalogue and a quote request. No device is connected to the portal — no live feeds, no remote unlocking, no meter readings.',
+        'Smart systems are shown as designed. Device connections are in pilot — cameras, locks and meters are installed at villas today, but live portal status is not switched on for every property yet.',
         '“Talk to the real person” opens a separate message thread with the team. A human does not take over the AI conversation you were in.',
       ]}
     />
