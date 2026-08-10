@@ -16,6 +16,8 @@ import {
 import demo from '../data/demo.js';
 import { AreaChart, baht } from '../components/ui.jsx';
 import asset from '../lib/asset.js';
+import { ItemView, sectionLanding } from './ops/index.jsx';
+import { dossierTabViews } from './ops/DossierTabs.jsx';
 
 const rail = [
   { key: 'home', icon: Home, label: 'Home' },
@@ -530,18 +532,11 @@ function Dossier({ villa, onBack }) {
         </>
       )}
 
-      {tab !== 'Overview' && (
-        <div className="hp-card-flat p-8 text-center">
-          <div className="eyebrow">{tab}</div>
-          <p className="mx-auto mt-3 max-w-md text-[14.5px] text-hp-text2">
-            {tab} is a full tab in the product. In this demo only the Overview tab is wired up — the rest are
-            shown so you can see how a villa file is organised.
-          </p>
-          <button onClick={() => setTab('Overview')} className="btn btn-quiet mt-5 !py-2 !text-[13.5px]">
-            Back to Overview
-          </button>
-        </div>
-      )}
+      {tab !== 'Overview' &&
+        (() => {
+          const TabView = dossierTabViews[tab];
+          return TabView ? <TabView villa={villa} /> : null;
+        })()}
     </div>
   );
 }
@@ -662,9 +657,20 @@ export default function OpsConsole() {
     setPalette(false);
   };
 
+  /** Every sidebar destination routes through here. */
+  const goTo = (sec, item) => {
+    setSection(sec);
+    if (item === 'Dashboard') setView({ name: 'dashboard' });
+    else if (item === 'All villas') setView({ name: 'villas' });
+    else if (item === 'Tasks') setView({ name: 'tasks' });
+    else setView({ name: 'item', item });
+  };
+
   const sb = sidebars[section];
   const activeItem =
-    view.name === 'tasks'
+    view.name === 'item'
+      ? view.item
+      : view.name === 'tasks'
       ? 'Tasks'
       : view.name === 'dossier' || view.name === 'villas'
       ? 'All villas'
@@ -715,18 +721,7 @@ export default function OpsConsole() {
             return (
               <button
                 key={r.key}
-                onClick={() => {
-                  setSection(r.key);
-                  setView(
-                    r.key === 'operations'
-                      ? { name: 'tasks' }
-                      : r.key === 'properties'
-                      ? { name: 'villas' }
-                      : r.key === 'home'
-                      ? { name: 'dashboard' }
-                      : { name: 'stub' }
-                  );
-                }}
+                onClick={() => goTo(r.key, sectionLanding[r.key])}
                 title={r.label}
                 aria-label={r.label}
                 className={`flex h-8 w-8 items-center justify-center rounded-lg transition ${
@@ -752,25 +747,18 @@ export default function OpsConsole() {
                 <div className="mt-1.5 space-y-0.5">
                   {g.items.map((it) => {
                     const active = it === activeItem;
-                    const clickable = it === 'Tasks' || it === 'All villas' || it === 'Dashboard';
                     return (
                       <button
                         key={it}
-                        onClick={() => {
-                          if (it === 'Tasks') setView({ name: 'tasks' });
-                          else if (it === 'All villas') setView({ name: 'villas' });
-                          else if (it === 'Dashboard') setView({ name: 'dashboard' });
-                        }}
+                        onClick={() => goTo(section, it)}
                         className={`flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-[12.5px] transition ${
                           active
                             ? 'border border-hp-gold/35 bg-[color:var(--hp-gold-wash-2)] text-hp-text'
-                            : clickable
-                            ? 'text-hp-text2 hover:bg-[color:var(--hp-veil-3)]'
-                            : 'text-hp-text3'
+                            : 'text-hp-text2 hover:bg-[color:var(--hp-veil-3)]'
                         }`}
                       >
                         <span className="flex-1 truncate">{it}</span>
-                        {clickable && <Star size={10} className="opacity-40" />}
+                        {active && <Star size={10} className="opacity-50" />}
                       </button>
                     );
                   })}
@@ -782,31 +770,29 @@ export default function OpsConsole() {
 
         {/* main */}
         <div className="min-w-0 flex-1 overflow-hidden p-3 sm:p-4">
+          {/* on phones the contextual sidebar is hidden, so its items live here */}
+          <div className="-mx-3 mb-3 flex gap-1.5 overflow-x-auto px-3 no-scrollbar md:hidden">
+            {sb.groups.flatMap((g) => g.items).map((it) => (
+              <button
+                key={it}
+                onClick={() => goTo(section, it)}
+                className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1.5 text-[12px] transition ${
+                  it === activeItem
+                    ? 'border-hp-gold/45 bg-[color:var(--hp-gold-wash-2)] text-hp-goldInk'
+                    : 'border-hp-line text-hp-text3'
+                }`}
+              >
+                {it}
+              </button>
+            ))}
+          </div>
           {view.name === 'dashboard' && <Dashboard onOpenVilla={openVilla} />}
           {view.name === 'dossier' && (
             <Dossier villa={view.villa} onBack={() => setView({ name: 'villas' })} />
           )}
           {view.name === 'villas' && <VillaList onOpen={(v) => setView({ name: 'dossier', villa: v })} />}
           {view.name === 'tasks' && <Tasks />}
-          {view.name === 'stub' && (
-            <div className="hp-card-flat p-10 text-center">
-              <div className="eyebrow">{sb.title}</div>
-              <h4 className="mt-3 font-display text-[22px] text-hp-text">{sb.sub}</h4>
-              <p className="mx-auto mt-3 max-w-md text-[14.5px] text-hp-text2">
-                This section exists in the product. Three areas are wired up in this demo — Home, Properties and
-                Operations. Press ⌘K to jump straight to a villa.
-              </p>
-              <button
-                onClick={() => {
-                  setSection('home');
-                  setView({ name: 'dashboard' });
-                }}
-                className="btn btn-quiet mt-5 !py-2 !text-[13.5px]"
-              >
-                Back to the dashboard
-              </button>
-            </div>
-          )}
+          {view.name === 'item' && <ItemView item={view.item} goTo={goTo} />}
         </div>
       </div>
 
