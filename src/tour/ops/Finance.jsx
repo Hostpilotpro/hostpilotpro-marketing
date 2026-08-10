@@ -244,7 +244,7 @@ export function Statements() {
       />
       <Card title="All statements" sub="Select a row to open the detail" right="Sorted newest first">
         <Table
-          minWidth={860}
+          minWidth={960}
           onRowClick={setOpen}
           rowKey={(r) => r.id}
           rows={demo.statements}
@@ -266,6 +266,18 @@ export function Statements() {
               align: 'right',
               tnum: true,
               render: (r) => <span style={{ color: 'var(--hp-neg)' }}>{signedBaht(r.expenses_thb)}</span>,
+            },
+            {
+              key: 'other',
+              label: 'Recovered',
+              align: 'right',
+              tnum: true,
+              render: (r) =>
+                r.other_income_thb ? (
+                  <span style={{ color: 'var(--hp-pos)' }}>+{baht(r.other_income_thb)}</span>
+                ) : (
+                  <span className="text-hp-text3">—</span>
+                ),
             },
             {
               key: 'net',
