@@ -314,7 +314,10 @@
   body {
     background: var(--hp-bg);
     color: var(--hp-text-2);
-    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    /* Inter has no Myanmar coverage; Burmese staff languages rendered as tofu
+       boxes without this. Google serves Noto Sans Myanmar with a unicode-range,
+       so it only downloads when Burmese characters are actually on the page. */
+    font-family: 'Inter', 'Noto Sans Myanmar', ui-sans-serif, system-ui, sans-serif;
     font-size: 17px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
