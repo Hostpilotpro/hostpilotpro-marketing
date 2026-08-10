@@ -197,8 +197,7 @@ export default function Tour() {
           <ul className="mt-4 grid gap-2.5 text-[15px] text-hp-text2 sm:grid-cols-2">
             {[
               'Nothing you click is saved. Reload and it resets.',
-              'The Hostaway sync, payouts and payroll are live in the product but stubbed here.',
-              'Only three sections of the ops console are wired up: Home, Properties, Operations.',
+              'Nothing pushes anywhere. Approving a rate or a payment here changes nothing — in the product those actions reach Hostaway, the channels and the bank.',
               'Every villa, owner, guest, staff member and figure is invented for this demo.',
               'Smart systems are shown as designed. Device connections are in pilot — cameras, locks and meters are installed at villas today, but live status in the portal is not switched on for every property yet.',
             ].map((t) => (
@@ -209,8 +208,9 @@ export default function Tour() {
             ))}
           </ul>
           <p className="mt-5 max-w-2xl text-[15px] text-hp-text3">
-            If you want to see the parts that are stubbed here running on live data, we will screen-share the real
-            system on a call — including the unglamorous bits.
+            Every section of the ops console is walkable and every villa tab opens. If you want to see it running on
+            live data rather than invented data, we will screen-share the real system on a call — including the
+            unglamorous bits.
           </p>
           <Link to="/demo" className="btn btn-gold mt-6">
             Book a call <ArrowRight size={16} />
