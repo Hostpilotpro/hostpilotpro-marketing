@@ -42,9 +42,12 @@ export default function StackCollapse({ compact = false }) {
               {stack.map((s, i) => (
                 <li
                   key={s.job}
-                  className="reveal hp-card relative p-5"
+                  className="reveal hp-card stack-scatter relative p-5"
                   style={{
-                    transform: `rotate(${i % 2 === 0 ? -0.45 : 0.5}deg) translateX(${
+                    // Applied only from lg up - see .stack-scatter in index.css. The
+                    // translateX pushed these cards past the viewport on a phone,
+                    // which scrolled the whole page sideways.
+                    '--scatter': `rotate(${i % 2 === 0 ? -0.45 : 0.5}deg) translateX(${
                       i % 3 === 0 ? 0 : i % 3 === 1 ? 10 : 4
                     }px)`,
                   }}

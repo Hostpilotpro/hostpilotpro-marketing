@@ -219,10 +219,10 @@ function Dashboard({ onOpenVilla }) {
 
       <div className="grid grid-cols-2 gap-3.5 lg:grid-cols-4">
         {d.tiles.map((t) => (
-          <div key={t.label} className="hp-card-flat p-4">
+          <div key={t.label} className="hp-card-flat min-w-0 p-4">
             <div className="text-[11px] uppercase tracking-[0.09em] text-hp-text3">{t.label}</div>
-            <div className="mt-2.5 flex items-end gap-2">
-              <div className="tnum font-display text-[clamp(1.4rem,1rem+1vw,1.9rem)] leading-none text-hp-text">
+            <div className="mt-2.5 flex min-w-0 flex-wrap items-end gap-x-2 gap-y-1">
+              <div className="tnum min-w-0 font-display text-[clamp(1.05rem,0.72rem+1.6vw,1.9rem)] leading-none text-hp-text">
                 {t.value}
               </div>
               {t.delta && <span className="tnum text-[12px] font-semibold text-hp-pos">{t.delta}</span>}

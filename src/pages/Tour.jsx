@@ -111,7 +111,8 @@ export default function Tour() {
   }, []);
 
   return (
-    <div className="pt-16">
+    // pb-20 keeps the last section clear of the fixed Book-a-call pill on phones.
+    <div className="pb-20 pt-16 sm:pb-0">
       {/* header */}
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
         <div className="grain absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_-10%,var(--hp-gold-tint),transparent_60%)]" />
@@ -218,12 +219,16 @@ export default function Tour() {
         </div>
       </section>
 
-      {/* floating CTA */}
+      {/* Floating CTA. On a phone it sat directly on top of page content at every
+         scroll position, so below sm it shrinks to a labelled pill with a tighter
+         inset and the page carries bottom padding so nothing ends up permanently
+         hidden behind it. */}
       <Link
         to="/demo"
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full border border-hp-gold/60 gold-fill px-4 py-3 text-[14px] font-semibold text-[color:var(--hp-on-gold)] shadow-goldGlow"
+        className="fixed bottom-4 right-4 z-40 inline-flex items-center gap-1.5 rounded-full border border-hp-gold/60 gold-fill px-3 py-2 text-[13px] font-semibold text-[color:var(--hp-on-gold)] shadow-goldGlow sm:bottom-5 sm:right-5 sm:gap-2 sm:px-4 sm:py-3 sm:text-[14px]"
       >
-        <PhoneCall size={15} /> Book a call
+        <PhoneCall size={14} className="sm:hidden" />
+        <PhoneCall size={15} className="hidden sm:block" /> Book a call
       </Link>
     </div>
   );

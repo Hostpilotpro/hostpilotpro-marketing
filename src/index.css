@@ -628,3 +628,15 @@
   background: var(--hp-bg);
   color: var(--hp-text-2);
 }
+
+/* Decorative "pile of vendor invoices" scatter on the stack-collapse cards.
+   Only from lg up: the translateX(10px) pushed cards past a 375px viewport
+   and made the whole /tour page scroll sideways. */
+.stack-scatter {
+  transform: none;
+}
+@media (min-width: 1024px) {
+  .stack-scatter {
+    transform: var(--scatter, none);
+  }
+}
