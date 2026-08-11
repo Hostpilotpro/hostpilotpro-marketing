@@ -16,8 +16,9 @@ const surfaces = [
     host: 'ops.hostpilotpro.com',
     persona: 'Signed in as the main office of Azure Coast Villas',
     hints: [
-      ['Press ⌘K (or Ctrl+K) and type a villa name', Command],
-      ['Click any villa to open its dossier', MousePointerClick],
+      // Third element marks a hint as desktop-only: a phone has no ⌘K.
+      ['Press ⌘K (or Ctrl+K) and type a villa name', Command, true],
+      ['Tap any villa to open its dossier', MousePointerClick],
       ['Open Operations in the left rail for the task board', MousePointerClick],
     ],
   },
@@ -110,6 +111,18 @@ export default function Tour() {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, []);
 
+  /* The fixed Book-a-call pill sat on top of the intro copy and the demo-data
+     disclosure on a phone, where there is no spare gutter to hold it. Hold it
+     back until the reader is into the replica, then keep it for the rest of
+     the page. */
+  const [showCta, setShowCta] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShowCta(window.scrollY > 620);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     // pb-20 keeps the last section clear of the fixed Book-a-call pill on phones.
     <div className="pb-20 pt-16 sm:pb-0">
@@ -133,8 +146,11 @@ export default function Tour() {
       </section>
 
       {/* segmented control */}
-      <div className="sticky top-16 z-40 border-b border-hp-lineSoft bg-[color:var(--hp-sticky)] backdrop-blur-xl">
-        <div className="shell-wide flex items-center gap-3 py-3">
+      {/* Not sticky below sm: stacked under the site header it took roughly a
+         third of a 375px viewport and clipped the replica behind it. On a phone
+         you scroll back up to change surface. */}
+      <div className="z-40 border-b border-hp-lineSoft bg-[color:var(--hp-sticky)] backdrop-blur-xl sm:sticky sm:top-16">
+        <div className="shell-wide flex items-center gap-3 py-2.5 sm:py-3">
           <div className="flex flex-1 gap-1 overflow-x-auto no-scrollbar rounded-full border border-hp-line bg-[color:var(--hp-veil-2)] p-1">
             {surfaces.map((x) => (
               <button
@@ -157,8 +173,11 @@ export default function Tour() {
       {/* stage */}
       <section className="shell-wide py-8 sm:py-12">
         <div className="mb-5 flex flex-wrap gap-2">
-          {s.hints.map(([h, Icon]) => (
-            <span key={h} className="chip !text-[12px]">
+          {s.hints.map(([h, Icon, desktopOnly]) => (
+            <span
+              key={h}
+              className={`chip !text-[12px] ${desktopOnly ? 'hidden sm:inline-flex' : ''}`}
+            >
               <Icon size={12} className="text-hp-goldInk" /> {h}
             </span>
           ))}
@@ -225,7 +244,11 @@ export default function Tour() {
          hidden behind it. */}
       <Link
         to="/demo"
-        className="fixed bottom-4 right-4 z-40 inline-flex items-center gap-1.5 rounded-full border border-hp-gold/60 gold-fill px-3 py-2 text-[13px] font-semibold text-[color:var(--hp-on-gold)] shadow-goldGlow sm:bottom-5 sm:right-5 sm:gap-2 sm:px-4 sm:py-3 sm:text-[14px]"
+        aria-hidden={!showCta}
+        tabIndex={showCta ? 0 : -1}
+        className={`fixed bottom-4 right-4 z-40 inline-flex items-center gap-1.5 rounded-full border border-hp-gold/60 gold-fill px-3 py-2 text-[13px] font-semibold text-[color:var(--hp-on-gold)] shadow-goldGlow transition-opacity duration-300 sm:bottom-5 sm:right-5 sm:gap-2 sm:px-4 sm:py-3 sm:text-[14px] ${
+          showCta ? 'opacity-100' : 'pointer-events-none opacity-0'
+        }`}
       >
         <PhoneCall size={14} className="sm:hidden" />
         <PhoneCall size={15} className="hidden sm:block" /> Book a call
