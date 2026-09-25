@@ -4,6 +4,7 @@ import { SectionHead, Eyebrow, BrowserFrame, PhoneFrame, Tilt } from './ui.jsx';
 import CompatNote from './CompatNote.jsx';
 import BeingBuilt from './BeingBuilt.jsx';
 import AudienceLinks from './AudienceLinks.jsx';
+import InternationalRollout from './InternationalRollout.jsx';
 
 /**
  * Shared layout for the four surface pages. Each page supplies its own copy,
@@ -49,6 +50,7 @@ export default function ProductPage({
             </ul>
           )}
           <CompatNote className="mt-7" />
+          <InternationalRollout compact />
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to={tourTo} className="btn btn-gold">
               <Play size={15} className="fill-current" /> {surface==='ops'?'See the real Ops screens':'Try it in the tour'}

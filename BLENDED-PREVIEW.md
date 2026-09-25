@@ -77,3 +77,45 @@ payment behaviour or every feature in the accompanying product description.
 - Homepage, Ops and tour fit 1440px and 375px viewports without page-level overflow.
 - Light and dark screenshot-gallery presentation visually inspected.
 - Separate Owner and Guest demonstration routes remain outside the screenshot gallery.
+
+## Follow-up: fuel, league and international positioning
+
+The first screenshot version was published by explicit user approval as PR #8.
+This follow-up is a separate draft branch, `feat/real-fuel-league-screens`.
+
+- Adds actual Travel & Fuel allowance policy and staff-calculation captures.
+- Adds actual staff-facing Initiative League season and rulebook captures.
+- No recompute, baseline edit, points award, payroll apply, payout or season
+  rollover was performed. All capture-tab requests remained read-only.
+- Staff names, policy author, company monetary values and reward allocation
+  percentages were anonymised. Empty/zero states remain genuine.
+- Fuel rotation-coverage/task-attribution warnings and the league's Not started
+  state are disclosed, not hidden. These are not successful-run demonstrations.
+- Two image-view buttons within each new tab expose actual page positions/views,
+  not a reconstructed or simulated operational interface.
+- International messaging distinguishes MPS's current English/Thai/Burmese setup
+  from planned country-by-country language, legal-setting and payment adaptations.
+- Spanish-speaking and French-speaking markets, the Philippines and Indonesia
+  are stated as planned directions, not supported-country or compliance claims.
+- Homepage has the full rollout explanation; product pages link to it with a
+  first-client note. Field/About copy no longer presents three languages as the
+  product's worldwide limit. Regional payment providers are not invented.
+
+### Follow-up QA inventory
+
+- Fuel and league parent tabs, both image views, full-size links and alt/captions.
+- Switching away and back resets the image view; keyboard and direct URL access.
+- Existing four screenshot tabs and old Ops surface route continue to work.
+- International section link works from product pages and direct hash URLs,
+  including nested HashRouter preview builds.
+- Markets and planned/current distinction visible on desktop and mobile.
+- No page overflow, image load failures or browser errors; production/preview builds.
+
+### Follow-up verification
+
+Both views in both new tabs load the correct flattened image and caption, with
+matching full-size URLs. Keyboard End selects the league tab; returning to a tab
+resets its subview. Full-size opening was exercised. The new pages fit 375px and
+1440px widths, with mobile and dark-theme visual review. The international anchor
+was corrected to avoid smooth-scroll displacement during route changes. No page
+errors were recorded. Production and nested-path preview builds pass.

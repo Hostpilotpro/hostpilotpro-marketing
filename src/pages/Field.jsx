@@ -6,7 +6,7 @@ export default function Field() {
   useSeo({
     title: 'HostPilot Field — the staff mobile app for cleaners, pool techs and drivers',
     description:
-      'Clock in, claim jobs, log work already done, photograph a receipt, check pay. Built for a phone held in one hand outdoors, in English, Thai or Burmese.',
+      'Clock in, claim jobs, log work and check pay. English, Thai and Burmese serve first client Mr Property Siam; additional market-specific languages are planned.',
     path: '/field',
   });
   return (
@@ -17,7 +17,7 @@ export default function Field() {
           The app your cleaners and pool techs <span className="serif-em text-hp-text2">actually open.</span>
         </>
       }
-      lede="Operations software fails in the field, not in the office. If the housekeeping lead cannot clock in, find her four jobs and close them with photos while standing in a driveway, none of the data upstream is real. Field is nine tiles, large type, three languages and nothing else."
+      lede="Operations software fails in the field, not in the office. Staff need to find their jobs, record work and understand their pay without asking someone to translate every step. The current English, Thai and Burmese setup was built for our first client, Mr Property Siam. International editions will be adapted to each market."
       bullets={[
         'Clock in and out, with hours visible to the person working them',
         'My jobs — today’s list, claimable if unassigned',
@@ -34,9 +34,9 @@ export default function Field() {
       sections={[
         {
           eyebrow: 'Language',
-          title: 'English, Thai and Burmese — because that is who does the work.',
+          title: 'Three languages for our first client. More markets ahead.',
           lede:
-            'On Samui a housekeeping team is commonly Thai and Burmese. An English-only ops app quietly forces a supervisor to become a translation layer, and the data degrades every time.',
+            'Mr Property Siam’s team uses English, Thai and Burmese. This is the first-client configuration, not the international limit: language, local terminology and country-specific settings will be developed for each rollout.',
           items: [
             ['One tap re-labels everything', 'Not a settings page buried three levels down — a chip in the header.'],
             ['Per-person, not per-company', 'Each staff member keeps their own language; the office still reads English.'],
