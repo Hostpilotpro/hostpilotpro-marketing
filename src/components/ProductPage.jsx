@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Play, Info } from 'lucide-react';
 import { SectionHead, Eyebrow, BrowserFrame, PhoneFrame, Tilt } from './ui.jsx';
 import CompatNote from './CompatNote.jsx';
 import BeingBuilt from './BeingBuilt.jsx';
+import AudienceLinks from './AudienceLinks.jsx';
 
 /**
  * Shared layout for the four surface pages. Each page supplies its own copy,
@@ -22,7 +23,13 @@ export default function ProductPage({
   notFor = [],
   extra = null,
   roadmapIds = null,
+  showcase = null,
+  compactDetails = false,
 }) {
+  const {pathname}=useLocation();
+  const surface=pathname==='/owner'?'owner':pathname==='/guest'?'guest':pathname==='/field'?'field':'ops';
+  const tourTo=surface==='ops'?'/tour?story=messages':`/tour?surface=${surface}`;
+  const ReplicaWrap=showcase?'details':'div';
   return (
     <div>
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
@@ -43,18 +50,22 @@ export default function ProductPage({
           )}
           <CompatNote className="mt-7" />
           <div className="mt-9 flex flex-wrap gap-3">
-            <Link to="/tour" className="btn btn-gold">
+            <Link to={tourTo} className="btn btn-gold">
               <Play size={15} className="fill-current" /> Try it in the tour
             </Link>
             <Link to="/demo" className="btn btn-quiet">
               Book a call <ArrowRight size={15} />
             </Link>
           </div>
+          <AudienceLinks />
         </div>
       </section>
 
+      {showcase && <section className="shell-wide py-12 sm:py-16">{showcase}</section>}
       <section className="py-12 sm:py-16">
         <div className="shell-wide">
+          <ReplicaWrap className={showcase?'blend-more':''}>
+          {showcase&&<summary>Explore the original portfolio console</summary>}
           {replicaKind === 'desktop' ? (
             <>
               <div className="reveal hidden md:block">
@@ -72,7 +83,7 @@ export default function ProductPage({
                 </Tilt>
               </div>
               <div
-                className={`-mx-5 overflow-hidden border-y border-hp-line md:hidden ${
+                className={`${showcase?'':'-mx-5'} overflow-hidden border-y border-hp-line md:hidden ${
                   replicaTheme === 'light' ? 'replica-light' : 'replica-dark'
                 }`}
               >
@@ -91,10 +102,11 @@ export default function ProductPage({
                 'Sample portfolio. Azure Coast Villas is a fictional 24-villa operator — every figure shown is demo data.'}
             </span>
           </div>
+          </ReplicaWrap>
         </div>
       </section>
 
-      {sections.map((s, i) => (
+      {compactDetails ? <section className="shell-wide pb-12"><SectionHead eyebrow="Go deeper" title="The working details." lede="Open the area that matters to your operation, from cash controls and pricing to the people doing the work."/><div className="mt-7">{sections.map(s=><details className="blend-more" key={s.title}><summary>{s.title}</summary><div className="blend-more-body"><p className="text-[15px] text-hp-text2 mb-5">{s.lede}</p><div className="blend-detail-grid">{s.items.map(([t,b])=><article key={t}><strong>{t}</strong><p>{b}</p></article>)}</div></div></details>)}</div></section> : sections.map((s, i) => (
         <section key={s.title} className={i % 2 === 0 ? 'band py-16 sm:py-20' : 'py-16 sm:py-20'}>
           <div className="shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
             <SectionHead eyebrow={s.eyebrow} title={s.title} lede={s.lede} />
@@ -138,7 +150,7 @@ export default function ProductPage({
         <div className="shell">
           <h2 className="h-sub font-display">Judge it yourself before anyone calls you.</h2>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link to="/tour" className="btn btn-gold">
+            <Link to={tourTo} className="btn btn-gold">
               Open the live tour
             </Link>
             <Link to="/pricing" className="btn btn-quiet">

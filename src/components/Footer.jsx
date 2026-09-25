@@ -6,9 +6,9 @@ const cols = [
   {
     title: 'Product',
     links: [
-      ['/owner', 'HostPilot Owner'],
-      ['/ops', 'HostPilot Ops'],
-      ['/guest', 'HostPilot Guest'],
+      ['/ops', 'For management companies'],
+      ['/owner', 'For owners'],
+      ['/guest', 'For guests'],
       ['/field', 'HostPilot Field'],
       ['/full-suite', 'Full suite'],
     ],
@@ -16,7 +16,7 @@ const cols = [
   {
     title: 'See it',
     links: [
-      ['/tour', 'Live interactive tour'],
+      ['/tour', 'Interactive walkthroughs'],
       ['/pricing', 'Pricing'],
       ['/demo', 'Book a call'],
     ],

@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, Play, Building2, Users, Smartphone, Monitor, Check, Info } from 'lucide-react';
 import useSeo from '../lib/seo.js';
-import { SectionHead, Eyebrow, Tilt, BrowserFrame, PrimaryLink } from '../components/ui.jsx';
-import OpsConsole from '../tour/OpsConsole.jsx';
+import { SectionHead, Eyebrow, PrimaryLink } from '../components/ui.jsx';
 import demo from '../data/demo.js';
 import asset from '../lib/asset.js';
 import StackCollapse from '../components/StackCollapse.jsx';
 import SmartCatalog from '../components/SmartCatalog.jsx';
 import BeingBuilt from '../components/BeingBuilt.jsx';
 import CompatNote from '../components/CompatNote.jsx';
+import BusinessStories from '../components/BusinessStories.jsx';
+import AudienceLinks from '../components/AudienceLinks.jsx';
 
 const surfaces = [
   {
@@ -51,9 +52,9 @@ const surfaces = [
 
 export default function Home() {
   useSeo({
-    title: 'HostPilot Pro — two subscriptions, not seven',
+    title: 'HostPilot Pro | Keep your PMS. Connect the business around it.',
     description:
-      'Keep your channel manager. HostPilot Pro replaces the rest of the stack: owner portal, ops console, guest app, field app, ledgers, reporting, tours and transfers. Sits on top of Hostaway today. Click through it without talking to anyone.',
+      'Keep your channel manager. Connect messages, owner finance, revenue, people and property operations. Explore HostPilot Pro for management companies, owners and guests.',
     path: '/',
   });
 
@@ -75,12 +76,11 @@ export default function Home() {
             </span>
           </div>
           <h1 className="h-hero mt-6 max-w-[17ch] font-medium">
-            Keep your channel manager. <span className="serif-em">Replace everything else.</span>
+            Keep your channel manager. <span className="serif-em">Run the business around it.</span>
           </h1>
           <p className="mt-7 max-w-2xl text-[17px] leading-[1.7] text-hp-text2 sm:text-[19px]">
-            A boutique villa operator pays for seven things. HostPilot Pro collapses that to two lines on the card: the
-            channel manager you already have, and us — a staff console, an owner portal, a guest app and a field app on
-            one database, with the ledgers, reporting and tour sales that live between them.
+            Your PMS is the booking backbone. HostPilot Pro connects the operation around it:
+            your conversations, owner money, pricing, listings and team, with dedicated experiences for owners and guests.
           </p>
           <CompatNote className="mt-6" />
           <div className="mt-9 flex flex-wrap gap-3">
@@ -92,53 +92,44 @@ export default function Home() {
             </Link>
           </div>
           <p className="mt-4 text-[14px] text-hp-text3">
-            No email gate. No signup. The tour is the product, filled with demo data.
+            No email gate. No signup. Explore illustrated workflows and interactive replicas with sample data.
           </p>
+          <AudienceLinks />
         </div>
       </section>
-
-      {/* ----------------------------------------- the consolidation centrepiece */}
-      <StackCollapse />
 
       {/* ------------------------------------------------------- product on page */}
       <section className="border-t border-hp-lineSoft bg-hp-bg py-14 sm:py-20">
         <div className="shell-wide">
           <div className="reveal flex flex-wrap items-end justify-between gap-5">
             <div className="max-w-2xl">
-              <Eyebrow>The ops console, live below</Eyebrow>
+              <Eyebrow>The business behind the bookings</Eyebrow>
               <h2 className="h-sec mt-3">
-                This is not a screenshot. <span className="serif-em text-hp-text2">Use it.</span>
+                See how the work connects. <span className="serif-em text-hp-text2">Try a story.</span>
               </h2>
               <p className="mt-4 text-[17px] text-hp-text2">
-                Press ⌘K and search a villa. Click one to open its dossier. Open Operations for the task board. Same
-                code as the tour, same fictional portfolio.
+                Follow a conversation, a month’s owner money or a payday review.
+                Switch between short examples instead of reading a wall of features.
               </p>
             </div>
             <PrimaryLink to="/tour">Open the full tour</PrimaryLink>
           </div>
 
-          <div className="reveal mt-9">
-            <Tilt max={2}>
-              <BrowserFrame host="ops.hostpilotpro.com" note="Live replica · demo data">
-                <div className="max-h-[720px] overflow-hidden">
-                  <OpsConsole />
-                </div>
-              </BrowserFrame>
-            </Tilt>
-          </div>
-          <div className="reveal mt-4 flex items-center gap-2 text-[12.5px] text-hp-text3">
-            <Info size={13} className="text-hp-goldDeep" />
-            Sample portfolio. Azure Coast Villas is a fictional 24-villa operator — every figure shown is demo data.
+          <div className="mt-9">
+            <BusinessStories />
           </div>
         </div>
       </section>
+
+      {/* The original visual consolidation argument stays, after the new lead stories. */}
+      <StackCollapse compact />
 
       {/* ---------------------------------------------------------- operator proof */}
       <section className="band py-16 sm:py-24">
         <div className="shell grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <SectionHead
-              eyebrow="Why this exists"
+              eyebrow="Built by the operator · used by Mr Property Siam"
               title={
                 <>
                   Built by an operator, <span className="serif-em text-hp-text2">not a software company.</span>
@@ -151,7 +142,7 @@ export default function Home() {
                 ['One database', 'Owners, guests, staff and the office read the same records. Nothing is re-keyed.'],
                 ['On top of your channel manager', 'Distribution stays where it is. We do everything after the booking. Hostaway syncs today; Guesty and Lodgify are being built.'],
                 ['Three languages in the field', 'English, Thai and Burmese, because that is who does the work.'],
-                ['Support from the operator', 'The most common complaint about every competitor we reviewed was support. We are a small team that answers.'],
+                ['Support from the operator', 'Built around the questions and problems of an operating villa company, not just a booking calendar.'],
               ].map(([t, b]) => (
                 <div key={t} className="hp-card p-5">
                   <div className="flex items-center gap-2">
@@ -213,9 +204,13 @@ export default function Home() {
 
       {/* ------------------------------------------------------- smart catalogue */}
       <SmartCatalog />
-
-      {/* ----------------------------------------------------------- the roadmap */}
-      <BeingBuilt />
+      <section className="shell-wide pb-12">
+        <details className="blend-more">
+          <summary>What is still being built</summary>
+          <p className="px-6 pb-3 text-[14px] text-hp-text2">Hardware installation, planned integrations and the core software are separate offers.</p>
+          <BeingBuilt />
+        </details>
+      </section>
 
       {/* ---------------------------------------------------- the owner statement */}
       <section className="band py-16 sm:py-24">

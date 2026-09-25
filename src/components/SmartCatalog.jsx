@@ -25,19 +25,19 @@ const steps = [
     icon: Zap,
     title: 'The meter meets the reservation',
     body:
-      "A Shelly meter counts kWh. That is all a meter app can tell you. Connected to the property, the reading is split by stay, billed above the included allowance, and lands on the owner's statement as ฿11,240 of income — not as a note somebody has to remember to type.",
+      "The planned connection ties meter readings to stays and owner reporting. The demo illustrates how recovered electricity could appear on a statement; it is not a live meter feed.",
   },
   {
     icon: KeyRound,
     title: 'The door code knows the dates',
     body:
-      'A code is generated from the booking, sent with the arrival message, and expires at checkout. Housekeeping gets a code valid 09:00–14:00. Nobody keeps a spreadsheet of PINs, and nobody drives a key across the island.',
+      'The design direction is reservation-aware access: guest dates and separate service windows. A displayed demo code does not mean a smart lock is connected or changing codes today.',
   },
   {
     icon: MousePointerClick,
     title: 'One screen, not five apps',
     body:
-      'Cameras, lock, tank level, leak sensors, solar and the charger appear next to the bookings and the payout, for the owner and the office. A low water tank raises a task on the ops board instead of an email nobody opens.',
+      'The visual concept places installed systems next to property and reservation context. Live device status, alerts and automatic task creation require their own verified integration.',
   },
 ];
 
@@ -66,13 +66,13 @@ export default function SmartCatalog() {
     <section id="smart" className="border-t border-hp-lineSoft py-16 sm:py-24">
       <div className="shell-wide">
         <SectionHead
-          eyebrow="Smart systems"
+          eyebrow="Smart systems · catalogue and connection concepts"
           title={
             <>
               The tech at your villa, <span className="serif-em text-hp-text2">in the same app as the money.</span>
             </>
           }
-          lede="Most villas already have it: cameras at the gate, a keypad lock on the main door, a meter in the board, maybe solar and a charger. It lives in five different vendor apps, and not one of them knows what a booking is. HostPilot Pro connects what is already installed to the property, the reservation and the statement."
+          lede="Cameras, locks and meters often sit in separate vendor apps. The catalogue and the visual connection story remain part of HostPilot Pro, but the screens below illustrate a direction, not a verified live device integration."
         />
 
         {/* ------------------------------------------- large context image + story */}

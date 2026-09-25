@@ -2,6 +2,7 @@ import useSeo from '../lib/seo.js';
 import ProductPage from '../components/ProductPage.jsx';
 import OpsConsole from '../tour/OpsConsole.jsx';
 import { opsDepth } from './ops-sections.js';
+import BusinessStories from '../components/BusinessStories.jsx';
 
 export default function Ops() {
   useSeo({
@@ -15,21 +16,20 @@ export default function Ops() {
       eyebrow="HostPilot Ops"
       title={
         <>
-          The console the whole operation <span className="serif-em text-hp-text2">actually runs on.</span>
+          Your PMS handles the bookings.<br /><span className="serif-em text-hp-text2">Run the business around them.</span>
         </>
       }
-      lede="One screen for the morning: who arrives, who leaves, what is late, what it earned. Underneath it, a villa file for every property that holds the bookings, the house manual, the photos, the owner, the financials and the history in one place — so nobody has to ask which spreadsheet is current."
+      lede="Connect the message centre, owner finance, RatePilot, listing tools, people and property care. Keep the booking backbone you already use, then give the office and the team a shared way to run the business behind every stay."
       bullets={[
-        'A dashboard that opens with today, not with a chart nobody reads',
-        '⌘K command palette across villas, tasks and owners',
-        'A villa dossier per property with a 30-day booking grid',
-        'Task board across cleaning, pool, garden, maintenance and inspection',
-        'Finance hub: statements, owner balances, payment queue, petty cash',
-        'RatePilot rate recommendations, reviewed by a person before anything moves',
-        'Siam Discoveries: tours, activities and transfers priced per villa',
-        'Staff records with document expiry dates, and team messaging built in',
-        'Profit estimate for the open month, clearly labelled as an estimate',
+        'Message context, staff authorship and human-reviewed AI assistance',
+        'Owner ledgers, invoices, payouts, supplier costs and verification',
+        'RatePilot, competitor context and owner pricing boundaries',
+        'Channel-specific listing audits, rewrites and fleet visibility',
+        'Recruitment, staff documents, overtime, allowances and payday',
+        'Onboarding, property records, inspections and proof of work',
       ]}
+      showcase={<BusinessStories />}
+      compactDetails
       replica={<OpsConsole />}
       replicaTheme="dark"
       host="ops.hostpilotpro.com"
@@ -71,6 +71,17 @@ export default function Ops() {
           ],
         },
         ...opsDepth,
+        {
+          eyebrow:'People & payroll',
+          title:'Recruitment to payday, with the working details included.',
+          lede:'A staff directory is only the beginning. Keep the employment journey connected to the work, the evidence and the pay review.',
+          items:[
+            ['Careers and employment','Applications, CVs, contracts and staff records belong in a connected workflow.'],
+            ['Payroll walkthrough','Review one payee at a time, with salary, approved overtime, allowances and previous advances visible.'],
+            ['Goals and recognition','Make contributions and bonus goals visible. Approved pay, league standings and reward accounting are not the same thing.'],
+            ['Document dates','Track staff documents and expiry dates. Confirm the configured reminder recipients and delivery path during onboarding.'],
+          ],
+        },
       ]}
       roadmapIds={['connectors', 'trust']}
       notFor={[
@@ -79,7 +90,7 @@ export default function Ops() {
         'There is no built-in website or booking engine. Direct bookings arrive through your existing stack.',
         'RatePilot does not run your pricing unattended. It proposes; a person accepts; strict mode never pushes.',
         'Document expiry reminders are not proven. The dates are tracked and visible; we will not promise an email until one has demonstrably sent.',
-        'Team messaging is internal. It is not a unified inbox across WhatsApp, email and the OTA channels.',
+        'The combined message centre uses supported, configured sources. It is not a full Gmail replacement or WhatsApp group archive; social capture and outbound support have separate activation boundaries.',
         'Tour and transfer requests are confirmed by your office, not auto-confirmed with the supplier.',
       ]}
     />

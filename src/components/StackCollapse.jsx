@@ -19,13 +19,13 @@ export default function StackCollapse({ compact = false }) {
       <div className="grain absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_-10%,var(--hp-gold-tint),transparent_62%)]" />
       <div className="shell-wide relative">
         <SectionHead
-          eyebrow="The arithmetic"
+          eyebrow="The consolidation argument"
           title={
             <>
-              Two subscriptions, <span className="serif-em text-hp-text2">not seven.</span>
+              Keep the backbone. <span className="serif-em text-hp-text2">Connect the rest.</span>
             </>
           }
-          lede="Nobody re-platforms forty villas mid-season, so we do not ask you to. Keep the channel manager you already trust for distribution and the inbox. Everything else on this list is what HostPilot Pro replaces — one subscription, one login, one database."
+          lede="Keep the channel manager you trust for distribution. Bring the operational work around it together: owner finance, people, field work and guest service. Review the fit with your existing tools rather than replacing the whole stack mid-season."
         />
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
@@ -34,7 +34,7 @@ export default function StackCollapse({ compact = false }) {
             <div className="reveal flex items-baseline justify-between gap-4 border-b border-hp-line pb-3">
               <h3 className="font-display text-[19px] text-hp-text">What a villa operator buys today</h3>
               <span className="tnum text-[12.5px] uppercase tracking-[0.14em] text-hp-text3">
-                {stack.length} vendors
+                {stack.length} jobs to connect
               </span>
             </div>
 
@@ -90,9 +90,8 @@ export default function StackCollapse({ compact = false }) {
             </ul>
 
             <p className="reveal mt-5 text-[13px] leading-relaxed text-hp-text3">
-              Figures are quoted from each vendor’s own published pricing page and checked on {PRICES_CHECKED}. Where a
-              vendor does not publish a price — Hostaway and Breezeway do not — this page says so rather than
-              estimating one. Prices change; check the links.
+              Historical comparison: these vendor figures were checked on {PRICES_CHECKED}, not today.
+              The linked vendor pages may have changed. This illustrates a fragmented stack, not guaranteed savings or a promise to replace every tool.
             </p>
           </div>
 
@@ -133,9 +132,8 @@ export default function StackCollapse({ compact = false }) {
             <div className="reveal hp-card-flat mt-4 p-5">
               <div className="eyebrow">The part people miss</div>
               <p className="mt-3 text-[15px] leading-relaxed text-hp-text2">
-                A channel manager, a booking website and a synced inbox. That is maybe a fifth of running a villa
-                business. Guesty, Hostify, Lodgify and Hostaway are genuinely good at that fifth — we ran on all four.
-                The other four-fifths is what this is.
+                A reservation is only the start. Someone must coordinate the work, account for the owner’s money,
+                pay the team and keep the property ready for the next stay. That is the business HostPilot Pro connects.
               </p>
               {!compact && (
                 <div className="mt-5 flex flex-wrap items-center gap-4">

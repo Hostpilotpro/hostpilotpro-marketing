@@ -124,9 +124,9 @@ function RatePilotCard() {
   const r = demo.ratepilot_approval;
   const [choice, setChoice] = useState(null);
   const confirmation = {
-    Approve: `Approved. ฿${r.suggested_thb.toLocaleString()} is live on all channels for ${r.window}. Nothing changed in this demo.`,
-    'Approve with cap': `Approved with a ฿15,000 ceiling. RatePilot will move rates up to the cap and no further. Nothing changed in this demo.`,
-    Decline: `Declined. The rate stays at ฿${r.current_thb.toLocaleString()} and RatePilot will not ask again for this window. Nothing changed in this demo.`,
+    Approve: `Demo approval selected: ฿${r.suggested_thb.toLocaleString()} for ${r.window}. No live rate changed.`,
+    'Approve with cap': `Demo approval selected with a ฿15,000 ceiling. Nothing was sent to any channel.`,
+    Decline: `Demo decline selected. The sample rate stays at ฿${r.current_thb.toLocaleString()}. No live rate changed.`,
   };
   return (
     <div className="hp-card-flat overflow-hidden">
@@ -297,7 +297,7 @@ function Statement({ highlight = null, flashKey = 0, onBack = null }) {
 const ownerNav = [
   { icon: Home, label: 'Overview' },
   { icon: FileText, label: 'Statements' },
-  { icon: CalendarDays, label: 'Calendar' },
+  // The calendar is not implemented in this replica. Do not present a dead tab.
   { icon: Wallet, label: 'Payouts' },
   { icon: Gauge, label: 'Approvals' },
   { icon: Radio, label: 'Smart systems' },
@@ -309,6 +309,9 @@ export default function OwnerPortal() {
   const [highlight, setHighlight] = useState(null);
   const [flashKey, setFlashKey] = useState(0);
   const stRef = useRef(null);
+  const payoutRef = useRef(null);
+  const rateRef = useRef(null);
+  const topRef = useRef(null);
 
   /* Cross-tab jump: the electricity meter on Smart systems produces the
      "Electricity recovered from guests" income line, so clicking it lands on
@@ -321,7 +324,7 @@ export default function OwnerPortal() {
   };
 
   return (
-    <div className="replica-light bg-hp-bg">
+    <div ref={topRef} className="replica-light bg-hp-bg">
       <div className="flex items-center gap-3 border-b border-hp-lineSoft bg-[color:var(--hp-panel-bar)] px-4 py-2.5">
         <div className="font-display text-[13.5px] text-hp-text">Azure Coast Villas</div>
         <span className="hidden text-[11px] uppercase tracking-[0.14em] text-hp-text3 sm:inline">
@@ -350,6 +353,8 @@ export default function OwnerPortal() {
                     () => stRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }),
                     60
                   );
+                const destination=n.label==='Payouts'?payoutRef:n.label==='Approvals'?rateRef:n.label==='Overview'?topRef:null;
+                if(destination)setTimeout(()=>destination.current?.scrollIntoView({behavior:'smooth',block:'center'}),60);
               }}
               className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[12.5px] transition ${
                 active
@@ -404,7 +409,7 @@ export default function OwnerPortal() {
         </div>
 
         <div className="grid gap-3.5 lg:grid-cols-2">
-          <div className="hp-card-flat p-5">
+          <div ref={payoutRef} className="hp-card-flat p-5">
             <h4 className="font-display text-[18px] text-hp-text">Next payout</h4>
             <div className="mt-3 flex items-end gap-3">
               <div className="tnum font-display text-[28px] leading-none text-hp-goldInk">
@@ -425,7 +430,7 @@ export default function OwnerPortal() {
               </div>
             </div>
           </div>
-          <RatePilotCard />
+          <div ref={rateRef}><RatePilotCard /></div>
         </div>
 
         <Concierge />

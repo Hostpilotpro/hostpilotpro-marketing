@@ -102,15 +102,15 @@ export const opsDepth = [
   },
   {
     eyebrow: 'Talking',
-    title: 'Team messaging, built in.',
+    title: 'Internal collaboration and a broader message centre.',
     lede:
-      'Groups by department, notifications tied to records, and AI conversations reviewable by the office. It exists so a job, a photo and a conversation live in one place.',
+      'Keep department conversations and job context, then bring supported guest, office and enquiry sources into the wider office workflow. Preserve who wrote a reply, who owns the work and who reviews the next action.',
     items: [
       ['Groups by department', 'Housekeeping, pool, garden, maintenance and office, with membership managed like any other record.'],
       ['Notifications against records', 'An alert points at the task, statement or villa it came from.'],
       [
         'Small on purpose, and small in practice',
-        'Team messaging built in — that is the claim. It is not a unified omnichannel inbox across WhatsApp, email and the OTAs, and our own message volume is modest.',
+        'Source coverage depends on the connected provider and activation state. Human review remains important, and a receive-only integration is not advertised as a two-way inbox.',
       ],
     ],
   },
