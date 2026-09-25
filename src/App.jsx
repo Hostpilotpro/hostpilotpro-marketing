@@ -4,9 +4,6 @@ import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import Tour from './pages/Tour.jsx';
-import Owner from './pages/Owner.jsx';
-import Ops from './pages/Ops.jsx';
-import Guest from './pages/Guest.jsx';
 import Field from './pages/Field.jsx';
 import FullSuite from './pages/FullSuite.jsx';
 import Pricing from './pages/Pricing.jsx';
@@ -15,6 +12,7 @@ import Proof from './pages/Proof.jsx';
 import Blog from './pages/Blog.jsx';
 import Demo from './pages/Demo.jsx';
 import NotFound from './pages/NotFound.jsx';
+import AudiencePage from './components/AudiencePage.jsx';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -56,9 +54,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tour" element={<Tour />} />
-          <Route path="/owner" element={<Owner />} />
-          <Route path="/ops" element={<Ops />} />
-          <Route path="/guest" element={<Guest />} />
+          <Route path="/owner" element={<AudiencePage audience="owner" />} />
+          <Route path="/ops" element={<AudiencePage audience="ops" />} />
+          <Route path="/guest" element={<AudiencePage audience="guest" />} />
           <Route path="/field" element={<Field />} />
           <Route path="/full-suite" element={<FullSuite />} />
           <Route path="/pricing" element={<Pricing />} />

@@ -16,7 +16,7 @@ export default function Owner() {
       eyebrow="HostPilot Owner"
       title={
         <>
-          The owner portal, <span className="serif-em text-hp-text2">and the reason the rest exists.</span>
+          Your property. Your numbers.<br /><span className="serif-em text-hp-text2">A clearer picture.</span>
         </>
       }
       lede="Owners do not churn because occupancy dipped. They churn because a statement did not make sense and nobody could explain it quickly. HostPilot Owner is built around that single problem: every figure an owner sees can be opened until it reaches the invoice, the meter photo or the completed task behind it."

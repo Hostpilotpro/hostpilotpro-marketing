@@ -634,9 +634,9 @@ function Tasks() {
 
 /* ---------------------------------------------------------------- shell */
 
-export default function OpsConsole() {
-  const [section, setSection] = useState('home');
-  const [view, setView] = useState({ name: 'dashboard' });
+export default function OpsConsole({ initialScreen = 'dashboard' }) {
+  const [section, setSection] = useState(initialScreen === 'tasks' ? 'operations' : initialScreen === 'finance' ? 'finance' : 'home');
+  const [view, setView] = useState(initialScreen === 'finance' ? { name: 'item', item: 'Finance hub' } : { name: initialScreen });
   const [palette, setPalette] = useState(false);
   const wrapRef = useRef(null);
 
@@ -680,13 +680,13 @@ export default function OpsConsole() {
     <div ref={wrapRef} className="replica-dark relative bg-hp-bg">
       {/* top bar */}
       <div className="flex items-center gap-3 border-b border-hp-lineSoft bg-[color:var(--hp-panel-bar)] px-3 py-2.5">
-        <div className="hidden items-center gap-2 sm:flex">
+        <div className="flex shrink-0 items-center gap-2">
           <div className="flex h-6 w-6 items-center justify-center rounded-md border border-hp-line text-hp-text3">
             <Command size={12} />
           </div>
           <div className="leading-tight">
-            <div className="font-display text-[13.5px] text-hp-text">Azure Coast Villas</div>
-            <div className="text-[9.5px] uppercase tracking-[0.14em] text-hp-text3">HostPilot Pro · Ops</div>
+            <div className="font-display text-[13.5px] text-hp-text">HostPilot Pro</div>
+            <div className="text-[12px] text-hp-text3"><span className="hidden sm:inline">Azure Coast Villas · </span>Ops demo</div>
           </div>
         </div>
         <div className="hidden text-[11.5px] text-hp-text3 md:block">

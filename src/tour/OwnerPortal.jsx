@@ -124,9 +124,9 @@ function RatePilotCard() {
   const r = demo.ratepilot_approval;
   const [choice, setChoice] = useState(null);
   const confirmation = {
-    Approve: `Approved. ฿${r.suggested_thb.toLocaleString()} is live on all channels for ${r.window}. Nothing changed in this demo.`,
-    'Approve with cap': `Approved with a ฿15,000 ceiling. RatePilot will move rates up to the cap and no further. Nothing changed in this demo.`,
-    Decline: `Declined. The rate stays at ฿${r.current_thb.toLocaleString()} and RatePilot will not ask again for this window. Nothing changed in this demo.`,
+    Approve: `Demo approval selected: ฿${r.suggested_thb.toLocaleString()} for ${r.window}. No live rates changed and nothing was sent to any channel.`,
+    'Approve with cap': `Demo approval selected with a ฿15,000 ceiling. No live rates changed and nothing was sent to any channel.`,
+    Decline: `Demo decline selected. The sample rate stays at ฿${r.current_thb.toLocaleString()}. No live rates changed.`,
   };
   return (
     <div className="hp-card-flat overflow-hidden">
@@ -303,9 +303,9 @@ const ownerNav = [
   { icon: Radio, label: 'Smart systems' },
 ];
 
-export default function OwnerPortal() {
+export default function OwnerPortal({ initialScreen = 'Overview' }) {
   const d = demo.owner_dashboard;
-  const [nav, setNav] = useState('Overview');
+  const [nav, setNav] = useState(initialScreen);
   const [highlight, setHighlight] = useState(null);
   const [flashKey, setFlashKey] = useState(0);
   const stRef = useRef(null);
@@ -323,7 +323,7 @@ export default function OwnerPortal() {
   return (
     <div className="replica-light bg-hp-bg">
       <div className="flex items-center gap-3 border-b border-hp-lineSoft bg-[color:var(--hp-panel-bar)] px-4 py-2.5">
-        <div className="font-display text-[13.5px] text-hp-text">Azure Coast Villas</div>
+        <div><div className="font-display text-[13.5px] text-hp-text">HostPilot Pro</div><div className="text-[12px] text-hp-text3">Azure Coast Villas · Owner demo</div></div>
         <span className="hidden text-[11px] uppercase tracking-[0.14em] text-hp-text3 sm:inline">
           Owner portal
         </span>
@@ -369,7 +369,7 @@ export default function OwnerPortal() {
         </div>
       ) : (
       <div className="space-y-3.5 p-3 sm:p-4">
-        <div className="grain relative overflow-hidden rounded-2xl border border-hp-line">
+        {nav === 'Overview' && <><div className="grain relative overflow-hidden rounded-2xl border border-hp-line">
           <img src={asset('/img/villa-day.jpg')} alt="" className="h-[150px] w-full object-cover sm:h-[180px]" loading="lazy" />
           <div className="absolute inset-0 scrim-d" />
           <div className="absolute inset-0 flex flex-col justify-center p-5 sm:p-7">
@@ -395,16 +395,17 @@ export default function OwnerPortal() {
           ))}
         </div>
 
-        <div ref={stRef}>
+        </>}
+        {(nav === 'Overview' || nav === 'Statements') && <div ref={stRef}>
           <Statement
             highlight={highlight}
             flashKey={flashKey}
             onBack={() => setNav('Smart systems')}
           />
-        </div>
+        </div>}
 
-        <div className="grid gap-3.5 lg:grid-cols-2">
-          <div className="hp-card-flat p-5">
+        {(nav === 'Overview' || nav === 'Payouts' || nav === 'Approvals') && <div className={`grid gap-3.5 ${nav === 'Overview' ? 'lg:grid-cols-2' : ''}`}>
+          {nav !== 'Approvals' && <div className="hp-card-flat p-5">
             <h4 className="font-display text-[18px] text-hp-text">Next payout</h4>
             <div className="mt-3 flex items-end gap-3">
               <div className="tnum font-display text-[28px] leading-none text-hp-goldInk">
@@ -424,11 +425,12 @@ export default function OwnerPortal() {
                 <AreaChart series={[41, 48, 52, 58, 61, 66, 71, 69, 74, 78, 82, 79]} height={80} id="own-pipe" />
               </div>
             </div>
-          </div>
-          <RatePilotCard />
-        </div>
+          </div>}
+          {nav !== 'Payouts' && <RatePilotCard />}
+        </div>}
 
-        <Concierge />
+        {nav === 'Overview' && <Concierge />}
+        {nav === 'Calendar' && <div className="hp-card-flat p-5"><h3 className="font-display text-[22px]">Forward booking pipeline</h3><p className="mt-3 text-[15px] text-hp-text2">This replica shows the 90-day pipeline summary, not a live reservation calendar. Ask for a guided product demonstration to see the calendar in use.</p><p className="mt-4 text-[24px] text-hp-goldInk">{baht(d.pipeline_next_90d_thb)}</p><p className="text-[13px] text-hp-text3">Fictional confirmed pipeline · next 90 days</p></div>}
       </div>
       )}
     </div>
