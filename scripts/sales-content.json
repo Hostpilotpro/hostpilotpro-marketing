@@ -1,0 +1,123 @@
+{
+  "ops": {
+    "pdf": "/downloads/hostpilotpro-operations-sales-guide.pdf",
+    "pdfTitle": "Operations sales guide",
+    "image": "/img/walkthrough-ops.jpg",
+    "caption": "HostPilot Pro operations replica. Fictional portfolio and figures, not MPS production records.",
+    "headline": "One place to run the business behind every stay.",
+    "intro": "Your channel manager handles distribution. HostPilot Pro brings the day-to-day operation together: properties, people, reservations, money and the experiences you give owners and guests.",
+    "promise": "For a management company, the value is not another dashboard. It is a shared way to get the work done and explain what happened.",
+    "functions": [
+      [
+        "Daily operations",
+        "See arrivals, departures and outstanding work together. Give the office a clear starting point for the day.",
+        "A clearer handover between the people coordinating stays."
+      ],
+      [
+        "Properties and reservations",
+        "Keep property context, owner details and reservation information close to the work they create.",
+        "Less searching across separate files and conversations."
+      ],
+      [
+        "Team and field work",
+        "Coordinate cleaning, pool, garden, maintenance and inspection tasks, with responsibility and progress visible.",
+        "Know who is handling the job and what still needs attention."
+      ],
+      [
+        "Financial control",
+        "Review owner statements, bills, balances, petty cash and payment work within the operation.",
+        "Give money movements an operational record, not just a message."
+      ],
+      [
+        "Connected owner and guest service",
+        "Use dedicated portals to present the right information to owners and guests, while staff controls stay internal.",
+        "One business, with a different view for each audience."
+      ]
+    ],
+    "limits": [
+      "Hostaway is the current channel-manager integration. Other connectors should be discussed, not assumed.",
+      "Operational finance does not replace your accountant, statutory accounts or jurisdiction-specific trust accounting.",
+      "The public demo is illustrative. A guided call should verify your required workflows and deployment scope."
+    ],
+    "takeaway": "Sell a coordinated operation, not a tour of every internal menu."
+  },
+  "owner": {
+    "pdf": "/downloads/hostpilotpro-owner-portal-sales-guide.pdf",
+    "pdfTitle": "Owner portal sales guide",
+    "image": "/img/owner-money.png",
+    "caption": "Selected screen from the MPS owner-portal demonstration guide, September 2026. MPS is the client deployment shown.",
+    "headline": "Give owners visibility. Give your team fewer things to explain twice.",
+    "intro": "An owner-facing portal for the questions behind the relationship: what the property earned, what was paid, what is booked and how the villa is being looked after.",
+    "promise": "Owners see their property. Management companies get a clearer way to demonstrate the work behind the relationship.",
+    "functions": [
+      [
+        "Money that makes sense",
+        "Bring earnings, booking-level financial context, payouts, bills and spending into an owner-facing view.",
+        "Owners can understand the difference between earnings, costs and money awaiting payout."
+      ],
+      [
+        "Bookings and performance",
+        "Show stays across connected channels, performance context and guest feedback for the property.",
+        "Give owners a picture of the business beyond a single monthly total."
+      ],
+      [
+        "Proof of property care",
+        "Present routine work, maintenance and inspection evidence in the context of the villa.",
+        "Show the work completed, not just a promise that it was handled."
+      ],
+      [
+        "Documents and agreements",
+        "Keep the management agreement and property paperwork accessible, with missing items easier to identify.",
+        "Make the relationship easier to follow after onboarding."
+      ],
+      [
+        "Communication and support",
+        "Bring updates, resources and a route to the management team into the same owner experience.",
+        "Owners know where to look and how to ask for help."
+      ]
+    ],
+    "limits": [
+      "The MPS example includes Thailand-specific services and business rules. Those are not universal software terms.",
+      "Tax and compliance material supports professional advice; it is not a tax filing or legal service.",
+      "This is a concise product introduction, not a full training manual or a promise of every feature in every deployment."
+    ],
+    "takeaway": "Owner confidence comes from visibility, context and evidence."
+  },
+  "guest": {
+    "pdf": "/downloads/hostpilotpro-guest-portal-sales-guide.pdf",
+    "pdfTitle": "Guest portal sales guide",
+    "image": "/img/walkthrough-guest.jpg",
+    "caption": "HostPilot Pro guest replica. Fictional stay and access details, not a live guest reservation.",
+    "headline": "Make the stay easier, without another app to download.",
+    "intro": "A guest-facing link for arrival information, stay essentials and useful extras. Your management company remains the service provider behind the experience.",
+    "promise": "For guests, simplicity. For the management company, a more consistent way to prepare arrivals and present its services.",
+    "functions": [
+      [
+        "Arrival information",
+        "Give guests a place to find their stay details and arrival status before reaching the property.",
+        "Start the stay with clearer expectations."
+      ],
+      [
+        "Stay essentials",
+        "Present the access information, Wi-Fi and house information supplied by the team.",
+        "Make the recurring questions easier to answer."
+      ],
+      [
+        "Services and extras",
+        "Let guests discover transfers, experiences and in-villa extras with pricing and context.",
+        "Present your service offering inside the stay experience."
+      ],
+      [
+        "Office coordination",
+        "Service requests still need the team to confirm availability and arrangements.",
+        "A guest-facing request is not an automatic supplier confirmation."
+      ]
+    ],
+    "limits": [
+      "This is not a replacement for your booking engine or channel manager.",
+      "Access information is supplied by the team; a displayed code does not imply a connected smart lock.",
+      "Requests, supplier confirmation and payment handling depend on your agreed operational setup."
+    ],
+    "takeaway": "Sell a smoother guest experience, not an overloaded guest dashboard."
+  }
+}

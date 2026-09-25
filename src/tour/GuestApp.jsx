@@ -4,7 +4,7 @@ import demo from '../data/demo.js';
 import { baht } from '../components/ui.jsx';
 import asset from '../lib/asset.js';
 
-export default function GuestApp() {
+export default function GuestApp({ focus = 'all' }) {
   const g = demo.guest_stay;
   const initial = useMemo(
     () => Object.fromEntries(g.addons.map((a) => [a.name, a.state === 'Booked'])),
@@ -17,6 +17,7 @@ export default function GuestApp() {
 
   return (
     <div className="replica-light bg-hp-bg text-hp-text2">
+      <div className="px-4 py-3 border-b border-hp-lineSoft"><div className="font-display text-[16px] text-hp-text">HostPilot Pro <span className="text-[12px] text-hp-goldInk">Guest</span></div><div className="text-[12px] text-hp-text3">Azure Coast Villas · Demo stay</div></div>
       {/* stay header */}
       <div className="relative">
         <img src={asset('/img/villa-sapphire-hero.jpg')} alt="" className="h-[190px] w-full object-cover" loading="lazy" />
@@ -32,7 +33,7 @@ export default function GuestApp() {
 
       <div className="space-y-3 p-4">
         {/* countdown */}
-        <div className="rounded-2xl border border-hp-gold/30 bg-[color:var(--hp-gold-wash)] p-4">
+        {(focus === 'all' || focus === 'arrival') && <div className="rounded-2xl border border-hp-gold/30 bg-[color:var(--hp-gold-wash)] p-4">
           <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-hp-goldDeep">
             <Clock size={11} /> Check-in
           </div>
@@ -43,10 +44,10 @@ export default function GuestApp() {
           <div className="mt-1.5 flex items-center gap-1.5 text-[12px]" style={{ color: 'var(--hp-pos)' }}>
             <ShieldCheck size={12} /> {g.checkin.status}
           </div>
-        </div>
+        </div>}
 
         {/* access */}
-        <div className="grid grid-cols-2 gap-3">
+        {focus !== 'extras' && <div className="grid grid-cols-2 gap-3">
           <div className="hp-card-flat p-3.5">
             <div className="flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.12em] text-hp-text3">
               <KeyRound size={11} /> Door code
@@ -61,13 +62,13 @@ export default function GuestApp() {
             </div>
             <div className="mt-2 truncate text-[13.5px] text-hp-text">{g.checkin.wifi}</div>
           </div>
-        </div>
+        </div>}
 
         {/* add-ons */}
-        <div className="hp-card-flat overflow-hidden">
+        {(focus === 'all' || focus === 'extras') && <div className="hp-card-flat overflow-hidden">
           <div className="border-b border-hp-lineSoft px-4 py-3">
             <h4 className="font-display text-[16px] text-hp-text">Add to your stay</h4>
-            <div className="text-[11.5px] text-hp-text3">Tap to add. Charged to the villa account at checkout.</div>
+            <div className="text-[12px] text-hp-text3">Sample selection only. Real requests need office confirmation.</div>
           </div>
           <div className="divide-y divide-[color:var(--hp-line-soft)]">
             {g.addons.map((a) => {
@@ -76,6 +77,7 @@ export default function GuestApp() {
                 <button
                   key={a.name}
                   onClick={() => setSel((s) => ({ ...s, [a.name]: !s[a.name] }))}
+                  aria-pressed={on}
                   className="flex w-full items-center gap-3 px-4 py-3 text-left transition hover:bg-[color:var(--hp-veil-3)]"
                 >
                   <span
@@ -102,10 +104,10 @@ export default function GuestApp() {
             </div>
             <div className="tnum font-display text-[19px] text-hp-goldInk">{baht(total)}</div>
           </div>
-        </div>
+        </div>}
 
         {/* punchline */}
-        <div className="rounded-2xl border border-hp-line bg-[image:var(--hp-gold-wash-grad)] p-4">
+        {focus === 'all' && <div className="rounded-2xl border border-hp-line bg-[image:var(--hp-gold-wash-grad)] p-4">
           <div className="eyebrow">The point</div>
           <div className="tnum mt-2 font-display text-[26px] leading-none text-hp-goldInk">
             {baht(demo.guest_stay.upsell_revenue_thb)}
@@ -114,7 +116,7 @@ export default function GuestApp() {
             Add-on revenue booked on this single seven-night stay. Guests buy more when the list is in their pocket
             instead of in an email. That is the argument for the guest app paying for itself.
           </p>
-        </div>
+        </div>}
 
         <div className="pb-2 text-center text-[11px] text-hp-text3">
           Stay code {g.stay_code} · {g.guest}

@@ -4,11 +4,11 @@ import CompatNote from './CompatNote.jsx';
 
 const cols = [
   {
-    title: 'Product',
+    title: 'Built for',
     links: [
-      ['/owner', 'HostPilot Owner'],
-      ['/ops', 'HostPilot Ops'],
-      ['/guest', 'HostPilot Guest'],
+      ['/ops', 'Property management companies'],
+      ['/owner', 'Owners'],
+      ['/guest', 'Guests'],
       ['/field', 'HostPilot Field'],
       ['/full-suite', 'Full suite'],
     ],
@@ -16,7 +16,7 @@ const cols = [
   {
     title: 'See it',
     links: [
-      ['/tour', 'Live interactive tour'],
+      ['/tour', 'PDF walkthroughs'],
       ['/pricing', 'Pricing'],
       ['/demo', 'Book a call'],
     ],
@@ -25,7 +25,7 @@ const cols = [
     title: 'Company',
     links: [
       ['/about', 'About the operator'],
-      ['/proof', 'Proof'],
+      ['/proof', 'Mr Property Siam showcase'],
       ['/blog', 'Field notes'],
     ],
   },
@@ -63,7 +63,7 @@ export default function Footer() {
       <div className="shell-wide flex flex-col gap-2 border-t border-hp-lineSoft py-6 text-[13.5px] text-hp-text3 sm:flex-row sm:items-center sm:justify-between">
         <div>© {new Date().getFullYear()} HostPilot Pro · a Mr Property Siam product · Koh Samui, Thailand</div>
         <div>
-          Every figure shown in product screens on this site is fictional demo data for Azure Coast Villas.
+          Selected owner screen: MPS demonstration guide. Interactive replicas: fictional demo data.
         </div>
       </div>
     </footer>

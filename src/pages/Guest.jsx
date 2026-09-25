@@ -14,7 +14,7 @@ export default function Guest() {
       eyebrow="HostPilot Guest"
       title={
         <>
-          The stay app that sells things <span className="serif-em text-hp-text2">while you sleep.</span>
+          Everything for the stay.<br /><span className="serif-em text-hp-text2">One simple link.</span>
         </>
       }
       lede="Guests ask the same eleven questions on every stay, and they ask them at midnight. Answer them once, in a link they already have, and the same screen can offer an airport transfer, a chef and a boat day without a WhatsApp negotiation — your office confirms the ones they request."

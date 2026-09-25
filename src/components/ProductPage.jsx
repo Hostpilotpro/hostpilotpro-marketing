@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ArrowRight, Play, Info } from 'lucide-react';
 import { SectionHead, Eyebrow, BrowserFrame, PhoneFrame, Tilt } from './ui.jsx';
 import CompatNote from './CompatNote.jsx';
 import BeingBuilt from './BeingBuilt.jsx';
+import { audiences } from '../data/audiences.js';
 
 /**
  * Shared layout for the four surface pages. Each page supplies its own copy,
@@ -23,11 +24,18 @@ export default function ProductPage({
   extra = null,
   roadmapIds = null,
 }) {
+  const { pathname } = useLocation();
+  const audience = audiences.find((a) => a.to === pathname);
+  const tourTo = `/tour?surface=${audience?.key || 'field'}`;
   return (
     <div>
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
         <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_15%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pb-16 sm:pt-32">
+          <nav aria-label="Product audiences" className="product-audience-links mb-8">
+            {audiences.map((a) => <NavLink key={a.key} to={a.to} className={({ isActive }) => isActive ? 'is-active' : ''}>{a.short}</NavLink>)}
+          </nav>
+          {audience && <p className="text-[13px] text-hp-text3 mb-3">HostPilot Pro for {audience.label.toLowerCase()}</p>}
           <Eyebrow>{eyebrow}</Eyebrow>
           <h1 className="h-sec mt-4 max-w-[22ch] font-medium">{title}</h1>
           <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">{lede}</p>
@@ -43,8 +51,8 @@ export default function ProductPage({
           )}
           <CompatNote className="mt-7" />
           <div className="mt-9 flex flex-wrap gap-3">
-            <Link to="/tour" className="btn btn-gold">
-              <Play size={15} className="fill-current" /> Try it in the tour
+            <Link to={tourTo} className="btn btn-gold">
+              <Play size={15} className="fill-current" /> Start this walkthrough
             </Link>
             <Link to="/demo" className="btn btn-quiet">
               Book a call <ArrowRight size={15} />
@@ -138,8 +146,8 @@ export default function ProductPage({
         <div className="shell">
           <h2 className="h-sub font-display">Judge it yourself before anyone calls you.</h2>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Link to="/tour" className="btn btn-gold">
-              Open the live tour
+            <Link to={tourTo} className="btn btn-gold">
+              Open this walkthrough
             </Link>
             <Link to="/pricing" className="btn btn-quiet">
               How pricing works

@@ -2,6 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Audience discovery extends the existing cream/gold and charcoal identity. */
+.site-nav-link { display:flex; align-items:center; gap:.375rem; padding:.5rem .625rem; border-radius:2rem; font-size:13px; color:var(--hp-text-2); white-space:nowrap; }
+.site-nav-link:hover,.site-nav-link.is-active { color:var(--hp-gold-ink); background:var(--hp-gold-wash-2); }
+.core-functions article { display:grid; grid-template-columns:48px 1.4fr 1fr; gap:2rem; padding:1.75rem 0; border-top:1px solid var(--hp-line); align-items:start; }
+.connection-story { border:1px solid var(--hp-line); border-radius:1rem; padding:2rem; background:var(--hp-card-bg); }
+.connection-row { display:flex; gap:1.25rem; padding:1.5rem 0; border-bottom:1px solid var(--hp-line); }
+.connection-row > span { font-size:13px; color:var(--hp-gold-ink); }
+.connection-row h4 { font-size:17px; }
+.connection-row p { font-size:14px; color:var(--hp-text-2); margin-top:.375rem; }
+@media(max-width:639px) { .core-functions article { grid-template-columns:24px 1fr; gap:1rem; } .core-functions article > p { grid-column:2; } }
+.audience-section { scroll-margin-top:80px; background:var(--hp-bg); }
+.audience-tabs { display:grid; grid-template-columns:1.5fr 1fr 1fr; border:1px solid var(--hp-line); border-radius:1rem; overflow:hidden; background:var(--hp-surface); }
+.audience-tabs > button { display:flex; align-items:center; gap:1rem; padding:1.25rem 1.5rem; text-align:left; color:var(--hp-text-2); border-right:1px solid var(--hp-line); font-size:15px; transition:background .2s; }
+.audience-tabs > button:last-child { border-right:0; }
+.audience-tabs > button[aria-selected="true"] { background:var(--hp-gold-wash-3); color:var(--hp-text); box-shadow:inset 0 -3px 0 var(--hp-gold); }
+.audience-tabs > button:hover { background:var(--hp-gold-wash-2); }
+.audience-number { color:var(--hp-gold-ink); font-size:13px; }
+.audience-tabs small { display:block; color:var(--hp-text-3); font-size:12px; margin-top:.25rem; }
+.audience-panel { display:grid; grid-template-columns:.85fr 1.3fr; gap:3rem; padding:2.5rem 0; align-items:center; }
+.audience-copy { padding:.5rem 0; }
+.audience-screen { min-width:0; display:block; border:1px solid var(--hp-line); border-radius:1rem; overflow:hidden; box-shadow:var(--hp-frame-shadow); background:var(--hp-surface); }
+.audience-screen-label { display:flex; justify-content:space-between; gap:1rem; padding:1rem; font-size:12px; border-bottom:1px solid var(--hp-line); }
+.audience-screen img { width:100%; aspect-ratio:1.45; object-fit:cover; object-position:top; }
+.audience-screen-guest img { width:auto; max-width:100%; height:420px; aspect-ratio:auto; object-fit:contain; margin:1.5rem auto 0; border-radius:1rem 1rem 0 0; }
+.audience-screen-note { display:block; padding:.75rem 1rem; font-size:12px; color:var(--hp-text-3); border-top:1px solid var(--hp-line); }
+.client-strip { display:flex; flex-wrap:wrap; align-items:center; gap:1.5rem; border-top:1px solid var(--hp-line); padding:1.5rem 0; }
+.client-strip p:not(.eyebrow) { flex:1 1 280px; max-width:640px; font-size:14px; line-height:1.6; color:var(--hp-text-2); }
+.product-audience-links { display:flex; flex-wrap:wrap; gap:.5rem; }
+.product-audience-links a { border:1px solid var(--hp-line); padding:.625rem 1rem; border-radius:2rem; font-size:13px; color:var(--hp-text-2); }
+.product-audience-links a.is-active { border-color:var(--hp-gold); background:var(--hp-gold-wash-2); color:var(--hp-gold-ink); }
+#walkthrough-stage { scroll-margin-top:80px; }
+.walkthrough-layout { display:grid; grid-template-columns:280px minmax(0,1fr); gap:2rem; align-items:start; }
+.walkthrough-guide { position:sticky; top:90px; }
+.walkthrough-progress { display:flex; gap:.5rem; }
+.walkthrough-progress button { flex:1; padding:.5rem 0; }
+.walkthrough-progress span { display:block; height:4px; border-radius:1rem; background:var(--hp-line); }
+.walkthrough-progress [aria-current="step"] span { background:var(--hp-gold); }
+.tour-brand-bar { display:flex; align-items:center; justify-content:space-between; gap:1rem; border:1px solid var(--hp-line); padding:1rem; border-radius:1rem 1rem 0 0; background:var(--hp-surface); font-size:13px; }
+.tour-brand-bar > span:last-child { text-align:right; }
+.tour-brand-bar small { display:block; font-size:12px; color:var(--hp-text-3); margin-top:.25rem; }
+.tour-demo-stage { border:1px solid var(--hp-line); border-top:0; border-radius:0 0 1rem 1rem; overflow:hidden; background:var(--hp-surface); }
+.tour-demo-phone { padding:1.5rem; background:var(--hp-gold-wash); }
+.tour-demo-phone > div { max-width:430px; margin:auto; border:1px solid var(--hp-line); border-radius:1.5rem; overflow:hidden; }
+:is(button,a,[tabindex]):focus-visible { outline:2px solid var(--hp-gold-ink); outline-offset:4px; }
+@media(max-width:1023px) {
+  .audience-panel { grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .walkthrough-layout { grid-template-columns:1fr; }
+  .walkthrough-guide { position:static; max-width:740px; }
+  .audience-tabs > button { padding:1rem; gap:.5rem; }
+}
+@media(max-width:639px) {
+  .audience-tabs { grid-template-columns:1fr; border-radius:.75rem; }
+  .audience-tabs > button { padding:.875rem 1rem; border-right:0; border-bottom:1px solid var(--hp-line); font-size:14px; }
+  .audience-tabs > button:last-child { border-bottom:0; }
+  .audience-tabs small { display:inline; margin-left:.5rem; }
+  .audience-tabs > button:first-child small { display:block; margin-left:0; }
+  .audience-panel { grid-template-columns:1fr; gap:1.5rem; padding:1.5rem 0; }
+  .audience-screen-label { flex-wrap:wrap; gap:.25rem; }
+  .client-strip { gap:1rem; }
+  .tour-brand-bar { flex-wrap:wrap; }
+  .tour-brand-bar > span:last-child { text-align:left; }
+  .tour-demo-phone { padding:.5rem; }
+}
+
 /* ---------------------------------------------------------------------------
    THEME TOKENS
 
