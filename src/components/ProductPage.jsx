@@ -51,7 +51,7 @@ export default function ProductPage({
           <CompatNote className="mt-7" />
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to={tourTo} className="btn btn-gold">
-              <Play size={15} className="fill-current" /> Try it in the tour
+              <Play size={15} className="fill-current" /> {surface==='ops'?'See the real Ops screens':'Try it in the tour'}
             </Link>
             <Link to="/demo" className="btn btn-quiet">
               Book a call <ArrowRight size={15} />
@@ -62,7 +62,7 @@ export default function ProductPage({
       </section>
 
       {showcase && <section className="shell-wide py-12 sm:py-16">{showcase}</section>}
-      <section className="py-12 sm:py-16">
+      {replica && <section className="py-12 sm:py-16">
         <div className="shell-wide">
           <ReplicaWrap className={showcase?'blend-more':''}>
           {showcase&&<summary>Explore the original portfolio console</summary>}
@@ -104,7 +104,7 @@ export default function ProductPage({
           </div>
           </ReplicaWrap>
         </div>
-      </section>
+      </section>}
 
       {compactDetails ? <section className="shell-wide pb-12"><SectionHead eyebrow="Go deeper" title="The working details." lede="Open the area that matters to your operation, from cash controls and pricing to the people doing the work."/><div className="mt-7">{sections.map(s=><details className="blend-more" key={s.title}><summary>{s.title}</summary><div className="blend-more-body"><p className="text-[15px] text-hp-text2 mb-5">{s.lede}</p><div className="blend-detail-grid">{s.items.map(([t,b])=><article key={t}><strong>{t}</strong><p>{b}</p></article>)}</div></div></details>)}</div></section> : sections.map((s, i) => (
         <section key={s.title} className={i % 2 === 0 ? 'band py-16 sm:py-20' : 'py-16 sm:py-20'}>
@@ -151,7 +151,7 @@ export default function ProductPage({
           <h2 className="h-sub font-display">Judge it yourself before anyone calls you.</h2>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link to={tourTo} className="btn btn-gold">
-              Open the live tour
+              {surface==='ops'?'Open the screenshot tour':'Open the live tour'}
             </Link>
             <Link to="/pricing" className="btn btn-quiet">
               How pricing works

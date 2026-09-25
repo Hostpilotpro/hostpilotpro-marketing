@@ -3,7 +3,6 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Info, Command, MousePointerClick, ArrowRight, PhoneCall } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import { BrowserFrame, PhoneFrame, Eyebrow } from '../components/ui.jsx';
-import OpsConsole from '../tour/OpsConsole.jsx';
 import OwnerPortal from '../tour/OwnerPortal.jsx';
 import GuestApp from '../tour/GuestApp.jsx';
 import FieldApp from '../tour/FieldApp.jsx';
@@ -96,16 +95,16 @@ function FrameChrome({ children, host, kind, persona }) {
 
 export default function Tour() {
   useSeo({
-    title: 'HostPilot Pro | Business workflows and interactive product demos',
+    title: 'HostPilot Pro | Real Ops screenshots and product demonstrations',
     description:
-      'Explore the message centre, owner finance, payroll, pricing and listing stories, alongside the original Ops, Owner, Guest and Field replicas. Illustrative data; no signup.',
+      'See actual Ops screenshots from Mr Property Siam, with sensitive data masked. Explore the separate Owner, Guest and Field demonstrations. No signup.',
     path: '/tour',
   });
   /* /tour?surface=owner lands straight on the owner portal — the marketing
      smart-systems section links in that way. */
   const [params,setParams]=useSearchParams();
   const wanted = params.get('surface');
-  const showStories = !wanted;
+  const showStories = !wanted || wanted === 'ops' || !surfaces.some(x=>x.key===wanted);
   const active=surfaces.some(x=>x.key===wanted)?wanted:'ops';
   const setActive=key=>setParams({surface:key});
   const s = surfaces.find((x) => x.key === active);
@@ -135,19 +134,19 @@ export default function Tour() {
         <div className="shell relative py-12 sm:py-16">
           <Eyebrow>The HostPilot Pro walkthrough</Eyebrow>
           <h1 className="h-sec mt-4 max-w-3xl">
-            {showStories?'Try the business workflows.':'Explore the product replicas.'} <span className="serif-em text-hp-text2">No signup.</span>
+            {showStories?'The real Ops workspace.':'Explore the product replicas.'} <span className="serif-em text-hp-text2">No signup.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-[17px] text-hp-text2">
-            {showStories?'Follow a conversation, close a sample month or review a payday. Short, interactive examples explain the business value without opening every menu.':'The original Ops, Owner, Guest and Field demonstrations remain here. They use fictional data and illustrate selected interactions, not every current product screen.'}
+            {showStories?'Actual screenshots from Mr Property Siam using HostPilot Pro. Explore the message centre, owner ledger, finance overview and payroll walkthrough without opening a live account.':'The Owner, Guest and Field demonstrations use fictional data and illustrate selected interactions. They are separate from the actual Ops screenshots.'}
           </p>
           <p className="mt-4 max-w-2xl text-[14.5px] text-hp-text3">
-            Nothing here connects to a live account. Sample messages, amounts and records reset when you reload.
+            {showStories?'Only sensitive data has been replaced or hidden. The application layout, branding, controls and visible statuses are unchanged.':'Nothing here connects to a live account. Sample messages, amounts and records reset when you reload.'}
           </p>
-          {!showStories&&<Link to="/tour" className="btn btn-quiet mt-6">Try the new business stories <ArrowRight size={15}/></Link>}
+          {!showStories&&<Link to="/tour" className="btn btn-quiet mt-6">See real Ops screenshots <ArrowRight size={15}/></Link>}
         </div>
       </section>
 
-      {showStories&&<section className="shell-wide py-10 sm:py-14"><BusinessStories initial={params.get('story')||'messages'} inTour onStoryChange={story=>setParams({story})}/><div className="blend-preserved-banner"><p>The original product replicas are still available:</p><div className="mt-4 flex flex-wrap gap-3">{surfaces.map(x=><Link key={x.key} className="btn btn-quiet !text-[13px] !py-2" to={`/tour?surface=${x.key}`}>{x.label}<ArrowRight size={13}/></Link>)}</div></div></section>}
+      {showStories&&<section className="shell-wide py-10 sm:py-14"><BusinessStories initial={params.get('story')||'messages'} inTour onStoryChange={story=>setParams({story})}/><div className="blend-preserved-banner"><p>Explore the separate product demonstrations:</p><div className="mt-4 flex flex-wrap gap-3">{surfaces.filter(x=>x.key!=='ops').map(x=><Link key={x.key} className="btn btn-quiet !text-[13px] !py-2" to={`/tour?surface=${x.key}`}>{x.label}<ArrowRight size={13}/></Link>)}</div></div></section>}
       {!showStories&&<>
       {/* segmented control */}
       {/* Not sticky below sm: stacked under the site header it took roughly a
@@ -188,7 +187,6 @@ export default function Tour() {
         </div>
 
         <FrameChrome host={s.host} kind={s.kind} persona={s.persona}>
-          {active === 'ops' && <OpsConsole />}
           {active === 'owner' && <OwnerPortal />}
           {active === 'guest' && <GuestApp />}
           {active === 'field' && <FieldApp />}

@@ -1,6 +1,5 @@
 import useSeo from '../lib/seo.js';
 import ProductPage from '../components/ProductPage.jsx';
-import OpsConsole from '../tour/OpsConsole.jsx';
 import { opsDepth } from './ops-sections.js';
 import BusinessStories from '../components/BusinessStories.jsx';
 
@@ -30,7 +29,6 @@ export default function Ops() {
       ]}
       showcase={<BusinessStories />}
       compactDetails
-      replica={<OpsConsole />}
       replicaTheme="dark"
       host="ops.hostpilotpro.com"
       sections={[

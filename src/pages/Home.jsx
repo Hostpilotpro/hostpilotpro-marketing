@@ -92,7 +92,7 @@ export default function Home() {
             </Link>
           </div>
           <p className="mt-4 text-[14px] text-hp-text3">
-            No email gate. No signup. Explore illustrated workflows and interactive replicas with sample data.
+            No email gate. No signup. See real Ops screenshots and explore the owner and guest demonstrations.
           </p>
           <AudienceLinks />
         </div>
@@ -105,11 +105,11 @@ export default function Home() {
             <div className="max-w-2xl">
               <Eyebrow>The business behind the bookings</Eyebrow>
               <h2 className="h-sec mt-3">
-                See how the work connects. <span className="serif-em text-hp-text2">Try a story.</span>
+                See the actual workspace. <span className="serif-em text-hp-text2">Not a mockup.</span>
               </h2>
               <p className="mt-4 text-[17px] text-hp-text2">
-                Follow a conversation, a month’s owner money or a payday review.
-                Switch between short examples instead of reading a wall of features.
+                Explore the message centre, finance, owner ledger and payroll as they look in use at Mr Property Siam.
+                Private data is masked. The interface is the real thing.
               </p>
             </div>
             <PrimaryLink to="/tour">Open the full tour</PrimaryLink>
