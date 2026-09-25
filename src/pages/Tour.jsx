@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Info, Command, MousePointerClick, ArrowRight, PhoneCall } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import { BrowserFrame, PhoneFrame, Eyebrow } from '../components/ui.jsx';
-import OpsConsole from '../tour/OpsConsole.jsx';
 import OwnerPortal from '../tour/OwnerPortal.jsx';
 import GuestApp from '../tour/GuestApp.jsx';
 import FieldApp from '../tour/FieldApp.jsx';
+import BusinessStories from '../components/BusinessStories.jsx';
 
 const surfaces = [
   {
@@ -95,16 +95,18 @@ function FrameChrome({ children, host, kind, persona }) {
 
 export default function Tour() {
   useSeo({
-    title: 'Interactive tour — click through HostPilot Pro without signing up',
+    title: 'HostPilot Pro | Real Ops screenshots and product demonstrations',
     description:
-      'A working replica of all four HostPilot Pro surfaces: the ops console, the owner portal, the guest app and the staff field app. No signup, no email gate, no sales call.',
+      'See actual Ops screenshots from Mr Property Siam, with sensitive data masked. Explore the separate Owner, Guest and Field demonstrations. No signup.',
     path: '/tour',
   });
   /* /tour?surface=owner lands straight on the owner portal — the marketing
      smart-systems section links in that way. */
-  const { search } = useLocation();
-  const wanted = new URLSearchParams(search).get('surface');
-  const [active, setActive] = useState(surfaces.some((x) => x.key === wanted) ? wanted : 'ops');
+  const [params,setParams]=useSearchParams();
+  const wanted = params.get('surface');
+  const showStories = !wanted || wanted === 'ops' || !surfaces.some(x=>x.key===wanted);
+  const active=surfaces.some(x=>x.key===wanted)?wanted:'ops';
+  const setActive=key=>setParams({surface:key});
   const s = surfaces.find((x) => x.key === active);
 
   useEffect(() => {
@@ -130,21 +132,22 @@ export default function Tour() {
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
         <div className="grain absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_-10%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative py-12 sm:py-16">
-          <Eyebrow>The live tour</Eyebrow>
+          <Eyebrow>The HostPilot Pro walkthrough</Eyebrow>
           <h1 className="h-sec mt-4 max-w-3xl">
-            Click through the whole product. <span className="serif-em text-hp-text2">No signup.</span>
+            {showStories?'The real Ops workspace.':'Explore the product replicas.'} <span className="serif-em text-hp-text2">No signup.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-[17px] text-hp-text2">
-            Four surfaces, one database. These are not screenshots — they are the real interface rebuilt in your
-            browser and filled with a fictional 24-villa portfolio. Break things. Nothing here can be saved.
+            {showStories?'Actual screenshots from Mr Property Siam using HostPilot Pro. Explore the message centre, owner ledger, finance overview and payroll walkthrough without opening a live account.':'The Owner, Guest and Field demonstrations use fictional data and illustrate selected interactions. They are separate from the actual Ops screenshots.'}
           </p>
           <p className="mt-4 max-w-2xl text-[14.5px] text-hp-text3">
-            Of the eight vacation-rental platforms we surveyed, none let you touch the product before a sales call.
-            This page is our answer to that.
+            {showStories?'Only sensitive data has been replaced or hidden. The application layout, branding, controls and visible statuses are unchanged.':'Nothing here connects to a live account. Sample messages, amounts and records reset when you reload.'}
           </p>
+          {!showStories&&<Link to="/tour" className="btn btn-quiet mt-6">See real Ops screenshots <ArrowRight size={15}/></Link>}
         </div>
       </section>
 
+      {showStories&&<section className="shell-wide py-10 sm:py-14"><BusinessStories initial={params.get('story')||'messages'} inTour onStoryChange={story=>setParams({story})}/><div className="blend-preserved-banner"><p>Explore the separate product demonstrations:</p><div className="mt-4 flex flex-wrap gap-3">{surfaces.filter(x=>x.key!=='ops').map(x=><Link key={x.key} className="btn btn-quiet !text-[13px] !py-2" to={`/tour?surface=${x.key}`}>{x.label}<ArrowRight size={13}/></Link>)}</div></div></section>}
+      {!showStories&&<>
       {/* segmented control */}
       {/* Not sticky below sm: stacked under the site header it took roughly a
          third of a 375px viewport and clipped the replica behind it. On a phone
@@ -184,7 +187,6 @@ export default function Tour() {
         </div>
 
         <FrameChrome host={s.host} kind={s.kind} persona={s.persona}>
-          {active === 'ops' && <OpsConsole />}
           {active === 'owner' && <OwnerPortal />}
           {active === 'guest' && <GuestApp />}
           {active === 'field' && <FieldApp />}
@@ -217,9 +219,9 @@ export default function Tour() {
           <ul className="mt-4 grid gap-2.5 text-[15px] text-hp-text2 sm:grid-cols-2">
             {[
               'Nothing you click is saved. Reload and it resets.',
-              'Nothing pushes anywhere. Approving a rate or a payment here changes nothing — in the product those actions reach Hostaway, the channels and the bank.',
+              'Nothing pushes anywhere. Approving a rate or a payment here changes no production record and sends no bank instruction.',
               'Every villa, owner, guest, staff member and figure is invented for this demo.',
-              'Smart systems are shown as designed. Device connections are in pilot — cameras, locks and meters are installed at villas today, but live status in the portal is not switched on for every property yet.',
+              'Smart-device screens illustrate planned connections, not a demonstrated live integration. Hardware installation, catalogue access and connected device control are separate capabilities.',
             ].map((t) => (
               <li key={t} className="flex gap-2.5">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-hp-goldDim" />
@@ -228,21 +230,21 @@ export default function Tour() {
             ))}
           </ul>
           <p className="mt-5 max-w-2xl text-[15px] text-hp-text3">
-            Every section of the ops console is walkable and every villa tab opens. If you want to see it running on
-            live data rather than invented data, we will screen-share the real system on a call — including the
-            unglamorous bits.
+            These replicas cover selected interactions. For a decision about your business, ask us to demonstrate
+            the specific live workflows, integration status and limitations that matter to you.
           </p>
           <Link to="/demo" className="btn btn-gold mt-6">
             Book a call <ArrowRight size={16} />
           </Link>
         </div>
       </section>
+      </>}
 
       {/* Floating CTA. On a phone it sat directly on top of page content at every
          scroll position, so below sm it shrinks to a labelled pill with a tighter
          inset and the page carries bottom padding so nothing ends up permanently
          hidden behind it. */}
-      <Link
+      {!showStories&&<Link
         to="/demo"
         aria-hidden={!showCta}
         tabIndex={showCta ? 0 : -1}
@@ -252,7 +254,7 @@ export default function Tour() {
       >
         <PhoneCall size={14} className="sm:hidden" />
         <PhoneCall size={15} className="hidden sm:block" /> Book a call
-      </Link>
+      </Link>}
     </div>
   );
 }

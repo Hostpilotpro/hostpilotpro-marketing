@@ -10,6 +10,8 @@ const products = [
   { to: '/guest', name: 'HostPilot Guest', desc: 'Stay app and add-ons' },
   { to: '/field', name: 'HostPilot Field', desc: 'The staff mobile app' },
   { to: '/full-suite', name: 'Full suite', desc: 'All four, one database' },
+  { to: '/about', name: 'Built at Mr Property Siam', desc: 'The operator behind the software' },
+  { to: '/proof', name: 'Proof', desc: 'What you can check for yourself' },
 ];
 
 function ThemeToggle({ className = '' }) {
@@ -45,6 +47,13 @@ export default function Nav() {
     setOpen(false);
     setMenu(false);
   }, [pathname]);
+  useEffect(() => {
+    const close = (e) => { if(e.key==='Escape'){setOpen(false);setMenu(false);} };
+    const outside = (e) => { if(!e.target.closest('[data-platform-menu]'))setMenu(false); };
+    document.addEventListener('keydown',close);
+    document.addEventListener('pointerdown',outside);
+    return()=>{document.removeEventListener('keydown',close);document.removeEventListener('pointerdown',outside);};
+  }, []);
 
   return (
     <header
@@ -65,7 +74,7 @@ export default function Nav() {
           <Link to="/" className="text-hp-text" aria-label="HostPilot Pro home">
             <Logo />
           </Link>
-          <span className="hidden items-center gap-2 border-l border-hp-lineSoft pl-4 xl:flex">
+          <span className="hidden items-center gap-2 border-l border-hp-lineSoft pl-4">
             <Layers size={13} className="text-hp-goldInk" />
             <span className="text-[12.5px] leading-tight text-hp-text3">
               Sits on top of your channel manager
@@ -74,18 +83,17 @@ export default function Nav() {
           </span>
         </div>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-1 xl:flex" aria-label="Primary">
           <div
             className="relative"
-            onMouseEnter={() => setMenu(true)}
-            onMouseLeave={() => setMenu(false)}
+            data-platform-menu
           >
             <button
               className="flex items-center gap-1 rounded-full px-3.5 py-2 text-[15px] text-hp-text2 transition hover:text-hp-text"
               aria-expanded={menu}
               onClick={() => setMenu((v) => !v)}
             >
-              Product <ChevronDown size={15} className={menu ? 'rotate-180 transition' : 'transition'} />
+              Platform <ChevronDown size={15} className={menu ? 'rotate-180 transition' : 'transition'} />
             </button>
             {menu && (
               <div className="absolute left-0 top-full w-[330px] pt-2">
@@ -105,6 +113,11 @@ export default function Nav() {
             )}
           </div>
 
+          {[
+            ['/ops','Management companies'],
+            ['/owner','Owners'],
+            ['/guest','Guests'],
+          ].map(([to,label])=><NavLink key={to} to={to} className={({isActive})=>`rounded-full px-2.5 py-2 text-[13px] transition ${isActive?'bg-[color:var(--hp-gold-wash-2)] text-hp-goldInk':'text-hp-text2 hover:text-hp-text'}`}>{label}</NavLink>)}
           <NavLink
             to="/tour"
             className={({ isActive }) =>
@@ -120,8 +133,6 @@ export default function Nav() {
 
           {[
             ['/pricing', 'Pricing'],
-            ['/about', 'About'],
-            ['/proof', 'Proof'],
           ].map(([to, label]) => (
             <NavLink
               key={to}
@@ -137,14 +148,14 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2.5 lg:flex">
+        <div className="hidden items-center gap-2.5 xl:flex">
           <Link to="/demo" className="btn btn-gold !py-2.5 !text-[14.5px]">
             Book a call
           </Link>
           <ThemeToggle />
         </div>
 
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 xl:hidden">
           <ThemeToggle />
         <button
           className="rounded-lg border border-hp-line p-2 text-hp-text"
@@ -158,7 +169,7 @@ export default function Nav() {
       </div>
 
       {open && (
-        <div className="border-t border-hp-lineSoft bg-[color:var(--hp-nav-solid)] px-5 pb-6 pt-3 lg:hidden">
+        <div className="border-t border-hp-lineSoft bg-[color:var(--hp-nav-solid)] px-5 pb-6 pt-3 xl:hidden max-h-[calc(100dvh-64px)] overflow-y-auto">
           <p className="mb-3 flex items-center gap-2 text-[12.5px] text-hp-text3">
             <Layers size={13} className="shrink-0 text-hp-goldInk" />
             Sits on top of your channel manager — Hostaway today
