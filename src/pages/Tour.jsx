@@ -97,7 +97,7 @@ export default function Tour() {
   useSeo({
     title: 'HostPilot Pro | Real Ops screenshots and product demonstrations',
     description:
-      'See actual Ops screenshots from Mr Property Siam, with sensitive data masked. Explore the separate Owner, Guest and Field demonstrations. No signup.',
+      'See actual Ops screenshots, including fuel allowances and the initiative league, from first client Mr Property Siam. Sensitive data is masked. No signup.',
     path: '/tour',
   });
   /* /tour?surface=owner lands straight on the owner portal — the marketing
@@ -137,7 +137,7 @@ export default function Tour() {
             {showStories?'The real Ops workspace.':'Explore the product replicas.'} <span className="serif-em text-hp-text2">No signup.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-[17px] text-hp-text2">
-            {showStories?'Actual screenshots from Mr Property Siam using HostPilot Pro. Explore the message centre, owner ledger, finance overview and payroll walkthrough without opening a live account.':'The Owner, Guest and Field demonstrations use fictional data and illustrate selected interactions. They are separate from the actual Ops screenshots.'}
+            {showStories?'Actual screenshots from our first client, Mr Property Siam. Explore the message centre, owner ledger, finance, payroll, fuel allowance and motivational league without opening a live account.':'The Owner, Guest and Field demonstrations use fictional data and illustrate selected interactions. Their Thailand-based examples reflect our first-client setup, not a claim of worldwide availability.'}
           </p>
           <p className="mt-4 max-w-2xl text-[14.5px] text-hp-text3">
             {showStories?'Only sensitive data has been replaced or hidden. The application layout, branding, controls and visible statuses are unchanged.':'Nothing here connects to a live account. Sample messages, amounts and records reset when you reload.'}

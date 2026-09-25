@@ -169,10 +169,10 @@ export default function About() {
             />
             <ul className="reveal mt-7 space-y-3.5 text-[15.5px] text-hp-text2">
               {[
-                'My teams are Thai and Burmese, so the field app is trilingual rather than English with a translate button bolted on.',
+                'Mr Property Siam is our first client. English, Thai and Burmese fit its team; those three languages are the starting configuration, not the limit of our international plans.',
                 'My owners are overseas and asleep when things break, so the portal has to answer them without waking anybody up.',
                 'Every villa is its own building with its own pump, garden and meter, so maintenance and recoveries are first-class records, not an expense category.',
-                'Thai compliance is real work. TM30 and VAT-aware reporting are part of the flow, not a report you export once a year.',
+                'The first-client edition includes Thai-specific workflows such as TM30 and VAT-aware reporting. International editions will need their own country-specific legal settings and regional payment integrations, developed and reviewed before release.',
               ].map((t) => (
                 <li key={t} className="flex gap-3">
                   <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-hp-gold" />

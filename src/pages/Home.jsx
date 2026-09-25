@@ -10,6 +10,7 @@ import BeingBuilt from '../components/BeingBuilt.jsx';
 import CompatNote from '../components/CompatNote.jsx';
 import BusinessStories from '../components/BusinessStories.jsx';
 import AudienceLinks from '../components/AudienceLinks.jsx';
+import InternationalRollout from '../components/InternationalRollout.jsx';
 
 const surfaces = [
   {
@@ -28,7 +29,7 @@ const surfaces = [
     line: 'The staff console the whole operation runs on.',
     body:
       'Villas, owners, reservations, tasks, inspections, statements, petty cash and payroll inputs in one place, with a command palette that reaches any record in two keystrokes.',
-    proof: 'Press ⌘K in the tour and jump to any villa.',
+    proof: 'See the real working screens in the Ops screenshot tour.',
   },
   {
     to: '/guest',
@@ -45,7 +46,7 @@ const surfaces = [
     icon: Building2,
     line: 'The app your cleaners and pool techs actually open.',
     body:
-      'Clock in, claim jobs, log work already done, photograph a receipt, check pay. Built for a phone held in one hand outdoors, in English, Thai or Burmese.',
+      'Clock in, claim jobs, log work already done, photograph a receipt, check pay. Our first client, Mr Property Siam, uses English, Thai and Burmese; further market-specific languages are planned.',
     proof: 'Switch language in the tour and watch it re-label.',
   },
 ];
@@ -108,7 +109,7 @@ export default function Home() {
                 See the actual workspace. <span className="serif-em text-hp-text2">Not a mockup.</span>
               </h2>
               <p className="mt-4 text-[17px] text-hp-text2">
-                Explore the message centre, finance, owner ledger and payroll as they look in use at Mr Property Siam.
+                Explore messages, finance, payroll, fuel allowances and the initiative league as they look at Mr Property Siam.
                 Private data is masked. The interface is the real thing.
               </p>
             </div>
@@ -141,7 +142,7 @@ export default function Home() {
               {[
                 ['One database', 'Owners, guests, staff and the office read the same records. Nothing is re-keyed.'],
                 ['On top of your channel manager', 'Distribution stays where it is. We do everything after the booking. Hostaway syncs today; Guesty and Lodgify are being built.'],
-                ['Three languages in the field', 'English, Thai and Burmese, because that is who does the work.'],
+                ['Languages for our first client', 'English, Thai and Burmese serve Mr Property Siam’s team. Other languages and country settings are planned market by market.'],
                 ['Support from the operator', 'Built around the questions and problems of an operating villa company, not just a booking calendar.'],
               ].map(([t, b]) => (
                 <div key={t} className="hp-card p-5">
@@ -164,6 +165,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <InternationalRollout />
 
       {/* ---------------------------------------------------------- four surfaces */}
       <section className="py-16 sm:py-24">
