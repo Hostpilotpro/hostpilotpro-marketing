@@ -66,6 +66,9 @@ export default function Footer() {
           Every figure shown in product screens on this site is fictional demo data for Azure Coast Villas.
         </div>
       </div>
+      <div className="shell-wide pb-6 text-center text-[12px] text-hp-text3">
+        Part of <a href="https://siamsolutions.group/" className="underline underline-offset-4 transition hover:text-hp-goldInk">Siam Solutions Group</a>
+      </div>
     </footer>
   );
 }
