@@ -63,7 +63,7 @@ export default function Footer() {
       <div className="shell-wide flex flex-col gap-2 border-t border-hp-lineSoft py-6 text-[13.5px] text-hp-text3 sm:flex-row sm:items-center sm:justify-between">
         <div>© {new Date().getFullYear()} HostPilot Pro · a Mr Property Siam product · Koh Samui, Thailand</div>
         <div>
-          Every figure shown in product screens on this site is fictional demo data for Azure Coast Villas.
+          Interactive portals use fictional demo records. Actual Ops screenshots are labelled and private information is masked.
         </div>
       </div>
       <div className="shell-wide pb-6 text-center text-[12px] text-hp-text3">

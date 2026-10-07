@@ -61,9 +61,8 @@ export default function Pricing() {
             The platform.<br /><span className="serif-em">For your portfolio.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
-            We do not publish a rate yet. We do publish exactly how you are charged, what is included, and the five
-            things we will never bill you for — because a page that says only “contact us” tells you nothing, and
-            pricing opacity is the most common complaint in this category.
+            Pricing is quoted for your portfolio. See how the monthly charge works, what is included and the
+            commitments below, then tell us about your villas for a tailored proposal.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to="/demo" className="btn btn-gold">
@@ -129,8 +128,8 @@ export default function Pricing() {
               ))}
             </ul>
             <p className="mt-6 text-[14px] text-hp-text3">
-              Each of those five is a real, repeated complaint made about a named competitor in the reviews we read
-              while researching this market. They are on this page so you can hold us to them.
+              These commitments describe our pricing approach. Your portfolio proposal will confirm the rate,
+              supported connections and agreed rollout scope in writing.
             </p>
           </div>
         </div>

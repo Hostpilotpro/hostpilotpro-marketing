@@ -10,7 +10,7 @@ const SIZES = ['Under 20 villas', '20–50 villas', '50–100 villas', '100–20
 const INTEREST = ['The full suite', 'Owner portal', 'Ops console', 'Guest app', 'Field app', 'Partner / licensing'];
 
 const ENDPOINT = import.meta.env.VITE_LEAD_ENDPOINT || '';
-const FALLBACK_MAIL = 'info@mrpropertysiam.com';
+const FALLBACK_MAIL = import.meta.env.VITE_LEAD_EMAIL || 'info@mrpropertysiam.com';
 
 export default function Demo() {
   useSeo({
@@ -138,12 +138,13 @@ export default function Demo() {
                   Open the tour meanwhile
                 </Link>
                 <button onClick={() => setStatus('idle')} className="btn btn-quiet">
-                  Send another
+                  {status === 'mailto' ? 'Prepare another enquiry' : 'Send another enquiry'}
                 </button>
               </div>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="hp-card space-y-3.5 p-6 sm:p-7">
+              {!ENDPOINT && <p className="rounded-xl border border-hp-line p-3.5 text-[13px] leading-relaxed text-hp-text2">This form prepares an email draft. You will need to send it from your email app. You can also contact <a href={`mailto:${FALLBACK_MAIL}`} className="link-gold">{FALLBACK_MAIL}</a> directly.</p>}
               <div className="grid gap-3.5 sm:grid-cols-2">
                 <input required className={field} aria-label="Your name" autoComplete="name" placeholder="Your name" value={state.name} onChange={set('name')} />
                 <input
@@ -208,7 +209,7 @@ export default function Demo() {
                 </div>
               )}
               <button type="submit" disabled={status === 'sending'} className="btn btn-gold w-full">
-                {status === 'sending' ? 'Preparing…' : ENDPOINT ? 'Send your enquiry' : 'Prepare your email enquiry'}
+                {status === 'sending' ? ENDPOINT ? 'Sending…' : 'Preparing…' : ENDPOINT ? 'Send your enquiry' : 'Prepare your email enquiry'}
               </button>
               <p className="text-[13px] text-hp-text3">
                 We use this to reply and to size a quote. No newsletter, no sequence, no reselling your details.

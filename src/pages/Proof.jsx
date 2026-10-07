@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import { SectionHead, Eyebrow } from '../components/ui.jsx';
 
 const claims = [
   [
-    'The product is real and complete enough to use.',
-    'Open the tour. Four surfaces, working interactions, real interface code. If a screen looked good but did nothing, you would find out in about ten seconds.',
+    'See working software and clearly labelled demonstrations.',
+    'The Ops tour shows actual anonymised screenshots. Owner, Guest and Field use fictional records to demonstrate selected interactions. A tour is a starting point; your required live workflows are reviewed before rollout.',
     '/tour',
     'Check it in the tour',
   ],
@@ -19,7 +19,7 @@ const claims = [
   [
     'The owner statement reconciles.',
     'The demo statement is arithmetically closed: ฿369,200 − ฿41,800 − ฿58,932 − ฿14,600 − ฿9,800 − ฿3,450 − ฿5,834 + ฿11,240 = ฿246,024. Expand any line in the tour to see what it is.',
-    '/tour',
+    '/tour?surface=owner',
     'Expand the statement',
   ],
   [
@@ -30,64 +30,31 @@ const claims = [
   ],
 ];
 
-const research = [
-  {
-    finding: 'Not one of eight major vendors offers a self-serve interactive demo.',
-    detail:
-      'Guesty, Hostaway, Lodgify, Hostfully, Uplisting, Smoobu, Breezeway and Wheelhouse all gate real product exposure behind a sales call or a trial signup.',
-    links: [
-      ['Guesty', 'https://www.guesty.com/'],
-      ['Hostaway', 'https://www.hostaway.com/'],
-      ['Hostfully', 'https://www.hostfully.com/'],
-      ['Breezeway', 'https://www.breezeway.io/'],
-    ],
-  },
-  {
-    finding: 'Owner-portal-first positioning is open ground in the small-to-mid segment.',
-    detail:
-      'Every mainstream vendor leads with channel management, AI or breadth. The only vendor found leading with owner trust and financial transparency is Track Hospitality, an enterprise-tier platform.',
-    links: [['Track Hospitality', 'https://trackhospitality.com/']],
-  },
-  {
-    finding: 'Pricing opacity is one of the most-cited complaints in the category.',
-    detail:
-      'Hostaway and Hostfully publish no pricing at all. Guesty publishes only its 1–3 listing Lite tier, from $9 per listing per month, with Pro and Enterprise quote-gated.',
-    links: [
-      ['Hostaway pricing', 'https://www.hostaway.com/pricing'],
-      ['Guesty pricing', 'https://www.guesty.com/pricing/'],
-    ],
-  },
-  {
-    finding: 'Support quality is the single most consistent complaint across vendors.',
-    detail:
-      'Slow responses, bot-first support and unanswered tickets recur across G2 and Capterra reviews for Guesty, Hostaway, Hostfully, Uplisting, Smoobu and Wheelhouse.',
-    links: [
-      ['Guesty on G2', 'https://www.g2.com/products/guesty/reviews'],
-      ['Guesty on Capterra', 'https://www.capterra.com/p/159377/Guesty/reviews/'],
-    ],
-  },
+const reviewPoints = [
+  ['Your booking connection', 'Hostaway is the current operating connection. Guesty and Lodgify adapters are planned and require testing before availability.'],
+  ['Your financial workflow', 'Ask to see the source records, statement review and publication steps for the workflows your company needs. Demo arithmetic alone does not verify your accounting setup.'],
+  ['Your country and team', 'Confirm local documents, supported payment workflows, languages and team access during rollout. Thailand examples do not establish support for another country.'],
 ];
 
 export default function Proof() {
   useSeo({
     title: 'Proof — what we claim and how you can check it',
     description:
-      'No testimonials we cannot evidence and no review scores we have not earned. Every claim HostPilot Pro makes, with the place you can verify it, plus the competitor research behind our positioning.',
+      'Inspect actual Ops screenshots, fictional portal demonstrations and the workflows to review for your own business before rollout.',
     path: '/proof',
   });
   return (
-    <div>
+    <div className="cinematic-product-page replica-dark proof-launch-page">
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
         <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_50%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pt-32">
           <Eyebrow>Proof</Eyebrow>
-          <h1 className="h-sec mt-4 max-w-[26ch] font-medium">
-            No stars, no logos, <span className="serif-em text-hp-text2">no numbers we cannot show you.</span>
+          <h1 className="sales-page-title mt-4 max-w-[26ch]">
+            See the work.<br /><span className="serif-em">Check the details.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
-            This page used to hold testimonials. They have been removed, because we cannot evidence them to the
-            standard a sceptical property manager should demand. What is left is every claim the site makes and the
-            exact place you can check it.
+            Explore the real Ops interface, try the sample portals and bring your own requirements to the conversation.
+            We show which screens come from the current operation and which experiences use fictional records.
           </p>
         </div>
       </section>
@@ -114,34 +81,21 @@ export default function Proof() {
       <section className="band py-16 sm:py-20">
         <div className="shell">
           <SectionHead
-            eyebrow="The research behind the positioning"
-            title="Why we lead with the owner portal."
-            lede="These are findings from a review of eight vendors’ marketing sites, pricing pages and public reviews. Each is linked so you can disagree with us using the same sources."
+            eyebrow="Before your rollout"
+            title="Make the demonstration relevant to you."
+            lede="A useful product review follows your business. These are the details to confirm together."
           />
           <div className="mt-9 grid gap-3 md:grid-cols-2">
-            {research.map((r) => (
-              <div key={r.finding} className="reveal hp-card p-6">
-                <div className="font-display text-[18px] leading-snug text-hp-text">{r.finding}</div>
-                <p className="mt-2.5 text-[14.5px] leading-relaxed text-hp-text2">{r.detail}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {r.links.map(([label, href]) => (
-                    <a
-                      key={href}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="chip !text-[12px] transition hover:border-hp-gold/50 hover:text-hp-goldInk"
-                    >
-                      {label} <ExternalLink size={11} />
-                    </a>
-                  ))}
-                </div>
+            {reviewPoints.map(([title, detail]) => (
+              <div key={title} className="reveal hp-card p-6">
+                <div className="font-display text-[18px] leading-snug text-hp-text">{title}</div>
+                <p className="mt-2.5 text-[14.5px] leading-relaxed text-hp-text2">{detail}</p>
               </div>
             ))}
           </div>
           <p className="reveal mt-7 max-w-2xl text-[14px] text-hp-text3">
-            Vendor pricing and review scores change. These reflect what those pages showed when we read them; check
-            the links before quoting them back to us.
+            Camera and smart-device views are illustrative proposed connections. They are separate from the live
+            operational workflows we can demonstrate.
           </p>
         </div>
       </section>

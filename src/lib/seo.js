@@ -36,5 +36,6 @@ export default function useSeo({ title, description, path = '/', image = '/og.pn
       name: 'twitter:description',
       content: description,
     });
+    upsert('meta[name="twitter:image"]', { tag: 'meta', name: 'twitter:image', content: SITE + image });
   }, [title, description, path, image]);
 }
