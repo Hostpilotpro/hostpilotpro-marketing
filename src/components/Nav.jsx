@@ -36,7 +36,7 @@ export default function Nav() {
   const [menu, setMenu] = useState(false);
   const [solid, setSolid] = useState(false);
   const { pathname } = useLocation();
-  const cinematicRoute = ['/', '/owner', '/ops', '/guest', '/field', '/capabilities', '/pricing', '/demo'].includes(pathname);
+  const cinematicRoute = ['/', '/owner', '/ops', '/guest', '/field', '/capabilities', '/pricing', '/demo', '/tour'].includes(pathname);
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 12);

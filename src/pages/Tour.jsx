@@ -7,6 +7,7 @@ import OwnerPortal from '../tour/OwnerPortal.jsx';
 import GuestApp from '../tour/GuestApp.jsx';
 import FieldApp from '../tour/FieldApp.jsx';
 import BusinessStories from '../components/BusinessStories.jsx';
+import TourNavigator from '../components/TourNavigator.jsx';
 
 const surfaces = [
   {
@@ -109,10 +110,6 @@ export default function Tour() {
   const setActive=key=>setParams({surface:key});
   const s = surfaces.find((x) => x.key === active);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'auto' });
-  }, []);
-
   /* The fixed Book-a-call pill sat on top of the intro copy and the demo-data
      disclosure on a phone, where there is no spare gutter to hold it. Hold it
      back until the reader is into the replica, then keep it for the rest of
@@ -127,14 +124,14 @@ export default function Tour() {
 
   return (
     // pb-20 keeps the last section clear of the fixed Book-a-call pill on phones.
-    <div className="pb-20 pt-16 sm:pb-0">
+    <div className="cinematic-product-page replica-dark pb-20 pt-16 sm:pb-0">
       {/* header */}
-      <section className="relative overflow-hidden border-b border-hp-lineSoft">
+      <section className="tour-cinematic-header relative overflow-hidden border-b border-hp-lineSoft">
         <div className="grain absolute inset-0 bg-[radial-gradient(120%_100%_at_50%_-10%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative py-12 sm:py-16">
           <Eyebrow>The HostPilot Pro walkthrough</Eyebrow>
           <h1 className="h-sec mt-4 max-w-3xl">
-            {showStories?'The real Ops workspace.':'Explore the product replicas.'} <span className="serif-em text-hp-text2">No signup.</span>
+            {showStories?'Step inside the operation.':'See it from their side.'} <span className="serif-em">No signup.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-[17px] text-hp-text2">
             {showStories?'Actual screenshots from our first client, Mr Property Siam. Explore the message centre, owner ledger, finance, payroll, fuel allowance and motivational league without opening a live account.':'The Owner, Guest and Field demonstrations use fictional data and illustrate selected interactions. Their Thailand-based examples reflect our first-client setup, not a claim of worldwide availability.'}
@@ -145,6 +142,9 @@ export default function Tour() {
           {!showStories&&<Link to="/tour" className="btn btn-quiet mt-6">See real Ops screenshots <ArrowRight size={15}/></Link>}
         </div>
       </section>
+
+      <TourNavigator active={active} />
+      <div id="tour-workspace" />
 
       {showStories&&<section className="shell-wide py-10 sm:py-14"><BusinessStories initial={params.get('story')||'messages'} inTour onStoryChange={story=>setParams({story})}/><div className="blend-preserved-banner"><p>Explore the separate product demonstrations:</p><div className="mt-4 flex flex-wrap gap-3">{surfaces.filter(x=>x.key!=='ops').map(x=><Link key={x.key} className="btn btn-quiet !text-[13px] !py-2" to={`/tour?surface=${x.key}`}>{x.label}<ArrowRight size={13}/></Link>)}</div></div></section>}
       {!showStories&&<>
