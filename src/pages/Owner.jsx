@@ -4,6 +4,7 @@ import ProductPage from '../components/ProductPage.jsx';
 import OwnerPortal from '../tour/OwnerPortal.jsx';
 import { ownerDepth } from './owner-sections.js';
 import SmartCatalog from '../components/SmartCatalog.jsx';
+import { NotificationDemo } from '../components/VisualProductStories.jsx';
 
 export default function Owner() {
   useSeo({
@@ -15,12 +16,14 @@ export default function Owner() {
   return (
     <ProductPage
       eyebrow="HostPilot Owner"
+      visualHero={{kind: 'owner', image: '/img/hostpilot-owner-laptop.webp', width: 1672, height: 941, alt: 'Illustrative owner viewing a proposed exterior-camera dashboard on a laptop', notification: 'Your payout advice is ready.', note: 'Financial records, available in your owner portal.', caption: 'YOUR PROPERTY. YOUR RECORDS. YOUR PERSPECTIVE.', boundary: 'Lifestyle scene and screen are illustrative. Camera viewing is a proposed integration and requires device support and authorised access.'}}
+      visualDetails={<div className="cinematic-home replica-dark"><NotificationDemo /></div>}
       title={
         <>
-          The owner portal, <span className="serif-em text-hp-text2">and the reason the rest exists.</span>
+          Your property.<br /><span className="serif-em text-hp-text2">Closer than ever.</span>
         </>
       }
-      lede="Owners do not churn because occupancy dipped. They churn because a statement did not make sense and nobody could explain it quickly. HostPilot Owner is built around that single problem: every figure an owner sees can be opened until it reaches the invoice, the meter photo or the completed task behind it."
+      lede="Your villa, your statements and the story behind every figure. Give owners a clear view of performance, costs, supporting documents and the decisions that need their attention."
       bullets={[
         'Monthly statements with every line expandable to a plain-English verdict',
         'Payout history, references and the transfer method on the record',

@@ -36,6 +36,7 @@ export default function Nav() {
   const [menu, setMenu] = useState(false);
   const [solid, setSolid] = useState(false);
   const { pathname } = useLocation();
+  const cinematicRoute = ['/', '/owner', '/ops', '/guest'].includes(pathname);
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 12);
@@ -58,7 +59,7 @@ export default function Nav() {
 
   return (
     <header
-      className={`${pathname === '/' ? 'cinema-nav replica-dark' : ''} fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+      className={`${cinematicRoute ? 'cinema-nav replica-dark' : ''} fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         solid
           ? 'border-b border-hp-lineSoft bg-[color:var(--hp-nav)] backdrop-blur-xl'
           : 'border-b border-transparent'
@@ -153,11 +154,11 @@ export default function Nav() {
           <Link to="/demo" className="btn btn-gold !py-2.5 !text-[14.5px]">
             Book a call
           </Link>
-          <ThemeToggle />
+          {!cinematicRoute && <ThemeToggle />}
         </div>
 
         <div className="flex items-center gap-2 xl:hidden">
-          <ThemeToggle />
+          {!cinematicRoute && <ThemeToggle />}
         <button
           className="rounded-lg border border-hp-line p-2 text-hp-text"
           onClick={() => setOpen((v) => !v)}

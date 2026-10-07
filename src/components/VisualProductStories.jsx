@@ -15,7 +15,7 @@ const scanSteps = [
   { name: 'Submit', title: 'Evidence follows the expense.', text: 'Submit the reviewed bill for the relevant approval. The document stays attached; a scan does not automatically approve an expense or prove payment.', status: 'Awaiting review', fields: [['Category', 'Pool maintenance'], ['Evidence', 'Receipt attached'], ['Status', 'Awaiting review']] },
 ];
 
-function NotificationDemo() {
+export function NotificationDemo() {
   const [active, setActive] = useState('payout');
   const alert = alerts.find(item => item.key === active);
   const Icon = alert.icon;
@@ -25,7 +25,7 @@ function NotificationDemo() {
   </section>;
 }
 
-function ScannerStory() {
+export function ScannerStory() {
   const [step, setStep] = useState(1);
   const scan = scanSteps[step];
   return <section className="product-scanner"><div className="cinema-shell product-two-column"><div className="product-scanner-image"><img src={asset('/img/hostpilot-bill-scanner.webp')} alt="Illustrative staff member using a smartphone to photograph a supplier receipt" loading="lazy" width="1086" height="1448" /><div className="product-scan-result" aria-live="polite"><div><ScanLine size={17} /><span>HOSTPILOT BILL SCANNER</span></div><h4>{scan.status}</h4>{scan.fields.map(([label,value]) => <p key={label}><span>{label}</span><strong>{value}</strong></p>)}<small>Illustrative workflow · sample data</small></div><span className="product-image-label">SOFTWARE THAT MEETS YOUR TEAM WHERE THEY WORK.</span></div><div className="product-scanner-copy"><p className="cinema-eyebrow">FROM PAPER TO A PROPER RECORD</p><h2>Point. Capture.<br /><em>Keep the evidence.</em></h2><p>Less typing. Fewer missing receipts. A bill scanner built into the operation, with a review step that keeps the team accountable.</p><div className="product-scan-steps" role="group" aria-label="Explore the bill-scanning workflow">{scanSteps.map((item,index) => <button key={item.name} type="button" aria-pressed={step === index} onClick={() => setStep(index)}><span>0{index+1}</span>{item.name}</button>)}</div><div className="product-scan-description" aria-live="polite"><h3>{scan.title}</h3><p>{scan.text}</p></div><Link to="/capabilities" className="cinema-text-link">Explore finance & operations <ArrowRight size={17} /></Link></div></div></section>;

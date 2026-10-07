@@ -13,12 +13,13 @@ export default function Guest() {
   return (
     <ProductPage
       eyebrow="HostPilot Guest"
+      visualHero={{kind: 'guest', image: '/img/hostpilot-guest-phone.webp', width: 1448, height: 1086, alt: 'Illustrative guest using the villa stay app on a smartphone by the pool', notification: 'Airport transfer requested.', note: 'Your villa team reviews and confirms the request.', caption: 'THE VILLA EXPERIENCE. IN THEIR POCKET.', boundary: 'Lifestyle scene and screen are illustrative. Guest service requests need team confirmation; payment methods are enabled and verified during operator setup.'}}
       title={
         <>
-          The stay app that sells things <span className="serif-em text-hp-text2">while you sleep.</span>
+          A remarkable stay.<br /><span className="serif-em text-hp-text2">At their fingertips.</span>
         </>
       }
-      lede="Guests ask the same eleven questions on every stay, and they ask them at midnight. Answer them once, in a link they already have, and the same screen can offer an airport transfer, a chef and a boat day without a WhatsApp negotiation — your office confirms the ones they request."
+      lede="Arrival details, house essentials and memorable extras, in a link guests can open on their phone. Help them find answers, request services and enjoy more of the stay — while your team keeps the operation connected."
       bullets={[
         'Arrival countdown, plus the door code and Wi-Fi your team set, shown on the morning of check-in',
         'Guest check-in progress and staff-recorded local reporting status',

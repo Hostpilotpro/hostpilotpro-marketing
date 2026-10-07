@@ -3,6 +3,7 @@ import useSeo from '../lib/seo.js';
 import ProductPage from '../components/ProductPage.jsx';
 import { opsDepth } from './ops-sections.js';
 import BusinessStories from '../components/BusinessStories.jsx';
+import { ScannerStory } from '../components/VisualProductStories.jsx';
 
 export default function Ops() {
   useSeo({
@@ -14,9 +15,11 @@ export default function Ops() {
   return (
     <ProductPage
       eyebrow="HostPilot Ops"
+      visualHero={{kind: 'ops', image: '/img/hostpilot-bill-scanner.webp', width: 1086, height: 1448, alt: 'Illustrative staff member scanning a supplier receipt with a phone', notification: 'Receipt captured. Ready for review.', note: 'Check details, assign the villa, keep the evidence.', caption: 'FROM FIELD WORK TO THE FINANCE WORKSPACE.', boundary: 'Lifestyle photo and update are illustrative. The inset shows the actual anonymised Ops interface. Extracted bills require review before submission and approval.'}}
+      visualDetails={<div className="cinematic-home replica-dark"><ScannerStory /></div>}
       title={
         <>
-          Your PMS handles the bookings.<br /><span className="serif-em text-hp-text2">Run the business around them.</span>
+          Every villa. Every detail.<br /><span className="serif-em text-hp-text2">One working view.</span>
         </>
       }
       lede="Connect the message centre, owner finance, RatePilot, listing tools, people and property care. Keep the booking backbone you already use, then give the office and the team a shared way to run the business behind every stay."
