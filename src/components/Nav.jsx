@@ -58,7 +58,7 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+      className={`${pathname === '/' ? 'cinema-nav replica-dark' : ''} fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         solid
           ? 'border-b border-hp-lineSoft bg-[color:var(--hp-nav)] backdrop-blur-xl'
           : 'border-b border-transparent'

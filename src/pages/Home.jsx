@@ -1,301 +1,65 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play, Building2, Users, Smartphone, Monitor, Check, Info } from 'lucide-react';
+import { ArrowRight, ArrowDown, Play, Check, Monitor, Users, Smartphone, Building2, MessageSquare, Sparkles, Megaphone, Globe2, ShieldCheck, Layers, CheckCircle2, ChevronRight } from 'lucide-react';
 import useSeo from '../lib/seo.js';
-import { SectionHead, Eyebrow, PrimaryLink } from '../components/ui.jsx';
-import demo from '../data/demo.js';
 import asset from '../lib/asset.js';
-import StackCollapse from '../components/StackCollapse.jsx';
-import SmartCatalog from '../components/SmartCatalog.jsx';
-import BeingBuilt from '../components/BeingBuilt.jsx';
-import CompatNote from '../components/CompatNote.jsx';
 import BusinessStories from '../components/BusinessStories.jsx';
-import AudienceLinks from '../components/AudienceLinks.jsx';
-import InternationalRollout from '../components/InternationalRollout.jsx';
+import './home-cinematic.css';
 
-const surfaces = [
-  {
-    to: '/owner',
-    name: 'HostPilot Owner',
-    icon: Users,
-    line: 'The owner portal, and the reason the rest exists.',
-    body:
-      'Monthly statements owners can actually read, every line expandable down to the invoice. Payout history, forward pipeline, rate approvals, and an assistant that answers questions from their own numbers.',
-    proof: 'Statement lines expand to a plain-English verdict.',
-  },
-  {
-    to: '/ops',
-    name: 'HostPilot Ops',
-    icon: Monitor,
-    line: 'The staff console the whole operation runs on.',
-    body:
-      'Villas, owners, reservations, tasks, inspections, statements, petty cash and payroll inputs in one place, with a command palette that reaches any record in two keystrokes.',
-    proof: 'See the real working screens in the Ops screenshot tour.',
-  },
-  {
-    to: '/guest',
-    name: 'HostPilot Guest',
-    icon: Smartphone,
-    line: 'The stay app that sells things while you sleep.',
-    body:
-      'Door code, Wi-Fi, house manual, arrival status and a paid add-on list in the guest’s pocket. Transfers, chefs, charters, massage, breakfast — booked without a WhatsApp thread.',
-    proof: '฿24,950 of add-ons on one seven-night demo stay.',
-  },
-  {
-    to: '/field',
-    name: 'HostPilot Field',
-    icon: Building2,
-    line: 'The app your cleaners and pool techs actually open.',
-    body:
-      'Clock in, claim jobs, log work already done, photograph a receipt, check pay. Our first client, Mr Property Siam, uses English, Thai and Burmese; further market-specific languages are planned.',
-    proof: 'Switch language in the tour and watch it re-label.',
-  },
+const experiences = [
+  { key: 'ops', name: 'Operations', label: 'For your office', icon: Monitor, title: 'Your entire operation. In focus.', body: 'From the next arrival to the next owner payout. Bring reservations, conversations, tasks, inspections and finance into one working view.', points: ['Property and reservation context', 'Team tasks, inspections and receipts', 'Owner statements and finance'], to: '/ops' },
+  { key: 'owner', name: 'Owners', label: 'For your owners', icon: Users, title: 'Confidence in every number.', body: 'Give owners a window into their property: readable statements, payout history, upcoming bookings and decisions that need their approval.', points: ['Statements with supporting detail', 'Payouts and forward booking pipeline', 'Property decisions and approvals'], to: '/owner' },
+  { key: 'guest', name: 'Guests', label: 'For your guests', icon: Smartphone, title: 'An exceptional stay starts here.', body: 'Put arrival information, villa essentials, local services and paid extras in your guest’s pocket. Less searching. More enjoying the stay.', points: ['Arrival details, Wi-Fi and house guides', 'Service requests and curated extras', 'Configured payment options'], to: '/guest' },
+  { key: 'field', name: 'Field team', label: 'For your people', icon: Building2, title: 'Great work. Made visible.', body: 'Give the people caring for your villas a simple way to see jobs, log work, attach evidence and keep the office informed.', points: ['Jobs and recorded work', 'Photos and receipt evidence', 'Time and pay information'], to: '/field' },
 ];
 
-export default function Home() {
-  useSeo({
-    title: 'HostPilot Pro | Keep your PMS. Connect the business around it.',
-    description:
-      'Keep your channel manager. Connect messages, owner finance, revenue, people and property operations. Explore HostPilot Pro for management companies, owners and guests.',
-    path: '/',
-  });
+function ExperiencePreview({ type }) {
+  if (type === 'ops') return <div className="cinema-ops-preview"><div className="cinema-window-bar"><span /><span /><span /><p>HostPilot Ops · actual workspace</p></div><img src={asset('/img/real-ops/01-real-ops-message-centre.jpg')} width="1356" height="847" loading="lazy" alt="Actual HostPilot Ops message centre, with private data anonymised" /></div>;
+  if (type === 'owner') return <div className="cinema-illustration"><div className="cinema-preview-top"><span>HOSTPILOT / OWNER</span><span>Illustrative demo</span></div><p className="cinema-preview-kicker">YOUR PROPERTY, AT A GLANCE</p><h3>Villa Azure</h3><div className="cinema-owner-stats"><div><span>Owner payout</span><strong>฿142,800</strong></div><div><span>Next arrival</span><strong>12 Oct</strong></div></div><div className="cinema-statement">{[['Booking revenue', '฿214,000'], ['Operating expenses', '−฿28,400'], ['Management fee', '−฿42,800'], ['Owner payout', '฿142,800']].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div><div className="cinema-preview-note"><ShieldCheck size={17} /> Every line has a story. Every story has a record.</div></div>;
+  if (type === 'guest') return <div className="cinema-guest-preview"><img src={asset('/img/villa-day.jpg')} alt="Villa terrace and swimming pool" loading="lazy" width="1000" height="650" /><div className="cinema-guest-card"><span>ILLUSTRATIVE GUEST EXPERIENCE</span><h3>Welcome to<br />your island escape.</h3><p>Villa Azure · 7-night demo stay</p><div><span><CheckCircle2 size={16} /> Arrival information</span><ChevronRight size={16} /></div><div><span><Sparkles size={16} /> Make your stay special</span><ChevronRight size={16} /></div><div><span><MessageSquare size={16} /> Ask your villa team</span><ChevronRight size={16} /></div></div></div>;
+  return <div className="cinema-illustration"><div className="cinema-preview-top"><span>HOSTPILOT / FIELD</span><span>Illustrative demo</span></div><p className="cinema-preview-kicker">A GREAT DAY STARTS WITH A CLEAR PLAN</p><h3>Ready for the next arrival.</h3><div className="cinema-task-list">{[['09:00', 'Villa Azure', 'Turnover clean', 'Completed'], ['11:30', 'Villa Palm', 'Pool inspection', 'In progress'], ['14:00', 'Villa Cove', 'Arrival preparation', 'Up next']].map(([time, villa, job, status]) => <div key={villa}><span>{time}</span><div><strong>{villa}</strong><p>{job}</p></div><em>{status}</em></div>)}</div><div className="cinema-preview-note"><CheckCircle2 size={17} /> Clear jobs. Recorded work. An informed office.</div></div>;
+}
 
-  return (
-    <div>
-      {/* ---------------------------------------------------------------- hero */}
-      <section className="relative overflow-hidden">
-        <img
-          src={asset('/img/samui-coast.jpg')}
-          alt=""
-          className="hero-img absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 hero-scrim" />
-        <div className="grain absolute inset-0" />
-        <div className="shell relative pb-16 pt-28 sm:pb-24 sm:pt-44">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="chip">
-              <span className="h-1.5 w-1.5 rounded-full bg-hp-pos" /> Built and run daily on Koh Samui
-            </span>
-          </div>
-          <h1 className="h-hero mt-6 max-w-[17ch] font-medium">
-            Keep your channel manager. <span className="serif-em">Run the business around it.</span>
-          </h1>
-          <p className="mt-7 max-w-2xl text-[17px] leading-[1.7] text-hp-text2 sm:text-[19px]">
-            Your PMS is the booking backbone. HostPilot Pro connects the operation around it:
-            your conversations, owner money, pricing, listings and team, with dedicated experiences for owners and guests.
-          </p>
-          <CompatNote className="mt-6" />
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Link to="/tour" className="btn btn-gold">
-              <Play size={15} className="fill-current" /> Open the live tour
-            </Link>
-            <Link to="/demo" className="btn btn-quiet">
-              Book a call <ArrowRight size={15} />
-            </Link>
-          </div>
-          <p className="mt-4 text-[14px] text-hp-text3">
-            No email gate. No signup. See real Ops screenshots and explore the owner and guest demonstrations.
-          </p>
-          <AudienceLinks />
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------- product on page */}
-      <section className="border-t border-hp-lineSoft bg-hp-bg py-14 sm:py-20">
-        <div className="shell-wide">
-          <div className="reveal flex flex-wrap items-end justify-between gap-5">
-            <div className="max-w-2xl">
-              <Eyebrow>The business behind the bookings</Eyebrow>
-              <h2 className="h-sec mt-3">
-                See the actual workspace. <span className="serif-em text-hp-text2">Not a mockup.</span>
-              </h2>
-              <p className="mt-4 text-[17px] text-hp-text2">
-                Explore messages, finance, payroll, fuel allowances and the initiative league as they look at Mr Property Siam.
-                Private data is masked. The interface is the real thing.
-              </p>
-            </div>
-            <PrimaryLink to="/tour">Open the full tour</PrimaryLink>
-          </div>
-
-          <div className="mt-9">
-            <BusinessStories />
-          </div>
-        </div>
-      </section>
-
-      {/* The original visual consolidation argument stays, after the new lead stories. */}
-      <StackCollapse compact />
-      <section className="shell py-14">
-        <p className="eyebrow">Growth, communication & service</p>
-        <h2 className="h-sec mt-4 max-w-3xl">More than the daily task board.</h2>
-        <div className="mt-7 grid gap-4 md:grid-cols-3">
-          {[
-            ['Market available nights', 'Prepare Google and Meta campaigns, social content and Mailchimp newsletters around actual stay windows, with budgets and approval before publishing.'],
-            ['Keep the office connected', 'Bring supported WhatsApp conversations and incoming social messages into the team’s working context. Explore the LINE supplier pilot for orders and delivery evidence.'],
-            ['Bring owners and guests along', 'Give owners marketing budgets, property decisions and payout records; give guests useful stay information, service requests and configured payment options.'],
-          ].map(([title, body]) => <article key={title} className="hp-card p-6"><h3 className="text-[18px] font-semibold">{title}</h3><p className="mt-3 text-[15px] leading-relaxed text-hp-text2">{body}</p></article>)}
-        </div>
-        <Link to="/capabilities" className="btn btn-quiet mt-7">Explore features & connections <ArrowRight size={15} /></Link>
-      </section>
-
-      {/* ---------------------------------------------------------- operator proof */}
-      <section className="band py-16 sm:py-24">
-        <div className="shell grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div>
-            <SectionHead
-              eyebrow="Built by the operator · used by Mr Property Siam"
-              title={
-                <>
-                  Built by an operator, <span className="serif-em text-hp-text2">not a software company.</span>
-                </>
-              }
-              lede="Mr Property Siam manages villas on Koh Samui. Every screen in HostPilot Pro was built because something in that operation was broken — a statement an owner did not trust, a clean nobody logged, a pool bill nobody could find. The company runs on this software daily. When something is wrong, the person who fixes it is the person who needs it fixed."
-            />
-            <div className="reveal mt-8 grid gap-4 sm:grid-cols-2">
-              {[
-                ['One database', 'Owners, guests, staff and the office read the same records. Nothing is re-keyed.'],
-                ['On top of your channel manager', 'Distribution stays where it is. We do everything after the booking. Hostaway syncs today; Guesty and Lodgify are being built.'],
-                ['Languages for our first client', 'English, Thai and Burmese serve Mr Property Siam’s team. Other languages and country settings are planned market by market.'],
-                ['Support from the operator', 'Built around the questions and problems of an operating villa company, not just a booking calendar.'],
-              ].map(([t, b]) => (
-                <div key={t} className="hp-card p-5">
-                  <div className="flex items-center gap-2">
-                    <Check size={14} className="text-hp-goldInk" />
-                    <div className="text-[15px] font-semibold text-hp-text">{t}</div>
-                  </div>
-                  <p className="mt-2 text-[14.5px] leading-relaxed text-hp-text2">{b}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="reveal">
-            <div className="overflow-hidden rounded-2xl border border-hp-line shadow-frame">
-              <img src={asset('/img/villa-sapphire-hero.jpg')} alt="A managed villa at dusk on Koh Samui" className="w-full" />
-            </div>
-            <p className="mt-4 text-[13.5px] text-hp-text3">
-              Koh Samui, Thailand. The software was written between check-outs.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <InternationalRollout />
-
-      {/* ---------------------------------------------------------- four surfaces */}
-      <section className="py-16 sm:py-24">
-        <div className="shell">
-          <SectionHead
-            eyebrow="Four surfaces, one system"
-            title="Everyone gets their own door."
-            lede="Most platforms give the office a good tool and everybody else a PDF. HostPilot Pro gives each audience a real interface, and they all read from the same records."
-          />
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            {surfaces.map((s) => {
-              const Icon = s.icon;
-              return (
-                <Link key={s.to} to={s.to} className="reveal hp-card group p-6 transition hover:border-hp-gold/40">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-hp-line bg-[color:var(--hp-gold-wash)] text-hp-goldInk">
-                        <Icon size={17} />
-                      </span>
-                      <div>
-                        <div className="font-display text-[20px] text-hp-text">{s.name}</div>
-                        <div className="text-[13px] text-hp-text3">{s.line}</div>
-                      </div>
-                    </div>
-                    <ArrowRight
-                      size={17}
-                      className="mt-2 shrink-0 text-hp-text3 transition group-hover:translate-x-1 group-hover:text-hp-goldInk"
-                    />
-                  </div>
-                  <p className="mt-4 text-[15px] leading-relaxed text-hp-text2">{s.body}</p>
-                  <div className="mt-4 border-t border-hp-lineSoft pt-3 text-[13px] text-hp-goldDeep">{s.proof}</div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------- smart catalogue */}
-      <SmartCatalog />
-      <section className="shell-wide pb-12">
-        <details className="blend-more">
-          <summary>What is still being built</summary>
-          <p className="px-6 pb-3 text-[14px] text-hp-text2">Hardware installation, planned integrations and the core software are separate offers.</p>
-          <BeingBuilt />
-        </details>
-      </section>
-
-      {/* ---------------------------------------------------- the owner statement */}
-      <section className="band py-16 sm:py-24">
-        <div className="shell grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <SectionHead
-              eyebrow="The thing owners judge you on"
-              title="A statement that survives being read closely."
-              lede="One number an owner cannot explain costs more trust than a whole quarter of good performance. Every line of a HostPilot statement expands into what it is, where it came from and why it is that size — including the maintenance nobody asked about."
-            />
-            <div className="reveal mt-7">
-              <PrimaryLink to="/owner">See HostPilot Owner</PrimaryLink>
-            </div>
-          </div>
-          <div className="reveal hp-card overflow-hidden">
-            <div className="border-b border-hp-lineSoft px-5 py-3.5 text-[13px] text-hp-text3">
-              {demo.owner_statement.villa} · {demo.owner_statement.period} · demo data
-            </div>
-            <div className="divide-y divide-[color:var(--hp-line-soft)]">
-              {demo.owner_statement.lines.map((l) => (
-                <div key={l.label} className="flex items-center gap-3 px-5 py-2.5">
-                  <span
-                    className={`flex-1 text-[14px] ${
-                      l.kind === 'total' ? 'font-semibold text-hp-text' : 'text-hp-text2'
-                    }`}
-                  >
-                    {l.label}
-                  </span>
-                  <span
-                    className="tnum text-[14px]"
-                    style={{
-                      color:
-                        l.kind === 'total'
-                          ? 'var(--hp-gold)'
-                          : l.value_thb < 0
-                          ? 'var(--hp-neg)'
-                          : 'var(--hp-text)',
-                    }}
-                  >
-                    {l.value_thb < 0 ? '−' : ''}฿{Math.abs(l.value_thb).toLocaleString()}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------------------------------------------------------- closing */}
-      <section className="relative overflow-hidden py-20 sm:py-28">
-        <div className="grain absolute inset-0 bg-[radial-gradient(90%_80%_at_50%_120%,var(--hp-gold-tint),transparent_65%)]" />
-        <div className="shell relative text-center">
-          <Eyebrow className="!text-hp-goldDeep">Next step</Eyebrow>
-          <h2 className="h-sec mx-auto mt-4 max-w-[22ch]">
-            Look at it first. <span className="serif-em text-hp-text2">Talk to us second.</span>
-          </h2>
-          <p className="mx-auto mt-5 max-w-xl text-[17px] text-hp-text2">
-            Open the tour and form your own opinion. If it fits your portfolio, tell us how many villas you run and we
-            will send a number the same day.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/tour" className="btn btn-gold">
-              <Play size={15} className="fill-current" /> Open the live tour
-            </Link>
-            <Link to="/pricing" className="btn btn-quiet">
-              How pricing works <ArrowRight size={15} />
-            </Link>
-          </div>
-        </div>
-      </section>
+function Experiences() {
+  const [active, setActive] = useState('ops');
+  const experience = experiences.find(item => item.key === active);
+  return <section className="cinema-experiences" id="experiences">
+    <div className="cinema-shell"><div className="cinema-section-intro"><div><p className="cinema-eyebrow">FOUR EXPERIENCES. ONE CONNECTED BUSINESS.</p><h2>Every person.<br /><em>The right perspective.</em></h2></div><p>Your office, owners, guests and field team each get their own experience. Shared context brings the whole operation together.</p></div>
+      <div className="cinema-experience-selector" role="group" aria-label="Choose a portal to explore">{experiences.map(item => { const Icon = item.icon; return <button key={item.key} type="button" aria-pressed={active === item.key} onClick={() => setActive(item.key)}><Icon size={19} /><span>{item.name}</span><ArrowRight size={16} /></button>; })}</div>
+      <div className="cinema-experience-panel"><div className="cinema-experience-copy"><p className="cinema-eyebrow">{experience.label}</p><h3>{experience.title}</h3><p>{experience.body}</p><ul>{experience.points.map(point => <li key={point}><Check size={16} />{point}</li>)}</ul><Link to={experience.to} className="cinema-text-link">Explore {experience.name.toLowerCase()} <ArrowRight size={17} /></Link></div><div className="cinema-experience-visual" key={active}><ExperiencePreview type={active} /></div></div>
     </div>
-  );
+  </section>;
+}
+
+export default function Home() {
+  useSeo({ title: 'HostPilot Pro | Exceptional villas. Extraordinary control.', description: 'The connected business behind exceptional villa stays. Explore operations, owner finance, guest experiences, field teams and growth tools built by a real villa operator.', path: '/' });
+  return <div className="cinematic-home replica-dark">
+    <section className="cinema-hero" aria-labelledby="cinema-title">
+      <img className="cinema-hero-image" src={asset('/img/hostpilot-cinematic-hero.webp')} width="1536" height="1024" fetchPriority="high" alt="A contemporary tropical villa and infinity pool overlooking the ocean at dusk" />
+      <div className="cinema-hero-shade" />
+      <div className="cinema-shell cinema-hero-content"><p className="cinema-eyebrow"><span className="cinema-live-dot" /> THE BUSINESS BEHIND EXCEPTIONAL STAYS</p><h1 id="cinema-title">Exceptional villas.<br /><em>Extraordinary control.</em></h1><p className="cinema-hero-description">The bookings. The people. The details.<br />Bring your villa business into one beautiful view.</p><div className="cinema-actions"><Link to="/#experiences" className="cinema-button cinema-button-gold">Explore the platform <ArrowRight size={18} /></Link><Link to="/tour" className="cinema-play-link"><span><Play size={15} fill="currentColor" /></span> See it in action</Link></div><div className="cinema-hero-proof"><ShieldCheck size={16} /><span>Built by a villa operator. Used in the real world.</span></div></div>
+      <div className="cinema-hero-caption"><span>KOH SAMUI SPIRIT. A BIGGER VISION.</span><span>Original architectural visual</span></div>
+      <div className="cinema-hero-bottom cinema-shell"><a href="#connected" className="cinema-scroll"><ArrowDown size={16} /> DISCOVER A DIFFERENT WAY</a><span>Keep your PMS. Elevate everything around it.</span></div>
+    </section>
+
+    <div className="cinema-signal-bar"><div className="cinema-shell"><p>ONE BUSINESS.<br /><strong>CONNECTED.</strong></p>{[['Operations', Monitor], ['Owners', Users], ['Guests', Smartphone], ['Field teams', Building2], ['Growth', Megaphone]].map(([label, Icon]) => <span key={label}><Icon size={18} />{label}</span>)}</div></div>
+
+    <section className="cinema-manifesto cinema-shell" id="connected"><p className="cinema-eyebrow">BEYOND THE BOOKING CALENDAR</p><h2>You create incredible stays.<br /><span>We connect everything</span><br /><em>that makes them possible.</em></h2><div className="cinema-manifesto-bottom"><span className="cinema-number">01 — THE BIGGER PICTURE</span><p>Your channel manager handles distribution. HostPilot Pro brings together the business around it — from owner money and guest requests to the people looking after every villa.</p><Link to="/capabilities" className="cinema-round-link" aria-label="Explore features and connections"><ArrowRight size={26} /></Link></div></section>
+
+    <Experiences />
+
+    <section className="cinema-proof-section cinema-shell"><div className="cinema-section-intro"><div><p className="cinema-eyebrow"><span className="cinema-live-dot" /> BUILT IN A WORKING VILLA BUSINESS</p><h2>Real work.<br /><em>Real screens.</em></h2></div><p>Developed inside Mr Property Siam on Koh Samui. Explore the actual Ops interface below, with private information anonymised.</p></div><BusinessStories /></section>
+
+    <section className="cinema-growth"><div className="cinema-shell"><div className="cinema-section-intro"><div><p className="cinema-eyebrow">MORE THAN OPERATIONS</p><h2>Run the business.<br /><em>Grow the opportunity.</em></h2></div><Link to="/capabilities" className="cinema-text-link">All features & connections <ArrowRight size={17} /></Link></div><div className="cinema-growth-grid">{[
+      { icon: Megaphone, number: '01', title: 'Make available nights work harder.', text: 'Prepare Google and Meta campaigns, social content and Mailchimp newsletters around real stay windows. Keep budgets and publishing approvals in view.', tags: ['Google & Meta', 'Social content', 'Mailchimp'] },
+      { icon: MessageSquare, number: '02', title: 'Keep conversations in context.', text: 'Bring supported WhatsApp and incoming social conversations into the team’s workspace. Explore the LINE supplier pilot for orders and delivery evidence.', tags: ['WhatsApp', 'Social inbox', 'LINE pilot'] },
+      { icon: Sparkles, number: '03', title: 'Make every stay more valuable.', text: 'Help guests discover transfers, chefs, experiences and useful extras. Give owners visibility into property decisions, marketing budgets and payouts.', tags: ['Guest services', 'Owner visibility', 'Configured payments'] },
+    ].map(item => <article key={item.number}><div className="cinema-growth-card-top"><item.icon size={25} /><span>{item.number}</span></div><h3>{item.title}</h3><p>{item.text}</p><div className="cinema-tags">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div></article>)}</div><p className="cinema-fine-print">Connection availability depends on provider accounts, permissions and rollout. Publishing and payments require configuration.</p></div></section>
+
+    <section className="cinema-operator cinema-shell"><div className="cinema-operator-image"><img src={asset('/img/villa-sapphire-hero.jpg')} alt="A managed tropical villa illuminated at dusk" loading="lazy" width="1200" height="800" /><span>FROM THE VILLA FLOOR TO THE OFFICE.</span></div><div className="cinema-operator-copy"><p className="cinema-eyebrow">BORN IN THE REAL WORLD</p><h2>Built where<br /><em>hospitality happens.</em></h2><p>A statement an owner needs to understand. A clean that needs recording. A guest who needs an answer. HostPilot Pro grew from the daily realities of managing villas — and the ambition to make them better.</p><Link to="/about" className="cinema-text-link">Meet the operation behind it <ArrowRight size={17} /></Link><div className="cinema-operator-signature"><span>MR PROPERTY SIAM</span><small>Koh Samui, Thailand · first operator</small></div></div></section>
+
+    <section className="cinema-connections cinema-shell"><div><Layers size={30} /><p className="cinema-eyebrow">YOUR BACKBONE. OUR CONNECTED LAYER.</p><h2>Keep what works.<br /><em>Build what’s next.</em></h2><p>Hostaway is supported in the existing operation. Guesty and Lodgify adapters are planned and need testing before availability. New SaaS companies connect only after setup and validation.</p></div><div className="cinema-connection-list"><div><strong>Hostaway</strong><span className="cinema-status-live">Supported in current operation</span></div><div><strong>Guesty</strong><span>Planned adapter</span></div><div><strong>Lodgify</strong><span>Planned adapter</span></div><div className="cinema-country-note"><Globe2 size={21} /><p><strong>A vision beyond one market.</strong>Country-specific reporting, payment methods, languages and legal workflows will be adapted and validated market by market. Thailand’s TM30 workflow is specific to Thailand.</p></div></div></section>
+
+    <section className="cinema-finale"><img src={asset('/img/hostpilot-cinematic-hero.webp')} alt="" loading="lazy" width="1536" height="1024" /><div className="cinema-finale-shade" /><div className="cinema-shell"><p className="cinema-eyebrow">YOUR NEXT CHAPTER</p><h2>A remarkable business<br />deserves <em>a remarkable view.</em></h2><p>Explore the platform. See the details. Imagine your operation.</p><div className="cinema-actions"><Link to="/tour" className="cinema-button cinema-button-gold">Take the live tour <ArrowRight size={18} /></Link><Link to="/demo" className="cinema-button cinema-button-outline">Talk about your portfolio <ArrowRight size={18} /></Link></div><span className="cinema-finale-footnote">No signup needed for the tour · Real Ops screenshots and illustrative portal demos</span></div></section>
+  </div>;
 }
