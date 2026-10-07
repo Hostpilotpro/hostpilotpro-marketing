@@ -3,7 +3,7 @@ import { ArrowRight, Globe2, Languages, Scale, CreditCard } from 'lucide-react';
 
 export default function InternationalRollout({ compact = false }) {
   if (compact) return <div className="mt-5 max-w-3xl rounded-xl border border-hp-line bg-[color:var(--hp-veil-1)] p-4 text-[13px] leading-relaxed text-hp-text2">
-    <p>English, Thai and Burmese are the current setup for our first client, Mr Property Siam. International rollout will adapt languages, country-specific legal settings and payment integrations market by market; it is not yet available everywhere.</p>
+    <p>English, Thai and Burmese are the current setup for our first client, Mr Property Siam. Tell us your country during onboarding. We will review the languages, currencies, payment providers and local document workflows your company needs, then agree the adaptations before activation.</p>
     <Link className="mt-2 inline-flex items-center gap-2 text-hp-goldInk" to="/#international">See the international rollout plan <ArrowRight size={13} /></Link>
   </div>;
 
@@ -18,7 +18,7 @@ export default function InternationalRollout({ compact = false }) {
       <div className="mt-7 grid gap-4 md:grid-cols-3">
         {[
           [Languages, 'Languages for the team', 'Planned editions for Spanish-speaking and French-speaking markets, the Philippines and Indonesia will adapt interface language and local terminology to each operator’s needs.'],
-          [Scale, 'Country-specific settings', 'Legal, tax, payroll and document settings will be developed and reviewed for each country before release. Translating a screen is not the same as making it suitable for that jurisdiction.'],
+          [Scale, 'Country-specific settings', 'We will agree local reporting, tax, payroll and document requirements during onboarding and review adaptations before release. TM30 is a Thailand-specific spreadsheet and filing-status workflow, not a worldwide reporting service.'],
           [CreditCard, 'Payments that fit the region', 'We intend to integrate payment providers and methods appropriate to each market. Thailand’s PromptPay is not the default answer for operators in other regions.'],
         ].map(([Icon, title, text]) => <article key={title} className="hp-card p-5">
           <Icon size={21} className="text-hp-goldInk" />

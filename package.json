@@ -4,6 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "demo:start": "node sandbox/server.mjs",
+    "demo:test": "node --test sandbox/server.test.mjs",
     "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "vite build",
     "build:preview": "VITE_PREVIEW=1 vite build --outDir dist-preview",

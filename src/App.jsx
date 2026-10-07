@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
@@ -15,6 +15,8 @@ import Proof from './pages/Proof.jsx';
 import Blog from './pages/Blog.jsx';
 import Demo from './pages/Demo.jsx';
 import NotFound from './pages/NotFound.jsx';
+import Capabilities from './pages/Capabilities.jsx';
+const Sandbox = lazy(() => import('./sandbox/Sandbox.jsx'));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -57,6 +59,10 @@ export default function App() {
     };
   }, [pathname]);
 
+  if (pathname === '/sandbox' || pathname.startsWith('/sandbox/')) {
+    return <Suspense fallback={<p className="shell pt-24" role="status">Opening your demo…</p>}><Sandbox /></Suspense>;
+  }
+
   return (
     <>
       <ScrollToTop />
@@ -70,6 +76,7 @@ export default function App() {
           <Route path="/guest" element={<Guest />} />
           <Route path="/field" element={<Field />} />
           <Route path="/full-suite" element={<FullSuite />} />
+          <Route path="/capabilities" element={<Capabilities />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
           <Route path="/proof" element={<Proof />} />
@@ -81,7 +88,7 @@ export default function App() {
           <Route path="/ops-hub" element={<Navigate to="/ops" replace />} />
           <Route path="/guest-portal" element={<Navigate to="/guest" replace />} />
           <Route path="/testimonials" element={<Navigate to="/proof" replace />} />
-          <Route path="/features" element={<Navigate to="/full-suite" replace />} />
+          <Route path="/features" element={<Navigate to="/capabilities" replace />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

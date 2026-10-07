@@ -1,3 +1,4 @@
+import { salesSections } from '../data/capabilities.js';
 import useSeo from '../lib/seo.js';
 import ProductPage from '../components/ProductPage.jsx';
 import { opsDepth } from './ops-sections.js';
@@ -32,6 +33,7 @@ export default function Ops() {
       replicaTheme="dark"
       host="ops.hostpilotpro.com"
       sections={[
+        salesSections.ops,
         {
           eyebrow: 'Speed',
           title: 'Two keystrokes to any record.',

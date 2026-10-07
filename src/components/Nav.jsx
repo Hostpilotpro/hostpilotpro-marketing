@@ -5,6 +5,7 @@ import Logo from './Logo.jsx';
 import useTheme from '../lib/theme.jsx';
 
 const products = [
+  { to: '/capabilities', name: 'Features & connections', desc: 'Marketing, messaging and country setup' },
   { to: '/owner', name: 'HostPilot Owner', desc: 'Statements, payouts, approvals' },
   { to: '/ops', name: 'HostPilot Ops', desc: 'The staff console' },
   { to: '/guest', name: 'HostPilot Guest', desc: 'Stay app and add-ons' },

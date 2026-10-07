@@ -124,6 +124,18 @@ export default function Home() {
 
       {/* The original visual consolidation argument stays, after the new lead stories. */}
       <StackCollapse compact />
+      <section className="shell py-14">
+        <p className="eyebrow">Growth, communication & service</p>
+        <h2 className="h-sec mt-4 max-w-3xl">More than the daily task board.</h2>
+        <div className="mt-7 grid gap-4 md:grid-cols-3">
+          {[
+            ['Market available nights', 'Prepare Google and Meta campaigns, social content and Mailchimp newsletters around actual stay windows, with budgets and approval before publishing.'],
+            ['Keep the office connected', 'Bring supported WhatsApp conversations and incoming social messages into the team’s working context. Explore the LINE supplier pilot for orders and delivery evidence.'],
+            ['Bring owners and guests along', 'Give owners marketing budgets, property decisions and payout records; give guests useful stay information, service requests and configured payment options.'],
+          ].map(([title, body]) => <article key={title} className="hp-card p-6"><h3 className="text-[18px] font-semibold">{title}</h3><p className="mt-3 text-[15px] leading-relaxed text-hp-text2">{body}</p></article>)}
+        </div>
+        <Link to="/capabilities" className="btn btn-quiet mt-7">Explore features & connections <ArrowRight size={15} /></Link>
+      </section>
 
       {/* ---------------------------------------------------------- operator proof */}
       <section className="band py-16 sm:py-24">
