@@ -5,6 +5,7 @@ import { SectionHead, Eyebrow } from '../components/ui.jsx';
 import StackCollapse from '../components/StackCollapse.jsx';
 import BeingBuilt from '../components/BeingBuilt.jsx';
 import CompatNote from '../components/CompatNote.jsx';
+import SuiteWorkspace from '../components/SuiteWorkspace.jsx';
 
 const flow = [
   { step: "Plan the next booking", body: "Find available stay windows, prepare newsletters and advertising, and review budgets before launching through configured marketing providers.", surfaces: ["Ops", "Owner"] },
@@ -54,13 +55,13 @@ export default function FullSuite() {
     path: '/full-suite',
   });
   return (
-    <div>
+    <div className="cinematic-product-page replica-dark full-suite-cinematic">
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
         <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_80%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pt-32">
           <Eyebrow>The full suite</Eyebrow>
           <h1 className="h-sec mt-4 max-w-[24ch] font-medium">
-            One database, <span className="serif-em text-hp-text2">four ways in.</span>
+            One connected business.<br /><span className="serif-em">Four portals. One purpose.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
             The reason an owner statement can be trusted is that it is assembled from the same records the cleaner
@@ -79,6 +80,7 @@ export default function FullSuite() {
         </div>
       </section>
 
+      <SuiteWorkspace />
       <StackCollapse compact />
       <div className="shell py-8"><Link to="/capabilities" className="btn btn-quiet">Explore marketing, messaging & connections <ArrowRight size={15} /></Link></div>
 
