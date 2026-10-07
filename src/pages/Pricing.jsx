@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Check, X, ArrowRight, Clock } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import { SectionHead, Eyebrow } from '../components/ui.jsx';
+import PortfolioQuote from '../components/PortfolioQuote.jsx';
 
 const included = [
   'All four surfaces — Ops, Owner, Guest and Field',
@@ -51,13 +52,13 @@ export default function Pricing() {
     path: '/pricing',
   });
   return (
-    <div>
+    <div className="cinematic-product-page replica-dark pricing-sales-page">
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
         <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_20%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pt-32">
           <Eyebrow>Pricing</Eyebrow>
-          <h1 className="h-sec mt-4 max-w-[26ch] font-medium">
-            The shape of the deal, <span className="serif-em text-hp-text2">without the number.</span>
+          <h1 className="sales-page-title mt-4 max-w-[26ch]">
+            The platform.<br /><span className="serif-em">For your portfolio.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
             We do not publish a rate yet. We do publish exactly how you are charged, what is included, and the five
@@ -74,6 +75,8 @@ export default function Pricing() {
           </div>
         </div>
       </section>
+
+      <PortfolioQuote />
 
       {/* how you are charged */}
       <section className="py-16 sm:py-20">

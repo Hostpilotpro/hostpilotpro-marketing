@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Check, ArrowRight, AlertTriangle } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import { Eyebrow } from '../components/ui.jsx';
+import asset from '../lib/asset.js';
+import '../components/sales-pages.css';
 
 const SIZES = ['Under 20 villas', '20–50 villas', '50–100 villas', '100–200 villas', '200+ villas'];
 const INTEREST = ['The full suite', 'Owner portal', 'Ops console', 'Guest app', 'Field app', 'Partner / licensing'];
@@ -18,15 +20,18 @@ export default function Demo() {
     path: '/demo',
   });
 
+  const [params] = useSearchParams();
+  const presetChannel = params.get('channel') || '';
+  const presetVillas = Number(params.get('villas'));
   const [state, setState] = useState({
     name: '',
     company: '',
     email: '',
     phone: '',
-    channel: '',
-    size: '',
-    interest: '',
-    message: '',
+    channel: ['Hostaway','Guesty','Lodgify','Other / not selected'].includes(presetChannel) ? presetChannel : '',
+    size: SIZES.includes(params.get('size')) ? params.get('size') : '',
+    interest: INTEREST.includes(params.get('interest')) ? params.get('interest') : '',
+    message: Number.isInteger(presetVillas) && presetVillas >= 1 && presetVillas <= 250 ? `My portfolio has ${presetVillas} villas.` : '',
   });
   const [status, setStatus] = useState('idle'); // idle | sending | done | mailto | error
   const set = (k) => (e) => setState({ ...state, [k]: e.target.value });
@@ -51,8 +56,8 @@ export default function Demo() {
       }
     }
 
-    // No endpoint configured: fall back to a mail draft, and still show a success state
-    // with the address in plain text so nothing is lost if no mail client opens.
+    // No endpoint configured: prepare an email draft and explain that it needs sending.
+    // Keep the address visible if no email client opens.
     const body = encodeURIComponent(
       [
         `Name: ${state.name}`,
@@ -78,18 +83,19 @@ export default function Demo() {
   const submitted = status === 'done' || status === 'mailto';
 
   return (
-    <div className="pt-24 pb-20 sm:pt-28">
+    <div className="cinematic-product-page replica-dark demo-sales-page pt-24 pb-20 sm:pt-28">
       <div className="shell grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <Eyebrow>Book a call</Eyebrow>
-          <h1 className="h-sec mt-4 font-medium">
-            Thirty minutes, <span className="serif-em text-hp-text2">live product.</span>
+          <h1 className="sales-page-title mt-4">
+            Your next chapter.<br /><span className="serif-em">A working product.</span>
           </h1>
           <p className="mt-6 text-[17px] leading-[1.7] text-hp-text2">
             You have already seen the interface in the tour, so the call is not a demo script. Bring your portfolio
             and your channel manager and we will show you the parts the tour stubs out: the Hostaway sync, a real
             statement close, payroll inputs, the bits that are still rough.
           </p>
+          <figure className="demo-sales-visual"><img src={asset('/img/real-ops/02-real-ops-finance-hub.jpg')} alt="Actual anonymised HostPilot Ops finance workspace" width="1356" height="847" /><figcaption>Actual Ops interface · private information anonymised</figcaption></figure>
           <ul className="mt-8 space-y-3 text-[15px] text-hp-text2">
             {[
               'A number for your portfolio size the same working day.',
@@ -117,10 +123,10 @@ export default function Demo() {
               <div className="flex h-10 w-10 items-center justify-center rounded-full border border-hp-pos/40 bg-[color:var(--hp-pos-wash)] text-hp-pos">
                 <Check size={18} />
               </div>
-              <h2 className="mt-5 font-display text-[26px] text-hp-text">Received. We will come back today.</h2>
+              <h2 className="mt-5 font-display text-[26px] text-hp-text">{status === 'mailto' ? 'Your email draft is ready.' : 'Your enquiry was received.'}</h2>
               <p className="mt-3 text-[15.5px] leading-relaxed text-hp-text2">
                 {status === 'mailto'
-                  ? 'A mail draft should have opened. If it did not, send the same details to '
+                  ? 'Review and send the draft in your email app. It has not been sent by this website. If no email app opened, send your details to '
                   : 'We reply within one working day, Thailand time. If anything is urgent, write to '}
                 <a href={`mailto:${FALLBACK_MAIL}`} className="link-gold">
                   {FALLBACK_MAIL}
@@ -139,10 +145,10 @@ export default function Demo() {
           ) : (
             <form onSubmit={onSubmit} className="hp-card space-y-3.5 p-6 sm:p-7">
               <div className="grid gap-3.5 sm:grid-cols-2">
-                <input required className={field} placeholder="Your name" value={state.name} onChange={set('name')} />
+                <input required className={field} aria-label="Your name" autoComplete="name" placeholder="Your name" value={state.name} onChange={set('name')} />
                 <input
                   className={field}
-                  placeholder="Company"
+                  aria-label="Company" autoComplete="organization" placeholder="Company"
                   value={state.company}
                   onChange={set('company')}
                 />
@@ -150,17 +156,17 @@ export default function Demo() {
                   required
                   type="email"
                   className={field}
-                  placeholder="Email"
+                  aria-label="Email" autoComplete="email" placeholder="Email"
                   value={state.email}
                   onChange={set('email')}
                 />
                 <input
                   className={field}
-                  placeholder="Phone or WhatsApp"
+                  aria-label="Phone or WhatsApp" autoComplete="tel" placeholder="Phone or WhatsApp"
                   value={state.phone}
                   onChange={set('phone')}
                 />
-                <select required className={field} value={state.size} onChange={set('size')}>
+                <select aria-label="Portfolio size" required className={field} value={state.size} onChange={set('size')}>
                   <option value="">Portfolio size</option>
                   {SIZES.map((s) => (
                     <option key={s} value={s}>
@@ -168,7 +174,7 @@ export default function Demo() {
                     </option>
                   ))}
                 </select>
-                <select className={field} value={state.interest} onChange={set('interest')}>
+                <select aria-label="Interested in" className={field} value={state.interest} onChange={set('interest')}>
                   <option value="">Interested in</option>
                   {INTEREST.map((s) => (
                     <option key={s} value={s}>
@@ -179,13 +185,13 @@ export default function Demo() {
               </div>
               <input
                 className={field}
-                placeholder="Channel manager you use (Hostaway, Guesty, none…)"
+                aria-label="Channel manager" placeholder="Channel manager you use (Hostaway, Guesty, none…)"
                 value={state.channel}
                 onChange={set('channel')}
               />
               <textarea
                 className={`${field} min-h-[120px]`}
-                placeholder="What is broken in your operation right now?"
+                aria-label="What would you like to improve?" placeholder="What would you like to improve in your operation?"
                 value={state.message}
                 onChange={set('message')}
               />
@@ -202,7 +208,7 @@ export default function Demo() {
                 </div>
               )}
               <button type="submit" disabled={status === 'sending'} className="btn btn-gold w-full">
-                {status === 'sending' ? 'Sending…' : 'Send and get a number today'}
+                {status === 'sending' ? 'Preparing…' : ENDPOINT ? 'Send your enquiry' : 'Prepare your email enquiry'}
               </button>
               <p className="text-[13px] text-hp-text3">
                 We use this to reply and to size a quote. No newsletter, no sequence, no reselling your details.
