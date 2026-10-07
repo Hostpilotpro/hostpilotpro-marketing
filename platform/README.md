@@ -2,7 +2,15 @@
 
 This is a standalone Vite app under `platform/`, deployed as a **new Vercel project**, with a **new Supabase project**. The parent repository remains the marketing website. No existing business backend or production database should be linked to this app.
 
-## Implemented
+## Cloud test status — 7 October 2026
+
+The separate test platform is online at https://hostpilotpro-platform-test.vercel.app, backed by a new Supabase project in Singapore. Both migrations have been applied to that new project. Existing operational databases and portals were not modified.
+
+Live browser checks covered login, company creation, loading 40 fictional properties, task completion and persistence. Two temporary verified accounts also passed cloud Data API checks: the second company could neither read the first company's records nor update its tasks or membership role. Database checks covered invitation roles, anonymous access and the verified-email gate. Temporary QA accounts and their sample portfolios were removed afterward. Supabase security advisors returned no notices.
+
+Email confirmation remains enabled, anonymous signup is disabled, and password length and leaked-password protections are configured. The built-in email sender remains for limited testing: a dedicated sender must be connected before customer signup. Inbox delivery, the complete email-confirmation journey and password-reset email delivery have not yet been verified. Custom domains, subscription billing and operational integrations remain future work.
+
+## Included features
 
 - Managed email/password signup, email verification, login/logout and password recovery using Supabase Auth.
 - Verified users create one company workspace, or accept an email-bound invitation.
@@ -19,7 +27,7 @@ This is a standalone Vite app under `platform/`, deployed as a **new Vercel proj
 1. Confirm the Supabase organization and the quoted new-project cost.
 2. Create a brand-new test project; do not branch or alter the existing operational database.
 3. Keep email confirmations enabled. Configure the test site's URL and allowed `/auth/confirm` and `/reset-password` redirects. Disable anonymous sign-ins. Configure a supported SMTP sender before inviting external test users; the default mail service has limited delivery scope and rate limits.
-4. Apply `supabase/migrations/20261007080641_company_foundation.sql` to the new project only. `database/schema.sql` is the identical review copy; tests require them to match.
+4. Apply both migrations in `supabase/migrations/` in timestamp order to the new project only. `database/schema.sql` is the identical review copy of the foundation migration; tests require them to match. The second migration covers the task foreign-key index and explicit denial of direct invitation-table access.
 5. Create a separate Vercel project, rooted at `platform/`. Set `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` and `VITE_SUPABASE_PROJECT_REF` from **that new project**. Use only a modern publishable key in browser code. Never use a service-role key or a management token.
 6. Deploy the platform as an isolated test deployment. Leave the marketing production branch, public signup links and existing portals unchanged.
 7. Verify auth configuration and database advisors. Run isolation checks on the new project and complete a browser journey with two test companies and a verified teammate account. Local PostgreSQL tests alone do not establish that cloud configuration or email delivery is working.

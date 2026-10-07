@@ -15,6 +15,7 @@ test('PostgreSQL enforces tenant isolation, verified identity and guarded invita
     const migration=await readFile(new URL('../supabase/migrations/20261007080641_company_foundation.sql', import.meta.url), 'utf8');
     assert.equal(migration,schema,'Deployment migration must match the schema exercised by these tests.');
     await db.exec(migration);
+    await db.exec(await readFile(new URL('../supabase/migrations/20261007084606_tenant_access_indexes.sql', import.meta.url), 'utf8'));
     const [a,b,field,unverified,impostor] = Array.from({length:5},()=>randomUUID());
     for(const [id,email,verified] of [[a,'admin-a@example.test',true],[b,'admin-b@example.test',true],[field,'field@example.test',true],[unverified,'unverified@example.test',false],[impostor,'impostor@example.test',true]]) {
       await db.query('insert into auth.users(id,email,email_confirmed_at) values($1,$2,$3)',[id,email,verified?new Date().toISOString():null]);

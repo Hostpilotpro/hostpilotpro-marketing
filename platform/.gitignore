@@ -5,3 +5,6 @@ dist/
 .vercel/
 .npm-cache/
 supabase/.temp/
+
+.vercel
+.env*
