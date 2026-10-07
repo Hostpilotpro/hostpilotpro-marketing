@@ -1,3 +1,4 @@
+import { salesSections } from '../data/capabilities.js';
 import useSeo from '../lib/seo.js';
 import ProductPage from '../components/ProductPage.jsx';
 import OwnerPortal from '../tour/OwnerPortal.jsx';
@@ -36,6 +37,7 @@ export default function Owner() {
       replicaTheme="light"
       host="owner.hostpilotpro.com"
       sections={[
+        salesSections.owner,
         {
           eyebrow: 'The statement',
           title: 'Written to be interrogated.',

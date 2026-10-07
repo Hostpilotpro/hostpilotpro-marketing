@@ -7,10 +7,11 @@ import BeingBuilt from '../components/BeingBuilt.jsx';
 import CompatNote from '../components/CompatNote.jsx';
 
 const flow = [
+  { step: "Plan the next booking", body: "Find available stay windows, prepare newsletters and advertising, and review budgets before launching through configured marketing providers.", surfaces: ["Ops", "Owner"] },
   {
     step: 'A booking lands',
     body:
-      'Hostaway syncs the reservation. HostPilot creates the stay, the guest record, the turnover tasks and the revenue line in one write.',
+      'Hostaway reservation sync provides the stay context for guest records, operational tasks and reporting.',
     surfaces: ['Ops', 'Guest'],
   },
   {
@@ -34,7 +35,7 @@ const flow = [
   {
     step: 'The month closes',
     body:
-      'Reservations, recoveries, service costs and maintenance assemble into a statement. Nothing is re-typed, so nothing can silently disagree.',
+      'Reservations, recoveries, service costs and maintenance assemble into a statement. Staff review the source records and statement before publication.',
     surfaces: ['Ops', 'Owner'],
   },
   {
@@ -79,13 +80,14 @@ export default function FullSuite() {
       </section>
 
       <StackCollapse compact />
+      <div className="shell py-8"><Link to="/capabilities" className="btn btn-quiet">Explore marketing, messaging & connections <ArrowRight size={15} /></Link></div>
 
       <section className="py-16 sm:py-20">
         <div className="shell">
           <SectionHead
             eyebrow="One booking, end to end"
             title="Follow a single reservation through the system."
-            lede="Six steps. No export, no re-keying, no reconciliation between two tools that half-agree."
+            lede="Marketing, guest service, property work and owner reporting connected through shared records and review."
           />
           <ol className="mt-10 space-y-3">
             {flow.map((f, i) => (
@@ -131,7 +133,7 @@ export default function FullSuite() {
           </div>
           <p className="reveal mt-7 max-w-2xl text-[14.5px] text-hp-text3">
             Being straight about this: Hostaway is the only channel manager HostPilot syncs with today. Guesty and
-            Lodgify connectors are being built — they are adapters rather than rewrites, but they are not finished, so
+            Lodgify adapters are planned and must be tested before availability, so
             if you run on either one you cannot subscribe and connect this week. Tell us on the call and we will tell you
             where the queue is.
           </p>

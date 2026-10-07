@@ -1,3 +1,4 @@
+import { salesSections } from '../data/capabilities.js';
 import useSeo from '../lib/seo.js';
 import ProductPage from '../components/ProductPage.jsx';
 import GuestApp from '../tour/GuestApp.jsx';
@@ -20,7 +21,7 @@ export default function Guest() {
       lede="Guests ask the same eleven questions on every stay, and they ask them at midnight. Answer them once, in a link they already have, and the same screen can offer an airport transfer, a chef and a boat day without a WhatsApp negotiation — your office confirms the ones they request."
       bullets={[
         'Arrival countdown, plus the door code and Wi-Fi your team set, shown on the morning of check-in',
-        'Verification status visible to the guest — passports, TM30 filed',
+        'Guest check-in progress and staff-recorded local reporting status',
         'House manual, directions and villa rules in one place',
         'Paid add-on catalogue with a running total',
         'Every add-on a guest requests appears in the ops task board straight away',
@@ -33,11 +34,12 @@ export default function Guest() {
       replicaTheme="light"
       host="stay.hostpilotpro.com"
       sections={[
+        salesSections.guest,
         {
           eyebrow: 'The commercial case',
           title: '฿24,950 on one seven-night stay.',
           lede:
-            'That figure is from the demo portfolio, not a customer average — we will not publish an uplift percentage we cannot show you on screen. But the mechanism is plain: a priced list in a guest’s pocket converts better than the same list inside an email they read on the plane.',
+            'That figure is from the demo portfolio, not a customer average — we will not publish an uplift percentage we cannot show you on screen. Guests can browse prices and request services from their stay portal.',
           items: [
             ['Add-ons priced and visible', 'Transfer ฿1,400 · chef ฿4,800 an evening · charter ฿18,500 · massage ฿1,200 an hour.'],
             ['One tap instead of a thread', 'The guest requests it; the office sees a task and a charge to confirm, not a message to interpret.'],
@@ -52,7 +54,7 @@ export default function Guest() {
             'Most bad reviews are written about the first evening — a code that did not work, a gate nobody explained, an aircon remote in Thai.',
           items: [
             ['Access details, timed', 'The code your team set is shown when the stay starts and hidden when it ends. The lock itself is not connected to this system — your team sets the code.'],
-            ['Status, not silence', 'The guest can see that their passports are verified and TM30 has been filed.'],
+            ['Status, not silence', 'Guests can see check-in progress and staff-recorded reporting status. In Thailand, TM30 spreadsheet preparation supports the team’s filing workflow.'],
             ['Directions that survive Samui', 'Pinned location, gate instructions and the manager’s name and number.'],
             ['One thread if they need a human', 'Messages route to whoever is on duty, inside the same system as the tasks.'],
           ],
@@ -65,11 +67,11 @@ export default function Guest() {
           items: [
             [
               'A visibility matrix your office controls',
-              '55 active experiences, and a per-villa matrix that decides which of them a given guest is shown. Across a portfolio that resolves to thousands of villa-and-experience combinations, with explicit overrides where a villa needs something different.',
+              'A per-villa visibility matrix controls which experiences each guest sees, with overrides for individual properties.',
             ],
             [
               'Transfers priced per villa, per destination',
-              '610 taxi rates across 10 destinations in our own operation. The airport run from one villa is not the same job as from another, and the price reflects it.',
+              'Set transfer prices for each villa and destination, reflecting the route and service your team offers.',
             ],
             [
               'Run by named people',
@@ -85,7 +87,7 @@ export default function Guest() {
       roadmapIds={['devices']}
       notFor={[
         'It is not a booking engine — guests arrive with a reservation already made.',
-        'It does not take card payments by itself; add-ons are settled through your existing payment flow at checkout.',
+        'Configured Stripe checkout supports card payments; Wise instructions and PromptPay evidence are available where enabled. Payment confirmation follows reconciliation or staff verification.',
         'It is a web app, not a native app. That is deliberate: nobody downloads software for one week.',
         'Add-on and transfer requests are not instantly confirmed with the supplier. Your team closes the loop.',
         'Door codes are issued and communicated by your team. No smart lock is connected to this system today.',

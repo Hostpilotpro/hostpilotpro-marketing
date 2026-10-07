@@ -6,3 +6,5 @@ dist/
 qa*.png
 qa*.jpg
 dist-preview/
+.sandbox/
+.npm-cache/

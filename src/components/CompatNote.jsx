@@ -13,7 +13,7 @@ export default function CompatNote({ variant = 'chip', className = '' }) {
     return (
       <p className={`text-[13.5px] leading-relaxed text-hp-text3 ${className}`}>
         <span className="text-hp-text2">Sits on top of your channel manager.</span> Hostaway is supported today; Guesty
-        and Lodgify connectors are being built.
+        and Lodgify adapters are planned and require testing before availability.
       </p>
     );
   }
@@ -24,7 +24,7 @@ export default function CompatNote({ variant = 'chip', className = '' }) {
         <Layers size={13} className="text-hp-goldInk" />
         Sits on top of your channel manager
       </span>
-      <span className="chip !text-[12px]">Hostaway today · Guesty and Lodgify next</span>
+      <span className="chip !text-[12px]">Hostaway today · Guesty and Lodgify planned</span>
     </div>
   );
 }
