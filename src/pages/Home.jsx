@@ -4,6 +4,7 @@ import { ArrowRight, ArrowDown, Play, Check, Monitor, Users, Smartphone, Buildin
 import useSeo from '../lib/seo.js';
 import asset from '../lib/asset.js';
 import BusinessStories from '../components/BusinessStories.jsx';
+import VisualProductStories from '../components/VisualProductStories.jsx';
 import './home-cinematic.css';
 
 const experiences = [
@@ -38,6 +39,7 @@ export default function Home() {
       <img className="cinema-hero-image" src={asset('/img/hostpilot-cinematic-hero.webp')} width="1536" height="1024" fetchPriority="high" alt="A contemporary tropical villa and infinity pool overlooking the ocean at dusk" />
       <div className="cinema-hero-shade" />
       <div className="cinema-shell cinema-hero-content"><p className="cinema-eyebrow"><span className="cinema-live-dot" /> THE BUSINESS BEHIND EXCEPTIONAL STAYS</p><h1 id="cinema-title">Exceptional villas.<br /><em>Extraordinary control.</em></h1><p className="cinema-hero-description">The bookings. The people. The details.<br />Bring your villa business into one beautiful view.</p><div className="cinema-actions"><Link to="/#experiences" className="cinema-button cinema-button-gold">Explore the platform <ArrowRight size={18} /></Link><Link to="/tour" className="cinema-play-link"><span><Play size={15} fill="currentColor" /></span> See it in action</Link></div><div className="cinema-hero-proof"><ShieldCheck size={16} /><span>Built by a villa operator. Used in the real world.</span></div></div>
+      <aside className="cinema-hero-device" aria-label="HostPilot Ops on a laptop"><span>YOUR OPERATION. ONE WORKING VIEW.</span><div className="cinema-hero-device-screen"><div><i /><i /><i /><small>HostPilot Ops · actual interface</small></div><img src={asset('/img/real-ops/02-real-ops-finance-hub.jpg')} alt="Actual HostPilot Ops finance interface with private data masked" width="1356" height="847" /></div><div className="cinema-hero-device-base" /><Link to="/tour">Explore the real workspace <ArrowRight size={13} /></Link></aside>
       <div className="cinema-hero-caption"><span>KOH SAMUI SPIRIT. A BIGGER VISION.</span><span>Original architectural visual</span></div>
       <div className="cinema-hero-bottom cinema-shell"><a href="#connected" className="cinema-scroll"><ArrowDown size={16} /> DISCOVER A DIFFERENT WAY</a><span>Keep your PMS. Elevate everything around it.</span></div>
     </section>
@@ -45,6 +47,8 @@ export default function Home() {
     <div className="cinema-signal-bar"><div className="cinema-shell"><p>ONE BUSINESS.<br /><strong>CONNECTED.</strong></p>{[['Operations', Monitor], ['Owners', Users], ['Guests', Smartphone], ['Field teams', Building2], ['Growth', Megaphone]].map(([label, Icon]) => <span key={label}><Icon size={18} />{label}</span>)}</div></div>
 
     <section className="cinema-manifesto cinema-shell" id="connected"><p className="cinema-eyebrow">BEYOND THE BOOKING CALENDAR</p><h2>You create incredible stays.<br /><span>We connect everything</span><br /><em>that makes them possible.</em></h2><div className="cinema-manifesto-bottom"><span className="cinema-number">01 — THE BIGGER PICTURE</span><p>Your channel manager handles distribution. HostPilot Pro brings together the business around it — from owner money and guest requests to the people looking after every villa.</p><Link to="/capabilities" className="cinema-round-link" aria-label="Explore features and connections"><ArrowRight size={26} /></Link></div></section>
+
+    <VisualProductStories />
 
     <Experiences />
 
