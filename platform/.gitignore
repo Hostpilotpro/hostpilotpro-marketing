@@ -4,3 +4,4 @@ dist/
 !.env.example
 .vercel/
 .npm-cache/
+supabase/.temp/
