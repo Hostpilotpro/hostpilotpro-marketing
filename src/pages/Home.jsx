@@ -5,6 +5,7 @@ import useSeo from '../lib/seo.js';
 import asset from '../lib/asset.js';
 import BusinessStories from '../components/BusinessStories.jsx';
 import VisualProductStories from '../components/VisualProductStories.jsx';
+import MarketingVisualStory from '../components/MarketingVisualStory.jsx';
 import './home-cinematic.css';
 
 const experiences = [
@@ -53,6 +54,8 @@ export default function Home() {
     <Experiences />
 
     <section className="cinema-proof-section cinema-shell"><div className="cinema-section-intro"><div><p className="cinema-eyebrow"><span className="cinema-live-dot" /> BUILT IN A WORKING VILLA BUSINESS</p><h2>Real work.<br /><em>Real screens.</em></h2></div><p>Developed inside Mr Property Siam on Koh Samui. Explore the actual Ops interface below, with private information anonymised.</p></div><BusinessStories /></section>
+
+    <MarketingVisualStory />
 
     <section className="cinema-growth"><div className="cinema-shell"><div className="cinema-section-intro"><div><p className="cinema-eyebrow">MORE THAN OPERATIONS</p><h2>Run the business.<br /><em>Grow the opportunity.</em></h2></div><Link to="/capabilities" className="cinema-text-link">All features & connections <ArrowRight size={17} /></Link></div><div className="cinema-growth-grid">{[
       { icon: Megaphone, number: '01', title: 'Make available nights work harder.', text: 'Prepare Google and Meta campaigns, social content and Mailchimp newsletters around real stay windows. Keep budgets and publishing approvals in view.', tags: ['Google & Meta', 'Social content', 'Mailchimp'] },

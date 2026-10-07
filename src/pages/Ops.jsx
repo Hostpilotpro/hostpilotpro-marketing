@@ -4,6 +4,7 @@ import ProductPage from '../components/ProductPage.jsx';
 import { opsDepth } from './ops-sections.js';
 import BusinessStories from '../components/BusinessStories.jsx';
 import { ScannerStory } from '../components/VisualProductStories.jsx';
+import MarketingVisualStory from '../components/MarketingVisualStory.jsx';
 
 export default function Ops() {
   useSeo({
@@ -15,7 +16,7 @@ export default function Ops() {
   return (
     <ProductPage
       eyebrow="HostPilot Ops"
-      visualHero={{kind: 'ops', image: '/img/hostpilot-bill-scanner.webp', width: 1086, height: 1448, alt: 'Illustrative staff member scanning a supplier receipt with a phone', notification: 'Receipt captured. Ready for review.', note: 'Check details, assign the villa, keep the evidence.', caption: 'FROM FIELD WORK TO THE FINANCE WORKSPACE.', boundary: 'Lifestyle photo and update are illustrative. The inset shows the actual anonymised Ops interface. Extracted bills require review before submission and approval.'}}
+      visualHero={{kind: 'ops', image: '/img/real-ops/01-real-ops-message-centre.jpg', width: 1356, height: 847, alt: 'Actual HostPilot Ops message workspace with private data anonymised', notification: 'A shared view for your operation.', note: 'Conversations, property context and team assignment.', caption: 'FROM FIELD WORK TO THE FINANCE WORKSPACE.', boundary: 'The screen shows the actual anonymised Ops interface. The update card is illustrative. Bill-scanning examples below require review before submission and approval.'}}
       visualDetails={<div className="cinematic-home replica-dark"><ScannerStory /></div>}
       title={
         <>
@@ -86,6 +87,7 @@ export default function Ops() {
           ],
         },
       ]}
+      extra={<MarketingVisualStory />}
       roadmapIds={['connectors', 'trust']}
       notFor={[
         'It is not a channel manager. Distribution, rates on the OTAs and inventory sync stay with Hostaway.',
