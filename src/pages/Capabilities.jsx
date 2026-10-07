@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import useSeo from '../lib/seo.js';
 import InternationalRollout from '../components/InternationalRollout.jsx';
 import { connections, salesSections } from '../data/capabilities.js';
+import FeatureVisualGuide from '../components/FeatureVisualGuide.jsx';
 
 export default function Capabilities() {
   useSeo({ title: 'HostPilot Pro — features & connections', description: 'Marketing, operations, owner reporting and guest services: explore HostPilot Pro workflows and the connections behind them.', path: '/capabilities' });
@@ -13,6 +14,7 @@ export default function Capabilities() {
       <p className="mt-5 max-w-3xl text-[13px] leading-relaxed text-hp-text3">These workflows are built around our first operation at Mr Property Siam. Features and provider connections are configured during onboarding; a new company account does not automatically activate every integration.</p>
       <div className="mt-7 flex flex-wrap gap-3">{[['ops','For your team'],['owner','For your owners'],['guest','For your guests']].map(([path,label]) => <Link className="btn btn-quiet" key={path} to={`/${path}`}>{label}</Link>)}</div>
     </section>
+    <FeatureVisualGuide />
     {Object.entries(salesSections).map(([key, section]) => <section key={key} className="band py-14" aria-labelledby={`${key}-features`}>
       <div className="shell"><p className="eyebrow">{section.eyebrow}</p><h2 id={`${key}-features`} className="h-sec mt-4 max-w-3xl">{section.title}</h2><p className="mt-4 max-w-3xl text-hp-text2">{section.lede}</p>
         <div className="mt-7 grid gap-4 md:grid-cols-2">{section.items.map(([title,body]) => <article key={title} className="hp-card p-6"><h3 className="text-[18px] font-semibold">{title}</h3><p className="mt-3 text-[15px] leading-relaxed text-hp-text2">{body}</p></article>)}</div>
