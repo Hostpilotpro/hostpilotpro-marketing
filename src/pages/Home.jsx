@@ -7,6 +7,7 @@ import VisualProductStories from '../components/VisualProductStories.jsx';
 import MarketingVisualStory from '../components/MarketingVisualStory.jsx';
 import EcosystemSpaces from '../components/EcosystemSpaces.jsx';
 import BusinessAdvantages from '../components/BusinessAdvantages.jsx';
+import BuyerQuestions from '../components/BuyerQuestions.jsx';
 import './home-cinematic.css';
 
 export default function Home() {
@@ -44,6 +45,8 @@ export default function Home() {
     <section className="cinema-operator cinema-shell"><div className="cinema-operator-image"><img src={asset('/img/villa-sapphire-hero.jpg')} alt="A managed tropical villa illuminated at dusk" loading="lazy" width="1200" height="800" /><span>FROM THE VILLA FLOOR TO THE OFFICE.</span></div><div className="cinema-operator-copy"><p className="cinema-eyebrow">BORN IN THE REAL WORLD</p><h2>Built where<br /><em>hospitality happens.</em></h2><p>A statement an owner needs to understand. A clean that needs recording. A guest who needs an answer. HostPilot Pro grew from the daily realities of managing villas — and the ambition to make them better.</p><Link to="/about" className="cinema-text-link">Meet the operation behind it <ArrowRight size={17} /></Link><div className="cinema-operator-signature"><span>MR PROPERTY SIAM</span><small>Koh Samui, Thailand · first operator</small></div></div></section>
 
     <section className="cinema-connections cinema-shell"><div><Layers size={30} /><p className="cinema-eyebrow">YOUR BACKBONE. OUR CONNECTED LAYER.</p><h2>Keep what works.<br /><em>Build what’s next.</em></h2><p>Hostaway is supported in the existing operation. Guesty and Lodgify adapters are planned and need testing before availability. New SaaS companies connect only after setup and validation.</p></div><div className="cinema-connection-list"><div><strong>Hostaway</strong><span className="cinema-status-live">Supported in current operation</span></div><div><strong>Guesty</strong><span>Planned adapter</span></div><div><strong>Lodgify</strong><span>Planned adapter</span></div><div className="cinema-country-note"><Globe2 size={21} /><p><strong>A vision beyond one market.</strong>Country-specific reporting, payment methods, languages and legal workflows will be adapted and validated market by market. Thailand’s TM30 workflow is specific to Thailand.</p></div></div></section>
+
+    <BuyerQuestions />
 
     <section className="cinema-finale"><img src={asset('/img/hostpilot-cinematic-hero.webp')} alt="" loading="lazy" width="1536" height="1024" /><div className="cinema-finale-shade" /><div className="cinema-shell"><p className="cinema-eyebrow">YOUR NEXT CHAPTER</p><h2>Be the agency<br /><em>people choose again.</em></h2><p>Show owners where their money goes. Help guests enjoy their stay. Give your team the tools to follow through.</p><div className="cinema-actions"><Link to="/tour" className="cinema-button cinema-button-gold">Take the live tour <ArrowRight size={18} /></Link><Link to="/demo" className="cinema-button cinema-button-outline">Talk about your portfolio <ArrowRight size={18} /></Link></div><span className="cinema-finale-footnote">No signup needed for the tour · Real Ops screenshots and illustrative portal demos</span></div></section>
   </div>;

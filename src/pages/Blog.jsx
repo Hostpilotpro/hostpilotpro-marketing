@@ -20,16 +20,16 @@ export default function Blog() {
     path: '/blog',
   });
   return (
-    <div>
+    <div className="cinematic-product-page replica-dark">
       <section className="border-b border-hp-lineSoft">
         <div className="shell pb-14 pt-28 sm:pt-32">
           <Eyebrow>Field notes</Eyebrow>
-          <h1 className="h-sec mt-4 max-w-[24ch] font-medium">
+          <h1 className="sales-page-title mt-4 max-w-[24ch]">
             Operations writing, <span className="serif-em text-hp-text2">from inside the work.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
-            Nothing is published here yet, and we would rather say that than fill the page with generated filler. These
-            are the six pieces being written, in order. Each one is about a decision that cost us something to learn.
+            Practical notes from running a villa management company: owner reporting, team coordination and better
+            guest service. The topics below are in preparation; published articles will appear here as they are ready.
           </p>
         </div>
       </section>
@@ -38,7 +38,7 @@ export default function Blog() {
         <div className="shell">
           <div className="reveal mb-8 flex items-center gap-2.5 rounded-xl border border-hp-gold/25 bg-[color:var(--hp-gold-wash)] px-4 py-3 text-[14.5px] text-hp-text2">
             <Clock size={15} className="text-hp-goldInk" />
-            First piece scheduled for publication. Ask on a call if you want it emailed when it lands.
+            Articles in preparation. Explore the product tour and operator story while these are being written.
           </div>
           <ul className="grid gap-3 md:grid-cols-2">
             {PLANNED.map(([tag, title, read]) => (

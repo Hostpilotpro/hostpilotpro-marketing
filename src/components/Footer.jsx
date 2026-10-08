@@ -34,7 +34,7 @@ const cols = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-hp-lineSoft bg-hp-surface">
+    <footer className="cinematic-product-page replica-dark border-t border-hp-lineSoft bg-hp-surface">
       <div className="shell-wide grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div>
           <Link to="/" className="text-hp-text">
@@ -68,6 +68,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="shell-wide pb-6 text-center text-[12px] text-hp-text3">
+        <a href="mailto:info@hostpilotpro.com" className="block mb-3 underline underline-offset-4">info@hostpilotpro.com</a>
         Part of <a href="https://siamsolutions.group/" className="underline underline-offset-4 transition hover:text-hp-goldInk">Siam Solutions Group</a>
       </div>
     </footer>
