@@ -10,7 +10,7 @@ const SIZES = ['Under 20 villas', '20–50 villas', '50–100 villas', '100–20
 const INTEREST = ['The full suite', 'Owner portal', 'Ops console', 'Guest app', 'Field app', 'Partner / licensing'];
 
 const ENDPOINT = import.meta.env.VITE_LEAD_ENDPOINT || '';
-const FALLBACK_MAIL = import.meta.env.VITE_LEAD_EMAIL || 'info@mrpropertysiam.com';
+const FALLBACK_MAIL = import.meta.env.VITE_LEAD_EMAIL || 'info@hostpilotpro.com';
 
 export default function Demo() {
   useSeo({
