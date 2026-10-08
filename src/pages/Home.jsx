@@ -1,45 +1,20 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowDown, Play, Check, Monitor, Users, Smartphone, Building2, MessageSquare, Sparkles, Megaphone, Globe2, ShieldCheck, Layers, CheckCircle2, ChevronRight } from 'lucide-react';
+import { ArrowRight, ArrowDown, Play, Monitor, Users, Smartphone, Building2, MessageSquare, Sparkles, Megaphone, Globe2, ShieldCheck, Layers } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import asset from '../lib/asset.js';
 import BusinessStories from '../components/BusinessStories.jsx';
 import VisualProductStories from '../components/VisualProductStories.jsx';
 import MarketingVisualStory from '../components/MarketingVisualStory.jsx';
+import EcosystemSpaces from '../components/EcosystemSpaces.jsx';
 import './home-cinematic.css';
 
-const experiences = [
-  { key: 'ops', name: 'Operations', label: 'For your office', icon: Monitor, title: 'Your entire operation. In focus.', body: 'From the next arrival to the next owner payout. Bring reservations, conversations, tasks, inspections and finance into one working view.', points: ['Property and reservation context', 'Team tasks, inspections and receipts', 'Owner statements and finance'], to: '/ops' },
-  { key: 'owner', name: 'Owners', label: 'For your owners', icon: Users, title: 'Confidence in every number.', body: 'Give owners a window into their property: readable statements, payout history, upcoming bookings and decisions that need their approval.', points: ['Statements with supporting detail', 'Payouts and forward booking pipeline', 'Property decisions and approvals'], to: '/owner' },
-  { key: 'guest', name: 'Guests', label: 'For your guests', icon: Smartphone, title: 'An exceptional stay starts here.', body: 'Put arrival information, villa essentials, local services and paid extras in your guest’s pocket. Less searching. More enjoying the stay.', points: ['Arrival details, Wi-Fi and house guides', 'Service requests and curated extras', 'Configured payment options'], to: '/guest' },
-  { key: 'field', name: 'Field team', label: 'For your people', icon: Building2, title: 'Great work. Made visible.', body: 'Give the people caring for your villas a simple way to see jobs, log work, attach evidence and keep the office informed.', points: ['Jobs and recorded work', 'Photos and receipt evidence', 'Time and pay information'], to: '/field' },
-];
-
-function ExperiencePreview({ type }) {
-  if (type === 'ops') return <div className="cinema-ops-preview"><div className="cinema-window-bar"><span /><span /><span /><p>HostPilot Ops · actual workspace</p></div><img src={asset('/img/real-ops/01-real-ops-message-centre.jpg')} width="1356" height="847" loading="lazy" alt="Actual HostPilot Ops message centre, with private data anonymised" /></div>;
-  if (type === 'owner') return <div className="cinema-illustration"><div className="cinema-preview-top"><span>HOSTPILOT / OWNER</span><span>Illustrative demo</span></div><p className="cinema-preview-kicker">YOUR PROPERTY, AT A GLANCE</p><h3>Villa Azure</h3><div className="cinema-owner-stats"><div><span>Owner payout</span><strong>฿142,800</strong></div><div><span>Next arrival</span><strong>12 Oct</strong></div></div><div className="cinema-statement">{[['Booking revenue', '฿214,000'], ['Operating expenses', '−฿28,400'], ['Management fee', '−฿42,800'], ['Owner payout', '฿142,800']].map(([label, value]) => <div key={label}><span>{label}</span><strong>{value}</strong></div>)}</div><div className="cinema-preview-note"><ShieldCheck size={17} /> Every line has a story. Every story has a record.</div></div>;
-  if (type === 'guest') return <div className="cinema-guest-preview"><img src={asset('/img/villa-day.jpg')} alt="Villa terrace and swimming pool" loading="lazy" width="1000" height="650" /><div className="cinema-guest-card"><span>ILLUSTRATIVE GUEST EXPERIENCE</span><h3>Welcome to<br />your island escape.</h3><p>Villa Azure · 7-night demo stay</p><div><span><CheckCircle2 size={16} /> Arrival information</span><ChevronRight size={16} /></div><div><span><Sparkles size={16} /> Make your stay special</span><ChevronRight size={16} /></div><div><span><MessageSquare size={16} /> Ask your villa team</span><ChevronRight size={16} /></div></div></div>;
-  return <div className="cinema-illustration"><div className="cinema-preview-top"><span>HOSTPILOT / FIELD</span><span>Illustrative demo</span></div><p className="cinema-preview-kicker">A GREAT DAY STARTS WITH A CLEAR PLAN</p><h3>Ready for the next arrival.</h3><div className="cinema-task-list">{[['09:00', 'Villa Azure', 'Turnover clean', 'Completed'], ['11:30', 'Villa Palm', 'Pool inspection', 'In progress'], ['14:00', 'Villa Cove', 'Arrival preparation', 'Up next']].map(([time, villa, job, status]) => <div key={villa}><span>{time}</span><div><strong>{villa}</strong><p>{job}</p></div><em>{status}</em></div>)}</div><div className="cinema-preview-note"><CheckCircle2 size={17} /> Clear jobs. Recorded work. An informed office.</div></div>;
-}
-
-function Experiences() {
-  const [active, setActive] = useState('ops');
-  const experience = experiences.find(item => item.key === active);
-  return <section className="cinema-experiences" id="experiences">
-    <div className="cinema-shell"><div className="cinema-section-intro"><div><p className="cinema-eyebrow">FOUR EXPERIENCES. ONE CONNECTED BUSINESS.</p><h2>Every person.<br /><em>The right perspective.</em></h2></div><p>Your office, owners, guests and field team each get their own experience. Shared context brings the whole operation together.</p></div>
-      <div className="cinema-experience-selector" role="group" aria-label="Choose a portal to explore">{experiences.map(item => { const Icon = item.icon; return <button key={item.key} type="button" aria-pressed={active === item.key} onClick={() => setActive(item.key)}><Icon size={19} /><span>{item.name}</span><ArrowRight size={16} /></button>; })}</div>
-      <div className="cinema-experience-panel"><div className="cinema-experience-copy"><p className="cinema-eyebrow">{experience.label}</p><h3>{experience.title}</h3><p>{experience.body}</p><ul>{experience.points.map(point => <li key={point}><Check size={16} />{point}</li>)}</ul><Link to={experience.to} className="cinema-text-link">Explore {experience.name.toLowerCase()} <ArrowRight size={17} /></Link></div><div className="cinema-experience-visual" key={active}><ExperiencePreview type={active} /></div></div>
-    </div>
-  </section>;
-}
-
 export default function Home() {
-  useSeo({ title: 'HostPilot Pro | Exceptional villas. Extraordinary control.', description: 'The connected business behind exceptional villa stays. Explore operations, owner finance, guest experiences, field teams and growth tools built by a real villa operator.', path: '/' });
+  useSeo({ title: 'HostPilot Pro | One ecosystem for property management companies', description: 'Property management software that connects your office, owners, guests, team and service-partner workflows in one ecosystem. Explore the dedicated portal pages.', path: '/' });
   return <div className="cinematic-home replica-dark">
     <section className="cinema-hero" aria-labelledby="cinema-title">
       <img className="cinema-hero-image" src={asset('/img/hostpilot-cinematic-hero.webp')} width="1536" height="1024" fetchPriority="high" alt="A contemporary tropical villa and infinity pool overlooking the ocean at dusk" />
       <div className="cinema-hero-shade" />
-      <div className="cinema-shell cinema-hero-content"><p className="cinema-eyebrow"><span className="cinema-live-dot" /> THE BUSINESS BEHIND EXCEPTIONAL STAYS</p><h1 id="cinema-title">Exceptional villas.<br /><em>Extraordinary control.</em></h1><p className="cinema-hero-description">The bookings. The people. The details.<br />Bring your villa business into one beautiful view.</p><div className="cinema-actions"><Link to="/#experiences" className="cinema-button cinema-button-gold">Explore the platform <ArrowRight size={18} /></Link><Link to="/tour" className="cinema-play-link"><span><Play size={15} fill="currentColor" /></span> See it in action</Link></div><div className="cinema-hero-proof"><ShieldCheck size={16} /><span>Built by a villa operator. Used in the real world.</span></div></div>
+      <div className="cinema-shell cinema-hero-content"><p className="cinema-eyebrow"><span className="cinema-live-dot" /> BUILT FOR PROPERTY MANAGEMENT COMPANIES</p><h1 id="cinema-title">Your people.<br /><em>One ecosystem.</em></h1><p className="cinema-hero-description">Give your owners, guests and team their own space.<br />Connect your office and partner workflows around them. One management company. One ecosystem.</p><div className="cinema-actions"><Link to="/#experiences" className="cinema-button cinema-button-gold">Explore your ecosystem <ArrowRight size={18} /></Link><Link to="/tour" className="cinema-play-link"><span><Play size={15} fill="currentColor" /></span> See it in action</Link></div><div className="cinema-hero-proof"><ShieldCheck size={16} /><span>Built by a villa operator. Used in the real world.</span></div></div>
       <aside className="cinema-hero-device" aria-label="HostPilot Ops on a laptop"><span>YOUR OPERATION. ONE WORKING VIEW.</span><div className="cinema-hero-device-screen"><div><i /><i /><i /><small>HostPilot Ops · actual interface</small></div><img src={asset('/img/real-ops/02-real-ops-finance-hub.jpg')} alt="Actual HostPilot Ops finance interface with private data masked" width="1356" height="847" /></div><div className="cinema-hero-device-base" /><Link to="/tour">Explore the real workspace <ArrowRight size={13} /></Link></aside>
       <div className="cinema-hero-caption"><span>KOH SAMUI SPIRIT. A BIGGER VISION.</span><span>Original architectural visual</span></div>
       <div className="cinema-hero-bottom cinema-shell"><a href="#connected" className="cinema-scroll"><ArrowDown size={16} /> DISCOVER A DIFFERENT WAY</a><span>Keep your PMS. Elevate everything around it.</span></div>
@@ -47,11 +22,11 @@ export default function Home() {
 
     <div className="cinema-signal-bar"><div className="cinema-shell"><p>ONE BUSINESS.<br /><strong>CONNECTED.</strong></p>{[['Operations', Monitor], ['Owners', Users], ['Guests', Smartphone], ['Field teams', Building2], ['Growth', Megaphone]].map(([label, Icon]) => <span key={label}><Icon size={18} />{label}</span>)}</div></div>
 
-    <section className="cinema-manifesto cinema-shell" id="connected"><p className="cinema-eyebrow">BEYOND THE BOOKING CALENDAR</p><h2>You create incredible stays.<br /><span>We connect everything</span><br /><em>that makes them possible.</em></h2><div className="cinema-manifesto-bottom"><span className="cinema-number">01 — THE BIGGER PICTURE</span><p>Your channel manager handles distribution. HostPilot Pro brings together the business around it — from owner money and guest requests to the people looking after every villa.</p><Link to="/capabilities" className="cinema-round-link" aria-label="Explore features and connections"><ArrowRight size={26} /></Link></div></section>
+    <section className="cinema-manifesto cinema-shell" id="connected"><p className="cinema-eyebrow">BEYOND THE BOOKING CALENDAR</p><h2>You create incredible stays.<br /><span>We connect everything</span><br /><em>that makes them possible.</em></h2><div className="cinema-manifesto-bottom"><span className="cinema-number">01 — THE BIGGER PICTURE</span><p>Your management company is the centre. HostPilotPro connects the spaces you give your owners, guests and team, alongside your office and supported partner workflows. Everyone has a role in the same business.</p><Link to="/capabilities" className="cinema-round-link" aria-label="Explore features and connections"><ArrowRight size={26} /></Link></div></section>
+
+    <EcosystemSpaces />
 
     <VisualProductStories />
-
-    <Experiences />
 
     <section className="cinema-proof-section cinema-shell"><div className="cinema-section-intro"><div><p className="cinema-eyebrow"><span className="cinema-live-dot" /> BUILT IN A WORKING VILLA BUSINESS</p><h2>Real work.<br /><em>Real screens.</em></h2></div><p>Developed inside Mr Property Siam on Koh Samui. Explore the actual Ops interface below, with private information anonymised.</p></div><BusinessStories /></section>
 

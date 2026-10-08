@@ -8,3 +8,5 @@ qa*.jpg
 dist-preview/
 .sandbox/
 .npm-cache/
+.env*
+!.env.example

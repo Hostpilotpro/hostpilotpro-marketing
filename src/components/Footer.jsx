@@ -7,9 +7,10 @@ const cols = [
     title: 'Product',
     links: [
       ['/ops', 'For management companies'],
-      ['/owner', 'For owners'],
-      ['/guest', 'For guests'],
+      ['/owner', 'Owner portal'],
+      ['/guest', 'Guest portal'],
       ['/field', 'HostPilot Field'],
+      ['/partners', 'Agents & partners'],
       ['/full-suite', 'Full suite'],
     ],
   },
