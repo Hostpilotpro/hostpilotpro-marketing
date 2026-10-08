@@ -5,9 +5,9 @@ import './ecosystem-spaces.css';
 
 const spaces = [
   { title: 'Your office', label: 'OPS WORKSPACE', text: 'The management team’s place for conversations, reservations, tasks and financial review.', image: '/img/real-ops/01-real-ops-message-centre.jpg', alt: 'Actual anonymised Ops message centre', caption: 'Actual Ops screenshot', to: '/ops' },
-  { title: 'Your owners', label: 'OWNER PORTAL', text: 'Give property owners a clear place for statements, supporting records and approvals.', image: '/img/hostpilot-owner-laptop.webp', alt: 'Illustrative owner using a property dashboard on a laptop', caption: 'Illustrative owner scene', to: '/owner' },
+  { title: 'Your owners', label: 'OWNER PORTAL', text: 'Build owner confidence with clear statements, supporting records and approvals. Make your transparency visible.', image: '/img/hostpilot-owner-laptop.webp', alt: 'Illustrative owner using a property dashboard on a laptop', caption: 'Illustrative owner scene', to: '/owner' },
   { title: 'Your guests', label: 'GUEST PORTAL', text: 'Bring arrival information, villa essentials and available extras into the guest’s stay.', image: '/img/hostpilot-guest-phone.webp', alt: 'Illustrative guest using a stay app on a phone', caption: 'Illustrative guest scene', to: '/guest' },
-  { title: 'Your team', label: 'FIELD WORKSPACE', text: 'Give the people on site a place to see jobs, record their work and keep the office informed.', image: '/img/real-ops/04-real-ops-payroll-walkthrough.jpg', alt: 'Actual anonymised staff pay-review workspace', caption: 'Actual Ops staff review screenshot', to: '/field' },
+  { title: 'Your team', label: 'FIELD WORKSPACE', text: 'Stop relying on scattered updates. Give your team clear jobs and a place to record the work behind your service.', image: '/img/real-ops/04-real-ops-payroll-walkthrough.jpg', alt: 'Actual anonymised staff pay-review workspace', caption: 'Actual Ops staff review screenshot', to: '/field' },
   { title: 'Your agents & partners', label: 'PARTNER WORKFLOWS', text: 'Bring service partners into the work. Explore supplier coordination and the scope of future agent access.', image: '/img/villa-day.jpg', alt: 'Villa terrace and swimming pool', caption: 'Property scene · explore supported scope', to: '/partners' },
 ];
 

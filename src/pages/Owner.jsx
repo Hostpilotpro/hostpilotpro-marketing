@@ -23,7 +23,7 @@ export default function Owner() {
           Your property.<br /><span className="serif-em text-hp-text2">Closer than ever.</span>
         </>
       }
-      lede="Your villa, your statements and the story behind every figure. Give owners a clear view of performance, costs, supporting documents and the decisions that need their attention."
+      lede="You manage multiple properties. Every owner expects personal attention and a clear explanation of their money. Give them their own portal for statements, costs, supporting records and approvals—so your transparency is visible every month, and your team spends less time chasing the same answers."
       bullets={[
         'Monthly statements with every line expandable to a plain-English verdict',
         'Payout history, references and the transfer method on the record',
