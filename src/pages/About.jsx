@@ -32,7 +32,7 @@ export default function About() {
   });
 
   return (
-    <div>
+    <div className="cinematic-product-page replica-dark">
       {/* --------------------------------------------------------------- opening */}
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
         <img
@@ -44,7 +44,7 @@ export default function About() {
         <div className="grain absolute inset-0" />
         <div className="shell relative pb-16 pt-28 sm:pt-36">
           <Eyebrow>About</Eyebrow>
-          <h1 className="h-sec mt-4 max-w-[26ch] font-medium">
+          <h1 className="sales-page-title mt-4 max-w-[26ch]">
             I manage villas for a living. <span className="serif-em text-hp-text2">This is the software I needed.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[18px] leading-[1.7] text-hp-text2">

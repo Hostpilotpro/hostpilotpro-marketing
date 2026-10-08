@@ -7,7 +7,7 @@ const demo = {
     "villa_count": 24,
     "staff_count": 19,
     "owner_count": 17,
-    "note": "A fictional 24-villa operator. Deliberately sized in the 20-49 unit band, which the competitor research identifies as the highest willingness-to-pay segment. Never show MPS's real 80-villa portfolio in marketing."
+    "note": "A fictional 24-villa operator used for product demonstrations. Names, amounts and records in this portfolio are sample data."
   },
   "owner": {
     "name": "Alexander Reid",

@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { Check, X, ArrowRight, Clock } from 'lucide-react';
 import useSeo from '../lib/seo.js';
 import { SectionHead, Eyebrow } from '../components/ui.jsx';
+import PortfolioQuote from '../components/PortfolioQuote.jsx';
+import BuyerQuestions from '../components/BuyerQuestions.jsx';
 
 const included = [
   'All four surfaces — Ops, Owner, Guest and Field',
@@ -51,18 +53,17 @@ export default function Pricing() {
     path: '/pricing',
   });
   return (
-    <div>
+    <div className="cinematic-product-page replica-dark pricing-sales-page">
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
         <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_20%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pt-32">
           <Eyebrow>Pricing</Eyebrow>
-          <h1 className="h-sec mt-4 max-w-[26ch] font-medium">
-            The shape of the deal, <span className="serif-em text-hp-text2">without the number.</span>
+          <h1 className="sales-page-title mt-4 max-w-[26ch]">
+            The platform.<br /><span className="serif-em">For your portfolio.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-[17px] leading-[1.7] text-hp-text2">
-            We do not publish a rate yet. We do publish exactly how you are charged, what is included, and the five
-            things we will never bill you for — because a page that says only “contact us” tells you nothing, and
-            pricing opacity is the most common complaint in this category.
+            Pricing is quoted for your portfolio. See how the monthly charge works, what is included and the
+            commitments below, then tell us about your villas for a tailored proposal.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to="/demo" className="btn btn-gold">
@@ -74,6 +75,8 @@ export default function Pricing() {
           </div>
         </div>
       </section>
+
+      <PortfolioQuote />
 
       {/* how you are charged */}
       <section className="py-16 sm:py-20">
@@ -104,7 +107,7 @@ export default function Pricing() {
         <div className="shell grid gap-6 lg:grid-cols-2">
           <div className="reveal hp-card p-6 sm:p-8">
             <Eyebrow>Included at every size</Eyebrow>
-            <h2 className="h-sub mt-3 font-display">Everything, at every tier.</h2>
+            <h2 className="h-sub mt-3 font-display">Core portals, at every size.</h2>
             <ul className="mt-6 space-y-2.5">
               {included.map((i) => (
                 <li key={i} className="flex gap-3 text-[15px] text-hp-text2">
@@ -113,6 +116,7 @@ export default function Pricing() {
                 </li>
               ))}
             </ul>
+            <p className="mt-6 text-[14px] leading-relaxed text-hp-text3">Custom domains are a premium rollout option. Branding scope, domain setup and availability are confirmed in your proposal.</p>
           </div>
           <div className="reveal hp-card p-6 sm:p-8">
             <Eyebrow>Commitments</Eyebrow>
@@ -126,8 +130,8 @@ export default function Pricing() {
               ))}
             </ul>
             <p className="mt-6 text-[14px] text-hp-text3">
-              Each of those five is a real, repeated complaint made about a named competitor in the reviews we read
-              while researching this market. They are on this page so you can hold us to them.
+              These commitments describe our pricing approach. Your portfolio proposal will confirm the rate,
+              supported connections and agreed rollout scope in writing.
             </p>
           </div>
         </div>
@@ -159,19 +163,18 @@ export default function Pricing() {
           <SectionHead
             eyebrow="Straight answer"
             title="Why we don’t list a price yet."
-            lede="Because we would have to guess, and a guess published on a website becomes a promise we might have to break."
+            lede="Your portfolio, connections and rollout requirements shape your proposal. We explain the scope and monthly rate before you decide."
           />
           <div className="reveal mt-6 space-y-4 text-[16px] leading-[1.7] text-hp-text2">
             <p>
-              HostPilot Pro grew inside a working villa company rather than out of a pricing study. We know what it
-              costs us to run and support a portfolio, because we support one. What we do not have yet is enough
-              external customers at enough different portfolio sizes to publish a ladder we would still be honest
-              about in six months.
+              Start with your villa count, the channel manager you use and the experiences you want to give your
+              owners, guests and team. We use that information to prepare a portfolio proposal with the supported
+              connections, onboarding scope and pricing bands clearly explained.
             </p>
             <p>
               So the deal is this: you tell us how many villas you manage and which channel manager you use, and we
               send a number the same working day — plus the bands above and below yours, so you can see where it goes
-              as you grow. If we ever publish a rate card, it will match the numbers we have been quoting privately.
+              as you grow. You can review the scope and rate together before making a commitment.
             </p>
           </div>
           <div className="reveal mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-hp-gold/25 bg-[color:var(--hp-gold-wash)] p-5">
@@ -186,6 +189,7 @@ export default function Pricing() {
           </div>
         </div>
       </section>
+      <BuyerQuestions />
     </div>
   );
 }

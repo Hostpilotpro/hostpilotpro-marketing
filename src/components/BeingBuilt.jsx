@@ -42,15 +42,15 @@ export default function BeingBuilt({ only, className = '' }) {
               >
                 <Hammer size={12} /> Not shipped yet
               </span>
-              <span className="text-[13px] text-hp-text3">Nothing below this line works today.</span>
+              <span className="text-[13px] text-hp-text3">The capabilities in this section are planned.</span>
             </div>
 
             <h2 id="being-built" className="h-sub mt-4 font-display">
-              Being built now.
+              What’s next.
             </h2>
             <p className="mt-3 max-w-2xl text-[15.5px] leading-relaxed text-hp-text2">
-              Every platform in this category quietly markets its roadmap as its product. Here is ours, kept separate on
-              purpose. If you need one of these three things to sign, do not sign yet.
+              Explore the next capabilities in the ecosystem. These are separate from the working product;
+              we will confirm scope and availability before including them in your rollout.
             </p>
 
             <ul

@@ -7,9 +7,10 @@ const cols = [
     title: 'Product',
     links: [
       ['/ops', 'For management companies'],
-      ['/owner', 'For owners'],
-      ['/guest', 'For guests'],
+      ['/owner', 'Owner portal'],
+      ['/guest', 'Guest portal'],
       ['/field', 'HostPilot Field'],
+      ['/partners', 'Agents & partners'],
       ['/full-suite', 'Full suite'],
     ],
   },
@@ -33,7 +34,7 @@ const cols = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-hp-lineSoft bg-hp-surface">
+    <footer className="cinematic-product-page replica-dark border-t border-hp-lineSoft bg-hp-surface">
       <div className="shell-wide grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
         <div>
           <Link to="/" className="text-hp-text">
@@ -63,10 +64,11 @@ export default function Footer() {
       <div className="shell-wide flex flex-col gap-2 border-t border-hp-lineSoft py-6 text-[13.5px] text-hp-text3 sm:flex-row sm:items-center sm:justify-between">
         <div>© {new Date().getFullYear()} HostPilot Pro · a Mr Property Siam product · Koh Samui, Thailand</div>
         <div>
-          Every figure shown in product screens on this site is fictional demo data for Azure Coast Villas.
+          Interactive portals use fictional demo records. Actual Ops screenshots are labelled and private information is masked.
         </div>
       </div>
       <div className="shell-wide pb-6 text-center text-[12px] text-hp-text3">
+        <a href="mailto:info@hostpilotpro.com" className="block mb-3 underline underline-offset-4">info@hostpilotpro.com</a>
         Part of <a href="https://siamsolutions.group/" className="underline underline-offset-4 transition hover:text-hp-goldInk">Siam Solutions Group</a>
       </div>
     </footer>

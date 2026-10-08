@@ -10,6 +10,7 @@ const products = [
   { to: '/ops', name: 'HostPilot Ops', desc: 'The staff console' },
   { to: '/guest', name: 'HostPilot Guest', desc: 'Stay app and add-ons' },
   { to: '/field', name: 'HostPilot Field', desc: 'The staff mobile app' },
+  { to: '/partners', name: 'Agents & partners', desc: 'Supplier workflows and planned partner access' },
   { to: '/full-suite', name: 'Full suite', desc: 'All four, one database' },
   { to: '/about', name: 'Built at Mr Property Siam', desc: 'The operator behind the software' },
   { to: '/proof', name: 'Proof', desc: 'What you can check for yourself' },
@@ -36,6 +37,7 @@ export default function Nav() {
   const [menu, setMenu] = useState(false);
   const [solid, setSolid] = useState(false);
   const { pathname } = useLocation();
+  const cinematicRoute = ['/', '/owner', '/ops', '/guest', '/field', '/partners', '/capabilities', '/pricing', '/demo', '/tour', '/full-suite', '/proof', '/about', '/blog'].includes(pathname);
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 12);
@@ -58,7 +60,7 @@ export default function Nav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+      className={`${cinematicRoute ? 'cinema-nav replica-dark' : ''} fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
         solid
           ? 'border-b border-hp-lineSoft bg-[color:var(--hp-nav)] backdrop-blur-xl'
           : 'border-b border-transparent'
@@ -116,8 +118,8 @@ export default function Nav() {
 
           {[
             ['/ops','Management companies'],
-            ['/owner','Owners'],
-            ['/guest','Guests'],
+            ['/owner','Owner portal'],
+            ['/guest','Guest portal'],
           ].map(([to,label])=><NavLink key={to} to={to} className={({isActive})=>`rounded-full px-2.5 py-2 text-[13px] transition ${isActive?'bg-[color:var(--hp-gold-wash-2)] text-hp-goldInk':'text-hp-text2 hover:text-hp-text'}`}>{label}</NavLink>)}
           <NavLink
             to="/tour"
@@ -153,11 +155,11 @@ export default function Nav() {
           <Link to="/demo" className="btn btn-gold !py-2.5 !text-[14.5px]">
             Book a call
           </Link>
-          <ThemeToggle />
+          {!cinematicRoute && <ThemeToggle />}
         </div>
 
         <div className="flex items-center gap-2 xl:hidden">
-          <ThemeToggle />
+          {!cinematicRoute && <ThemeToggle />}
         <button
           className="rounded-lg border border-hp-line p-2 text-hp-text"
           onClick={() => setOpen((v) => !v)}

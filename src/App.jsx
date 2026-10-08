@@ -16,6 +16,7 @@ import Blog from './pages/Blog.jsx';
 import Demo from './pages/Demo.jsx';
 import NotFound from './pages/NotFound.jsx';
 import Capabilities from './pages/Capabilities.jsx';
+import Partners from './pages/Partners.jsx';
 const Sandbox = lazy(() => import('./sandbox/Sandbox.jsx'));
 
 function ScrollToTop() {
@@ -77,6 +78,7 @@ export default function App() {
           <Route path="/field" element={<Field />} />
           <Route path="/full-suite" element={<FullSuite />} />
           <Route path="/capabilities" element={<Capabilities />} />
+          <Route path="/partners" element={<Partners />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
           <Route path="/proof" element={<Proof />} />

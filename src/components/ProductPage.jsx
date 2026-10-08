@@ -5,6 +5,7 @@ import CompatNote from './CompatNote.jsx';
 import BeingBuilt from './BeingBuilt.jsx';
 import AudienceLinks from './AudienceLinks.jsx';
 import InternationalRollout from './InternationalRollout.jsx';
+import ProductVisualHero from './ProductVisualHero.jsx';
 
 /**
  * Shared layout for the four surface pages. Each page supplies its own copy,
@@ -26,13 +27,16 @@ export default function ProductPage({
   roadmapIds = null,
   showcase = null,
   compactDetails = false,
+  visualHero = null,
+  visualDetails = null,
 }) {
   const {pathname}=useLocation();
   const surface=pathname==='/owner'?'owner':pathname==='/guest'?'guest':pathname==='/field'?'field':'ops';
   const tourTo=surface==='ops'?'/tour?story=messages':`/tour?surface=${surface}`;
   const ReplicaWrap=showcase?'details':'div';
   return (
-    <div>
+    <div className={visualHero ? 'cinematic-product-page replica-dark' : ''}>
+      {visualHero ? <ProductVisualHero visual={visualHero} eyebrow={eyebrow} title={title} lede={lede} tourTo={tourTo} bullets={bullets} /> : (
       <section className="relative overflow-hidden border-b border-hp-lineSoft">
         <div className="grain absolute inset-0 bg-[radial-gradient(110%_90%_at_15%_-20%,var(--hp-gold-tint),transparent_60%)]" />
         <div className="shell relative pb-14 pt-28 sm:pb-16 sm:pt-32">
@@ -62,7 +66,9 @@ export default function ProductPage({
           <AudienceLinks />
         </div>
       </section>
+      )}
 
+      {visualDetails}
       {showcase && <section className="shell-wide py-12 sm:py-16">{showcase}</section>}
       {replica && <section className="py-12 sm:py-16">
         <div className="shell-wide">

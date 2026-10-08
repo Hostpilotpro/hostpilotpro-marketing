@@ -12,9 +12,10 @@ export default function Field() {
   return (
     <ProductPage
       eyebrow="HostPilot Field"
+      visualHero={{kind: 'field', image: '/img/hostpilot-bill-scanner.webp', width: 1086, height: 1448, alt: 'Illustrative staff member photographing a supplier receipt in the field', notification: 'Receipt captured. Evidence attached.', note: 'Review the details before submitting to the office.', caption: 'CLEAR JOBS. RECORDED WORK. A CONNECTED TEAM.', boundary: 'Lifestyle photo and financial update are illustrative. Current team languages and country settings reflect the first operation; additional markets require adaptation.'}}
       title={
         <>
-          The app your cleaners and pool techs <span className="serif-em text-hp-text2">actually open.</span>
+          Great work.<br /><span className="serif-em text-hp-text2">Made visible.</span>
         </>
       }
       lede="Operations software fails in the field, not in the office. Staff need to find their jobs, record work and understand their pay without asking someone to translate every step. The current English, Thai and Burmese setup was built for our first client, Mr Property Siam. International editions will be adapted to each market."
