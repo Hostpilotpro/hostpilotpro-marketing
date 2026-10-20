@@ -10,7 +10,6 @@ const SIZES = ['Under 20 villas', '20–50 villas', '50–100 villas', '100–20
 const INTEREST = ['The full suite', 'Owner portal', 'Ops console', 'Guest app', 'Field app', 'Partner / licensing'];
 
 const ENDPOINT = 'https://mps-ops-hub-v2.vercel.app/api/siam-enquiries/submit';
-const FALLBACK_MAIL = import.meta.env.VITE_LEAD_EMAIL || 'info@hostpilotpro.com';
 
 export default function Demo() {
   useSeo({
@@ -174,11 +173,7 @@ export default function Demo() {
                 <div className="flex gap-2.5 rounded-xl border border-hp-neg/40 bg-[color:var(--hp-neg-wash)] p-3.5 text-[14px] text-hp-text2">
                   <AlertTriangle size={16} className="mt-0.5 shrink-0 text-hp-neg" />
                   <span>
-                    We could not confirm receipt. Retry with the same details, or email{' '}
-                    <a href={`mailto:${FALLBACK_MAIL}`} className="link-gold">
-                      {FALLBACK_MAIL}
-                    </a>{' '}
-                    directly. Your details remain in the form.
+                    We could not confirm receipt. Your details remain in the form. Please retry with the same details; this will not create a duplicate.
                   </span>
                 </div>
               )}
