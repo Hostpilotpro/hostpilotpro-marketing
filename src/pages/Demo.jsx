@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Check, ArrowRight, AlertTriangle } from 'lucide-react';
 import useSeo from '../lib/seo.js';
@@ -9,7 +9,7 @@ import '../components/sales-pages.css';
 const SIZES = ['Under 20 villas', '20–50 villas', '50–100 villas', '100–200 villas', '200+ villas'];
 const INTEREST = ['The full suite', 'Owner portal', 'Ops console', 'Guest app', 'Field app', 'Partner / licensing'];
 
-const ENDPOINT = import.meta.env.VITE_LEAD_ENDPOINT || '';
+const ENDPOINT = 'https://mps-ops-hub-v2.vercel.app/api/siam-enquiries/submit';
 const FALLBACK_MAIL = import.meta.env.VITE_LEAD_EMAIL || 'info@hostpilotpro.com';
 
 export default function Demo() {
@@ -33,6 +33,8 @@ export default function Demo() {
     interest: INTEREST.includes(params.get('interest')) ? params.get('interest') : '',
     message: Number.isInteger(presetVillas) && presetVillas >= 1 && presetVillas <= 250 ? `My portfolio has ${presetVillas} villas.` : '',
   });
+  const requestId = useRef(crypto.randomUUID());
+  const [reference, setReference] = useState('');
   const [status, setStatus] = useState('idle'); // idle | sending | done | mailto | error
   const set = (k) => (e) => setState({ ...state, [k]: e.target.value });
 
@@ -40,47 +42,25 @@ export default function Demo() {
     e.preventDefault();
     setStatus('sending');
 
-    if (ENDPOINT) {
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ ...state, source: 'hostpilotpro.com/demo' }),
-        });
-        if (!res.ok) throw new Error(`Endpoint responded ${res.status}`);
-        setStatus('done');
-        return;
-      } catch (err) {
-        setStatus('error');
-        return;
-      }
-    }
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST', headers: {'Content-Type':'application/json'}, signal:AbortSignal.timeout(20000),
+        body: JSON.stringify({request_id:requestId.current,name:state.name,email:state.email,phone:state.phone,company:state.company,
+          subject:'HostPilot Pro: '+(state.interest || 'Portfolio enquiry'),
+          message:[state.message, 'Portfolio: '+state.size, 'Channel manager: '+state.channel].filter(Boolean).join('\n'),
+          page_url:location.href,website_trap:''}),
+      });
+      const result=await res.json();
+      if(!res.ok || !result.received || !result.reference) throw new Error('Receipt was not confirmed');
+      setReference(result.reference); setStatus('done');
+    } catch { setStatus('error'); }
 
-    // No endpoint configured: prepare an email draft and explain that it needs sending.
-    // Keep the address visible if no email client opens.
-    const body = encodeURIComponent(
-      [
-        `Name: ${state.name}`,
-        `Company: ${state.company}`,
-        `Email: ${state.email}`,
-        `Phone: ${state.phone}`,
-        `Channel manager: ${state.channel}`,
-        `Portfolio size: ${state.size}`,
-        `Interested in: ${state.interest}`,
-        '',
-        state.message,
-      ].join('\n')
-    );
-    window.location.href = `mailto:${FALLBACK_MAIL}?subject=${encodeURIComponent(
-      `HostPilot Pro enquiry — ${state.company || state.name}`
-    )}&body=${body}`;
-    setStatus('mailto');
   };
 
   const field =
     'w-full rounded-xl border border-hp-line bg-[color:var(--hp-veil-2)] px-3.5 py-2.5 text-[15px] text-hp-text placeholder:text-hp-text3 outline-none transition focus:border-hp-gold/60';
 
-  const submitted = status === 'done' || status === 'mailto';
+  const submitted = status === 'done';
 
   return (
     <div className="cinematic-product-page replica-dark demo-sales-page pt-24 pb-20 sm:pt-28">
@@ -123,28 +103,22 @@ export default function Demo() {
               <div className="flex h-10 w-10 items-center justify-center rounded-full border border-hp-pos/40 bg-[color:var(--hp-pos-wash)] text-hp-pos">
                 <Check size={18} />
               </div>
-              <h2 className="mt-5 font-display text-[26px] text-hp-text">{status === 'mailto' ? 'Your email draft is ready.' : 'Your enquiry was received.'}</h2>
+              <h2 className="mt-5 font-display text-[26px] text-hp-text">Your enquiry was received.</h2>
               <p className="mt-3 text-[15.5px] leading-relaxed text-hp-text2">
-                {status === 'mailto'
-                  ? 'Review and send the draft in your email app. It has not been sent by this website. If no email app opened, send your details to '
-                  : 'We reply within one working day, Thailand time. If anything is urgent, write to '}
-                <a href={`mailto:${FALLBACK_MAIL}`} className="link-gold">
-                  {FALLBACK_MAIL}
-                </a>
-                .
+                Saved to the Siam Solutions group inbox. Our team will review your enquiry and reply to the email you provided. Reference: {reference}.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link to="/tour" className="btn btn-gold">
                   Open the tour meanwhile
                 </Link>
-                <button onClick={() => setStatus('idle')} className="btn btn-quiet">
-                  {status === 'mailto' ? 'Prepare another enquiry' : 'Send another enquiry'}
+                <button onClick={() => {requestId.current=crypto.randomUUID();setStatus('idle');}} className="btn btn-quiet">
+                  Send another enquiry
                 </button>
               </div>
             </div>
           ) : (
             <form onSubmit={onSubmit} className="hp-card space-y-3.5 p-6 sm:p-7">
-              {!ENDPOINT && <p className="rounded-xl border border-hp-line p-3.5 text-[13px] leading-relaxed text-hp-text2">This form prepares an email draft. You will need to send it from your email app. You can also contact <a href={`mailto:${FALLBACK_MAIL}`} className="link-gold">{FALLBACK_MAIL}</a> directly.</p>}
+              <p className="rounded-xl border border-hp-line p-3.5 text-[13px] leading-relaxed text-hp-text2">Your enquiry goes directly to the Siam Solutions team. We store your contact details and message privately to respond to this request.</p>
               <div className="grid gap-3.5 sm:grid-cols-2">
                 <input required className={field} aria-label="Your name" autoComplete="name" placeholder="Your name" value={state.name} onChange={set('name')} />
                 <input
@@ -200,16 +174,16 @@ export default function Demo() {
                 <div className="flex gap-2.5 rounded-xl border border-hp-neg/40 bg-[color:var(--hp-neg-wash)] p-3.5 text-[14px] text-hp-text2">
                   <AlertTriangle size={16} className="mt-0.5 shrink-0 text-hp-neg" />
                   <span>
-                    That did not send. Email{' '}
+                    We could not confirm receipt. Retry with the same details, or email{' '}
                     <a href={`mailto:${FALLBACK_MAIL}`} className="link-gold">
                       {FALLBACK_MAIL}
                     </a>{' '}
-                    directly and we will pick it up straight away.
+                    directly. Your details remain in the form.
                   </span>
                 </div>
               )}
               <button type="submit" disabled={status === 'sending'} className="btn btn-gold w-full">
-                {status === 'sending' ? ENDPOINT ? 'Sending…' : 'Preparing…' : ENDPOINT ? 'Send your enquiry' : 'Prepare your email enquiry'}
+                {status === 'sending' ? 'Sending…' : 'Send your enquiry'}
               </button>
               <p className="text-[13px] text-hp-text3">
                 We use this to reply and to size a quote. No newsletter, no sequence, no reselling your details.
