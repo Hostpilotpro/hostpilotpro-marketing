@@ -68,7 +68,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="shell-wide pb-6 text-center text-[12px] text-hp-text3">
-        <a href="mailto:info@hostpilotpro.com" className="block mb-3 underline underline-offset-4">info@hostpilotpro.com</a>
+        <Link to="/demo" className="block mb-3 underline underline-offset-4">Contact the HostPilot Pro team</Link>
         Part of <a href="https://siamsolutions.group/" className="underline underline-offset-4 transition hover:text-hp-goldInk">Siam Solutions Group</a>
       </div>
     </footer>
