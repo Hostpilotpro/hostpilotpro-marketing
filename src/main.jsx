@@ -9,7 +9,7 @@ import './design-polish.css';
 // eslint-disable-next-line no-undef
 const Router = __PREVIEW__ ? HashRouter : BrowserRouter;
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const application = (
   <React.StrictMode>
     <ThemeProvider initial="light">
       <Router>
@@ -18,3 +18,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </ThemeProvider>
   </React.StrictMode>
 );
+const root = document.getElementById('root');
+if (root.hasAttribute('data-prerendered')) ReactDOM.hydrateRoot(root, application);
+else ReactDOM.createRoot(root).render(application);
