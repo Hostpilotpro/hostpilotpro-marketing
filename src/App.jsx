@@ -13,6 +13,7 @@ import Pricing from './pages/Pricing.jsx';
 import About from './pages/About.jsx';
 import Proof from './pages/Proof.jsx';
 import Blog from './pages/Blog.jsx';
+import FieldNote from './pages/FieldNote.jsx';
 import Demo from './pages/Demo.jsx';
 import NotFound from './pages/NotFound.jsx';
 import Capabilities from './pages/Capabilities.jsx';
@@ -83,6 +84,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/proof" element={<Proof />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<FieldNote />} />
           <Route path="/demo" element={<Demo />} />
 
           {/* Legacy routes from the previous site — kept so existing links survive. */}

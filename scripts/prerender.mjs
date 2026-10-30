@@ -1,9 +1,10 @@
 import { pageSchema } from '../src/lib/public-schema.js';
-import { readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { resolve, dirname } from 'node:path';
+import { fieldNotes } from '../src/content/field-notes.js';
 import { pathToFileURL } from 'node:url';
 
-export const routes = ['/', '/tour', '/owner', '/ops', '/guest', '/field', '/full-suite', '/capabilities', '/partners', '/pricing', '/about', '/proof', '/demo', '/blog'];
+export const routes = ['/', '/tour', '/owner', '/ops', '/guest', '/field', '/full-suite', '/capabilities', '/partners', '/pricing', '/about', '/proof', '/demo', '/blog', ...fieldNotes.map(note=>'/blog/'+note.slug)];
 const SITE = 'https://hostpilotpro.com';
 const escape = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const json = (obj) => JSON.stringify(obj).replace(/</g, '\\u003c');
@@ -37,6 +38,7 @@ async function main() {
     const rendered = render(route);
     if (rendered.seo.path !== route) throw new Error(`Route metadata mismatch: ${route}`);
     const output = route === '/' ? 'index.html' : route.slice(1) + '.html';
+    await mkdir(dirname(resolve(root, 'dist', output)), {recursive:true});
     await writeFile(resolve(root, 'dist', output), documentFor(shell, rendered, route));
   }
   const sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + routes.map(route => `  <url><loc>${SITE + route}</loc></url>`).join('\n') + '\n</urlset>\n';
