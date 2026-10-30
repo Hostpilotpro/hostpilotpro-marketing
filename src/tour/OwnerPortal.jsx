@@ -124,9 +124,9 @@ function RatePilotCard() {
   const r = demo.ratepilot_approval;
   const [choice, setChoice] = useState(null);
   const confirmation = {
-    Approve: `Demo approval selected: ฿${r.suggested_thb.toLocaleString()} for ${r.window}. No live rate changed.`,
+    Approve: `Demo approval selected: ฿${r.suggested_thb.toLocaleString('en-US')} for ${r.window}. No live rate changed.`,
     'Approve with cap': `Demo approval selected with a ฿15,000 ceiling. Nothing was sent to any channel.`,
-    Decline: `Demo decline selected. The sample rate stays at ฿${r.current_thb.toLocaleString()}. No live rate changed.`,
+    Decline: `Demo decline selected. The sample rate stays at ฿${r.current_thb.toLocaleString('en-US')}. No live rate changed.`,
   };
   return (
     <div className="hp-card-flat overflow-hidden">
@@ -287,7 +287,7 @@ function Statement({ highlight = null, flashKey = 0, onBack = null }) {
           Paid {s.payout.sent} · {s.payout.method} · ref {s.payout.reference}
         </span>
         <span className="tnum text-hp-text2">
-          {baht(s.payout.amount_thb)} · approx ${s.payout.amount_usd.toLocaleString()}
+          {baht(s.payout.amount_thb)} · approx ${s.payout.amount_usd.toLocaleString('en-US')}
         </span>
       </div>
     </div>

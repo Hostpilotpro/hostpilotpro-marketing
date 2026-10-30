@@ -10,3 +10,5 @@ dist-preview/
 .npm-cache/
 .env*
 !.env.example
+
+.ssr/

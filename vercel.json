@@ -1,3 +1,12 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [{ "source": "/sandbox/:path*", "destination": "/sandbox.html" }],
+  "redirects": [
+    { "source": "/owner-portal", "destination": "/owner", "permanent": true },
+    { "source": "/ops-hub", "destination": "/ops", "permanent": true },
+    { "source": "/guest-portal", "destination": "/guest", "permanent": true },
+    { "source": "/testimonials", "destination": "/proof", "permanent": true },
+    { "source": "/features", "destination": "/capabilities", "permanent": true }
+  ]
 }
