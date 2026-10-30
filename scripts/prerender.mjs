@@ -3,7 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-export const routes = ['/', '/tour', '/owner', '/ops', '/guest', '/field', '/full-suite', '/pricing', '/about', '/proof', '/demo', '/blog'];
+export const routes = ['/', '/tour', '/owner', '/ops', '/guest', '/field', '/full-suite', '/capabilities', '/partners', '/pricing', '/about', '/proof', '/demo', '/blog'];
 const SITE = 'https://hostpilotpro.com';
 const escape = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const json = (obj) => JSON.stringify(obj).replace(/</g, '\\u003c');
@@ -30,6 +30,9 @@ async function main() {
   const root = resolve(import.meta.dirname, '..');
   const { render } = await import(pathToFileURL(resolve(root, '.ssr/entry-server.js')));
   const shell = await readFile(resolve(root, 'dist/index.html'), 'utf8');
+  // The isolated interactive sandbox keeps its client router and stays outside
+  // the marketing sitemap. It must not hydrate the homepage as a demo screen.
+  await writeFile(resolve(root, 'dist/sandbox.html'), shell.replace('</head>', '<meta name="robots" content="noindex,follow" /></head>'));
   for (const route of [...routes, '/404']) {
     const rendered = render(route);
     if (rendered.seo.path !== route) throw new Error(`Route metadata mismatch: ${route}`);

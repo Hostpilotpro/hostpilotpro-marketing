@@ -25,9 +25,10 @@ test('unknown routes have a real 404 document and no catch-all success rewrite',
  const html=await read('dist/404.html');
  assert.match(html, /name="robots" content="noindex,follow"/);
  const config=JSON.parse(await read('vercel.json'));
- assert.ok(!config.rewrites); assert.equal(config.cleanUrls,true);
+ assert.deepEqual(config.rewrites,[{source:'/sandbox/:path*',destination:'/sandbox.html'}]); assert.equal(config.cleanUrls,true);
  assert.equal(config.redirects.length,5);
  for(const rule of config.redirects){assert.ok(routes.includes(rule.destination));assert.equal(rule.permanent,true);}
+ const sandbox=await read('dist/sandbox.html');assert.match(sandbox, /name="robots" content="noindex,follow"/);assert.match(sandbox, /<div id="root"><\/div>/);
 });
 test('sitemap lists exactly the public routes', async () => {
  const sitemap=await read('dist/sitemap.xml');
